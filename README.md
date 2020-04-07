@@ -1,2 +1,2 @@
-# COVID-19-Simulation-for-Spatial-Policy-Analysis
-Simulations run in R to model the impact of different spatial policies for flattening the COVID-19 curve. 
+# Simple Epidemic Simulations
+Epidemic simulations visualised in a JavaFX GUI to show the impact of different spread prevention policies  
