@@ -1,10 +1,10 @@
 # Simple Epidemic Model
-
 Epidemic simulations visualised in a JavaFX GUI to show the impact of different spread prevention policies.
 
-### TODO
+#### TODO
+- [ ] Add project files to the repository.  
 
-### Inspirations
+#### Inspirations
 
 - Stevens, Harry. “These Simulations Show How to Flatten the Coronavirus Growth Curve.” The Washington Post, WP Company, 14 Mar. 2020, www.washingtonpost.com/graphics/2020/world/corona-simulator/. 
 
