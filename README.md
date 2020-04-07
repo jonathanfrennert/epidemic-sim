@@ -1,9 +1,12 @@
 # Simple Epidemic Model
-#### By Jonathan Gustafsson Frennert and Alexandra Purcarea
+#### By Jonathan Gustafsson Frennert and Alexandra Purcarea.
 
+### Description
 Epidemic simulations visualised in a JavaFX GUI to show the impact of different spread prevention policies.
 
-## Inspirations
+### TODO
+
+### Inspirations
 
 - Stevens, Harry. “These Simulations Show How to Flatten the Coronavirus Growth Curve.” The Washington Post, WP Company, 14 Mar. 2020, www.washingtonpost.com/graphics/2020/world/corona-simulator/. 
 
