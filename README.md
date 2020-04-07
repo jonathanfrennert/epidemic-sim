@@ -10,4 +10,4 @@ Epidemic simulations visualised in a JavaFX GUI to show the impact of different 
 
 - 3Blue1Brown. “Simulating an epidemic.” Youtube, 27 Mar. 2020, https://www.youtube.com/watch?v=gxAaO2rsdIs&t=36s.
 
-*Jonathan Gustafsson Frennert and Alexandra Purcarea*
+Created by [Jonathan Gustafsson Frennert](http://google.com) and [Alexandra Purcarea](http://google.com)
