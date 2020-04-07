@@ -1,4 +1,4 @@
-# Simple Epidemic Model
+# Stochastic Epidemic Simulations
 Epidemic simulations written for a JavaFX GUI to understand the efficacy of different spread-prevention policies for [COVID-19](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/events-as-they-happen).
 
 #### TODO
