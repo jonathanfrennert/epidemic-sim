@@ -1,5 +1,5 @@
 # Simple Epidemic Model
-##### By Jonathan Gustafsson Frennert and Alexandra Purcarea.
+##### Jonathan Gustafsson Frennert and Alexandra Purcarea.
 
 ### Description
 Epidemic simulations visualised in a JavaFX GUI to show the impact of different spread prevention policies.
