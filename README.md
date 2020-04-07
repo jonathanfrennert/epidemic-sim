@@ -1,5 +1,5 @@
 # Simple Epidemic Model
-Epidemic simulations visualised in a JavaFX GUI to show the impact of different spread prevention policies.
+Epidemic simulations written to a JavaFX GUI to understand the efficiacy of different spread-prevention policies for COVID-19.
 
 #### TODO
 - [ ] Add project files to the repository.  
