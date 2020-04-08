@@ -1,7 +1,3 @@
-# Ignore README.md and LICENSE
-*.md
-LICENSE
-
 .gradle
 /build/
 
