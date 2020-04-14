@@ -2,163 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="243795e0-89f3-4ef4-93ac-5b1593d0a61e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/epi/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/epi/MainApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/distributions/EpiSim-1.0-SNAPSHOT.tar" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/EpiSim-1.0-SNAPSHOT.tar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/distributions/EpiSim-1.0-SNAPSHOT.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/distributions/EpiSim-1.0-SNAPSHOT.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/EpiSim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/EpiSim.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-console-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-datetime-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-debug-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-errorhandling-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-file-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-file-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-file-l2-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-handle-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-heap-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-interlocked-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-libraryloader-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-localization-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-memory-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-namedpipe-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-processenvironment-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-processthreads-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-processthreads-l1-1-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-profile-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-string-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-synch-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-synch-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-sysinfo-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-timezone-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-core-util-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-conio-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-convert-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-environment-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-filesystem-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-heap-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-locale-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-math-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-multibyte-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-private-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-process-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-runtime-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-stdio-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-string-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-time-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/api-ms-win-crt-utility-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/awt.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/fontmanager.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/freetype.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/java.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/java.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/javajpeg.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/javaw.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/jawt.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/jimage.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/jli.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/jrunscript.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/jsound.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/keytool.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/lcms.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/mlib_image.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/msvcp140.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/net.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/nio.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/prefs.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/server/jvm.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/splashscreen.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/ucrtbase.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/vcruntime140.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/verify.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/bin/zip.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/net.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/security/java.policy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/security/java.security" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/limited/default_US_export.policy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/limited/default_local.policy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/limited/exempt_local.policy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/unlimited/default_US_export.policy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/security/policy/unlimited/default_local.policy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/conf/sound.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/COPYRIGHT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/aes.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/asm.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/c-libutl.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/cldr.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/icu.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/public_suffix.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/unicode.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.base/zlib.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.datatransfer/COPYRIGHT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.datatransfer/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/COPYRIGHT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/colorimaging.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/freetype.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/giflib.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/harfbuzz.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/jpeg.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/lcms.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/libpng.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/mesa3d.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.desktop/opengl.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.prefs/COPYRIGHT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.prefs/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.scripting/COPYRIGHT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.scripting/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/COPYRIGHT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/bcel.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/dom.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/jcup.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/xalan.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/java.xml/xerces.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/jdk.unsupported/COPYRIGHT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/legal/jdk.unsupported/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/classlist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/fontconfig.bfc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/fontconfig.properties.src" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/jawt.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/jrt-fs.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/jvm.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/jvm.lib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/modules" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/psfont.properties.ja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/psfontj2d.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/security/blacklisted.certs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/security/cacerts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/security/default.policy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/security/public_suffix_list.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/server/Xusage.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/tzdb.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/lib/tzmappings" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/image/release" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/EpiSim-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/EpiSim.merged.module.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/javafx-base-14-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/javafx-controls-14-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/javafx-fxml-14-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jlinkbase/jlinkjars/javafx-graphics-14-win.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jlinkbase/tmpmerged/EpiSim.merged.module.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jlinkbase/tmpmodinfo/module-info.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/EpiSim-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/EpiSim-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/scripts/EpiSim" beforeDir="false" afterPath="$PROJECT_DIR$/build/scripts/EpiSim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/MainApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,9 +58,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaFXApplication" />
-        <option value="Class" />
         <option value="module-info" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -221,6 +68,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1aFHVG41zQS46c5FmV4owh7uiIB" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -357,26 +207,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1586326949293" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586869281561">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586869281561" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1586369190055">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586369190055" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1586868682676">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1586869505692">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586868682676" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1586868682676">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586869505692" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1586869505692">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586868682676" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1586868682676">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586869505692" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1586869505692">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586868682676" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1586868682676">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586869505692" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1586869505692">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586868682676" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586869505692" />
     <state x="310" y="57" width="981" height="712" key="SettingsEditor" timestamp="1586346014633">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
