@@ -6,13 +6,23 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="C:/Gradle/gradle-5.6.4" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../Gradle/gradle-5.6.4" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
           </set>
         </option>
-        <option name="useAutoImport" value="true" />
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/../EpiSim" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../Program Files/Gradle" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../EpiSim" />
+          </set>
+        </option>
         <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
