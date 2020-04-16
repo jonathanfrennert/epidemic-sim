@@ -29,4 +29,4 @@ jlink {
     }
 }
 
-mainClassName = "$moduleName/org.epi.MainApp"
+mainClassName = "$moduleName/org.epi.BouncingBallFX"
