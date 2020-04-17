@@ -49,8 +49,8 @@ public class AnimationTimerTest extends Application {
     private static final int NUM_BALLS = 100;
     private static final double MIN_RADIUS = 3 ;
     private static final double MAX_RADIUS = 3 ;
-    private static final double MIN_SPEED = 2 ;
-    private static final double MAX_SPEED = 50 ;
+    private static final double MIN_SPEED = 40 ;
+    private static final double MAX_SPEED = 40 ;
     private static final Color[] COLORS = new Color[] { RED, YELLOW, GREEN,
             BROWN, BLUE, PINK, BLACK };
 
@@ -143,6 +143,7 @@ public class AnimationTimerTest extends Application {
                     || (b1.getCenterY() + b1.getRadius() >= maxY && yVel > 0)) {
                 b1.setYVelocity(-yVel);
             }
+
             for (ListIterator<Ball> fastIt = balls.listIterator(slowIt.nextIndex()); fastIt.hasNext();) {
                 Ball b2 = fastIt.next();
                 // performance hack: both colliding(...) and bounce(...) need deltaX and deltaY, so compute them once here:
@@ -189,18 +190,19 @@ public class AnimationTimerTest extends Application {
         final double massSum = b1.getMass() + b2.getMass() ;
         final double massDiff = b1.getMass() - b2.getMass() ;
 
-        final double v1 = ( 2*b2.getMass()*u2 + u1 * massDiff ) / massSum ; // These equations are derived for one-dimensional collision by
-        final double v2 = ( 2*b1.getMass()*u1 - u2 * massDiff ) / massSum ; // solving equations for conservation of momentum and conservation of energy
+        final double v1 = b2.getMass()*u2 ; // These equations are derived for one-dimensional collision by
+        final double v2 = b1.getMass()*u1 ; // solving equations for conservation of momentum and conservation of energy
 
         final double u1PerpX = xVelocity1 - u1 * unitContactX ; // Components of ball 1 velocity in direction perpendicular
         final double u1PerpY = yVelocity1 - u1 * unitContactY ; // to contact vector. This doesn't change with collision
         final double u2PerpX = xVelocity2 - u2 * unitContactX ; // Same for ball 2....
         final double u2PerpY = yVelocity2 - u2 * unitContactY ;
 
-        b1.setXVelocity(v1 * unitContactX + u1PerpX);
-        b1.setYVelocity(v1 * unitContactY + u1PerpY);
-        b2.setXVelocity(v2 * unitContactX + u2PerpX);
-        b2.setYVelocity(v2 * unitContactY + u2PerpY);
+
+        b1.setXVelocity(u2 * unitContactX + u1PerpX);
+        b1.setYVelocity(u2 * unitContactY + u1PerpY);
+        b2.setXVelocity(u1 * unitContactX + u2PerpX);
+        b2.setYVelocity(u1 * unitContactY + u2PerpY);
 
     }
 
