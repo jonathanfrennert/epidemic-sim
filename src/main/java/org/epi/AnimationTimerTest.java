@@ -1,32 +1,9 @@
 package org.epi;
 
-import static java.lang.Math.PI;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.sqrt;
-import static javafx.scene.paint.Color.BLACK;
-import static javafx.scene.paint.Color.BLUE;
-import static javafx.scene.paint.Color.BROWN;
-import static javafx.scene.paint.Color.GREEN;
-import static javafx.scene.paint.Color.PINK;
-import static javafx.scene.paint.Color.RED;
-import static javafx.scene.paint.Color.YELLOW;
-
-import java.util.ListIterator;
-import java.util.Random;
-import java.util.concurrent.Callable;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.ReadOnlyDoubleProperty;
-import javafx.beans.property.ReadOnlyDoubleWrapper;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -43,10 +20,18 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
+import java.awt.geom.Point2D;
+import java.util.ListIterator;
+import java.util.Random;
+import java.util.concurrent.Callable;
+
+import static java.lang.Math.*;
+import static javafx.scene.paint.Color.*;
+
 public class AnimationTimerTest extends Application {
 
     private ObservableList<Ball> balls = FXCollections.observableArrayList();
-    private static final int NUM_BALLS = 100;
+    private static final int NUM_BALLS = 500;
     private static final double MIN_RADIUS = 3 ;
     private static final double MAX_RADIUS = 3 ;
     private static final double MIN_SPEED = 40 ;
@@ -179,6 +164,43 @@ public class AnimationTimerTest extends Application {
         final double unitContactX = deltaX / distance ;
         final double unitContactY = deltaY / distance ;
 
+        /*
+        double angle = Math.atan2(b2.getCenterY() - b1.getCenterY(),
+                b2.getCenterX() - b1.getCenterX());
+        double distanceToMove = (b2.getRadius() + b1.getRadius()) - distance;
+
+        Point2D tangentVector = new Point2D.Float();
+
+        double length1 = sqrt(tangentVector.getY()*tangentVector.getY())+
+                (tangentVector.getX()*tangentVector.getX());
+
+        tangentVector.setLocation((b2.getCenterY()-b1.getCenterY())/length1,
+                -(b2.getCenterX()-b1.getCenterX())/length1);
+
+        Point2D relativeVelocity = new Point2D.Float();
+
+        relativeVelocity.setLocation(b1.getXVelocity() - b2.getXVelocity(),
+                b1.getYVelocity() - b2.getYVelocity());
+
+        float length = (float) (tangentVector.getX()*relativeVelocity.getX() +
+                                tangentVector.getY()*relativeVelocity.getY());
+
+        Point2D velocityComponentOnTangent = new Point2D.Float();
+        velocityComponentOnTangent.setLocation(tangentVector.getX()*length,
+                tangentVector.getY()*length);
+
+        Point2D velocityComponentPerpendicularToTangent = new Point2D.Float();
+        velocityComponentPerpendicularToTangent.setLocation(
+                relativeVelocity.getX() - velocityComponentOnTangent.getX(),
+                relativeVelocity.getY() - velocityComponentOnTangent.getY());
+
+        b1.setXVelocity(b1.getXVelocity()-velocityComponentPerpendicularToTangent.getX());
+        b1.setYVelocity(b1.getYVelocity()-velocityComponentPerpendicularToTangent.getY());
+        b2.setXVelocity(b2.getXVelocity()-velocityComponentPerpendicularToTangent.getX());
+        b2.setYVelocity(b2.getYVelocity()-velocityComponentPerpendicularToTangent.getY());
+
+         */
+
         final double xVelocity1 = b1.getXVelocity();
         final double yVelocity1 = b1.getYVelocity();
         final double xVelocity2 = b2.getXVelocity();
@@ -199,10 +221,24 @@ public class AnimationTimerTest extends Application {
         final double u2PerpY = yVelocity2 - u2 * unitContactY ;
 
 
-        b1.setXVelocity(u2 * unitContactX + u1PerpX);
-        b1.setYVelocity(u2 * unitContactY + u1PerpY);
-        b2.setXVelocity(u1 * unitContactX + u2PerpX);
-        b2.setYVelocity(u1 * unitContactY + u2PerpY);
+        double initSpeedSquared1 = xVelocity1 * xVelocity1 + yVelocity1 * yVelocity1;
+        double initSpeedSquared2 = xVelocity2 * xVelocity2 + yVelocity2 * yVelocity2;
+
+        double finalSpeedSquared1 = (u2 * unitContactX + u1PerpX) * (u2 * unitContactX + u1PerpX)
+                + (u2 * unitContactY + u1PerpY) * (u2 * unitContactY + u1PerpY);
+        double finalSpeedSquared2 = (u1 * unitContactX + u2PerpX) * (u1 * unitContactX + u2PerpX)
+                + (u1 * unitContactY + u2PerpY) * (u1 * unitContactY + u2PerpY);
+
+        double n1 = initSpeedSquared1/finalSpeedSquared1;
+        double n2 = initSpeedSquared2/finalSpeedSquared2;
+
+
+
+        b1.setXVelocity(sqrt(n1)*(u2 * unitContactX + u1PerpX));
+        b1.setYVelocity(sqrt(n1)*(u2 * unitContactY + u1PerpY));
+        b2.setXVelocity(sqrt(n2)*(u1 * unitContactX + u2PerpX));
+        b2.setYVelocity(sqrt(n2)*(u1 * unitContactY + u2PerpY));
+
 
     }
 
