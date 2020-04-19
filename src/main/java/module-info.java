@@ -1,4 +1,4 @@
-module EpiSim {
+module Epi {
     requires javafx.controls;
     requires javafx.fxml;
 

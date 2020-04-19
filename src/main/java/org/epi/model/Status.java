@@ -1,4 +1,4 @@
-package org.epi.simulation;
+package org.epi.model;
 
 enum Status {
     HEALTHY,

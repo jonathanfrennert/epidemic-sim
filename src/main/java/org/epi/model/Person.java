@@ -1,4 +1,4 @@
-package org.epi.simulation;
+package org.epi.model;
 
 import javafx.beans.property.Property;
 import javafx.scene.shape.Circle;

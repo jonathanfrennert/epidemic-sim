@@ -72,12 +72,10 @@ public class MainApp extends Application {
         //create a keyFrame, the keyValue is reached at time 2s
         Duration duration = Duration.millis(2000);
         //one can add a specific action when the keyframe is reached
-        EventHandler onFinished = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent t) {
-                stack.setTranslateX(java.lang.Math.random()*200-100);
-                //reset counter
-                i = 0;
-            }
+        EventHandler<ActionEvent> onFinished = t -> {
+            stack.setTranslateX(Math.random()*200-100);
+            //reset counter
+            i = 0;
         };
 
         KeyFrame keyFrame = new KeyFrame(duration, onFinished , keyValueX, keyValueY);
