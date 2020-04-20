@@ -1,6 +1,5 @@
 package org.epi.model;
 
-import javafx.scene.paint.Color;
 import org.epi.util.ErrorUtil;
 
 import javafx.beans.property.DoubleProperty;
@@ -33,7 +32,7 @@ public class BouncyCircle extends Circle {
      * @param velocityY the vertical velocity of the the bouncy circle in pixels per frame
      * @param fill      determines how to fill the interior of the bouncy circle
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@link BouncyCircle#SPEED}
+     *                                  {@value BouncyCircle#SPEED} pixels per frame
      * @throws NullPointerException     if the given fill is null
      */
     public static BouncyCircle createBouncyCircle(double centerX, double centerY, double velocityX, double velocityY, Paint fill) {
@@ -59,12 +58,12 @@ public class BouncyCircle extends Circle {
     }
 
     /**
-     * Check that the magnitude of the total velocity is equal to {@link BouncyCircle#SPEED}.
+     * Check that the magnitude of the total velocity is equal to {@value BouncyCircle#SPEED}.
      *
      * @param velocityX a horizontal velocity in pixels per frame
      * @param velocityY a vertical velocity in pixels per frame
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@link BouncyCircle#SPEED}
+     *                                  {@value BouncyCircle#SPEED} pixels per frame
      */
     private static void checkSpeed(double velocityX, double velocityY) {
         double totalVelocity = velocityX*velocityX + velocityY*velocityY;
@@ -94,7 +93,7 @@ public class BouncyCircle extends Circle {
     /**
      * Setter for {@link BouncyCircle#velocityX}
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@link BouncyCircle#SPEED}
+     *                                  {@value BouncyCircle#SPEED} pixels per frame
      */
     public void setVelocityX(double velocityX) {
         checkSpeed(velocityX, getVelocityY());
@@ -121,7 +120,7 @@ public class BouncyCircle extends Circle {
     /**
      * Setter for {@link BouncyCircle#velocityY}
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@link BouncyCircle#SPEED}
+     *                                  {@value BouncyCircle#SPEED} pixels per frame
      */
     public void setVelocityY(double velocityY) {
         checkSpeed(getVelocityX(), velocityY);

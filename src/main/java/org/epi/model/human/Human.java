@@ -1,4 +1,9 @@
-package org.epi.model;
+package org.epi.model.human;
+
+import org.epi.model.BouncyCircle;
+import org.epi.util.ErrorUtil;
+
+import java.util.Objects;
 
 /** The superclass for all humans in the simulation.*/
 public abstract class Human {
@@ -6,18 +11,16 @@ public abstract class Human {
     /** The representation of this human in the simulation view.*/
     private final BouncyCircle view;
 
-    /** The health status this human.*/
-    private final StatusType status;
-
     /**
-     * Create a human.
+     * Constructor for a human
      *
-     * @param view
-     * @param status
+     * @param view The view of this human in the simulation view
+     * @throws NullPointerException if the given view is null
      */
-    public Human(BouncyCircle view, StatusType status) {
+    public Human(BouncyCircle view) {
+        Objects.requireNonNull(view, ErrorUtil.getNullMsg("view"));
+
         this.view = view;
-        this.status = status;
     }
 
     /**
@@ -27,15 +30,6 @@ public abstract class Human {
      */
     public BouncyCircle getView() {
         return view;
-    }
-
-    /**
-     * Getter for {@link Human#status}.
-     *
-     * @return the health status of this human
-     */
-    public StatusType getStatus() {
-        return status;
     }
 
 }
