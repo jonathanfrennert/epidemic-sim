@@ -1,23 +1,86 @@
 package org.epi.util;
 
-import java.util.Objects;
-
-/** */
+/** Utility class with helper methods for common error checks.*/
 public class ErrorUtil {
 
+    /** Error message tag.*/
+    public static final String ERROR_TAG = "ERROR:";
+
     /** {@link NullPointerException} message format.*/
-    private static final String NULL_MSG = "ERROR: Given %s must not be null.";
+    private static final String NULL_MSG = ERROR_TAG + " Given %s must not be null.";
+
+    /** Outside interval message format.*/
+    private static final String INTERVAL_MSG = ERROR_TAG + " Given %s must be between %d and %d but is: %f";
+
+    /** The minimum probability.*/
+    public static final double MIN_PROB = 0;
+
+    /** The maximum probability.*/
+    public static final double MAX_PROB = 1;
+
+    //---------------------------- Null checks ----------------------------
 
     /**
      * Return a {@link NullPointerException} message with the given object name.
      *
      * @param objectName the name of the object which is null
      * @return a {@link NullPointerException} message personalised with the object name
-     * @throws NullPointerException if the given objectName is null
      */
     public static String getNullMsg(String objectName) {
-        Objects.requireNonNull(objectName, String.format(NULL_MSG, "object name"));
         return String.format(NULL_MSG, objectName);
+    }
+
+    //---------------------------- Comparison & Interval checks ----------------------------
+
+    /**
+     * Check if the given number is non-negative.
+     *
+     * @param number a number
+     * @throws IllegalArgumentException if the given number is non-negative
+     */
+    public static void nonNegativeCheck(Number number) {
+        if (number.doubleValue() < 0) {
+            throw new IllegalArgumentException(ERROR_TAG + " Given number is negative: " + number);
+        }
+    }
+
+    /**
+     * Return an outside-of-interval message with the given number category.
+     *
+     * @param numberCategory the number category for the value, i.e., probability or percentage etc.
+     * @param lowest the low endpoint of the interval
+     * @param highest the high endpoint of the interval
+     * @param value the value which should be within the interval
+     * @return a outside-of-interval message personalised with the number category and interval endpoints
+     */
+    public static String getIntervalMsg(String numberCategory, Number lowest, Number highest, Number value) {
+        return String.format(INTERVAL_MSG, numberCategory, lowest.intValue(), highest.intValue(), value.doubleValue());
+    }
+
+    /**
+     * Check if a given number is within an interval.
+     *
+     * @param numberCategory the number category for the value, i.e., probability or percentage etc.
+     * @param lowest the low endpoint of the interval
+     * @param highest the high endpoint of the interval
+     * @param value the value which should be within the interval
+     * @throws IllegalArgumentException if the given value is lower than lowest or higher than highest
+     */
+    public static void intervalCheck(String numberCategory, Number lowest, Number highest, Number value) {
+        if (value.doubleValue() < lowest.doubleValue() || value.doubleValue() > highest.doubleValue()) {
+            throw new IllegalArgumentException(getIntervalMsg(numberCategory, MIN_PROB, MAX_PROB, value));
+        }
+    }
+
+    /**
+     * Check if the given probability is more than {@value MIN_PROB} and less than {@value MAX_PROB}.
+     *
+     * @param probability A probability
+     * @throws IllegalArgumentException if the given probability is less than {@value MIN_PROB} or more than
+     *                                  {@value MAX_PROB}
+     */
+    public static void probabilityCheck(double probability) {
+        intervalCheck("probability", MIN_PROB, MAX_PROB, probability);
     }
 
 }

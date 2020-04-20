@@ -2,6 +2,7 @@ package org.epi.model;
 
 import org.epi.util.ErrorUtil;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -53,8 +54,8 @@ public class BouncyCircle extends Circle {
      */
     private BouncyCircle(double centerX, double centerY, double velocityX, double velocityY, Paint fill) {
         super(centerX, centerY, RADIUS, fill);
-        this.velocityX.setValue(velocityX);
-        this.velocityY.setValue(velocityY);
+        this.velocityX = new SimpleDoubleProperty(velocityX);
+        this.velocityY = new SimpleDoubleProperty(velocityY);
     }
 
     /**
@@ -72,60 +73,6 @@ public class BouncyCircle extends Circle {
             throw new IllegalArgumentException("ERROR: The total velocity of a bouncy circle must be equal to " + SPEED
                     + "but is:" + totalVelocity);
         }
-    }
-
-    /**
-     * Getter for {@link BouncyCircle#velocityX}
-     * @return {@link BouncyCircle#velocityX}
-     */
-    public double getVelocityX() {
-        return velocityX.get();
-    }
-
-    /**
-     * Getter for {@link BouncyCircle#velocityX} {@link DoubleProperty}
-     * @return {@link BouncyCircle#velocityX}
-     */
-    public DoubleProperty velocityXProperty() {
-        return velocityX;
-    }
-
-    /**
-     * Setter for {@link BouncyCircle#velocityX}
-     * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@value BouncyCircle#SPEED} pixels per frame
-     */
-    public void setVelocityX(double velocityX) {
-        checkSpeed(velocityX, getVelocityY());
-
-        this.velocityX.set(velocityX);
-    }
-
-    /**
-     * Getter for {@link BouncyCircle#velocityY}
-     * @return {@link BouncyCircle#velocityY}
-     */
-    public double getVelocityY() {
-        return velocityY.get();
-    }
-
-    /**
-     * Getter for {@link BouncyCircle#velocityY} {@link DoubleProperty}
-     * @return {@link BouncyCircle#velocityY}
-     */
-    public DoubleProperty velocityYProperty() {
-        return velocityY;
-    }
-
-    /**
-     * Setter for {@link BouncyCircle#velocityY}
-     * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@value BouncyCircle#SPEED} pixels per frame
-     */
-    public void setVelocityY(double velocityY) {
-        checkSpeed(getVelocityX(), velocityY);
-
-        this.velocityY.set(velocityY);
     }
 
     /**
@@ -151,7 +98,71 @@ public class BouncyCircle extends Circle {
     public void bounceOn(BouncyCircle other) {
         Objects.requireNonNull(other, ErrorUtil.getNullMsg("bouncy circle"));
 
-       // TODO Alexandra :)
+        // TODO Alexandra :)
+    }
+
+    //---------------------------- Getters & Setters ----------------------------
+
+    /**
+     * Getter for {@link BouncyCircle#velocityX}
+     *
+     * @return {@link BouncyCircle#velocityX}
+     */
+    public double getVelocityX() {
+        return velocityX.get();
+    }
+
+    /**
+     * Getter for {@link BouncyCircle#velocityX} {@link DoubleProperty}
+     *
+     * @return {@link BouncyCircle#velocityX}
+     */
+    public DoubleProperty velocityXProperty() {
+        return velocityX;
+    }
+
+    /**
+     * Setter for {@link BouncyCircle#velocityX}
+     *
+     * @param velocityX
+     * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
+     *                                  {@value BouncyCircle#SPEED} pixels per frame
+     */
+    public void setVelocityX(double velocityX) {
+        checkSpeed(velocityX, getVelocityY());
+
+        this.velocityX.set(velocityX);
+    }
+
+    /**
+     * Getter for {@link BouncyCircle#velocityY}
+     *
+     * @return {@link BouncyCircle#velocityY}
+     */
+    public double getVelocityY() {
+        return velocityY.get();
+    }
+
+    /**
+     * Getter for {@link BouncyCircle#velocityY} {@link DoubleProperty}
+     *
+     * @return {@link BouncyCircle#velocityY}
+     */
+    public DoubleProperty velocityYProperty() {
+        return velocityY;
+    }
+
+    /**
+     * Setter for {@link BouncyCircle#velocityY}
+     *
+     * @param velocityY
+     * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
+     *                                  {@value BouncyCircle#SPEED} pixels per frame
+     */
+    public void setVelocityY(double velocityY) {
+        checkSpeed(getVelocityX(), velocityY);
+
+        this.velocityY.set(velocityY);
     }
 
 }
