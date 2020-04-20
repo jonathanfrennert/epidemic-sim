@@ -1,6 +1,7 @@
 package org.epi;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -27,6 +28,11 @@ public class MainApp extends Application {
     private Integer i=0;
 
     @Override public void start(Stage stage) {
+
+        // Setting application title and icon
+        stage.setTitle("Epidemic Simulator");
+        stage.getIcons().add(new Image(getClass().getResource("/images/Epi.png").toExternalForm()));
+
         Group p = new Group();
         Scene scene = new Scene(p);
         stage.setScene(scene);
@@ -36,7 +42,7 @@ public class MainApp extends Application {
         p.setTranslateY(80);
 
         //create a circle with effect
-        final Circle circle = new Circle(20,  Color.rgb(156,216,255));
+        final Circle circle = new Circle(20,  Color.DODGERBLUE);
         circle.setEffect(new Lighting());
         //create a text inside a circle
         final Text text = new Text (i.toString());

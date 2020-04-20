@@ -20,10 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b5cc742-57ca-4556-918d-abdafffe3589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Status.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/BouncyCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/BouncyCircle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Human.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/Human.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/StatusType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/StatusType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/ErrorUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/util/ErrorUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/EpiSim.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/Epi.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +94,7 @@
         <option value="module-info" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -105,7 +118,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -118,13 +131,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.epi.model" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jonat\EpiSim\src\main\resources\images" />
       <recent name="C:\Users\jonat\Desktop\Epidemic Modelling\EpiSim\src\main\resources\org.epi" />
       <recent name="C:\Users\jonat\Desktop\Epidemic Modelling\EpiSim\src\main\resources" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jonat\EpiSim\src\main\resources\images" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.epi.model" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.EpiSim [run]">
@@ -160,7 +176,7 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="EpiSim [jlink]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="EpiSim [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -171,7 +187,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="jlink" />
+            <option value="dependencies" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -212,17 +228,17 @@
     <list>
       <item itemvalue="Application.MainApp" />
       <item itemvalue="Gradle.EpiSim [build]" />
-      <item itemvalue="Gradle.EpiSim [jlink]" />
       <item itemvalue="Gradle.EpiSim [run]" />
       <item itemvalue="Shell Script.EpiSim" />
+      <item itemvalue="Gradle.EpiSim [dependencies]" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.EpiSim [run]" />
+        <item itemvalue="Gradle.EpiSim [dependencies]" />
         <item itemvalue="Gradle.EpiSim [build]" />
         <item itemvalue="Application.MainApp" />
         <item itemvalue="Shell Script.EpiSim" />
-        <item itemvalue="Gradle.EpiSim [jlink]" />
       </list>
     </recent_temporary>
   </component>
@@ -231,12 +247,13 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="243795e0-89f3-4ef4-93ac-5b1593d0a61e" name="Default Changelist" comment="" />
+      <changelist id="7b5cc742-57ca-4556-918d-abdafffe3589" name="Default Changelist" comment="" />
       <created>1586324443065</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1586324443065</updated>
       <workItem from="1587303033532" duration="44000" />
+      <workItem from="1587363542500" duration="9392000" />
     </task>
     <servers />
   </component>
@@ -253,55 +270,60 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586326949293">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1586326949293" />
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1587311265383">
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1587368613799">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587311265383" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586869281561">
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587368613799" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587370329763">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586869281561" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1587370329763" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1586369190055">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586369190055" />
-    <state width="746" height="210" key="GridCell.Tab.0.bottom" timestamp="1587280837552">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1587373518199">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587280837552" />
-    <state width="746" height="210" key="GridCell.Tab.0.center" timestamp="1587280837552">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587373518199" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1587373518199">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587280837552" />
-    <state width="746" height="210" key="GridCell.Tab.0.left" timestamp="1587280837552">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587373518199" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1587373518199">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587280837552" />
-    <state width="746" height="210" key="GridCell.Tab.0.right" timestamp="1587280837552">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587373518199" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1587373518199">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="746" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587280837552" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587373518199" />
     <state x="310" y="57" width="981" height="712" key="SettingsEditor" timestamp="1586346014633">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="310" y="57" width="981" height="712" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586346014633" />
-    <state x="478" y="0" width="579" height="824" key="find.popup" timestamp="1587309006470">
+    <state x="478" y="0" width="579" height="824" key="find.popup" timestamp="1587365537129">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="478" y="0" width="579" height="824" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1587309006470" />
+    <state x="478" y="0" width="579" height="824" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1587365537129" />
     <state x="209" y="24" key="new project wizard" timestamp="1586369221073">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="209" y="24" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1586369221073" />
-    <state x="562" y="160" key="refactoring.ChangeSignatureDialog" timestamp="1587311675480">
+    <state x="562" y="160" key="refactoring.ChangeSignatureDialog" timestamp="1587368065463">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="562" y="160" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1587311675480" />
+    <state x="562" y="160" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1587368065463" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1587370636590">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1587370636590" />
   </component>
 </project>

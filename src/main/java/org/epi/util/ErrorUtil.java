@@ -13,7 +13,7 @@ public class ErrorUtil {
      *
      * @param objectName the name of the object which is null
      * @return a {@link NullPointerException} message personalised with the object name
-     * @throws NullPointerException if the given objectName is null (Nullception!)
+     * @throws NullPointerException if the given objectName is null
      */
     public static String getNullMsg(String objectName) {
         Objects.requireNonNull(objectName, String.format(NULL_MSG, "object name"));
