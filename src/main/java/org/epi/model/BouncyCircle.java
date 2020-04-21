@@ -89,7 +89,8 @@ public class BouncyCircle extends Circle {
     }
 
     /**
-     * Bounce this bouncy circle off another bouncy circle.
+     * Set the horizontal and vertical velocity resulting from a bounce between this bouncy circle and
+     * another bouncy circle for both bouncy circles.
      *
      * @param other a bouncy circle
      * @throws NullPointerException if the given bouncy circle is null
@@ -101,11 +102,13 @@ public class BouncyCircle extends Circle {
     }
 
     /**
-     * Move the bouncy circle by one frame.
+     * Move the bouncy circle by a certain amount of time.
+     *
+     * @param elapsedSeconds the number of seconds elapsed in the move.
      */
-    public void move(long elapsedTime) {
-        setTranslateX(elapsedTime * getVelocityX());
-        setTranslateY( elapsedTime * getVelocityY());
+    public void move(double elapsedSeconds) {
+        setTranslateX(elapsedSeconds * getVelocityX());
+        setTranslateY(elapsedSeconds * getVelocityY());
     }
 
     //---------------------------- Getters & Setters ----------------------------
