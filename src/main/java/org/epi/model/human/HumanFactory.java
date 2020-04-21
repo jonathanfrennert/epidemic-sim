@@ -77,7 +77,7 @@ enum HumanFactory {
      *                  per frame
      * @return a human
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@value BouncyCircle#SPEED} pixels per frame
+     *                                  {@value BouncyCircle#SPEED} pixels per second
      */
     public abstract Human createHuman(Disease disease,
                                       double centerX, double centerY,

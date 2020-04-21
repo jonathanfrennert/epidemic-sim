@@ -7,7 +7,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-/** Model class for the disease.*/
+/** Wrapper class for the disease parameters.*/
 public class Disease {
 
     /** The probability of a transmission occurring in effective contact.*/

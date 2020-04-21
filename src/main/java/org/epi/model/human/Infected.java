@@ -2,6 +2,7 @@ package org.epi.model.human;
 
 import org.epi.model.BouncyCircle;
 import org.epi.model.Disease;
+import org.epi.util.Probability;
 import org.epi.util.ErrorUtil;
 
 import javafx.beans.property.DoubleProperty;
@@ -9,7 +10,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.paint.Paint;
 
-import java.util.Random;
 
 /** Model class for humans infected with the disease.*/
 public class Infected extends Human {
@@ -40,19 +40,32 @@ public class Infected extends Human {
     }
 
     /**
+     * Update the current duration by one frame.
+     */
+    public void updateCurrentDuration() {
+        currentDuration.setValue(getCurrentDuration() + 1);
+    }
+
+    /**
+     * Check if this person is deceased
+     *
+     * @return true if the total duration of the disease has passed and the chance of fatality returned true,
+     *         otherwise false
+     */
+    public boolean isPersonDeceased(){
+        if (diseaseHasPassed()) {
+            return Probability.chance(disease.getFatalityRate());
+        }
+        return false;
+    }
+
+    /**
      * Check if this person has had the disease for its total duration.
      *
      * @return true if the person has had the disease for its total duration, otherwise false
      */
-    public boolean diseaseHasPassed(){
+    private boolean diseaseHasPassed(){
         return getCurrentDuration() >= disease.getTotalDuration();
-    }
-
-    public boolean isPersonDeceased(){
-        if (diseaseHasPassed()) {
-            new Random().nextBoolean();
-        }
-        return false;
     }
 
     /**

@@ -10,30 +10,29 @@ import javafx.scene.shape.Circle;
 import java.util.Objects;
 
 /** View representation of humans in the simulation. Circle fill is used to distinguish status types in the population.
- * Bouncy circles act have inelastic collisions, the same speed and radius. The units are measured in pixels per
- * {@link javafx.animation.KeyFrame}.*/
+ * Bouncy circles act have inelastic collisions, the same speed and radius. The units are measured in pixels per second.*/
 public class BouncyCircle extends Circle {
 
-    /** The speed of a bouncy circle in pixels per frame.*/
-    public static final double SPEED = 10;
+    /** The speed of a bouncy circle in pixels per second.*/
+    public static final double SPEED = 20;
     /** The radius of a bouncy circle in pixels.*/
     private static final double RADIUS = 5;
 
-    /** The horizontal velocity of the bouncy circle in pixels per frame.*/
-    private DoubleProperty velocityX;
-    /** The vertical velocity of the bouncy circle in pixels per frame.*/
-    private DoubleProperty velocityY;
+    /** The horizontal velocity of the bouncy circle in pixels per second.*/
+    private final DoubleProperty velocityX;
+    /** The vertical velocity of the bouncy circle in pixels per second.*/
+    private final DoubleProperty velocityY;
 
     /**
      * Factory method to create a new instance of bouncy circle with a specified position, velocity and fill in a container.
      *
      * @param centerX   the horizontal position of the center of the bouncy circle in pixels
      * @param centerY   the vertical position of the center of the bouncy circle in pixels
-     * @param velocityX the horizontal velocity of the bouncy circle in pixels per frame
-     * @param velocityY the vertical velocity of the the bouncy circle in pixels per frame
+     * @param velocityX the horizontal velocity of the bouncy circle in pixels per second
+     * @param velocityY the vertical velocity of the the bouncy circle in pixels per second
      * @param fill      determines how to fill the interior of the bouncy circle
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@value BouncyCircle#SPEED} pixels per frame
+     *                                  {@value BouncyCircle#SPEED} pixels per second
      * @throws NullPointerException     if the given fill is null
      */
     public static BouncyCircle createBouncyCircle(double centerX, double centerY, double velocityX, double velocityY, Paint fill) {
@@ -48,8 +47,8 @@ public class BouncyCircle extends Circle {
      *
      * @param centerX   the horizontal position of the center of the bouncy circle in pixels
      * @param centerY   the vertical position of the center of the bouncy circle in pixels
-     * @param velocityX the horizontal velocity of the bouncy circle in pixels per frame
-     * @param velocityY the vertical velocity of the the bouncy circle in pixels per frame
+     * @param velocityX the horizontal velocity of the bouncy circle in pixels per second
+     * @param velocityY the vertical velocity of the the bouncy circle in pixels per second
      * @param fill      determines how to fill the interior of the bouncy circle
      */
     private BouncyCircle(double centerX, double centerY, double velocityX, double velocityY, Paint fill) {
@@ -61,10 +60,10 @@ public class BouncyCircle extends Circle {
     /**
      * Check that the magnitude of the total velocity is equal to {@value BouncyCircle#SPEED}.
      *
-     * @param velocityX a horizontal velocity in pixels per frame
-     * @param velocityY a vertical velocity in pixels per frame
+     * @param velocityX a horizontal velocity in pixels per second
+     * @param velocityY a vertical velocity in pixels per second
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@value BouncyCircle#SPEED} pixels per frame
+     *                                  {@value BouncyCircle#SPEED} pixels per second
      */
     private static void checkSpeed(double velocityX, double velocityY) {
         double totalVelocity = velocityX*velocityX + velocityY*velocityY;
@@ -101,6 +100,14 @@ public class BouncyCircle extends Circle {
         // TODO Alexandra :)
     }
 
+    /**
+     * Move the bouncy circle by one frame.
+     */
+    public void move(long elapsedTime) {
+        setTranslateX(elapsedTime * getVelocityX());
+        setTranslateY( elapsedTime * getVelocityY());
+    }
+
     //---------------------------- Getters & Setters ----------------------------
 
     /**
@@ -124,9 +131,9 @@ public class BouncyCircle extends Circle {
     /**
      * Setter for {@link BouncyCircle#velocityX}
      *
-     * @param velocityX
+     * @param velocityX the horizontal velocity of the bouncy circle in pixels per second
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@value BouncyCircle#SPEED} pixels per frame
+     *                                  {@value BouncyCircle#SPEED} pixels per second
      */
     public void setVelocityX(double velocityX) {
         checkSpeed(velocityX, getVelocityY());
@@ -155,9 +162,9 @@ public class BouncyCircle extends Circle {
     /**
      * Setter for {@link BouncyCircle#velocityY}
      *
-     * @param velocityY
+     * @param velocityY the vertical velocity of the bouncy circle in pixels per second
      * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@value BouncyCircle#SPEED} pixels per frame
+     *                                  {@value BouncyCircle#SPEED} pixels per second
      */
     public void setVelocityY(double velocityY) {
         checkSpeed(getVelocityX(), velocityY);
