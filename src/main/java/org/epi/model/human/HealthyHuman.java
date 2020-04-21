@@ -1,14 +1,13 @@
 package org.epi.model.human;
 
+import javafx.scene.paint.Color;
 import org.epi.model.BouncyCircle;
 
-import javafx.scene.paint.Paint;
-
 /** Model class for humans without the disease.*/
-public class Healthy extends Human {
+public class HealthyHuman extends Human {
 
     /**
-     * The constructor for healthy humans. Meant to be accessed only via {@link HumanFactory}.
+     * The constructor for healthy humans.
      *
      * @param centerX   the initial horizontal position of the center of the bouncy circle which represents this human
      *                  in pixels
@@ -18,10 +17,10 @@ public class Healthy extends Human {
      *                  frame
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
      *                  per frame
-     * @param fill      The color which indicates this status type in the simulation view
+     * @throws IllegalArgumentException if the
      */
-    public Healthy(double centerX, double centerY, double velocityX, double velocityY, Paint fill) {
-        super(BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, fill));
+    public HealthyHuman(double centerX, double centerY, double velocityX, double velocityY) {
+        super(StatusType.HEALTHY, BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, StatusType.HEALTHY.color));
     }
 
 }

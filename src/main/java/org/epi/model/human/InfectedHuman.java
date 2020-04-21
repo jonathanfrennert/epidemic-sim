@@ -8,11 +8,9 @@ import org.epi.util.ErrorUtil;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.paint.Paint;
-
 
 /** Model class for humans infected with the disease.*/
-public class Infected extends Human {
+public class InfectedHuman extends Human {
 
     /** The disease which this human has.*/
     private final Disease disease;
@@ -21,7 +19,7 @@ public class Infected extends Human {
     private final IntegerProperty currentDuration = new SimpleIntegerProperty(0);
 
     /**
-     * The constructor for infected humans. Meant to be accessed only via {@link HumanFactory}.
+     * The constructor for infected humans.
      *
      * @param disease   a disease
      * @param centerX   the initial horizontal position of the center of the bouncy circle which represents this human
@@ -32,10 +30,11 @@ public class Infected extends Human {
      *                  frame
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
      *                  per frame
-     * @param fill      The color which indicates this status type in the simulation view
+     * @throws NullPointerException
+     * @throws IllegalArgumentException
      */
-    public Infected(Disease disease, double centerX, double centerY, double velocityX, double velocityY, Paint fill) {
-        super(BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, fill));
+    public InfectedHuman(Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
+        super(StatusType.INFECTED, BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, StatusType.INFECTED.color));
         this.disease = disease;
     }
 
@@ -84,25 +83,25 @@ public class Infected extends Human {
     //---------------------------- Getters & Setters ----------------------------
 
     /**
-     * Getter for {@link Infected#currentDuration}
+     * Getter for {@link InfectedHuman#currentDuration}
      *
-     * @return {@link Infected#currentDuration}
+     * @return {@link InfectedHuman#currentDuration}
      */
     public int getCurrentDuration() {
         return currentDuration.get();
     }
 
     /**
-     * Getter for {@link Infected#currentDuration} {@link DoubleProperty}
+     * Getter for {@link InfectedHuman#currentDuration} {@link DoubleProperty}
      *
-     * @return {@link Infected#currentDuration}
+     * @return {@link InfectedHuman#currentDuration}
      */
     public IntegerProperty currentDurationProperty() {
         return currentDuration;
     }
 
     /**
-     * Setter for {@link Infected#currentDuration}
+     * Setter for {@link InfectedHuman#currentDuration}
      *
      * @param currentDuration the current duration in number of frames
      * @throws IllegalArgumentException if the given currentDuration is less than the previous currentDuration

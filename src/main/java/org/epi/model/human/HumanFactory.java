@@ -1,71 +1,22 @@
 package org.epi.model.human;
 
-import org.epi.model.BouncyCircle;
 import org.epi.model.Disease;
 import org.epi.util.ErrorUtil;
 
-import javafx.scene.paint.Color;
-
 import java.util.Objects;
 
-/** All the status types which individuals in the population can have and their corresponding color in the
- * simulation view.*/
-enum HumanFactory {
+/** Static factory for creating humans.*/
+public final class HumanFactory {
 
-    HEALTHY (Color.DODGERBLUE) {
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Human createHuman(Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
-            return new Healthy(centerX, centerY, velocityX, velocityY, color);
-        }
-
-    },
-
-    INFECTED (Color.CRIMSON) {
-
-        /**
-         * {@inheritDoc}
-         * @throws NullPointerException if the given disease is null
-         */
-        @Override
-        public Human createHuman(Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
-            Objects.requireNonNull(disease, ErrorUtil.getNullMsg("disease"));
-
-            return new Infected(disease, centerX, centerY, velocityX, velocityY, color);
-        }
-
-    },
-
-    RECOVERED (Color.DARKORCHID) {
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Human createHuman(Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
-            return new Recovered(centerX, centerY, velocityX, velocityY, color);
-        }
-
-    };
-
-    /** The color which identifies this human's status in the simulation view.*/
-    public final Color color;
-
-    /**
-     * Constructor for a human status color.
-     *
-     * @param color the color to identify this human's status by in the simulation view
-     */
-    private HumanFactory(Color color) {
-        this.color = color;
+    /** Not to be used. */
+    private HumanFactory() {
+        throw new UnsupportedOperationException("This constructor should never be used.");
     }
 
     /**
-     * Factory method for creating a human.
+     * Create humans for the given disease dependent status type.
      *
+     * @param status    status of this human
      * @param disease   a disease
      * @param centerX   the initial horizontal position of the center of the bouncy circle which represents this human
      *                  in pixels
@@ -75,12 +26,54 @@ enum HumanFactory {
      *                  frame
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
      *                  per frame
-     * @return a human
-     * @throws IllegalArgumentException if the total velocity magnitude of velocityX and velocityY is not equal to
-     *                                  {@value BouncyCircle#SPEED} pixels per second
+     * @return Human initialised for the given status type and initial position. If the human creation
+     * failed due to an illegal argument, null will be returned.
+     * @throws NullPointerException If the given status or disease is null.
      */
-    public abstract Human createHuman(Disease disease,
-                                      double centerX, double centerY,
-                                      double velocityX, double velocityY);
+    public static Human createHuman(StatusType status, Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
+        Objects.requireNonNull(status, ErrorUtil.getNullMsg("status type"));
+        Objects.requireNonNull(disease, ErrorUtil.getNullMsg("disease"));
+
+        try {
+            if (status == StatusType.INFECTED) {
+                return new InfectedHuman(disease, centerX, centerY, velocityX, velocityY);
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return null;
+    }
+
+    /**
+     * Create human for the given status type.
+     *
+     * @param status    status of this human
+     * @param centerX   the initial horizontal position of the center of the bouncy circle which represents this human
+     *                  in pixels
+     * @param centerY   the initial vertical position of the center of the bouncy circle which represents this human
+     *                  in pixels
+     * @param velocityX the initial horizontal velocity of the bouncy circle which represents this human in pixels per
+     *                  frame
+     * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
+     *                  per frame
+     * @return Human initialised for the given status type and initial position. If the human creation
+     * failed due to an illegal argument, null will be returned.
+     * @throws NullPointerException If the given status is null.
+     */
+    public static Human createHuman(StatusType status, double centerX, double centerY, double velocityX, double velocityY) {
+        Objects.requireNonNull(status, ErrorUtil.getNullMsg("status type"));
+
+        try {
+            switch(status) {
+                case HEALTHY:   return new HealthyHuman(centerX, centerY, velocityX, velocityY);
+                case RECOVERED: return new RecoveredHuman(centerX, centerY, velocityX, velocityY);
+            }
+        } catch (IllegalArgumentException e) {
+                System.err.println(e.getMessage());
+        }
+
+        return null;
+    }
 
 }

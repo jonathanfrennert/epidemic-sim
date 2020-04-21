@@ -5,10 +5,10 @@ import org.epi.model.BouncyCircle;
 import javafx.scene.paint.Paint;
 
 /** Model class for humans who have recovered from the disease.*/
-public class Recovered extends Human {
+public class RecoveredHuman extends Human {
 
     /**
-     * The constructor for recovered humans. Meant to be accessed only via {@link HumanFactory}.
+     * The constructor for recovered humans.
      *
      * @param centerX   the initial horizontal position of the center of the bouncy circle which represents this human
      *                  in pixels
@@ -18,10 +18,11 @@ public class Recovered extends Human {
      *                  frame
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
      *                  per frame
-     * @param fill      The color which indicates this status type in the simulation view
+     * @throws NullPointerException
+     * @throws IllegalArgumentException
      */
-    public Recovered(double centerX, double centerY, double velocityX, double velocityY, Paint fill) {
-        super(BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, fill));
+    public RecoveredHuman(double centerX, double centerY, double velocityX, double velocityY) {
+        super(StatusType.RECOVERED ,BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, StatusType.RECOVERED.color));
     }
 
 }

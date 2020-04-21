@@ -8,25 +8,40 @@ import java.util.Objects;
 /** The superclass for all humans in the simulation.*/
 public abstract class Human {
 
+    /** The status of this human.*/
+    private final StatusType status;
+
     /** The representation of this human in the simulation view.*/
     private final BouncyCircle view;
 
     /**
      * Constructor for a human
      *
+     * @param status the status type of this human
      * @param view The view of this human in the simulation view
      * @throws NullPointerException if the given view is null
      */
-    public Human(BouncyCircle view) {
+    public Human(StatusType status, BouncyCircle view) {
+        Objects.requireNonNull(status, ErrorUtil.getNullMsg("status"));
         Objects.requireNonNull(view, ErrorUtil.getNullMsg("view"));
 
+        this.status = status;
         this.view = view;
+    }
+
+    /**
+     * Getter for {@link Human#status}.
+     *
+     * @return {@link Human#status}
+     */
+    public StatusType getStatus() {
+        return status;
     }
 
     /**
      * Getter for {@link Human#view}.
      *
-     * @return the representation of this human in the simulation view
+     * @return {@link Human#view}
      */
     public BouncyCircle getView() {
         return view;

@@ -6,7 +6,6 @@ import org.epi.util.ErrorUtil;
 import javafx.scene.layout.Pane;
 import javafx.animation.AnimationTimer;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,15 +16,10 @@ public class Simulator {
     private final Pane simulationView = new Pane();
 
     /** The animation timer for the simulation view.*/
-    private final AnimationTimer timer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-
-        }
-    };
+    private final AnimationTimer timer;
 
     /** The human population being simulated.*/
-    private final List<Human> population = Collections.emptyList();
+    private final List<Human> population;
 
     /** The disease being simulated.*/
     private final Disease disease;
@@ -43,4 +37,14 @@ public class Simulator {
 
         this.disease = disease;
     }
+
+    /**
+     * Getter for {@link Simulator#population}.
+     *
+     * @return {@link Simulator#population}
+     */
+    public List<Human> getPopulation() {
+        return population;
+    }
+
 }
