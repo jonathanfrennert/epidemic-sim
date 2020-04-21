@@ -1,6 +1,5 @@
 package org.epi.model.human;
 
-import javafx.scene.paint.Color;
 import org.epi.model.BouncyCircle;
 
 /** Model class for humans without the disease.*/

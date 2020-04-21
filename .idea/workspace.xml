@@ -21,13 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7b5cc742-57ca-4556-918d-abdafffe3589" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/Simulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/Healthy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HealthyHuman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/Human.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/Human.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HumanFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/StatusType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/Infected.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/InfectedHuman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/Recovered.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/RecoveredHuman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HealthyHuman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HealthyHuman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HumanFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HumanFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

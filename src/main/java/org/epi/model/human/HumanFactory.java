@@ -35,8 +35,10 @@ public final class HumanFactory {
         Objects.requireNonNull(disease, ErrorUtil.getNullMsg("disease"));
 
         try {
-            if (status == StatusType.INFECTED) {
-                return new InfectedHuman(disease, centerX, centerY, velocityX, velocityY);
+            switch (status) {
+                case INFECTED: return new InfectedHuman(disease, centerX, centerY, velocityX, velocityY);
+                default:
+                    throw new IllegalArgumentException(ErrorUtil.ERROR_TAG + " Status type is not disease dependent: " + status);
             }
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
@@ -68,6 +70,8 @@ public final class HumanFactory {
             switch(status) {
                 case HEALTHY:   return new HealthyHuman(centerX, centerY, velocityX, velocityY);
                 case RECOVERED: return new RecoveredHuman(centerX, centerY, velocityX, velocityY);
+                default:
+                    throw new IllegalArgumentException(ErrorUtil.ERROR_TAG + " Status type is disease dependent: " + status);
             }
         } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
