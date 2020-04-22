@@ -1,6 +1,7 @@
 package org.epi.model.human;
 
 import org.epi.model.BouncyCircle;
+import org.epi.model.Human;
 import org.epi.model.StatusType;
 
 /** Model class for humans without the disease.*/
