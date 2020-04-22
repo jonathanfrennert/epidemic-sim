@@ -20,7 +20,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b5cc742-57ca-4556-918d-abdafffe3589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileContent/fileContent.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/EpiSim.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/MainApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/BouncyCircle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Disease.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Human.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/HumanFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Simulator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Statistics.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/StatusType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/World.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HealthyHuman.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/InfectedHuman.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/RecoveredHuman.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Error.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Positioner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Probability.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/QuadTree.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/Epi.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +301,7 @@
       <workItem from="1587536306633" duration="10432000" />
       <workItem from="1587557830197" duration="5194000" />
       <workItem from="1587588029275" duration="492000" />
-      <workItem from="1587588535534" duration="1241000" />
+      <workItem from="1587588535534" duration="1541000" />
     </task>
     <servers />
   </component>
