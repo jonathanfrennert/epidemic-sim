@@ -23,9 +23,9 @@ public final class HumanFactory {
      * @param centerY   the initial vertical position of the center of the bouncy circle which represents this human
      *                  in pixels
      * @param velocityX the initial horizontal velocity of the bouncy circle which represents this human in pixels per
-     *                  frame
+     *                  second
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
-     *                  per frame
+     *                  per second
      * @return Human initialised for the given status type and initial position. If the human creation
      * failed due to an illegal argument, null will be returned.
      * @throws NullPointerException If the given status or disease is null.
@@ -56,9 +56,9 @@ public final class HumanFactory {
      * @param centerY   the initial vertical position of the center of the bouncy circle which represents this human
      *                  in pixels
      * @param velocityX the initial horizontal velocity of the bouncy circle which represents this human in pixels per
-     *                  frame
+     *                  second
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
-     *                  per frame
+     *                  per second
      * @return Human initialised for the given status type and initial position. If the human creation
      * failed due to an illegal argument, null will be returned.
      * @throws NullPointerException If the given status is null.

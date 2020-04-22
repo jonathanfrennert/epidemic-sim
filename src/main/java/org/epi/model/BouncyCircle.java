@@ -95,7 +95,7 @@ public class BouncyCircle extends Circle {
      * @param other a bouncy circle
      * @throws NullPointerException if the given parameter is null
      */
-    public void bounceOn(BouncyCircle other) {
+    public void bounce(BouncyCircle other) {
         Objects.requireNonNull(other, Error.getNullMsg("bouncy circle"));
 
         // TODO Alexandra :)

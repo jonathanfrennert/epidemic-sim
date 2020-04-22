@@ -13,9 +13,9 @@ public class HealthyHuman extends Human {
      * @param centerY   the initial vertical position of the center of the bouncy circle which represents this human
      *                  in pixels
      * @param velocityX the initial horizontal velocity of the bouncy circle which represents this human in pixels per
-     *                  frame
+     *                  second
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
-     *                  per frame
+     *                  per second
      * @throws IllegalArgumentException TODO
      */
     public HealthyHuman(double centerX, double centerY, double velocityX, double velocityY) {

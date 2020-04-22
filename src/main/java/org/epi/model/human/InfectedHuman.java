@@ -1,5 +1,6 @@
 package org.epi.model.human;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import org.epi.model.BouncyCircle;
 import org.epi.model.Disease;
 import org.epi.util.Probability;
@@ -15,8 +16,8 @@ public class InfectedHuman extends Human {
     /** The disease which this human has.*/
     private final Disease disease;
 
-    /** The current duration of the disease in number of frames.*/
-    private final IntegerProperty currentDuration = new SimpleIntegerProperty(0);
+    /** The current duration of the disease in number of seconds.*/
+    private final DoubleProperty currentDuration = new SimpleDoubleProperty(0);
 
     /**
      * The constructor for infected humans.
@@ -27,9 +28,9 @@ public class InfectedHuman extends Human {
      * @param centerY   the initial vertical position of the center of the bouncy circle which represents this human
      *                  in pixels
      * @param velocityX the initial horizontal velocity of the bouncy circle which represents this human in pixels per
-     *                  frame
+     *                  second
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
-     *                  per frame
+     *                  per second
      * @throws NullPointerException TODO
      * @throws IllegalArgumentException TODO
      */
@@ -39,10 +40,12 @@ public class InfectedHuman extends Human {
     }
 
     /**
-     * Update the current duration by one frame.
+     * Update the current duration by a certain amount of time.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the previous update
      */
-    public void updateCurrentDuration() {
-        currentDuration.setValue(getCurrentDuration() + 1);
+    public void updateCurrentDuration(double elapsedSeconds) {
+        currentDuration.setValue(getCurrentDuration() + elapsedSeconds);
     }
 
     /**
@@ -52,7 +55,7 @@ public class InfectedHuman extends Human {
      *         otherwise false
      */
     public boolean isPersonDeceased(){
-        if (diseaseHasPassed()) {
+        if (totalDurationPassed()) {
             return Probability.chance(disease.getFatalityRate());
         }
         return false;
@@ -63,17 +66,17 @@ public class InfectedHuman extends Human {
      *
      * @return true if the person has had the disease for its total duration, otherwise false
      */
-    private boolean diseaseHasPassed(){
+    private boolean totalDurationPassed(){
         return getCurrentDuration() >= disease.getTotalDuration();
     }
 
     /**
      * Check if the given duration is less than the previous duration.
      *
-     * @param currentDuration the current duration in number of frames
+     * @param currentDuration the current duration in seconds
      * @throws IllegalArgumentException if the given currentDuration is less than the previous currentDuration
      */
-    private void checkDuration (int currentDuration) {
+    private void checkDuration (double currentDuration) {
         if (currentDuration < getCurrentDuration()) {
             throw new IllegalArgumentException(Error.ERROR_TAG + " Previous current duration "
                     + getCurrentDuration() + "is more than the given current duration: " + currentDuration);
@@ -87,7 +90,7 @@ public class InfectedHuman extends Human {
      *
      * @return {@link InfectedHuman#currentDuration}
      */
-    public int getCurrentDuration() {
+    public double getCurrentDuration() {
         return currentDuration.get();
     }
 
@@ -96,17 +99,17 @@ public class InfectedHuman extends Human {
      *
      * @return {@link InfectedHuman#currentDuration}
      */
-    public IntegerProperty currentDurationProperty() {
+    public DoubleProperty currentDurationProperty() {
         return currentDuration;
     }
 
     /**
      * Setter for {@link InfectedHuman#currentDuration}
      *
-     * @param currentDuration the current duration in number of frames
+     * @param currentDuration the current duration in seconds
      * @throws IllegalArgumentException if the given currentDuration is less than the previous currentDuration
      */
-    public void setCurrentDuration(int currentDuration) {
+    public void setCurrentDuration(double currentDuration) {
         checkDuration(currentDuration);
 
         this.currentDuration.set(currentDuration);
