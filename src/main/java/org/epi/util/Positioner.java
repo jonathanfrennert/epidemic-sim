@@ -1,12 +1,12 @@
 package org.epi.util;
 
+import static org.epi.model.BouncyCircle.RADIUS;
+
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;;
+import javafx.scene.shape.Circle;
 
 import java.util.Objects;
-
-import static org.epi.model.BouncyCircle.RADIUS;
 
 /** Utility class for positioning humans in the view such that they do not overlap. Utilizes Poisson Disc-sampling.*/
 public class Positioner {
@@ -17,39 +17,26 @@ public class Positioner {
     /** Grid placement value for indicating a sample.*/
     private static final int CONTAINS_SAMPLE = 1;
 
-    /** The view in which the new circles are to be placed*/
-    private final Pane view;
-
-    /**
-     * Constructor for a positioner given the view in which circles are to be placed.
-     *
-     * @param view the view in which the circles are to be placed
-     * @throws NullPointerException if the given parameters is null
-     */
-    public Positioner(Pane view) {
-        Objects.requireNonNull(view, Error.getNullMsg("view"));
-
-        this.view = view;
-    }
-
-
     /**
      * Place a circle in a random position in the view such that it does not overlap with any already placed circles.
      *
+     * @param view a view pane
      * @param circle a circle
      * @return true if the circle was placed successfully, otherwise false
-     * @throws NullPointerException if the given parameter is null
+     * @throws NullPointerException if any of the two given parameters are null
+     * @throws IllegalArgumentException if the given view contains children that are not circles
      */
-    public boolean placeInView(Circle circle) {
-
-        //TODO Currently working on quadtree.
-
+    public static boolean position(Pane view, Circle circle) {
+        Objects.requireNonNull(view, Error.getNullMsg("view"));
         Objects.requireNonNull(circle, Error.getNullMsg("circle"));
+        contentCheck(view);
+
+        //TODO Currently working on Quadtree.
 
         boolean success = false;
 
-        int gridWidth = (int) (VIEW_WIDTH / RADIUS);
-        int gridHeight = (int) (VIEW_HEIGHT / RADIUS);
+        int gridWidth = (int) (view.getWidth() / RADIUS);
+        int gridHeight = (int) (view.getHeight() / RADIUS);
         int[][] placementGrid = new int[gridWidth][gridHeight];
 
         for (Node placed : view.getChildren()) {
@@ -65,5 +52,18 @@ public class Positioner {
         return success;
     }
 
+    /**
+     * Check if the given pane only has circles as children.
+     *
+     * @param pane a pane
+     * @throws IllegalArgumentException if the given pane contains children that are not circles
+     */
+    private static void contentCheck(Pane pane) {
+        for (Node child : pane.getChildren()) {
+            if (!(child instanceof Circle)) {
+                throw new IllegalArgumentException(Error.ERROR_TAG + " Given pane contains more than circles:" + child);
+            }
+        }
+    }
 
 }

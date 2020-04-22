@@ -3,12 +3,11 @@ package org.epi.model.human;
 import javafx.beans.property.SimpleDoubleProperty;
 import org.epi.model.BouncyCircle;
 import org.epi.model.Disease;
+import org.epi.model.StatusType;
 import org.epi.util.Probability;
 import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 /** Model class for humans infected with the disease.*/
 public class InfectedHuman extends Human {

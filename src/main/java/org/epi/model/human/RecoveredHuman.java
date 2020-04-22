@@ -1,6 +1,7 @@
 package org.epi.model.human;
 
 import org.epi.model.BouncyCircle;
+import org.epi.model.StatusType;
 
 /** Model class for humans who have recovered from the disease.*/
 public class RecoveredHuman extends Human {

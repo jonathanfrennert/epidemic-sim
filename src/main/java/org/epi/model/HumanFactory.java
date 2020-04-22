@@ -1,6 +1,6 @@
-package org.epi.model.human;
+package org.epi.model;
 
-import org.epi.model.Disease;
+import org.epi.model.human.*;
 import org.epi.util.Error;
 
 import java.util.Objects;

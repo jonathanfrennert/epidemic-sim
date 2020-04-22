@@ -1,6 +1,7 @@
 package org.epi.model.human;
 
 import org.epi.model.BouncyCircle;
+import org.epi.model.StatusType;
 import org.epi.util.Error;
 
 import java.util.Objects;

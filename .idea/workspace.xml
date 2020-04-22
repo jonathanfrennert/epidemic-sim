@@ -21,12 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7b5cc742-57ca-4556-918d-abdafffe3589" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Disease.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/Disease.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/World.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/util/Error.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Positioner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/util/Positioner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Probability.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/util/Probability.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/util/Statistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/QuadTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/util/QuadTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/Statistics.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +254,8 @@
       <workItem from="1587502630356" duration="615000" />
       <workItem from="1587536306633" duration="10432000" />
       <workItem from="1587557830197" duration="5194000" />
-      <workItem from="1587588029275" duration="36000" />
+      <workItem from="1587588029275" duration="492000" />
+      <workItem from="1587588535534" duration="748000" />
     </task>
     <servers />
   </component>

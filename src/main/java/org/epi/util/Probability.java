@@ -40,4 +40,5 @@ public class Probability {
     public static void probabilityCheck(double probability) {
         Error.intervalCheck("probability", MIN_PROB, MAX_PROB, probability);
     }
+
 }
