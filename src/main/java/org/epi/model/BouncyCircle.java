@@ -1,6 +1,6 @@
 package org.epi.model;
 
-import org.epi.util.ErrorUtil;
+import org.epi.util.Error;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.DoubleProperty;
@@ -13,10 +13,10 @@ import java.util.Objects;
  * Bouncy circles act have inelastic collisions, the same speed and radius. The units are measured in pixels per second.*/
 public class BouncyCircle extends Circle {
 
-    /** The speed of a bouncy circle in pixels per second.*/
+    /** The initial speed of a bouncy circle in pixels per second.*/
     public static final double SPEED = 20;
     /** The radius of a bouncy circle in pixels.*/
-    private static final double RADIUS = 5;
+    public static final double RADIUS = 5;
 
     /** The horizontal velocity of the bouncy circle in pixels per second.*/
     private final DoubleProperty velocityX;
@@ -37,7 +37,7 @@ public class BouncyCircle extends Circle {
      */
     public static BouncyCircle createBouncyCircle(double centerX, double centerY, double velocityX, double velocityY, Paint fill) {
         checkSpeed(velocityX, velocityY);
-        Objects.requireNonNull(fill, ErrorUtil.getNullMsg("fill"));
+        Objects.requireNonNull(fill, Error.getNullMsg("fill"));
 
         return new BouncyCircle(centerX, centerY, velocityX, velocityY, fill);
     }
@@ -79,10 +79,10 @@ public class BouncyCircle extends Circle {
      *
      * @param circle A circle
      * @return true if the bouncy circle is colliding with the given circle, otherwise false
-     * @throws NullPointerException if the given circle is null
+     * @throws NullPointerException if the given parameter is null
      */
     public boolean collidingWith(Circle circle) {
-        Objects.requireNonNull(circle, ErrorUtil.getNullMsg("circle"));
+        Objects.requireNonNull(circle, Error.getNullMsg("circle"));
 
         // TODO Alexandra :)
         return false;
@@ -93,10 +93,10 @@ public class BouncyCircle extends Circle {
      * another bouncy circle for both bouncy circles.
      *
      * @param other a bouncy circle
-     * @throws NullPointerException if the given bouncy circle is null
+     * @throws NullPointerException if the given parameter is null
      */
     public void bounceOn(BouncyCircle other) {
-        Objects.requireNonNull(other, ErrorUtil.getNullMsg("bouncy circle"));
+        Objects.requireNonNull(other, Error.getNullMsg("bouncy circle"));
 
         // TODO Alexandra :)
     }
@@ -105,8 +105,11 @@ public class BouncyCircle extends Circle {
      * Move the bouncy circle by a certain amount of time.
      *
      * @param elapsedSeconds the number of seconds elapsed in the move.
+     * @throws IllegalArgumentException if the given parameter is negative
      */
     public void move(double elapsedSeconds) {
+        Error.nonNegativeCheck(elapsedSeconds);
+
         setTranslateX(elapsedSeconds * getVelocityX());
         setTranslateY(elapsedSeconds * getVelocityY());
     }

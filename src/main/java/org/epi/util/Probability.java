@@ -14,11 +14,11 @@ public class Probability {
      *
      * @param chance the chance of success
      * @return true if the sampling was within the chance of the success, otherwise false
-     * @throws NullPointerException if the given chance is less than {@value ErrorUtil#MIN_PROB} or more than
-     *                              {@value ErrorUtil#MAX_PROB}
+     * @throws NullPointerException if the given chance is less than {@value Error#MIN_PROB} or more than
+     *                              {@value Error#MAX_PROB}
      */
     public static boolean chance(double chance) {
-        ErrorUtil.probabilityCheck(chance);
+        Error.probabilityCheck(chance);
 
         List<Pair<Boolean,Double>> outcomes = Arrays.asList(Pair.create(true, chance), Pair.create(false, 1 - chance));
 

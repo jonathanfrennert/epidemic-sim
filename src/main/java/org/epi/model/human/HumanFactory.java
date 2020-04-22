@@ -1,7 +1,7 @@
 package org.epi.model.human;
 
 import org.epi.model.Disease;
-import org.epi.util.ErrorUtil;
+import org.epi.util.Error;
 
 import java.util.Objects;
 
@@ -31,14 +31,14 @@ public final class HumanFactory {
      * @throws NullPointerException If the given status or disease is null.
      */
     public static Human createHuman(StatusType status, Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
-        Objects.requireNonNull(status, ErrorUtil.getNullMsg("status type"));
-        Objects.requireNonNull(disease, ErrorUtil.getNullMsg("disease"));
+        Objects.requireNonNull(status, Error.getNullMsg("status type"));
+        Objects.requireNonNull(disease, Error.getNullMsg("disease"));
 
         try {
             switch (status) {
                 case INFECTED: return new InfectedHuman(disease, centerX, centerY, velocityX, velocityY);
                 default:
-                    throw new IllegalArgumentException(ErrorUtil.ERROR_TAG + " Status type is not disease dependent: " + status);
+                    throw new IllegalArgumentException(Error.ERROR_TAG + " Status type is not disease dependent: " + status);
             }
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
@@ -64,14 +64,14 @@ public final class HumanFactory {
      * @throws NullPointerException If the given status is null.
      */
     public static Human createHuman(StatusType status, double centerX, double centerY, double velocityX, double velocityY) {
-        Objects.requireNonNull(status, ErrorUtil.getNullMsg("status type"));
+        Objects.requireNonNull(status, Error.getNullMsg("status type"));
 
         try {
             switch(status) {
                 case HEALTHY:   return new HealthyHuman(centerX, centerY, velocityX, velocityY);
                 case RECOVERED: return new RecoveredHuman(centerX, centerY, velocityX, velocityY);
                 default:
-                    throw new IllegalArgumentException(ErrorUtil.ERROR_TAG + " Status type is disease dependent: " + status);
+                    throw new IllegalArgumentException(Error.ERROR_TAG + " Status type is disease dependent: " + status);
             }
         } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());

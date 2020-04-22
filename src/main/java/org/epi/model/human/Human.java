@@ -1,7 +1,7 @@
 package org.epi.model.human;
 
 import org.epi.model.BouncyCircle;
-import org.epi.util.ErrorUtil;
+import org.epi.util.Error;
 
 import java.util.Objects;
 
@@ -22,8 +22,8 @@ public abstract class Human {
      * @throws NullPointerException if the given view is null
      */
     public Human(StatusType status, BouncyCircle view) {
-        Objects.requireNonNull(status, ErrorUtil.getNullMsg("status"));
-        Objects.requireNonNull(view, ErrorUtil.getNullMsg("view"));
+        Objects.requireNonNull(status, Error.getNullMsg("status"));
+        Objects.requireNonNull(view, Error.getNullMsg("view"));
 
         this.status = status;
         this.view = view;

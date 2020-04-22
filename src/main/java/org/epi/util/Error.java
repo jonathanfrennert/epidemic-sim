@@ -1,7 +1,7 @@
 package org.epi.util;
 
 /** Utility class with helper methods for common error checks.*/
-public class ErrorUtil {
+public class Error {
 
     /** Error message tag.*/
     public static final String ERROR_TAG = "ERROR:";

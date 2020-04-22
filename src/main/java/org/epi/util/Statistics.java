@@ -9,9 +9,6 @@ public class Statistics {
     /** Simulator to get statistics from.*/
     private Simulator simulator;
 
-
-    private int numberOf(String className) {
-    }
-
+    //TODO Implement status counter.
 
 }

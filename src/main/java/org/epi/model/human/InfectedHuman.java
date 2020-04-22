@@ -3,7 +3,7 @@ package org.epi.model.human;
 import org.epi.model.BouncyCircle;
 import org.epi.model.Disease;
 import org.epi.util.Probability;
-import org.epi.util.ErrorUtil;
+import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -30,8 +30,8 @@ public class InfectedHuman extends Human {
      *                  frame
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
      *                  per frame
-     * @throws NullPointerException
-     * @throws IllegalArgumentException
+     * @throws NullPointerException TODO
+     * @throws IllegalArgumentException TODO
      */
     public InfectedHuman(Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
         super(StatusType.INFECTED, BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, StatusType.INFECTED.color));
@@ -75,7 +75,7 @@ public class InfectedHuman extends Human {
      */
     private void checkDuration (int currentDuration) {
         if (currentDuration < getCurrentDuration()) {
-            throw new IllegalArgumentException(ErrorUtil.ERROR_TAG + " Previous current duration "
+            throw new IllegalArgumentException(Error.ERROR_TAG + " Previous current duration "
                     + getCurrentDuration() + "is more than the given current duration: " + currentDuration);
         }
     }

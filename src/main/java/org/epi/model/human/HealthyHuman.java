@@ -16,7 +16,7 @@ public class HealthyHuman extends Human {
      *                  frame
      * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
      *                  per frame
-     * @throws IllegalArgumentException if the
+     * @throws IllegalArgumentException TODO
      */
     public HealthyHuman(double centerX, double centerY, double velocityX, double velocityY) {
         super(StatusType.HEALTHY, BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, StatusType.HEALTHY.color));

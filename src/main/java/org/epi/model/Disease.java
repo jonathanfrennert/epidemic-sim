@@ -1,6 +1,6 @@
 package org.epi.model;
 
-import org.epi.util.ErrorUtil;
+import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -25,13 +25,13 @@ public class Disease {
      * @param transmissionRisk The probability of a transmission occurring
      * @param fatalityRate The probability of an infected person dying from the disease
      * @param totalDuration The total duration of the disease in number of frames
-     * @throws IllegalArgumentException if the given transmissionRisk or fatalityRate is less than {@value ErrorUtil#MIN_PROB} or more than
-     *                                  {@value ErrorUtil#MAX_PROB} and if the totalDuration is negative
+     * @throws IllegalArgumentException if the given transmissionRisk or fatalityRate is less than {@value Error#MIN_PROB} or more than
+     *                                  {@value Error#MAX_PROB} and if the totalDuration is negative
      */
     public Disease(double transmissionRisk, double fatalityRate, int totalDuration) {
-        ErrorUtil.probabilityCheck(transmissionRisk);
-        ErrorUtil.probabilityCheck(fatalityRate);
-        ErrorUtil.nonNegativeCheck(totalDuration);
+        Error.probabilityCheck(transmissionRisk);
+        Error.probabilityCheck(fatalityRate);
+        Error.nonNegativeCheck(totalDuration);
 
         this.transmissionRisk = new SimpleDoubleProperty(transmissionRisk);
         this.fatalityRate = new SimpleDoubleProperty(fatalityRate);
@@ -62,11 +62,11 @@ public class Disease {
      * Setter for {@link Disease#transmissionRisk}
      *
      * @param transmissionRisk the probability of a transmission occurring in effective contact
-     * @throws IllegalArgumentException if the given transmissionRisk is less than {@value ErrorUtil#MIN_PROB} or more than
-     *                                  {@value ErrorUtil#MAX_PROB}
+     * @throws IllegalArgumentException if the given transmissionRisk is less than {@value Error#MIN_PROB} or more than
+     *                                  {@value Error#MAX_PROB}
      */
     public void setTransmissionRisk(double transmissionRisk) {
-        ErrorUtil.probabilityCheck(transmissionRisk);
+        Error.probabilityCheck(transmissionRisk);
 
         this.transmissionRisk.set(transmissionRisk);
     }
@@ -93,11 +93,11 @@ public class Disease {
      * Setter for {@link Disease#transmissionRisk}
      *
      * @param fatalityRate the probability of an infected person dying from the disease
-     * @throws IllegalArgumentException if the fatalityRate is less than {@value ErrorUtil#MIN_PROB} or more than
-     *                                  {@value ErrorUtil#MAX_PROB}
+     * @throws IllegalArgumentException if the fatalityRate is less than {@value Error#MIN_PROB} or more than
+     *                                  {@value Error#MAX_PROB}
      */
     public void setFatalityRate(double fatalityRate) {
-        ErrorUtil.probabilityCheck(fatalityRate);
+        Error.probabilityCheck(fatalityRate);
 
         this.fatalityRate.set(fatalityRate);
     }
@@ -127,7 +127,7 @@ public class Disease {
      * @throws IllegalArgumentException if the given totalDuration is negative
      */
     public void setTotalDuration(int totalDuration) {
-        ErrorUtil.nonNegativeCheck(totalDuration);
+        Error.nonNegativeCheck(totalDuration);
 
         this.totalDuration.set(totalDuration);
     }

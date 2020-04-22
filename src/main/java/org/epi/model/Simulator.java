@@ -1,11 +1,12 @@
 package org.epi.model;
 
 import org.epi.model.human.Human;
-import org.epi.util.ErrorUtil;
+import org.epi.util.Error;
 
 import javafx.scene.layout.Pane;
 import javafx.animation.AnimationTimer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,12 @@ public class Simulator {
     private final Pane simulationView = new Pane();
 
     /** The animation timer for the simulation view.*/
-    private final AnimationTimer timer;
+    private final AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+
+        }
+    };
 
     /** The human population being simulated.*/
     private final List<Human> population;
@@ -31,9 +37,19 @@ public class Simulator {
      * @param world the world to be simulated
      * @throws NullPointerException if any of the two parameters are null
      */
-    public Simulator(Disease disease, World world) {
-        Objects.requireNonNull(disease, ErrorUtil.getNullMsg("disease"));
-        Objects.requireNonNull(world, ErrorUtil.getNullMsg("world"));
+    public Simulator(World world, Disease disease) {
+        Objects.requireNonNull(disease, Error.getNullMsg("disease"));
+        Objects.requireNonNull(world, Error.getNullMsg("world"));
+
+        population = new ArrayList<>();
+
+        for (int i = 0; i < world.getPopulationCount(); i++) {
+            double centerX = 0;
+            double centerY = 0;
+            double velocityX = 0;
+            double velocityY = 0;
+
+        }
 
         this.disease = disease;
     }
@@ -47,4 +63,7 @@ public class Simulator {
         return population;
     }
 
+    // TODO EVERYTHING
+
 }
+
