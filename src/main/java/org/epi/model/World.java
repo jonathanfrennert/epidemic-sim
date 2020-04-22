@@ -6,6 +6,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import org.epi.util.Probability;
 
 /** Wrapper class for the world parameters.*/
 public class World {
@@ -22,11 +23,11 @@ public class World {
      * @param population the number of humans in the initial population
      * @param socialDistProb the probability of someone social distancing
      * @throws IllegalArgumentException if the given population is negative or the socialDistProb is less than
-     *                                  {@value Error#MIN_PROB} or more than {@value Error#MAX_PROB}
+     *                                  {@value Probability#MIN_PROB} or more than {@value Probability#MAX_PROB}
      */
     public World(int population, double socialDistProb) {
         Error.nonNegativeCheck(population);
-        Error.probabilityCheck(socialDistProb);
+        Probability.probabilityCheck(socialDistProb);
 
         this.population = new SimpleIntegerProperty(population);
         this.socialDistProb = new SimpleDoubleProperty(socialDistProb);

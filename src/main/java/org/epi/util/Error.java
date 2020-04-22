@@ -12,12 +12,6 @@ public class Error {
     /** Outside interval message format.*/
     private static final String INTERVAL_MSG = ERROR_TAG + " Given %s must be between %d and %d but is: %f";
 
-    /** The minimum probability.*/
-    public static final double MIN_PROB = 0;
-
-    /** The maximum probability.*/
-    public static final double MAX_PROB = 1;
-
     //---------------------------- Null checks ----------------------------
 
     /**
@@ -31,18 +25,6 @@ public class Error {
     }
 
     //---------------------------- Comparison & Interval checks ----------------------------
-
-    /**
-     * Check if the given number is non-negative.
-     *
-     * @param number a number
-     * @throws IllegalArgumentException if the given number is non-negative
-     */
-    public static void nonNegativeCheck(Number number) {
-        if (number.doubleValue() < 0) {
-            throw new IllegalArgumentException(ERROR_TAG + " Given number is negative: " + number);
-        }
-    }
 
     /**
      * Return an outside-of-interval message with the given number category.
@@ -68,19 +50,20 @@ public class Error {
      */
     public static void intervalCheck(String numberCategory, Number lowest, Number highest, Number value) {
         if (value.doubleValue() < lowest.doubleValue() || value.doubleValue() > highest.doubleValue()) {
-            throw new IllegalArgumentException(getIntervalMsg(numberCategory, MIN_PROB, MAX_PROB, value));
+            throw new IllegalArgumentException(getIntervalMsg(numberCategory, Probability.MIN_PROB, Probability.MAX_PROB, value));
         }
     }
 
     /**
-     * Check if the given probability is more than {@value MIN_PROB} and less than {@value MAX_PROB}.
+     * Check if the given number is non-negative.
      *
-     * @param probability A probability
-     * @throws IllegalArgumentException if the given probability is less than {@value MIN_PROB} or more than
-     *                                  {@value MAX_PROB}
+     * @param number a number
+     * @throws IllegalArgumentException if the given number is non-negative
      */
-    public static void probabilityCheck(double probability) {
-        intervalCheck("probability", MIN_PROB, MAX_PROB, probability);
+    public static void nonNegativeCheck(Number number) {
+        if (number.doubleValue() < 0) {
+            throw new IllegalArgumentException(ERROR_TAG + " Given number is negative: " + number);
+        }
     }
 
 }

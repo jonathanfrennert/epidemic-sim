@@ -7,14 +7,9 @@ import javafx.scene.shape.Circle;;
 import java.util.Objects;
 
 import static org.epi.model.BouncyCircle.RADIUS;
-import static org.epi.model.Simulator.VIEW_HEIGHT;
-import static org.epi.model.Simulator.VIEW_WIDTH;
 
 /** Utility class for positioning humans in the view such that they do not overlap. Utilizes Poisson Disc-sampling.*/
 public class Positioner {
-
-    /** The limit of samples to choose before rejection.*/
-    private static final int SAMPLE_LIMIT = 30;
 
     /** Grid placement value for indicating no sample.*/
     private static final int NO_SAMPLE = 0;
