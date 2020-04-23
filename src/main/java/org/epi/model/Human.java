@@ -9,7 +9,7 @@ import javafx.scene.shape.Circle;
 import java.util.Objects;
 
 /** The superclass for all humans in the simulation.*/
-public abstract class Human extends Circle implements Movement {
+public abstract class Human extends Circle {
 
     /** The default radius of a human in pixels.*/
     public static final double RADIUS = 5;
@@ -54,8 +54,8 @@ public abstract class Human extends Circle implements Movement {
     public boolean isInContactWith(Human human) {
         Objects.requireNonNull(human, Error.getNullMsg("human"));
 
+        throw new UnsupportedOperationException("Alexandra look over here!");
         // TODO Alexandra :)
-        return false;
     }
 
     /**
@@ -68,6 +68,7 @@ public abstract class Human extends Circle implements Movement {
     public void prepareToLeave(Human human) {
         Objects.requireNonNull(human, Error.getNullMsg("human"));
 
+        throw new UnsupportedOperationException("Alexandra look over here!");
         // TODO Alexandra :)
     }
 
@@ -77,7 +78,6 @@ public abstract class Human extends Circle implements Movement {
      * @param elapsedSeconds the number of seconds elapsed
      * @throws IllegalArgumentException if the given parameter is negative
      */
-    @Override
     public void move(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
 

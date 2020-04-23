@@ -20,8 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b5cc742-57ca-4556-918d-abdafffe3589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Human.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/Human.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/HumanFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/HumanFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Movement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/Statistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/World.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/InfectedHuman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/InfectedHuman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/QuadTree.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +88,7 @@
         <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -99,6 +107,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -119,10 +131,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="org.epi.model.Simulator" />
       <recent name="org.epi.util.Probability" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.epi.model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jonat\EpiSim\src\main\resources\images" />
@@ -131,6 +141,9 @@
       <recent name="C:\Users\jonat\EpiSim\src\main\resources\images" />
       <recent name="C:\Users\jonat\Desktop\Epidemic Modelling\EpiSim\src\main\resources\org.epi" />
       <recent name="C:\Users\jonat\Desktop\Epidemic Modelling\EpiSim\src\main\resources" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.epi.model" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.EpiSim [run]">
@@ -253,7 +266,8 @@
       <workItem from="1587557830197" duration="5194000" />
       <workItem from="1587588029275" duration="492000" />
       <workItem from="1587588535534" duration="1665000" />
-      <workItem from="1587622409692" duration="10779000" />
+      <workItem from="1587622409692" duration="11015000" />
+      <workItem from="1587645675398" duration="19474000" />
     </task>
     <servers />
   </component>
@@ -281,22 +295,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1586326949293" />
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1587537314789">
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1587651496693">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587537314789" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1587651496693" />
     <state x="478" y="285" key="#com.intellij.refactoring.memberPullUp.PullUpDialog" timestamp="1587384490231">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="478" y="285" key="#com.intellij.refactoring.memberPullUp.PullUpDialog/0.0.1536.824@0.0.1536.824" timestamp="1587384490231" />
-    <state x="480" y="153" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1587563246436">
+    <state x="480" y="153" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1587667742804">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="480" y="153" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/0.0.1536.824@0.0.1536.824" timestamp="1587563246436" />
-    <state x="348" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587537460219">
+    <state x="480" y="153" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/0.0.1536.824@0.0.1536.824" timestamp="1587667742804" />
+    <state x="348" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587646652053">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="348" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1587537460219" />
+    <state x="348" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1587646652053" />
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587624775057">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -313,22 +327,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586369190055" />
-    <state width="1537" height="217" key="GridCell.Tab.0.bottom" timestamp="1587630399165">
+    <state width="1537" height="217" key="GridCell.Tab.0.bottom" timestamp="1587633447345">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587630399165" />
-    <state width="1537" height="217" key="GridCell.Tab.0.center" timestamp="1587630399164">
+    <state width="1537" height="217" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587633447345" />
+    <state width="1537" height="217" key="GridCell.Tab.0.center" timestamp="1587633447345">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587630399164" />
-    <state width="1537" height="217" key="GridCell.Tab.0.left" timestamp="1587630399164">
+    <state width="1537" height="217" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587633447345" />
+    <state width="1537" height="217" key="GridCell.Tab.0.left" timestamp="1587633447345">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587630399164" />
-    <state width="1537" height="217" key="GridCell.Tab.0.right" timestamp="1587630399164">
+    <state width="1537" height="217" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587633447345" />
+    <state width="1537" height="217" key="GridCell.Tab.0.right" timestamp="1587633447345">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587630399164" />
+    <state width="1537" height="217" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587633447345" />
     <state x="524" y="346" key="ReplaceDuplicatesPrompt" timestamp="1587384493776">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -337,6 +351,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="310" y="57" width="981" height="712" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586346014633" />
+    <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1587667722555">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824@0.0.1536.824" timestamp="1587667722555" />
     <state x="540" y="234" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1587390863877">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

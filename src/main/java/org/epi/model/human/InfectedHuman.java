@@ -114,4 +114,13 @@ public class InfectedHuman extends Human {
         this.currentDuration.set(currentDuration);
     }
 
+    /**
+     * Getter for {@link InfectedHuman#disease}.
+     *
+     * @return {@link InfectedHuman#disease}
+     */
+    public Disease getDisease() {
+        return disease;
+    }
+
 }

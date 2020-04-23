@@ -8,8 +8,15 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import org.epi.util.Probability;
 
+import static org.epi.model.Human.RADIUS;
+import static org.epi.model.Simulator.WORLD_WIDTH;
+import static org.epi.model.Simulator.WORLD_HEIGHT;
+
 /** Wrapper class for the world parameters.*/
 public class World {
+
+    /** The maximum population; equal to the maximum number of humans that can fit in the view without any overlap.*/
+    private static final int MAX_POPULATION = (int) Math.floor((WORLD_WIDTH * WORLD_HEIGHT) / (4 * RADIUS * RADIUS));
 
     /** The number of humans in the initial population.*/
     private final IntegerProperty population;
@@ -22,11 +29,11 @@ public class World {
      *
      * @param population the number of humans in the initial population
      * @param socialDistProb the probability of someone social distancing
-     * @throws IllegalArgumentException if the given population is negative or the socialDistProb is less than
+     * @throws IllegalArgumentException if the given population is negative or above {@link #MAX_POPULATION} the socialDistProb is less than
      *                                  {@value Probability#MIN_PROB} or more than {@value Probability#MAX_PROB}
      */
     public World(int population, double socialDistProb) {
-        Error.nonNegativeCheck(population);
+        Error.intervalCheck("population", 0, MAX_POPULATION, population);
         Probability.probabilityCheck(socialDistProb);
 
         this.population = new SimpleIntegerProperty(population);

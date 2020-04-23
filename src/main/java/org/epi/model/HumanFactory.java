@@ -26,23 +26,22 @@ public final class HumanFactory {
     //---------------------------- Factory Methods ----------------------------
 
     /**
-     * Create humans for the given disease dependent status type.
+     * Create humans for the given disease dependent status type and place them in the view.
      *
      * @param world     a world
      * @param disease   a disease
      * @param view      a view pane
      * @param status    a status
-     * @return a human initialised for the given status type and initial position. If the human creation
-     *         failed due to an illegal argument or the view is over capacity, null will be returned
+     * @return if the human of the given status was initialised in the view, otherwise false
      * @throws NullPointerException if any of the given parameters are null
      */
-    public static Human createHuman(World world, Disease disease, Pane view , StatusType status) {
+    public static boolean createHuman(Pane view , World world, Disease disease, StatusType status) {
+        Objects.requireNonNull(world, Error.getNullMsg("view"));
         Objects.requireNonNull(status, Error.getNullMsg("world"));
         Objects.requireNonNull(disease, Error.getNullMsg("disease"));
-        Objects.requireNonNull(world, Error.getNullMsg("view"));
         Objects.requireNonNull(status, Error.getNullMsg("status type"));
 
-        Human human = null;
+        Human human;
 
         try {
             if (status == StatusType.INFECTED) {
@@ -56,27 +55,29 @@ public final class HumanFactory {
 
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+            System.err.println("Human was not added to the view.");
+            return false;
         }
 
-        return human;
+        view.getChildren().add(human);
+        return true;
     }
 
     /**
-     * Create human for the given status type.
+     * Create human for the given status type and place them in the view.
      *
      * @param world     a world
      * @param view      a view pane
      * @param status    a status
-     * @return a human initialised for the given status type. If the human creation
-     *         failed due to an illegal argument or the view is over capacity, null will be returned
+     * @return true if the human of the given status was initialised in the view, otherwise false
      * @throws NullPointerException If any of the given parameters are null
      */
-    public static Human createHuman(World world, Pane view, StatusType status) {
-        Objects.requireNonNull(status, Error.getNullMsg("world"));
+    public static boolean createHuman(Pane view, World world, StatusType status) {
         Objects.requireNonNull(world, Error.getNullMsg("view"));
+        Objects.requireNonNull(status, Error.getNullMsg("world"));
         Objects.requireNonNull(status, Error.getNullMsg("status type"));
 
-        Human human = null;
+        Human human;
 
         try {
             switch(status) {
@@ -95,55 +96,12 @@ public final class HumanFactory {
 
         } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
+                System.err.println("Human was not added to the view.");
+                return false;
         }
 
-        return human;
-    }
-
-    //---------------------------- Converter methods ----------------------------
-
-    /**
-     * Convert any human to an infected human
-     *
-     * @param disease a disease
-     * @param human a human
-     * @return a infected human with the same position and velocity as the given human
-     * @throws NullPointerException if the given parameters are null
-     */
-    public static Human infect(Disease disease, Human human) {
-        Objects.requireNonNull(disease, Error.getNullMsg("disease"));
-        Objects.requireNonNull(human, Error.getNullMsg("human"));
-
-        Human infected = new InfectedHuman(disease);
-
-        infected.setCenterX(human.getCenterX());
-        infected.setCenterY(human.getCenterY());
-
-        infected.setVelocityX(human.getVelocityX());
-        infected.setVelocityY(human.getVelocityY());
-
-        return infected;
-    }
-
-    /**
-     * Convert any human to a recovered human
-     *
-     * @param human a human
-     * @return a recovered human with the same position and velocity as the given human
-     * @throws NullPointerException if the given parameter is null
-     */
-    public static Human recover(Human human) {
-        Objects.requireNonNull(human, Error.getNullMsg("human"));
-
-        Human recovered = new RecoveredHuman();
-
-        recovered.setCenterX(human.getCenterX());
-        recovered.setCenterY(human.getCenterY());
-
-        recovered.setVelocityX(human.getVelocityX());
-        recovered.setVelocityY(human.getVelocityY());
-
-        return recovered;
+        view.getChildren().add(human);
+        return true;
     }
 
     //---------------------------- Factory Workers ----------------------------
@@ -156,7 +114,8 @@ public final class HumanFactory {
      * @throws IllegalArgumentException if the given view is over capacity
      */
     private static void setPosition(Pane view, Human human) {
-        // TODO positioning
+        throw new UnsupportedOperationException("Alexandra look over here!");
+        // TODO Alexandra :)
     }
 
     /**
