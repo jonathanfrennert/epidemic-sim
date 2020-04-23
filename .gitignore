@@ -11,4 +11,4 @@ gradle-app.setting
 .gradletasknamecache
 
 #IntelliJ Ultimate
-!/.idea/codeStyles/
+/.idea/codeStyles/
