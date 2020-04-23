@@ -102,6 +102,52 @@ public final class HumanFactory {
         return human;
     }
 
+    //---------------------------- Converter methods ----------------------------
+
+    /**
+     * Convert any human to an infected human
+     *
+     * @param disease a disease
+     * @param human a human
+     * @return a infected human with the same position and velocity as the given human
+     * @throws NullPointerException if the given parameters are null
+     */
+    public static Human infect(Disease disease, Human human) {
+        Objects.requireNonNull(disease, Error.getNullMsg("disease"));
+        Objects.requireNonNull(human, Error.getNullMsg("human"));
+
+        Human infected = new InfectedHuman(disease);
+
+        infected.setCenterX(human.getCenterX());
+        infected.setCenterY(human.getCenterY());
+
+        infected.setVelocityX(human.getVelocityX());
+        infected.setVelocityY(human.getVelocityY());
+
+        return infected;
+    }
+
+    /**
+     * Convert any human to a recovered human
+     *
+     * @param human a human
+     * @return a recovered human with the same position and velocity as the given human
+     * @throws NullPointerException if the given parameter is null
+     */
+    public static Human recover(Human human) {
+        Objects.requireNonNull(human, Error.getNullMsg("human"));
+
+        Human recovered = new RecoveredHuman();
+
+        recovered.setCenterX(human.getCenterX());
+        recovered.setCenterY(human.getCenterY());
+
+        recovered.setVelocityX(human.getVelocityX());
+        recovered.setVelocityY(human.getVelocityY());
+
+        return recovered;
+    }
+
     //---------------------------- Factory Workers ----------------------------
 
     /**
