@@ -1,6 +1,5 @@
 package org.epi.model;
 
-import org.epi.model.human.Human;
 import org.epi.util.Error;
 
 import javafx.scene.layout.Pane;

@@ -1,7 +1,5 @@
 package org.epi.model;
 
-import org.epi.model.human.StatusType;
-import org.epi.model.human.Human;
 import org.epi.model.human.HealthyHuman;
 import org.epi.model.human.InfectedHuman;
 import org.epi.model.human.RecoveredHuman;

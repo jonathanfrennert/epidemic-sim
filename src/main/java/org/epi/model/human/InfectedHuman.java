@@ -1,6 +1,8 @@
 package org.epi.model.human;
 
 import org.epi.model.Disease;
+import org.epi.model.Human;
+import org.epi.model.StatusType;
 import org.epi.util.Probability;
 import org.epi.util.Error;
 

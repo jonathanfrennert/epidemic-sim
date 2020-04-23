@@ -1,6 +1,5 @@
-package org.epi.model.human;
+package org.epi.model;
 
-import org.epi.model.Movement;
 import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
