@@ -1,83 +1,142 @@
 package org.epi.model;
 
-import org.epi.model.human.*;
+import org.epi.model.human.StatusType;
+import org.epi.model.human.Human;
+import org.epi.model.human.HealthyHuman;
+import org.epi.model.human.InfectedHuman;
+import org.epi.model.human.RecoveredHuman;
 import org.epi.util.Error;
+
+import javafx.geometry.Point2D;
+import javafx.scene.layout.Pane;
 
 import java.util.Objects;
 
+import static org.epi.util.Probability.chance;
+
 /** Static factory for creating humans.*/
 public final class HumanFactory {
+
+    /** The initial speed of a human in pixels per second.*/
+    public static final double SPEED = 20;
 
     /** Not to be used. */
     private HumanFactory() {
         throw new UnsupportedOperationException("This constructor should never be used.");
     }
 
+    //---------------------------- Factory Methods ----------------------------
+
     /**
      * Create humans for the given disease dependent status type.
      *
-     * @param status    status of this human
+     * @param world     a world
      * @param disease   a disease
-     * @param centerX   the initial horizontal position of the center of the bouncy circle which represents this human
-     *                  in pixels
-     * @param centerY   the initial vertical position of the center of the bouncy circle which represents this human
-     *                  in pixels
-     * @param velocityX the initial horizontal velocity of the bouncy circle which represents this human in pixels per
-     *                  second
-     * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
-     *                  per second
-     * @return Human initialised for the given status type and initial position. If the human creation
-     * failed due to an illegal argument, null will be returned.
-     * @throws NullPointerException If the given status or disease is null.
+     * @param view      a view pane
+     * @param status    a status
+     * @return a human initialised for the given status type and initial position. If the human creation
+     *         failed due to an illegal argument or the view is over capacity, null will be returned
+     * @throws NullPointerException if any of the given parameters are null
      */
-    public static Human createHuman(StatusType status, Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
-        Objects.requireNonNull(status, Error.getNullMsg("status type"));
+    public static Human createHuman(World world, Disease disease, Pane view , StatusType status) {
+        Objects.requireNonNull(status, Error.getNullMsg("world"));
         Objects.requireNonNull(disease, Error.getNullMsg("disease"));
+        Objects.requireNonNull(world, Error.getNullMsg("view"));
+        Objects.requireNonNull(status, Error.getNullMsg("status type"));
+
+        Human human = null;
 
         try {
-            switch (status) {
-                case INFECTED: return new InfectedHuman(disease, centerX, centerY, velocityX, velocityY);
-                default:
-                    throw new IllegalArgumentException(Error.ERROR_TAG + " Status type is not disease dependent: " + status);
+            if (status == StatusType.INFECTED) {
+                human = new InfectedHuman(disease);
+            } else {
+                throw new IllegalArgumentException(Error.ERROR_TAG + " Status type is not disease dependent: " + status);
             }
+
+            setPosition(view, human);
+            setVelocity(world, human);
+
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
 
-        return null;
+        return human;
     }
 
     /**
      * Create human for the given status type.
      *
-     * @param status    status of this human
-     * @param centerX   the initial horizontal position of the center of the bouncy circle which represents this human
-     *                  in pixels
-     * @param centerY   the initial vertical position of the center of the bouncy circle which represents this human
-     *                  in pixels
-     * @param velocityX the initial horizontal velocity of the bouncy circle which represents this human in pixels per
-     *                  second
-     * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
-     *                  per second
-     * @return Human initialised for the given status type and initial position. If the human creation
-     * failed due to an illegal argument, null will be returned.
-     * @throws NullPointerException If the given status is null.
+     * @param world     a world
+     * @param view      a view pane
+     * @param status    a status
+     * @return a human initialised for the given status type. If the human creation
+     *         failed due to an illegal argument or the view is over capacity, null will be returned
+     * @throws NullPointerException If any of the given parameters are null
      */
-    public static Human createHuman(StatusType status, double centerX, double centerY, double velocityX, double velocityY) {
+    public static Human createHuman(World world, Pane view, StatusType status) {
+        Objects.requireNonNull(status, Error.getNullMsg("world"));
+        Objects.requireNonNull(world, Error.getNullMsg("view"));
         Objects.requireNonNull(status, Error.getNullMsg("status type"));
+
+        Human human = null;
 
         try {
             switch(status) {
-                case HEALTHY:   return new HealthyHuman(centerX, centerY, velocityX, velocityY);
-                case RECOVERED: return new RecoveredHuman(centerX, centerY, velocityX, velocityY);
+                case HEALTHY:
+                    human = new HealthyHuman();
+                    break;
+                case RECOVERED:
+                    human = new RecoveredHuman();
+                    break;
                 default:
                     throw new IllegalArgumentException(Error.ERROR_TAG + " Status type is disease dependent: " + status);
             }
+
+            setPosition(view, human);
+            setVelocity(world, human);
+
         } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
         }
 
-        return null;
+        return human;
+    }
+
+    //---------------------------- Factory Workers ----------------------------
+
+    /**
+     * Set the position of the given human in the view pane.
+     *
+     * @param view a view pane
+     * @param human a human
+     * @throws IllegalArgumentException if the given view is over capacity
+     */
+    private static void setPosition(Pane view, Human human) {
+        // TODO positioning
+    }
+
+    /**
+     * Set the velocities of the given human dependent on the world.
+     *
+     * @param world a world
+     * @param human a human
+     */
+    private static void setVelocity(World world, Human human) {
+        if (!chance(world.getSocialDistProb())) {
+            setRandomVelocities(human);
+        }
+    }
+
+    /**
+     * Set random horizontal and vertical velocity normalised to a speed of {@value SPEED} for this human.
+     *
+     * @param human a human
+     */
+    private static void setRandomVelocities(Human human) {
+        Point2D totalVelocity = new Point2D(Math.random(), Math.random()).normalize();
+
+        human.setVelocityX(totalVelocity.getX() * SPEED);
+        human.setVelocityY(totalVelocity.getY() * SPEED);
     }
 
 }

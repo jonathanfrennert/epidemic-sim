@@ -20,57 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b5cc742-57ca-4556-918d-abdafffe3589" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileContent/fileContent.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/EpiSim.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/MainApp.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/Human.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/BouncyCircle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Disease.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Human.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/HumanFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Simulator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Statistics.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/StatusType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/World.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HealthyHuman.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/InfectedHuman.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/RecoveredHuman.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Error.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/HumanFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/HumanFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/StatusType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/StatusType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HealthyHuman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/HealthyHuman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/InfectedHuman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/InfectedHuman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/model/human/RecoveredHuman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/epi/model/human/RecoveredHuman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Positioner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/Probability.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/epi/util/QuadTree.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/Epi.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,8 +88,8 @@
         <option value="JavaFXApplication" />
         <option value="module-info" />
         <option value="FxmlFile" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -301,7 +261,8 @@
       <workItem from="1587536306633" duration="10432000" />
       <workItem from="1587557830197" duration="5194000" />
       <workItem from="1587588029275" duration="492000" />
-      <workItem from="1587588535534" duration="1541000" />
+      <workItem from="1587588535534" duration="1665000" />
+      <workItem from="1587622409692" duration="7838000" />
     </task>
     <servers />
   </component>
@@ -345,10 +306,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="348" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1587537460219" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587383670570">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587624775057">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1587383670570" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1587624775057" />
     <state x="499" y="159" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1587403546310">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -389,10 +350,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="540" y="234" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.824@0.0.1536.824" timestamp="1587390863877" />
-    <state x="478" y="0" width="579" height="824" key="find.popup" timestamp="1587561258871">
+    <state x="415" y="-2" width="579" height="824" key="find.popup" timestamp="1587624862342">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="478" y="0" width="579" height="824" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1587561258871" />
+    <state x="415" y="-2" width="579" height="824" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1587624862342" />
     <state x="209" y="24" key="new project wizard" timestamp="1586369221073">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

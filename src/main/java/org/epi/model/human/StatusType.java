@@ -1,4 +1,4 @@
-package org.epi.model;
+package org.epi.model.human;
 
 import javafx.scene.paint.Color;
 

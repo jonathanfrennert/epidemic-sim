@@ -1,51 +1,39 @@
 package org.epi.model.human;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import org.epi.model.BouncyCircle;
 import org.epi.model.Disease;
-import org.epi.model.Human;
-import org.epi.model.StatusType;
 import org.epi.util.Probability;
 import org.epi.util.Error;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.DoubleProperty;
 
-/** Model class for humans infected with the disease.*/
+import java.util.Objects;
+
+/** Model class for humans infected with a disease.*/
 public class InfectedHuman extends Human {
+
+    /** The initial value for the current duration.*/
+    private static final double INITIAL_DURATION = 0;
 
     /** The disease which this human has.*/
     private final Disease disease;
 
     /** The current duration of the disease in number of seconds.*/
-    private final DoubleProperty currentDuration = new SimpleDoubleProperty(0);
+    private final DoubleProperty currentDuration;
 
     /**
      * The constructor for infected humans.
      *
-     * @param disease   a disease
-     * @param centerX   the initial horizontal position of the center of the bouncy circle which represents this human
-     *                  in pixels
-     * @param centerY   the initial vertical position of the center of the bouncy circle which represents this human
-     *                  in pixels
-     * @param velocityX the initial horizontal velocity of the bouncy circle which represents this human in pixels per
-     *                  second
-     * @param velocityY the initial vertical velocity of the the bouncy circle which represents this human in pixels
-     *                  per second
-     * @throws NullPointerException TODO
-     * @throws IllegalArgumentException TODO
+     * @param disease a disease
+     * @throws NullPointerException if the given parameter is null
      */
-    public InfectedHuman(Disease disease, double centerX, double centerY, double velocityX, double velocityY) {
-        super(StatusType.INFECTED, BouncyCircle.createBouncyCircle(centerX, centerY, velocityX, velocityY, StatusType.INFECTED.color));
-        this.disease = disease;
-    }
+    public InfectedHuman(Disease disease) {
+        super(StatusType.INFECTED);
+        Objects.requireNonNull(disease, Error.getNullMsg("disease"));
 
-    /**
-     * Update the current duration by a certain amount of time.
-     *
-     * @param elapsedSeconds the number of seconds elapsed since the previous update
-     */
-    public void updateCurrentDuration(double elapsedSeconds) {
-        currentDuration.setValue(getCurrentDuration() + elapsedSeconds);
+        this.disease = disease;
+        this.currentDuration = new SimpleDoubleProperty(INITIAL_DURATION);
+        setFill(StatusType.INFECTED.color);
     }
 
     /**
@@ -54,7 +42,7 @@ public class InfectedHuman extends Human {
      * @return true if the total duration of the disease has passed and the chance of fatality returned true,
      *         otherwise false
      */
-    public boolean isPersonDeceased(){
+    public boolean isDeceased(){
         if (totalDurationPassed()) {
             return Probability.chance(disease.getFatalityRate());
         }
@@ -68,6 +56,15 @@ public class InfectedHuman extends Human {
      */
     private boolean totalDurationPassed(){
         return getCurrentDuration() >= disease.getTotalDuration();
+    }
+
+    /**
+     * Update the current duration by a certain amount of time.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the previous update
+     */
+    public void updateCurrentDuration(double elapsedSeconds) {
+        currentDuration.setValue(getCurrentDuration() + elapsedSeconds);
     }
 
     /**
