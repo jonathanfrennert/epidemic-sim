@@ -30,4 +30,4 @@ jlink {
     }
 }
 
-mainClassName = "$moduleName/org.epi.AnimationTimerTest"
+mainClassName = "$moduleName/org.epi.MainApp"
