@@ -14,7 +14,8 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-    @Override public void start(Stage stage) {
+    @Override
+    public void start(Stage stage) {
 
         // Setting application title and icon.
         stage.setTitle("Epidemic Simulator");
