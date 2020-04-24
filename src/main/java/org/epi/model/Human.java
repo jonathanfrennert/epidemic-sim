@@ -1,7 +1,5 @@
 package org.epi.model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
