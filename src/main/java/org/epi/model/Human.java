@@ -54,8 +54,17 @@ public abstract class Human extends Circle {
     public boolean isInContactWith(Human human) {
         Objects.requireNonNull(human, Error.getNullMsg("human"));
 
-        throw new UnsupportedOperationException("Alexandra look over here!");
-        // TODO Alexandra :)
+        final double deltaX = getCenterX() - human.getCenterX();
+        final double deltaY = getCenterY() - human.getCenterY();
+        final double radiusSum = getRadius() + human.getRadius();
+
+        if (deltaX * deltaX + deltaY * deltaY <= radiusSum * radiusSum) {
+            if (deltaX * (human.getVelocityX() - getVelocityX())
+                    + deltaY * (human.getVelocityY() - getVelocityY()) <= 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
