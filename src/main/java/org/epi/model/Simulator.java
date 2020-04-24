@@ -2,6 +2,8 @@ package org.epi.model;
 
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.epi.model.human.InfectedHuman;
 import org.epi.model.human.RecoveredHuman;
 import org.epi.util.Error;
@@ -11,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.animation.AnimationTimer;
 
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 
 /** The main simulator class; a facade to the rest of the simulator components.*/
@@ -21,6 +24,8 @@ public class Simulator {
 
     /** The default view height in pixels.*/
     public static final double WORLD_HEIGHT = 500;
+
+    private ObservableList<Human> humans = FXCollections.observableArrayList();
 
     //---------------------------- AnimationTimer ----------------------------
 
@@ -99,8 +104,21 @@ public class Simulator {
      * Find all humans that are colliding with walls and adjust their velocities.
      */
     private void wallCollisions() {
-        throw new UnsupportedOperationException("Alexandra look over here!");
-        // TODO Alexandra :)
+        for(ListIterator<Human> slowIt = humans.listIterator(); slowIt.hasNext();){
+            Human h1 = slowIt.next();
+
+            double xVel = h1.getVelocityX();
+            double yVel = h1.getVelocityY();
+
+            if ((h1.getCenterX() - h1.getRadius() <= 0 && xVel < 0)
+                    || (h1.getCenterX() + h1.getRadius() >= WORLD_WIDTH && xVel > 0)) {
+                h1.setVelocityX(-xVel);
+            }
+            if ((h1.getCenterY() - h1.getRadius() <= 0 && yVel < 0)
+                    || (h1.getCenterY() + h1.getRadius() >= WORLD_HEIGHT && yVel > 0)) {
+                h1.setVelocityY(-yVel);
+            }
+        }
     }
 
     /**
