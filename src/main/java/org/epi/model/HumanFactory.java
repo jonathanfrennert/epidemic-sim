@@ -11,7 +11,12 @@ import javafx.scene.layout.Pane;
 import java.util.Objects;
 import java.util.Random;
 
+import static org.epi.model.Human.RADIUS;
+import static org.epi.model.Simulator.WORLD_HEIGHT;
+import static org.epi.model.Simulator.WORLD_WIDTH;
 import static org.epi.util.Probability.chance;
+import static org.epi.util.Probability.probabilityCheck;
+import static org.epi.model.World.MAX_POPULATION;
 
 /** Static factory for creating humans.*/
 public final class HumanFactory {
@@ -115,6 +120,10 @@ public final class HumanFactory {
      * @throws IllegalArgumentException if the given view is over capacity
      */
     private static void setPosition(Pane view, Human human) {
+        if(view.getChildren().size() > MAX_POPULATION){
+            throw new IllegalArgumentException("Pane must not be larger than 500x500!");
+        }
+
         final Random rand = new Random();
 
         final double initialX = view.getWidth() * rand.nextDouble();
@@ -122,8 +131,6 @@ public final class HumanFactory {
 
         human.setCenterX(initialX);
         human.setCenterY(initialY);
-
-        // TODO IllegalArgumentException
     }
 
     /**
