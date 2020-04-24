@@ -51,6 +51,8 @@ public class Simulator {
                 // Update the world view given the time that has passed.
                 statusEffects(elapsedSeconds);
                 movement(elapsedSeconds);
+
+                worldStats.updateCount(worldView);
             }
 
             if (endingIsReached()) {
@@ -90,7 +92,7 @@ public class Simulator {
             HumanFactory.createHuman(worldView, world, StatusType.HEALTHY);
         }
 
-       this.worldStats = new Statistics();
+       this.worldStats = new Statistics(worldView);
     }
 
     /**
@@ -199,20 +201,50 @@ public class Simulator {
      * Check whether the world view has reached any end conditions
      */
     private boolean endingIsReached() {
-        // TODO statistics first.
-        return false;
+        boolean isDiseaseGone = worldStats.getInfectedCount() == 0;
+        boolean isHumanityGone = worldStats.getDeceasedCount() == worldStats.getInitPopulationCount();
+
+        return isDiseaseGone || isHumanityGone;
     }
 
-    //---------------------------- Getters & Setters ----------------------------
+    //---------------------------- Getters ----------------------------
 
     /**
-     * Get the population of a certain status from the world view
+     * Get the population of a certain status from the world view. Humans will be returned as {@link Node}
+     * as the worldView children cannot be type-cast directly to a human list.
      *
      * @param status the status by which to filter the population
      * @return population in world view with the given status
      */
     private List<Node> getPopulationOf(StatusType status) {
         return worldView.getChildren().filtered(node -> node instanceof Human && ((Human) node).getStatus() == status);
+    }
+
+    /**
+     * Getter for {@link #worldTime}.
+     *
+     * @return {@link #worldTime}
+     */
+    public AnimationTimer getWorldTime() {
+        return worldTime;
+    }
+
+    /**
+     * Getter for {@link #worldView}.
+     *
+     * @return {@link #worldView}
+     */
+    public Pane getWorldView() {
+        return worldView;
+    }
+
+    /**
+     * Getter for {@link #worldStats}.
+     *
+     * @return {@link #worldStats}
+     */
+    public Statistics getWorldStats() {
+        return worldStats;
     }
 
 }
