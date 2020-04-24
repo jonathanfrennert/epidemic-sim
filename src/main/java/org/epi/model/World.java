@@ -19,7 +19,7 @@ public class World {
     private static final int MAX_POPULATION = (int) Math.floor((WORLD_WIDTH * WORLD_HEIGHT) / (4 * RADIUS * RADIUS));
 
     /** The number of humans in the initial population.*/
-    private final IntegerProperty population;
+    public final IntegerProperty population;
 
     /** The probability of human social distancing.*/
     private final DoubleProperty socialDistProb;
