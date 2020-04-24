@@ -77,6 +77,7 @@ public abstract class Human extends Circle {
      * @throws NullPointerException if the given parameter is null
      */
     public void prepareToLeave(Human human) {
+        Objects.requireNonNull(human, Error.getNullMsg("human"));
         if(isInContactWith(human)){
             //TODO move(timeElapsed) to avoid sticking
 
