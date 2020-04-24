@@ -16,10 +16,10 @@ import static org.epi.model.Simulator.WORLD_HEIGHT;
 public class World {
 
     /** The maximum population; equal to the maximum number of humans that can fit in the view without any overlap.*/
-    private static final int MAX_POPULATION = (int) Math.floor((WORLD_WIDTH * WORLD_HEIGHT) / (4 * RADIUS * RADIUS));
+    public static final int MAX_POPULATION = (int) Math.floor((WORLD_WIDTH * WORLD_HEIGHT) / (4 * RADIUS * RADIUS));
 
     /** The number of humans in the initial population.*/
-    public final IntegerProperty population;
+    private final IntegerProperty population;
 
     /** The probability of human social distancing.*/
     private final DoubleProperty socialDistProb;
