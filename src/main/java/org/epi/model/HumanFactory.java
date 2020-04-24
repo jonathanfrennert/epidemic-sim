@@ -9,6 +9,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
 import java.util.Objects;
+import java.util.Random;
 
 import static org.epi.util.Probability.chance;
 
@@ -114,8 +115,15 @@ public final class HumanFactory {
      * @throws IllegalArgumentException if the given view is over capacity
      */
     private static void setPosition(Pane view, Human human) {
-        throw new UnsupportedOperationException("Alexandra look over here!");
-        // TODO Alexandra :)
+        final Random rand = new Random();
+
+        final double initialX = view.getWidth() * rand.nextDouble();
+        final double initialY = view.getHeight() * rand.nextDouble();
+
+        human.setCenterX(initialX);
+        human.setCenterY(initialY);
+
+        // TODO IllegalArgumentException
     }
 
     /**
