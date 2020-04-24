@@ -1,5 +1,7 @@
 package org.epi.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
@@ -7,6 +9,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.shape.Circle;
 
 import java.util.Objects;
+
+import static java.lang.Math.sqrt;
 
 /** The superclass for all humans in the simulation.*/
 public abstract class Human extends Circle {
@@ -75,10 +79,46 @@ public abstract class Human extends Circle {
      * @throws NullPointerException if the given parameter is null
      */
     public void prepareToLeave(Human human) {
-        Objects.requireNonNull(human, Error.getNullMsg("human"));
+        if(isInContactWith(human)){
+            //TODO move(timeElapsed) to avoid sticking
 
-        throw new UnsupportedOperationException("Alexandra look over here!");
-        // TODO Alexandra :)
+            final double deltaX = getCenterX() - human.getCenterX();
+            final double deltaY = getCenterY() - human.getCenterY();
+
+            final double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
+
+            double unitContactX = deltaX / distance;
+            double unitContactY = deltaY / distance;
+
+            // velocity of ball 1 parallel to contact vector, same for ball 2
+            final double u1 = getVelocityX() * unitContactX + getVelocityY() * unitContactY;
+            final double u2 = human.getVelocityX() * unitContactX + human.getVelocityY() * unitContactY;
+
+            /* Components of ball 1 velocity in direction perpendicular
+            to contact vector. This doesn't change with collision */
+            double u1PerpX = getVelocityX() - u1 * unitContactX;
+            double u1PerpY = getVelocityY() - u1 * unitContactY;
+
+            double u2PerpX = human.getVelocityX() - u2 * unitContactX;
+            double u2PerpY = human.getVelocityY() - u2 * unitContactY;
+
+            double initSpeedSquared1 = getVelocityX() * getVelocityX() + getVelocityY() * getVelocityY();
+            double initSpeedSquared2 = human.getVelocityX() * human.getVelocityX() + human.getVelocityY() * human.getVelocityY();
+
+            double finalSpeedSquared1 = (u2 * unitContactX + u1PerpX) * (u2 * unitContactX + u1PerpX)
+                    + (u2 * unitContactY + u1PerpY) * (u2 * unitContactY + u1PerpY);
+            double finalSpeedSquared2 = (u1 * unitContactX + u2PerpX) * (u1 * unitContactX + u2PerpX)
+                    + (u1 * unitContactY + u2PerpY) * (u1 * unitContactY + u2PerpY);
+
+            //normalizing factors to keep the same speed at all times
+            double n1 = sqrt(initSpeedSquared1/finalSpeedSquared1);
+            double n2 = sqrt(initSpeedSquared2/finalSpeedSquared2);
+
+            setVelocityX(n1 * (u2 * unitContactX + u1PerpX));
+            setVelocityY(n1 * (u2 * unitContactY + u1PerpY));
+            human.setVelocityX(n2 * (u1 * unitContactX + u2PerpX));
+            human.setVelocityY(n2 * (u1 * unitContactY + u2PerpY));
+        }
     }
 
     /**
