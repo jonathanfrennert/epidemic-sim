@@ -51,7 +51,7 @@ public class Simulator {
 
                 // Adjust velocities and statuses of humans.
                 wallCollisions();
-                humanInteractions();
+                humanInteractions(elapsedSeconds);
 
                 // Update the world view given the time that has passed.
                 statusEffects(elapsedSeconds);
@@ -124,10 +124,25 @@ public class Simulator {
     /**
      * Adjust the velocities of all interacting humans such that they leave their friends and those infected spread
      * the disease.
+     *
+     * @param elapsedSeconds the number of seconds that have passed since the last update
      */
-    private void humanInteractions() {
-        throw new UnsupportedOperationException("Alexandra look over here!");
-        // TODO Alexandra :)
+    private void humanInteractions(double elapsedSeconds) {
+        for (ListIterator<Human> slowIt = humans.listIterator(); slowIt.hasNext();) {
+            Human h1 = slowIt.next();
+
+            for (ListIterator<Human> fastIt = humans.listIterator(slowIt.nextIndex()); fastIt.hasNext();) {
+                Human h2 = fastIt.next();
+
+                if (h1.isInContactWith(h2)) {
+                    //the moves are done in order to avoid sticking
+                    h1.move(elapsedSeconds);
+                    h2.move(elapsedSeconds);
+                    h1.prepareToLeave(h2);
+
+                }
+            }
+        }
     }
 
     /**
