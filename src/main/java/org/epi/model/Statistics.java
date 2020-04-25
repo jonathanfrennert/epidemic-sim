@@ -3,7 +3,7 @@ package org.epi.model;
 import javafx.beans.property.*;
 import org.epi.util.Error;
 
-import javafx.scene.layout.Pane;
+import javafx.collections.ObservableList;
 
 import java.util.Objects;
 
@@ -28,18 +28,23 @@ public class Statistics {
     /** The number difference between the current population count and the initial population count.*/
     private final IntegerProperty deceasedCount;
 
+    /** Show the statistics. Only for diagnostics.*/
+    private final ReadOnlyStringWrapper text = new ReadOnlyStringWrapper(this,
+                                                                    "text",
+                                                                "healthy = 99, infected = 1, recovered = 0, deceased = 0");
+
     /**
      * Constructor for simulator statistics; a real-time count for status populations.
      *
-     * @param worldView a simulator world view
+     * @param population a simulator's population
      * @throws NullPointerException if the given parameter is null
      */
-    public Statistics(Pane worldView) {
-        Objects.requireNonNull(worldView, Error.getNullMsg("world view"));
+    public Statistics(ObservableList<Human> population) {
+        Objects.requireNonNull(population, Error.getNullMsg("population"));
 
-        healthyCount = new SimpleIntegerProperty(getPopulationCountOf(worldView, StatusType.HEALTHY));
-        infectedCount = new SimpleIntegerProperty(getPopulationCountOf(worldView, StatusType.INFECTED));
-        recoveredCount = new SimpleIntegerProperty(getPopulationCountOf(worldView, StatusType.RECOVERED));
+        healthyCount = new SimpleIntegerProperty(getPopulationCountOf(population, StatusType.HEALTHY));
+        infectedCount = new SimpleIntegerProperty(getPopulationCountOf(population, StatusType.INFECTED));
+        recoveredCount = new SimpleIntegerProperty(getPopulationCountOf(population, StatusType.RECOVERED));
         deceasedCount = new SimpleIntegerProperty(INIT_DECEASED);
 
         initPopulationCount = new SimpleIntegerProperty(healthyCount.get() + infectedCount.get() + recoveredCount.get());
@@ -48,17 +53,19 @@ public class Statistics {
     /**
      * Update the population counts. Meant to be called in the handle method of simulator's world time.
      *
-     * @param worldView a simulator world view
+     * @param population a simulator's population
      * @throws NullPointerException if the given parameters is null
      */
-    public void updateCount(Pane worldView) {
-        Objects.requireNonNull(worldView, Error.getNullMsg("world view"));
+    public void updateCount(ObservableList<Human> population) {
+        Objects.requireNonNull(population, Error.getNullMsg("world view"));
 
-        healthyCount.set(getPopulationCountOf(worldView, StatusType.HEALTHY));
-        infectedCount.set(getPopulationCountOf(worldView, StatusType.INFECTED));
-        recoveredCount.set(getPopulationCountOf(worldView, StatusType.RECOVERED));
+        healthyCount.set(getPopulationCountOf(population, StatusType.HEALTHY));
+        infectedCount.set(getPopulationCountOf(population, StatusType.INFECTED));
+        recoveredCount.set(getPopulationCountOf(population, StatusType.RECOVERED));
 
         deceasedCount.set(initPopulationCount.get() - healthyCount.get() - infectedCount.get() - recoveredCount.get());
+
+        text.set(toString());
     }
 
     /**
@@ -68,35 +75,33 @@ public class Statistics {
      */
     @Override
     public String toString() {
-        return "Statistics{" +
-                "initPopulationCount=" + initPopulationCount +
-                ", healthyCount=" + healthyCount +
-                ", infectedCount=" + infectedCount +
-                ", recoveredCount=" + recoveredCount +
-                ", deceasedCount=" + deceasedCount +
-                '}';
-    }
-
-    /**
-     * Used to show population statistics in application view.
-     *
-     * @return Populations count's for the simulator
-     */
-    public ReadOnlyStringProperty textProperty() {
-        return new SimpleStringProperty(this.toString());
+        return "healthy = " + healthyCount.get() +
+               ", infected = " + infectedCount.get() +
+               ", recovered = " + recoveredCount.get() +
+               ", deceased = " + deceasedCount.get() +
+                ".";
     }
 
     //---------------------------- Getters ----------------------------
 
     /**
-     * Get the number of humans in the world view who have a given status
+     * Getter for {@link #text} {@link ReadOnlyStringProperty}
      *
-     * @param worldView the world view of a simulation
-     * @param status a status
-     * @return the number of humans in the world view of that status
+     * @return {@link #text}
      */
-    private static int getPopulationCountOf(Pane worldView, StatusType status) {
-        return worldView.getChildren().filtered(node -> node instanceof Human && ((Human) node).getStatus() == status).size();
+    public ReadOnlyStringProperty getTextProperty() {
+        return text.getReadOnlyProperty();
+    }
+
+    /**
+     * Get the number of humans of a given status in the population.
+     *
+     * @param population a simulator's population
+     * @param status a status
+     * @return the number of humans in the population of that status
+     */
+    private static int getPopulationCountOf(ObservableList<Human> population, StatusType status) {
+        return population.filtered(human -> human.getStatus() == status).size();
     }
 
     /**

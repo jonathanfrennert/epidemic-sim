@@ -56,7 +56,7 @@ public class InfectedHuman extends Human {
      *
      * @return true if the person has had the disease for its total duration, otherwise false
      */
-    private boolean totalDurationPassed(){
+    public boolean totalDurationPassed(){
         return getCurrentDuration() >= disease.getTotalDuration();
     }
 

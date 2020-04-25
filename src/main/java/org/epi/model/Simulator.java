@@ -1,20 +1,22 @@
 package org.epi.model;
 
+import org.epi.model.human.HealthyHuman;
+import org.epi.model.human.InfectedHuman;
+import org.epi.util.Error;
+
+import javafx.animation.AnimationTimer;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import org.epi.model.human.InfectedHuman;
-import org.epi.model.human.RecoveredHuman;
-import org.epi.util.Error;
-
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.animation.AnimationTimer;
 
-import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
+
+import static org.epi.model.Human.RADIUS;
+import static org.epi.util.Probability.chance;
 
 /** The main simulator class; a facade to the rest of the simulator components.*/
 public class Simulator {
@@ -25,7 +27,8 @@ public class Simulator {
     /** The default view height in pixels.*/
     public static final double WORLD_HEIGHT = 500;
 
-    private ObservableList<Human> humans = FXCollections.observableArrayList();
+    /** The maximum population; equal to the maximum number of humans that can fit in the view without any overlap.*/
+    public static final int MAX_POPULATION = (int) Math.floor((WORLD_WIDTH * WORLD_HEIGHT) / (4 * RADIUS * RADIUS));
 
     //---------------------------- AnimationTimer ----------------------------
 
@@ -33,7 +36,7 @@ public class Simulator {
     private final AnimationTimer worldTime = new AnimationTimer() {
 
         /** The order magnitude of nano units.*/
-        private static final double NANO = 10^-9;
+        private static final double NANO = 1 / 1000_000_000.00;
 
         /** Last time world view was updated.*/
         final LongProperty lastUpdateTime = new SimpleLongProperty(0);
@@ -51,14 +54,14 @@ public class Simulator {
 
                 // Adjust velocities and statuses of humans.
                 wallCollisions();
-                humanInteractions(elapsedSeconds);
+                humanInteractions();
 
                 // Update the world view given the time that has passed.
                 statusEffects(elapsedSeconds);
                 movement(elapsedSeconds);
-
-                worldStats.updateCount(worldView);
             }
+
+            worldStats.updateCount(population);
 
             if (endingIsReached()) {
                 worldTime.stop();
@@ -68,6 +71,12 @@ public class Simulator {
         }
 
     };
+
+    //---------------------------- Population ----------------------------
+
+    /** Human container variable. Any humans in this list have according changes in the world view.
+     * This field is used to get around the fact that world view only returns a list of nodes.*/
+    private final ObservableList<Human> population;
 
     //---------------------------- World ----------------------------
 
@@ -91,118 +100,101 @@ public class Simulator {
         worldView = new Pane();
         worldView.setPrefSize(WORLD_WIDTH, WORLD_HEIGHT);
 
-        // Populate world.
-        HumanFactory.createHuman(worldView, world, disease, StatusType.INFECTED);
+        population = FXCollections.observableArrayList();
+
+        // Makes so that all changes to population are reflected in the world view.
+        population.addListener( (ListChangeListener<Human>) change -> {
+            while (change.next()) {
+                for (Human human : change.getAddedSubList()) {
+                    worldView.getChildren().add(human);
+                }
+
+                for (Human human : change.getRemoved()) {
+                    worldView.getChildren().remove(human);
+                }
+            }
+        });
+
+        // Add population.
+        HumanFactory.createHuman(population, world, disease, StatusType.INFECTED);
         for (int i = 0; i < world.getPopulationCount() - 1; i++) {
-            HumanFactory.createHuman(worldView, world, StatusType.HEALTHY);
+            HumanFactory.createHuman(population, world, StatusType.HEALTHY);
         }
 
-       this.worldStats = new Statistics(worldView);
+       this.worldStats = new Statistics(population);
     }
 
     /**
      * Find all humans that are colliding with walls and adjust their velocities.
      */
     private void wallCollisions() {
-        for(ListIterator<Human> slowIt = humans.listIterator(); slowIt.hasNext();){
-            Human h1 = slowIt.next();
+        for (Human human : population) {
+            boolean isSomething1 = human.getCenterX() - human.getRadius() <= 0 && human.getVelocityX() < 0;
+            boolean isSomething2 = human.getCenterX() + human.getRadius() >= WORLD_WIDTH && human.getVelocityX() > 0;
 
-            double xVel = h1.getVelocityX();
-            double yVel = h1.getVelocityY();
+            boolean isSomething3 = human.getCenterY() - human.getRadius() <= 0 && human.getVelocityY() < 0;
+            boolean isSomething4 = human.getCenterY() + human.getRadius() >= WORLD_HEIGHT && human.getVelocityY() > 0;
 
-            if ((h1.getCenterX() - h1.getRadius() <= 0 && xVel < 0)
-                    || (h1.getCenterX() + h1.getRadius() >= WORLD_WIDTH && xVel > 0)) {
-                h1.setVelocityX(-xVel);
+            if (isSomething1 || isSomething2) {
+                human.setVelocityX(- human.getVelocityX());
             }
-            if ((h1.getCenterY() - h1.getRadius() <= 0 && yVel < 0)
-                    || (h1.getCenterY() + h1.getRadius() >= WORLD_HEIGHT && yVel > 0)) {
-                h1.setVelocityY(-yVel);
+
+            if (isSomething3 || isSomething4) {
+                human.setVelocityY(- human.getVelocityY());
             }
+
         }
     }
 
     /**
      * Adjust the velocities of all interacting humans such that they leave their friends and those infected spread
      * the disease.
-     *
-     * @param elapsedSeconds the number of seconds that have passed since the last update
      */
-    private void humanInteractions(double elapsedSeconds) {
-        for (ListIterator<Human> slowIt = humans.listIterator(); slowIt.hasNext();) {
-            Human h1 = slowIt.next();
+    private void humanInteractions() {
+        ListIterator<Human> totalPopulationItr = population.listIterator();
+        while (totalPopulationItr.hasNext()) {
 
-            for (ListIterator<Human> fastIt = humans.listIterator(slowIt.nextIndex()); fastIt.hasNext();) {
-                Human h2 = fastIt.next();
+            Human human1 = totalPopulationItr.next();
 
-                if (h1.isInContactWith(h2)) {
-                    //the moves are done in order to avoid sticking
-                    h1.move(elapsedSeconds);
-                    h2.move(elapsedSeconds);
-                    h1.prepareToLeave(h2);
+            ListIterator<Human> lesserPopulationItr = population.listIterator(totalPopulationItr.nextIndex());
+            while (lesserPopulationItr.hasNext()) {
+
+                Human human2 = lesserPopulationItr.next();
+
+                if (human1.met(human2)) {
+                    human1.leave(human2);
+
+                    if (isEffectiveContact(human1, human2)) {
+                        Disease disease = ((InfectedHuman) human1).getDisease();
+
+                        if (chance(disease.getTransmissionRisk())) {
+                            lesserPopulationItr.set(HumanFactory.healthyToInfected(disease, (HealthyHuman) human2));
+                        }
+
+
+                    } else if (isEffectiveContact(human2, human1)) {
+                        Disease disease = ((InfectedHuman) human2).getDisease();
+
+                        if (chance(disease.getTransmissionRisk())) {
+                            totalPopulationItr.set(HumanFactory.healthyToInfected(disease, (HealthyHuman) human1));
+                        }
+                    }
 
                 }
+
             }
         }
     }
 
     /**
-     * Check whether the transmitter can potentially spread a disease to the receiver.
+     * Check whether the first given human can potentially spread a disease to the other.
      *
-     * @param transmitter a human
-     * @param receiver a human
-     * @return true if the transmitter can spread a disease to the receiver, otherwise false
+     * @param human1 a human
+     * @param human2 a human
+     * @return true if the first given human is infected and the other is healthy, otherwise false
      */
-    private boolean isTransmissibleInteraction (Human transmitter, Human receiver) {
-        return transmitter.getStatus() == StatusType.INFECTED && receiver.getStatus() == StatusType.HEALTHY;
-    }
-
-    /**
-     * Swap a human for a newly infected human in the world view
-     *
-     * @param disease a disease
-     * @param human a human
-     */
-    private void infect(Disease disease, Human human) {
-        Human infected = new InfectedHuman(disease);
-
-        infected.setCenterX(human.getCenterX());
-        infected.setCenterY(human.getCenterY());
-
-        infected.setVelocityX(human.getVelocityX());
-        infected.setVelocityY(human.getVelocityY());
-
-         worldView.getChildren().remove(human);
-         worldView.getChildren().add(infected);
-
-         swap(human, infected);
-    }
-
-    /**
-     * Swap a human for a recovered human in the world view
-     *
-     * @param human a human
-     */
-    private void recover(Human human) {
-        Human recovered = new RecoveredHuman();
-
-        recovered.setCenterX(human.getCenterX());
-        recovered.setCenterY(human.getCenterY());
-
-        recovered.setVelocityX(human.getVelocityX());
-        recovered.setVelocityY(human.getVelocityY());
-
-        swap(human, recovered);
-    }
-
-    /**
-     * Swap out humans from the world view.
-     *
-     * @param replaced the human who will be replaced
-     * @param replacement the human who will be replacement
-     */
-    private void swap(Human replaced, Human replacement) {
-        worldView.getChildren().remove(replaced);
-        worldView.getChildren().add(replacement);
+    private boolean isEffectiveContact(Human human1, Human human2) {
+        return human1.isType(StatusType.INFECTED) && human2.isType(StatusType.HEALTHY);
     }
 
     /**
@@ -211,10 +203,28 @@ public class Simulator {
      * @param elapsedSeconds the number of seconds that have passed since the last update
      */
     private void statusEffects(double elapsedSeconds) {
-        List<Node> infectedPopulation = getPopulationOf(StatusType.INFECTED);
+        for (ListIterator<Human> populationItr = population.listIterator(); populationItr.hasNext();) {
+            Human human = populationItr.next();
+            StatusType status = human.getStatus();
 
-        infectedPopulation.forEach(human -> ((InfectedHuman) human).updateCurrentDuration(elapsedSeconds));
-        infectedPopulation.removeIf(human -> ((InfectedHuman) human).isDeceased());
+            switch(status) {
+                case HEALTHY:
+                    break;
+                case INFECTED:
+                    InfectedHuman infected = (InfectedHuman) human;
+
+                    if (infected.isDeceased()) {
+                        populationItr.remove();
+                    } else if (infected.totalDurationPassed()) {
+                        populationItr.set(HumanFactory.infectedToRecovered(infected));
+                    } else {
+                        infected.updateCurrentDuration(elapsedSeconds);
+                    }
+
+                    break;
+                case RECOVERED:
+            }
+        }
     }
 
     /**
@@ -223,10 +233,8 @@ public class Simulator {
      * @param elapsedSeconds the number of seconds that have passed since the last update
      */
     private void movement(double elapsedSeconds) {
-        for (Node node : worldView.getChildren()) {
-            if (node instanceof Human) {
-                ((Human) node).move(elapsedSeconds);
-            }
+        for (Human human : population) {
+            human.move(elapsedSeconds);
         }
     }
 
@@ -241,17 +249,6 @@ public class Simulator {
     }
 
     //---------------------------- Getters ----------------------------
-
-    /**
-     * Get the population of a certain status from the world view. Humans will be returned as {@link Node}
-     * as the worldView children cannot be type-cast directly to a human list.
-     *
-     * @param status the status by which to filter the population
-     * @return population in world view with the given status
-     */
-    private List<Node> getPopulationOf(StatusType status) {
-        return worldView.getChildren().filtered(node -> node instanceof Human && ((Human) node).getStatus() == status);
-    }
 
     /**
      * Getter for {@link #worldTime}.

@@ -47,13 +47,53 @@ public abstract class Human extends Circle {
     }
 
     /**
+     * Adjust the velocities of this human and the given human if they are in contact, such that they are
+     * leaving each other in their next move. If they are not in contact, does not adjust velocities.
+     *
+     * @param human a human
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void leave(Human human) {
+        Objects.requireNonNull(human, Error.getNullMsg("human"));
+
+        if (!this.met(human)) {
+            return;
+        }
+
+        final double deltaX = getCenterX() - human.getCenterX();
+        final double deltaY = getCenterY() - human.getCenterY();
+
+        final double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        double unitContactX = deltaX / distance;
+        double unitContactY = deltaY / distance;
+
+        // velocity of ball 1 parallel to contact vector, same for ball 2
+        final double u1 = getVelocityX() * unitContactX + getVelocityY() * unitContactY;
+        final double u2 = human.getVelocityX() * unitContactX + human.getVelocityY() * unitContactY;
+
+        /* Components of ball 1 velocity in direction perpendicular
+        to contact vector. This doesn't change with collision */
+        double u1PerpX = getVelocityX() - u1 * unitContactX;
+        double u1PerpY = getVelocityY() - u1 * unitContactY;
+
+        double u2PerpX = human.getVelocityX() - u2 * unitContactX;
+        double u2PerpY = human.getVelocityY() - u2 * unitContactY;
+
+        setVelocityX(u2 * unitContactX + u1PerpX);
+        setVelocityY(u2 * unitContactY + u1PerpY);
+
+        human.setVelocityX(u1 * unitContactX + u2PerpX);
+        human.setVelocityY(u1 * unitContactY + u2PerpY);
+    }
+
+    /**
      * Check if this human is in contact with another human.
      *
      * @param human a human
      * @return true if the given human is in contact with this human, otherwise false
-     * @throws NullPointerException if the given parameter is null
      */
-    public boolean isInContactWith(Human human) {
+    public boolean met(Human human) {
         Objects.requireNonNull(human, Error.getNullMsg("human"));
 
         final double deltaX = getCenterX() - human.getCenterX();
@@ -61,63 +101,10 @@ public abstract class Human extends Circle {
         final double radiusSum = getRadius() + human.getRadius();
 
         if (deltaX * deltaX + deltaY * deltaY <= radiusSum * radiusSum) {
-            if (deltaX * (human.getVelocityX() - getVelocityX())
-                    + deltaY * (human.getVelocityY() - getVelocityY()) <= 0) {
-                return true;
-            }
+            return deltaX * (human.getVelocityX() - getVelocityX())
+                    + deltaY * (human.getVelocityY() - getVelocityY()) <= 0;
         }
         return false;
-    }
-
-    /**
-     * Adjust the velocities of this human and the given human which it is in contact with, such that they are
-     * leaving each other in their next move.
-     *
-     * @param human a human
-     * @throws NullPointerException if the given parameter is null
-     */
-    public void prepareToLeave(Human human) {
-        Objects.requireNonNull(human, Error.getNullMsg("human"));
-        if(isInContactWith(human)){
-            //TODO move(timeElapsed) to avoid sticking
-
-            final double deltaX = getCenterX() - human.getCenterX();
-            final double deltaY = getCenterY() - human.getCenterY();
-
-            final double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
-
-            double unitContactX = deltaX / distance;
-            double unitContactY = deltaY / distance;
-
-            // velocity of ball 1 parallel to contact vector, same for ball 2
-            final double u1 = getVelocityX() * unitContactX + getVelocityY() * unitContactY;
-            final double u2 = human.getVelocityX() * unitContactX + human.getVelocityY() * unitContactY;
-
-            /* Components of ball 1 velocity in direction perpendicular
-            to contact vector. This doesn't change with collision */
-            double u1PerpX = getVelocityX() - u1 * unitContactX;
-            double u1PerpY = getVelocityY() - u1 * unitContactY;
-
-            double u2PerpX = human.getVelocityX() - u2 * unitContactX;
-            double u2PerpY = human.getVelocityY() - u2 * unitContactY;
-
-            double initSpeedSquared1 = getVelocityX() * getVelocityX() + getVelocityY() * getVelocityY();
-            double initSpeedSquared2 = human.getVelocityX() * human.getVelocityX() + human.getVelocityY() * human.getVelocityY();
-
-            double finalSpeedSquared1 = (u2 * unitContactX + u1PerpX) * (u2 * unitContactX + u1PerpX)
-                    + (u2 * unitContactY + u1PerpY) * (u2 * unitContactY + u1PerpY);
-            double finalSpeedSquared2 = (u1 * unitContactX + u2PerpX) * (u1 * unitContactX + u2PerpX)
-                    + (u1 * unitContactY + u2PerpY) * (u1 * unitContactY + u2PerpY);
-
-            //normalizing factors to keep the same speed at all times
-            double n1 = sqrt(initSpeedSquared1/finalSpeedSquared1);
-            double n2 = sqrt(initSpeedSquared2/finalSpeedSquared2);
-
-            setVelocityX(n1 * (u2 * unitContactX + u1PerpX));
-            setVelocityY(n1 * (u2 * unitContactY + u1PerpY));
-            human.setVelocityX(n2 * (u1 * unitContactX + u2PerpX));
-            human.setVelocityY(n2 * (u1 * unitContactY + u2PerpY));
-        }
     }
 
     /**
@@ -129,8 +116,18 @@ public abstract class Human extends Circle {
     public void move(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
 
-        setTranslateX(elapsedSeconds * getVelocityX());
-        setTranslateY(elapsedSeconds * getVelocityY());
+        setCenterX(getCenterX() + elapsedSeconds * getVelocityX());
+        setCenterY(getCenterY() + elapsedSeconds * getVelocityY());
+    }
+
+    /**
+     * Check if this human is of a given type.
+     *
+     * @param statusType a status type
+     * @return true if this human's status type is equal to the given status type, otherwise false.
+     */
+    public boolean isType(StatusType statusType) {
+        return statusType == status;
     }
 
     //---------------------------- Getters & Setters ----------------------------
