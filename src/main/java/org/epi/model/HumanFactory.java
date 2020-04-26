@@ -1,21 +1,17 @@
 package org.epi.model;
 
+import javafx.collections.ObservableList;
 import org.epi.model.human.HealthyHuman;
 import org.epi.model.human.InfectedHuman;
 import org.epi.model.human.RecoveredHuman;
 import org.epi.util.Error;
 
-import javafx.collections.ObservableList;
-import javafx.geometry.Point2D;
-
 import java.util.Objects;
 import java.util.Random;
 
 import static java.lang.Math.*;
+import static org.epi.model.Simulator.*;
 import static org.epi.util.Probability.chance;
-import static org.epi.model.Simulator.WORLD_HEIGHT;
-import static org.epi.model.Simulator.WORLD_WIDTH;
-import static org.epi.model.Simulator.MAX_POPULATION;
 
 /** Static factory for creating humans.*/
 public final class HumanFactory {
@@ -203,7 +199,6 @@ public final class HumanFactory {
      * @param human a human
      */
     private static void setRandomVelocities(Human human) {
-        Point2D totalVelocity = (new Point2D(Math.random(), Math.random())).normalize();
         Random rand = new Random();
 
         final double speed = MIN_SPEED + (SPEED - MIN_SPEED) * rand.nextDouble();
@@ -211,9 +206,6 @@ public final class HumanFactory {
 
         human.setVelocityX(speed * cos(angle));
         human.setVelocityY(speed * sin(angle));
-
-        //human.setVelocityX(totalVelocity.getX() * totalVelocity.getX() * SPEED);
-        //human.setVelocityY(totalVelocity.getY() * totalVelocity.getY() * SPEED);
     }
 
 }

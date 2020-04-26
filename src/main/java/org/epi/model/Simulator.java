@@ -129,22 +129,24 @@ public class Simulator {
      */
     private void wallCollisions() {
         for (Human human : population) {
-            boolean isSomething1 = human.getCenterX() - human.getRadius() <= 0 && human.getVelocityX() < 0;
-            boolean isSomething2 = human.getCenterX() + human.getRadius() >= WORLD_WIDTH && human.getVelocityX() > 0;
+            boolean onLeftWall = human.getCenterX() - human.getRadius() <= 0 && human.getVelocityX() < 0;
+            boolean onRightWall = human.getCenterX() + human.getRadius() >= WORLD_WIDTH && human.getVelocityX() > 0;
 
-            boolean isSomething3 = human.getCenterY() - human.getRadius() <= 0 && human.getVelocityY() < 0;
-            boolean isSomething4 = human.getCenterY() + human.getRadius() >= WORLD_HEIGHT && human.getVelocityY() > 0;
+            boolean onBottomWall = human.getCenterY() - human.getRadius() <= 0 && human.getVelocityY() < 0;
+            boolean onTopWall = human.getCenterY() + human.getRadius() >= WORLD_HEIGHT && human.getVelocityY() > 0;
 
-            if (isSomething1 || isSomething2) {
+            if (onLeftWall || onRightWall) {
                 human.setVelocityX(- human.getVelocityX());
             }
 
-            if (isSomething3 || isSomething4) {
+            if (onBottomWall || onTopWall) {
                 human.setVelocityY(- human.getVelocityY());
             }
 
         }
     }
+
+    //TODO check interactions
 
     /**
      * Adjust the velocities of all interacting humans such that they leave their friends and those infected spread
