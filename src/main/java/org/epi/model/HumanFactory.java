@@ -9,7 +9,9 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 
 import java.util.Objects;
+import java.util.Random;
 
+import static java.lang.Math.*;
 import static org.epi.util.Probability.chance;
 import static org.epi.model.Simulator.WORLD_HEIGHT;
 import static org.epi.model.Simulator.WORLD_WIDTH;
@@ -20,6 +22,8 @@ public final class HumanFactory {
 
     /** The initial speed of a human in pixels per second.*/
     public static final double SPEED = 70;
+
+    public static final double MIN_SPEED = 50;
 
     /** Not to be used. */
     private HumanFactory() {
@@ -200,9 +204,16 @@ public final class HumanFactory {
      */
     private static void setRandomVelocities(Human human) {
         Point2D totalVelocity = (new Point2D(Math.random(), Math.random())).normalize();
+        Random rand = new Random();
 
-        human.setVelocityX(totalVelocity.getX() * totalVelocity.getX() * SPEED);
-        human.setVelocityY(totalVelocity.getY() * totalVelocity.getY() * SPEED);
+        final double speed = MIN_SPEED + (SPEED - MIN_SPEED) * rand.nextDouble();
+        final double angle = 2 * PI * rand.nextDouble();
+
+        human.setVelocityX(speed * cos(angle));
+        human.setVelocityY(speed * sin(angle));
+
+        //human.setVelocityX(totalVelocity.getX() * totalVelocity.getX() * SPEED);
+        //human.setVelocityY(totalVelocity.getY() * totalVelocity.getY() * SPEED);
     }
 
 }
