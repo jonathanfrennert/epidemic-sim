@@ -50,56 +50,57 @@ public abstract class Human extends Circle {
      * Adjust the velocities of this human and the given human if they are in contact, such that they are
      * leaving each other in their next move. If they are not in contact, does not adjust velocities.
      *
-     * @param human a human
+     * @param that a human
      * @throws NullPointerException if the given parameter is null
      */
-    public void leave(Human human) {
-        Objects.requireNonNull(human, Error.getNullMsg("human"));
+    public void leave(Human that) {
+        Objects.requireNonNull(that, Error.getNullMsg("human"));
 
-        final double deltaX = human.getCenterX() - getCenterX();
-        final double deltaY = human.getCenterY() - getCenterY();
+        double deltaX = that.getCenterX() - this.getCenterX();
+        double deltaY = that.getCenterY() - this.getCenterY();
 
-        final double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
+        double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
 
         double unitContactX = deltaX / distance;
         double unitContactY = deltaY / distance;
 
-        // velocity of ball 1 parallel to contact vector, same for ball 2
-        final double u1 = getVelocityX() * unitContactX + getVelocityY() * unitContactY;
-        final double u2 = human.getVelocityX() * unitContactX + human.getVelocityY() * unitContactY;
+        // velocity of this human in parallel to contact vector, same for that human.
+        double u1 = this.getVelocityX() * unitContactX + this.getVelocityY() * unitContactY;
+        double u2 = that.getVelocityX() * unitContactX + that.getVelocityY() * unitContactY;
 
-        /* Components of ball 1 velocity in direction perpendicular
-        to contact vector. This doesn't change with collision */
-        double u1PerpX = getVelocityX() - u1 * unitContactX;
-        double u1PerpY = getVelocityY() - u1 * unitContactY;
+        /* Components of this human velocity in direction perpendicular
+        to contact vector. This doesn't change with collision.*/
+        double u1PerpX = this.getVelocityX() - u1 * unitContactX;
+        double u1PerpY = this.getVelocityY() - u1 * unitContactY;
 
-        double u2PerpX = human.getVelocityX() - u2 * unitContactX;
-        double u2PerpY = human.getVelocityY() - u2 * unitContactY;
+        double u2PerpX = that.getVelocityX() - u2 * unitContactX;
+        double u2PerpY = that.getVelocityY() - u2 * unitContactY;
 
-        setVelocityX(u2 * unitContactX + u1PerpX);
-        setVelocityY(u2 * unitContactY + u1PerpY);
+        this.setVelocityX(u2 * unitContactX + u1PerpX);
+        this.setVelocityY(u2 * unitContactY + u1PerpY);
 
-        human.setVelocityX(u1 * unitContactX + u2PerpX);
-        human.setVelocityY(u1 * unitContactY + u2PerpY);
+        that.setVelocityX(u1 * unitContactX + u2PerpX);
+        that.setVelocityY(u1 * unitContactY + u2PerpY);
     }
 
     /**
      * Check if this human is in contact with another human.
      *
-     * @param human a human
+     * @param that a human
      * @return true if the given human is in contact with this human, otherwise false
      */
-    public boolean met(Human human) {
-        Objects.requireNonNull(human, Error.getNullMsg("human"));
+    public boolean met(Human that) {
+        Objects.requireNonNull(that, Error.getNullMsg("human"));
 
-        final double deltaX = human.getCenterX() -getCenterX();
-        final double deltaY = human.getCenterY() - getCenterY();
-        final double radiusSum = 2 * RADIUS;
+        double deltaX = that.getCenterX() - this.getCenterX();
+        double deltaY = that.getCenterY() - this.getCenterY();
+         double radiusSum = 2 * RADIUS;
 
         if (deltaX * deltaX + deltaY * deltaY <= radiusSum * radiusSum) {
-            return deltaX * (human.getVelocityX() - getVelocityX())
-                    + deltaY * (human.getVelocityY() - getVelocityY()) <= 0;
+            return deltaX * (that.getVelocityX() - this.getVelocityX())
+                    + deltaY * (that.getVelocityY() - this.getVelocityY()) <= 0;
         }
+
         return false;
     }
 

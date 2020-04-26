@@ -11,14 +11,14 @@ import javafx.beans.property.SimpleIntegerProperty;
 /** Wrapper class for the world parameters.*/
 public class World {
 
+    /** The lowest possible population count.*/
+    private static final int MIN_POPULATION = 1;
+
     /** The number of humans in the initial population.*/
     private final IntegerProperty population;
 
     /** The probability of human social distancing.*/
     private final DoubleProperty socialDistProb;
-
-    /** The lowest possible population count.*/
-    private static final int MIN_POPULATION = 1;
 
     /**
      * The constructor for a world.

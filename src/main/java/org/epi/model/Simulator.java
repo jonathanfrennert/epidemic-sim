@@ -146,8 +146,6 @@ public class Simulator {
         }
     }
 
-    //TODO check interactions
-
     /**
      * Adjust the velocities of all interacting humans such that they leave their friends and those infected spread
      * the disease.

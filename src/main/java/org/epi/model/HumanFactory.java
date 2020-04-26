@@ -7,19 +7,19 @@ import org.epi.model.human.RecoveredHuman;
 import org.epi.util.Error;
 
 import java.util.Objects;
-import java.util.Random;
 
-import static java.lang.Math.*;
-import static org.epi.model.Simulator.*;
-import static org.epi.util.Probability.chance;
+import static java.lang.Math.PI;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static org.epi.model.Simulator.MAX_POPULATION;
+import static org.epi.model.Simulator.WORLD_HEIGHT;
+import static org.epi.model.Simulator.WORLD_WIDTH;
 
 /** Static factory for creating humans.*/
 public final class HumanFactory {
 
     /** The initial speed of a human in pixels per second.*/
     public static final double SPEED = 70;
-
-    public static final double MIN_SPEED = 50;
 
     /** Not to be used. */
     private HumanFactory() {
@@ -54,7 +54,7 @@ public final class HumanFactory {
             }
 
             setPosition(population, human);
-            setVelocity(world, human);
+            setVelocity(human);
 
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
@@ -95,7 +95,7 @@ public final class HumanFactory {
             }
 
             setPosition(population, human);
-            setVelocity(world, human);
+            setVelocity(human);
 
         } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
@@ -182,30 +182,15 @@ public final class HumanFactory {
     }
 
     /**
-     * Set the velocities of the given human dependent on the world.
-     *
-     * @param world a world
-     * @param human a human
-     */
-    private static void setVelocity(World world, Human human) {
-        if (!chance(world.getSocialDistProb())) {
-            setRandomVelocities(human);
-        }
-    }
-
-    /**
      * Set random horizontal and vertical velocity normalised to a speed of {@value SPEED} for this human.
      *
      * @param human a human
      */
-    private static void setRandomVelocities(Human human) {
-        Random rand = new Random();
+    private static void setVelocity(Human human) {
+        final double angle = 2 * PI * Math.random();
 
-        final double speed = MIN_SPEED + (SPEED - MIN_SPEED) * rand.nextDouble();
-        final double angle = 2 * PI * rand.nextDouble();
-
-        human.setVelocityX(speed * cos(angle));
-        human.setVelocityY(speed * sin(angle));
+        human.setVelocityX(SPEED * cos(angle));
+        human.setVelocityY(SPEED * sin(angle));
     }
 
 }
