@@ -171,7 +171,6 @@ public class Simulator {
                             lesserPopulationItr.set(HumanFactory.healthyToInfected(disease, (HealthyHuman) human2));
                         }
 
-
                     } else if (isEffectiveContact(human2, human1)) {
                         Disease disease = ((InfectedHuman) human2).getDisease();
 

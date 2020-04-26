@@ -22,7 +22,7 @@ public class MainApp extends Application {
         stage.getIcons().add(new Image(getClass().getResource("/images/Epi.png").toExternalForm()));
 
         // Simulator parameters.
-        World world = new World(200,0.2);
+        World world = new World(50,0.2);
         Disease disease = new Disease(0.2,0.1,10);
 
         // Simulator initialisation.

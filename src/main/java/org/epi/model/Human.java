@@ -56,12 +56,8 @@ public abstract class Human extends Circle {
     public void leave(Human human) {
         Objects.requireNonNull(human, Error.getNullMsg("human"));
 
-        if (!this.met(human)) {
-            return;
-        }
-
-        final double deltaX = getCenterX() - human.getCenterX();
-        final double deltaY = getCenterY() - human.getCenterY();
+        final double deltaX = human.getCenterX() - getCenterX();
+        final double deltaY = human.getCenterY() - getCenterY();
 
         final double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
 
@@ -96,9 +92,9 @@ public abstract class Human extends Circle {
     public boolean met(Human human) {
         Objects.requireNonNull(human, Error.getNullMsg("human"));
 
-        final double deltaX = getCenterX() - human.getCenterX();
-        final double deltaY = getCenterY() - human.getCenterY();
-        final double radiusSum = getRadius() + human.getRadius();
+        final double deltaX = human.getCenterX() -getCenterX();
+        final double deltaY = human.getCenterY() - getCenterY();
+        final double radiusSum = 2 * RADIUS;
 
         if (deltaX * deltaX + deltaY * deltaY <= radiusSum * radiusSum) {
             return deltaX * (human.getVelocityX() - getVelocityX())
