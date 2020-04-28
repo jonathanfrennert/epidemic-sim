@@ -1,5 +1,6 @@
 package org.epi.model2;
 
+import org.epi.model.StatusType;
 import org.epi.util.Error;
 
 import javafx.beans.property.Property;
@@ -14,14 +15,17 @@ public class Human {
     /** The graphical view of this human.*/
     private final View view;
 
+    /** Health status of the human.*/
+    private StatusType status;
+
     /** The location of this human.*/
     private final Property<Location> location;
 
     /** The immune system protecting this human.*/
     private final ImmuneSystem immuneSystem;
 
-    /** The disease afflicting this human.*/
-    private Disease disease;
+    /** The pathogen infecting this human.*/
+    private Property<Pathogen> pathogen;
 
     //---------------------------- Constructor & associated helpers ----------------------------
 
@@ -36,14 +40,14 @@ public class Human {
         Objects.requireNonNull(behaviour, Error.getNullMsg("behaviour"));
         Objects.requireNonNull(location, Error.getNullMsg("location"));
 
-        this.view = new View(behaviour);
-        view.setHost(this);
+        this.view = new View(this, behaviour);
+
+        this.status = StatusType.HEALTHY;
 
         this.location = new SimpleObjectProperty<>(location);
         location.getPopulation().add(this);
 
-        this.immuneSystem = new ImmuneSystem();
-        immuneSystem.setHost(this);
+        this.immuneSystem = new ImmuneSystem(this);
 
         initEvents();
     }
@@ -59,7 +63,21 @@ public class Human {
             newValue.getPopulation().add(Human.this);
         });
 
+        // Immune system defense.
+        pathogen.addListener((observable, oldValue, newValue) -> {
+            boolean isIntruder = newValue != null;
+
+            if (isIntruder) {
+                immuneSystem.defend();
+            } else {
+                immuneSystem.learn(oldValue);
+            }
+
+        });
+
     }
+
+
 
     //---------------------------- Simulator actions ----------------------------
 
@@ -74,6 +92,27 @@ public class Human {
      */
     public View getView() {
         return view;
+    }
+
+    /**
+     * Getter for {@link #status}
+     *
+     * @return {@link #status}
+     */
+    public StatusType getStatus() {
+
+    }
+
+    /**
+     * Setter for {@link #status}
+     *
+     * @param status the status of this human
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void setStatus(StatusType status) {
+        Objects.requireNonNull(status,Error.getNullMsg("status"));
+
+        this.status = status;
     }
 
     /**
@@ -104,22 +143,22 @@ public class Human {
     }
 
     /**
-     * Setter for {@link #disease}.
+     * Setter for {@link #pathogen}.
      *
-     * @throws NullPointerException if the given disease is null
+     * @throws NullPointerException if the given pathogen is null
      */
-    public void setDisease(Disease disease) {
-        Objects.requireNonNull(disease, "disease");
-        this.disease = disease;
+    public void setPathogen(Pathogen pathogen) {
+        Objects.requireNonNull(pathogen, "pathogen");
+        this.pathogen = pathogen;
     }
 
     /**
-     * Getter for {@link #disease}.
+     * Getter for {@link #pathogen}.
      *
-     * @return {@link #disease}
+     * @return {@link #pathogen}
      */
-    public Disease getDisease() {
-        return disease;
+    public Pathogen getPathogen() {
+        return pathogen;
     }
 
 }
