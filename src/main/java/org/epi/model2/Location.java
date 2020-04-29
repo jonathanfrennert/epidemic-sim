@@ -9,7 +9,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
-import static org.epi.model2.View.HUMAN_RADIUS;
+import static org.epi.model2.Model.HUMAN_RADIUS;
 
 /** A simple model of a location.
  * The class is used as a graphical representation of a location in the simulator.*/
@@ -80,12 +80,12 @@ public class Location {
 
                 for (Human human : change.getAddedSubList()) {
 
-                    setPosition(human.getView());
-                    area.getChildren().add(human.getView());
+                    setPosition(human.getModel());
+                    area.getChildren().add(human.getModel());
                 }
 
                 for (Human human : change.getRemoved()) {
-                    area.getChildren().remove(human.getView());
+                    area.getChildren().remove(human.getModel());
                 }
             }
         });
@@ -93,13 +93,13 @@ public class Location {
     }
 
     /**
-     * Set a new position for a human's view given the layout boundaries of this location's area.
+     * Set a new position for a human's model given the layout boundaries of this location's area.
      *
-     * @param view a human's graphical representation
+     * @param model a human's graphical representation
      */
-    private void setPosition(View view) {
-        view.setCenterX(HUMAN_RADIUS +  Math.random() * (width.get() - HUMAN_DIAMETER));
-        view.setCenterY(HUMAN_RADIUS +  Math.random() * (height.get() - HUMAN_DIAMETER));
+    private void setPosition(Model model) {
+        model.setCenterX(HUMAN_RADIUS +  Math.random() * (width.get() - HUMAN_DIAMETER));
+        model.setCenterY(HUMAN_RADIUS +  Math.random() * (height.get() - HUMAN_DIAMETER));
     }
 
     /**

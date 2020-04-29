@@ -16,7 +16,7 @@ public class Human {
     private final Property<Location> location;
 
     /** The graphical view of this human.*/
-    private final View view;
+    private final Model model;
 
     /** The health status of this human.*/
     private StatusType status;
@@ -40,7 +40,7 @@ public class Human {
         Objects.requireNonNull(behaviour, Error.getNullMsg("behaviour"));
         Objects.requireNonNull(location, Error.getNullMsg("location"));
 
-        this.view = new View(this, behaviour);
+        this.model = new Model(this, behaviour);
 
         this.status = StatusType.HEALTHY;
 
@@ -112,12 +112,12 @@ public class Human {
     }
 
     /**
-     * Getter for {@link #view}.
+     * Getter for {@link #model}.
      *
-     * @return {@link #view}
+     * @return {@link #model}
      */
-    public View getView() {
-        return view;
+    public Model getModel() {
+        return model;
     }
 
     /**

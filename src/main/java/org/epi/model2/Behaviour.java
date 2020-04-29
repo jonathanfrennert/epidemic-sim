@@ -1,31 +1,29 @@
 package org.epi.model2;
 
-import javafx.collections.ObservableList;
-
 /** State class for the behaviour of humans.*/
 public abstract class Behaviour {
 
-    /** Backreference to this behaviour's view.*/
-    private View view;
+    /** Backreference to this behaviour's character model.*/
+    private Model model;
 
     /**
-     * Set a backreference for the view which this behaviour effects.
+     * Set a backreference for the character model which this behaviour effects.
      *
-     * @param view the view effected by this behaviour
+     * @param model the model effected by this behaviour
      */
-    public void setView(View view) {
-        this.view = view;
+    public void setModel(Model model) {
+        this.model = model;
         setVelocity();
     }
 
-    /** Set the initial velocity for this view.*/
+    /** Set the initial velocity for this model.*/
     abstract void setVelocity();
 
     /**
-     * Adjust the view velocity depending on the surrounding population.
+     * Return this model's velocity in taking account of another human's model in the population.
      *
-     * @param population the population for the host.
+     * @param model the model of a human in the population
      */
-    abstract void adjustToOthers(ObservableList<Human> population);
+    abstract void adjustToOthers(Model model);
 
 }
