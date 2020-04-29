@@ -1,6 +1,6 @@
 package org.epi.model2;
 
-import org.epi.model.StatusType;
+import org.epi.util.Probability;
 import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
@@ -19,10 +19,12 @@ public class ImmuneSystem {
     private final Human host;
 
     /** Antigen code for the pathogen that the host has gained immunity from.*/
-    private IntegerProperty antigen;
+    private final IntegerProperty antigen;
 
     /** The duration for which the antigen is remembered by the immune system in seconds.*/
-    private DoubleProperty immunityDuration;
+    private final DoubleProperty immunityDuration;
+
+    //---------------------------- Constructor & associated helpers ----------------------------
 
     /**
      * Create an immune system for a human.
@@ -36,39 +38,82 @@ public class ImmuneSystem {
         this.host = host;
         this.antigen = new SimpleIntegerProperty(DEF_ANTIGEN);
         this.immunityDuration = new SimpleDoubleProperty(0);
-
-        initEvents();
     }
 
-    /**
-     * Initialise all event listeners.
-     */
-    private void initEvents() {
-
-        antigen.addListener((observable, oldValue, newValue) -> {
-            boolean isImmune = newValue.intValue() != DEF_ANTIGEN;
-            boolean isHealthy = host.getPathogen() == null;
-
-            if (isImmune) {
-                host.setStatus(StatusType.RECOVERED);
-            } else if (isHealthy) {
-                host.setStatus(StatusType.HEALTHY);
-            } else {
-                host.setStatus(StatusType.INFECTED);
-            }
-
-        });
-
-    }
+    //---------------------------- Simulator actions ----------------------------
 
     /**
+     * Decrease the immunity duration as time passes and if enough time has passed, forget.
      *
+     * @param elapsedSeconds the number of seconds elapsed since the immune system was last updated
+     */
+    public void live(double elapsedSeconds) {
+        if (isImmune()){
+            immunityDuration.set(immunityDuration.get() - elapsedSeconds);
+            forget();
+        }
+    }
+
+    /**
+     * Forget the pathogen if enough time has passed.
+     */
+    private void forget() {
+        if (immunityDuration.get() <= 0) {
+            antigen.set(DEF_ANTIGEN);
+            immunityDuration.set(0);
+        }
+    }
+
+    /**
+     * Defend the host against known pathogens.
+     *
+     * @throws IllegalStateException if the host has no pathogen
      */
     public void defend() {
+        pathogenCheck();
+
+        boolean pathogenIsKnown = antigen.get() == host.getPathogen().hashCode();
+
+        if (pathogenIsKnown) {
+            immunityDuration.set(host.getPathogen().getImmunityDuration());
+            host.setPathogen(null);
+        }
 
     }
 
+    /**
+     * The immune system attempts to learn the pathogen in case of future contact.
+     *
+     * @param pathogen a pathogen which the host has survived
+     */
     public void learn(Pathogen pathogen) {
+        boolean immunityIsGained = Probability.chance(pathogen.getImmunityRate());
+
+        if (immunityIsGained) {
+            antigen.set(pathogen.hashCode());
+            immunityDuration.set(pathogen.getImmunityDuration());
+        }
 
     }
+
+    /**
+     * Check if the host has a pathogen.
+     *
+     * @throws IllegalStateException if the given host has no pathogen
+     */
+    private void pathogenCheck() {
+        if (host.getPathogen() == null) {
+            throw new IllegalStateException(Error.ERROR_TAG + " Immune defense called without a pathogen in the host.");
+        }
+    }
+
+    /**
+     * Check if the host is immune to the pathogen in this simulation.
+     *
+     * @return true if the immune system is immune to the pathogen in the simulation, otherwise false
+     */
+    public boolean isImmune() {
+        return antigen.get() != DEF_ANTIGEN;
+    }
+
 }

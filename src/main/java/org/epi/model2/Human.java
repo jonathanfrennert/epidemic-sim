@@ -12,20 +12,20 @@ import java.util.Objects;
  * The main actors in the simulator.*/
 public class Human {
 
+    /** The location of this human.*/
+    private final Property<Location> location;
+
     /** The graphical view of this human.*/
     private final View view;
 
-    /** Health status of the human.*/
+    /** The health status of this human.*/
     private StatusType status;
-
-    /** The location of this human.*/
-    private final Property<Location> location;
 
     /** The immune system protecting this human.*/
     private final ImmuneSystem immuneSystem;
 
     /** The pathogen infecting this human.*/
-    private Property<Pathogen> pathogen;
+    private Pathogen pathogen;
 
     //---------------------------- Constructor & associated helpers ----------------------------
 
@@ -36,7 +36,7 @@ public class Human {
      * @param location the location of this human
      * @throws NullPointerException if the given parameter is null
      */
-    public Human(Behaviour behaviour, Location location) {
+    public Human(Location location, Behaviour behaviour) {
         Objects.requireNonNull(behaviour, Error.getNullMsg("behaviour"));
         Objects.requireNonNull(location, Error.getNullMsg("location"));
 
@@ -56,64 +56,42 @@ public class Human {
      * Initialise all event listeners.
      */
     private void initEvents() {
-
         // If the location of the human is changed, they switch population.
         location.addListener((observable, oldValue, newValue) -> {
             oldValue.getPopulation().remove(Human.this);
             newValue.getPopulation().add(Human.this);
         });
-
-        // Immune system defense.
-        pathogen.addListener((observable, oldValue, newValue) -> {
-            boolean isIntruder = newValue != null;
-
-            if (isIntruder) {
-                immuneSystem.defend();
-            } else {
-                immuneSystem.learn(oldValue);
-            }
-
-        });
-
     }
-
-
 
     //---------------------------- Simulator actions ----------------------------
 
+    /**
+     * All regulatory behaviour for the immune system which happens in each simulator update
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the immune system was last updated
+     */
+    public void immuneSystem(double elapsedSeconds) {
+        immuneSystem.live(elapsedSeconds);
 
+        if (pathogen != null) {
+            immuneSystem.defend();
+        }
+    }
+
+    /**
+     * Update the health status of this human.
+     */
+    public void status() {
+        if (immuneSystem.isImmune()) {
+            status = StatusType.RECOVERED;
+        } else if (pathogen == null) {
+            status = StatusType.HEALTHY;
+        } else {
+            status = StatusType.INFECTED;
+        }
+    }
 
     //---------------------------- Getters & Setters ----------------------------
-
-    /**
-     * Getter for {@link #view}.
-     *
-     * @return {@link #view}
-     */
-    public View getView() {
-        return view;
-    }
-
-    /**
-     * Getter for {@link #status}
-     *
-     * @return {@link #status}
-     */
-    public StatusType getStatus() {
-
-    }
-
-    /**
-     * Setter for {@link #status}
-     *
-     * @param status the status of this human
-     * @throws NullPointerException if the given parameter is null
-     */
-    public void setStatus(StatusType status) {
-        Objects.requireNonNull(status,Error.getNullMsg("status"));
-
-        this.status = status;
-    }
 
     /**
      * Getter for {@link #immuneSystem}.
@@ -134,6 +112,35 @@ public class Human {
     }
 
     /**
+     * Getter for {@link #view}.
+     *
+     * @return {@link #view}
+     */
+    public View getView() {
+        return view;
+    }
+
+    /**
+     * Getter for {@link #status}
+     *
+     * @return {@link #status}
+     */
+    public StatusType getStatus() {
+        return status;
+    }
+
+    /**
+     * Setter for {@link #status}
+     *
+     * @param status the status of this human
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void setStatus(StatusType status) {
+        Objects.requireNonNull(status,Error.getNullMsg("status"));
+        this.status = status;
+    }
+
+    /**
      * Getter for {@link #immuneSystem}.
      *
      * @return {@link #immuneSystem}
@@ -144,11 +151,8 @@ public class Human {
 
     /**
      * Setter for {@link #pathogen}.
-     *
-     * @throws NullPointerException if the given pathogen is null
      */
     public void setPathogen(Pathogen pathogen) {
-        Objects.requireNonNull(pathogen, "pathogen");
         this.pathogen = pathogen;
     }
 

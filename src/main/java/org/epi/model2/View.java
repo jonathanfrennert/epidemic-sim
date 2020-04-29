@@ -10,13 +10,6 @@ import java.util.Objects;
 /** Graphical representation of a human in the simulator.*/
 public class View extends Circle {
 
-    /** Color of a healthy human.*/
-    private static final Color HEALTHY = Color.DODGERBLUE;
-    /** Color of a infected human.*/
-    private static final Color INFECTED  = Color.CRIMSON;
-    /** Color of a recovered human.*/
-    private static final Color RECOVERED = Color.DARKORCHID;
-
     /** Default coordinate position of the view.*/
     private static final double DEF_POS = 0;
     /** Radius of a host's graphical representation in pixels.*/
@@ -49,21 +42,18 @@ public class View extends Circle {
         this.host = host;
 
         this.behaviour = behaviour;
-        behaviour.setHost(host);
+        behaviour.setView(this);
         behaviour.setVelocity();
 
         // Indicate the status of the human.
         fill();
     }
 
+    /**
+     * Set the view fill to indicate the status type of the human.
+     */
     private void fill() {
-        Color view_color = null;
-
-        if (host.getPathogen() == null && host.getImmuneSystem().getAntigen() == null) {
-            setFill(HEALTHY);
-        }
+        setFill(host.getStatus().color);
     }
-
-
 
 }

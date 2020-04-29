@@ -30,7 +30,7 @@ public class Location {
     /** The graphical representation of this location.*/
     private final Pane area;
 
-    /** The population of this location*/
+    /** The population of this location.*/
     private final ObservableList<Human> population;
 
     //---------------------------- Constructor & associated helpers ----------------------------
