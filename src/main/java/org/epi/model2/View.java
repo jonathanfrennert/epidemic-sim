@@ -43,7 +43,6 @@ public class View extends Circle {
 
         this.behaviour = behaviour;
         behaviour.setView(this);
-        behaviour.setVelocity();
 
         // Indicate the status of the human.
         fill();
