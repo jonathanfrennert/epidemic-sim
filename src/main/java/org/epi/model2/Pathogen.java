@@ -1,16 +1,19 @@
 package org.epi.model2;
 
-import org.epi.util.Error;
 import org.epi.util.Probability;
+import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+
+import java.util.ListIterator;
 
 /** A simple model of a pathogen.
  * The pathogen spreads between humans in the simulations.*/
 public class Pathogen {
 
-    private final Human host;
+    /** The host for this pathogen.*/
+    private Human host;
 
     /** The current lifetime of this pathogen in seconds.*/
     private final DoubleProperty lifetime;
@@ -63,11 +66,105 @@ public class Pathogen {
         this.immunityDuration = new SimpleDoubleProperty(immunityDuration);
     }
 
+    //---------------------------- Helper methods ----------------------------
+
+    /**
+     * Returns the hash code for this pathogen
+     * dependent on the values of the non-changing instance fields.
+     *
+     * @return the hash code for this pathogen
+     */
+    @Override
+    public int hashCode() {
+        int result = Double.hashCode(lifespan.get());
+        result = 31 * result + Double.hashCode(transmissionRisk.get());
+        result = 31 *result + Double.hashCode(fatalityRate.get());
+        result = 31 * result + Double.hashCode(immunityRate.get());
+        result = 31 * result + Double.hashCode(immunityDuration.get());
+        return result;
+    }
+
     //---------------------------- Simulator actions ----------------------------
 
-    
+    /**
+     * Attempt to infect all humans which are in contact with the host.
+     */
+    public void infect() {
+        ListIterator<Human> populationItr = host.getLocation().getPopulation().listIterator();
+
+        while (populationItr.hasNext()) {
+            Human target = populationItr.next();
+
+            boolean isHealthy = target.getPathogen() == null;
+            boolean inContact = target.getModel().collidingWith(host.getModel());
+            boolean effectiveTransmission = Probability.chance(transmissionRisk.get());
+
+            if (isHealthy && inContact && effectiveTransmission) {
+                Pathogen offspring = reproduce();
+                populationItr.previous().setPathogen(offspring);
+            }
+        }
+    }
+
+    /**
+     * Create a new copy of this pathogen to infect another human.
+     *
+     * @return create a new copy of this pathogen to infect a human.
+     */
+    private Pathogen reproduce()  {
+        return new Pathogen(this.lifespan.get(),
+                this.transmissionRisk.get(),
+                this.fatalityRate.get(),
+                this.immunityRate.get(),
+                this.immunityDuration.get());
+    }
+
+    /**
+     * Increase the lifetime as time passes and if the lifespan has has passed, die and potentially kill the host,
+     * or let the host's immune system potentially learn to defend against the pathogen.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the immune system was last updated
+     */
+    public void live(double elapsedSeconds) {
+        lifetime.set(lifetime.get() + elapsedSeconds);
+
+        if (lifespan.get() <= lifetime.get()) {
+            if (!killHost()) {
+                host.getImmuneSystem().learn(this);
+            }
+            die();
+        }
+    }
+
+    /**
+     * Attempt to kill the host by removing them from the population.
+     */
+    private boolean killHost() {
+        boolean isFatal = Probability.chance(fatalityRate.get());
+
+        if (isFatal) {
+            host.getLocation().getPopulation().remove(host);
+        }
+
+        return isFatal;
+    }
+
+    /**
+     * Remove all references to this pathogen, so that it is deleted by the garbage collection.
+     */
+    public void die() {
+        host.setPathogen(null);
+        setHost(null);
+    }
 
     //---------------------------- Getters & Setters ----------------------------
+
+    /**
+     * Setter for {@link #host}.
+     */
+    public void setHost(Human host) {
+        this.host = host;
+    }
 
     /**
      * Getter for {@link #lifetime}.

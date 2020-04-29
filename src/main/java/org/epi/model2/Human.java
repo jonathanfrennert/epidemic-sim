@@ -27,7 +27,7 @@ public class Human {
     /** The pathogen infecting this human.*/
     private Pathogen pathogen;
 
-    //---------------------------- Constructor & associated helpers ----------------------------
+    //---------------------------- Constructor ----------------------------
 
     /**
      * Create a human at a given location
@@ -63,32 +63,67 @@ public class Human {
         });
     }
 
+    //---------------------------- Helper methods ----------------------------
+
+    /**
+     * Check if this human is infected with a pathogen.
+     *
+     * @return true if this human is infected, otherwise false
+     */
+    private boolean isInfected() {
+        return pathogen != null;
+    }
+
+    /**
+     * Update the health status of this human.
+     */
+    private void status() {
+        if (immuneSystem.isImmune()) {
+            status = StatusType.RECOVERED;
+        } else if (isInfected()) {
+            status = StatusType.INFECTED;
+        } else {
+            status = StatusType.HEALTHY;
+        }
+    }
+
     //---------------------------- Simulator actions ----------------------------
 
     /**
-     * All regulatory behaviour for the immune system which happens in each simulator update
+     * All regulatory behaviour for the pathogen which happens in each timer update.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
+     */
+    public void pathogen(double elapsedSeconds) {
+        if (isInfected()) {
+            pathogen.infect();
+
+            pathogen.live(elapsedSeconds);
+        }
+    }
+
+    /**
+     * All regulatory behaviour for the immune system which happens in each timer update.
      *
      * @param elapsedSeconds the number of seconds elapsed since the immune system was last updated
      */
     public void immuneSystem(double elapsedSeconds) {
         immuneSystem.live(elapsedSeconds);
 
-        if (pathogen != null) {
+        if (isInfected()) {
             immuneSystem.defend();
         }
     }
 
     /**
-     * Update the health status of this human.
+     * All regulatory behaviour for the model which happens in each timer update.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the model was last updated
      */
-    public void status() {
-        if (immuneSystem.isImmune()) {
-            status = StatusType.RECOVERED;
-        } else if (pathogen == null) {
-            status = StatusType.HEALTHY;
-        } else {
-            status = StatusType.INFECTED;
-        }
+    public void model(double elapsedSeconds) {
+        status();
+
+
     }
 
     //---------------------------- Getters & Setters ----------------------------

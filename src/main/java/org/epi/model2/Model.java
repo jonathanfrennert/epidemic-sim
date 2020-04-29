@@ -23,6 +23,8 @@ public class Model extends Circle {
     /** The velocity of the host.*/
     private Point2D velocity;
 
+    //---------------------------- Constructor ----------------------------
+
     /**
      * Create a human model given the behaviour that the human will exhibit.
      *
@@ -47,11 +49,37 @@ public class Model extends Circle {
         fill();
     }
 
+    //---------------------------- Simulator actions ----------------------------
+
     /**
      * Set the model fill to indicate the status type of the human.
      */
     private void fill() {
         setFill(host.getStatus().color);
+    }
+
+    //---------------------------- Helper methods ----------------------------
+
+    /**
+     * Check if a model is colliding with this model.
+     *
+     * @param model a model
+     * @return true if this model is colliding with the given model, otherwise false
+     * @throws NullPointerException if the given model is null
+     */
+    public boolean collidingWith(Model model) {
+        Objects.requireNonNull(model, Error.getNullMsg("model"));
+
+        double deltaX = model.getCenterX() - this.getCenterX();
+        double deltaY = model.getCenterY() - this.getCenterY();
+        double radiusSum = 2 * HUMAN_RADIUS;
+
+        if (deltaX * deltaX + deltaY * deltaY <= radiusSum * radiusSum) {
+            return deltaX * (velocity.getX() - this.velocity.getX())
+                    + deltaY * (model.velocity.getY() - this.velocity.getY()) <= 0;
+        }
+
+        return false;
     }
 
 }

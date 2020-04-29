@@ -1,5 +1,9 @@
 package org.epi.model2;
 
+import org.epi.util.Error;
+
+import java.util.Objects;
+
 /** State class for the behaviour of humans.*/
 public abstract class Behaviour {
 
@@ -10,8 +14,11 @@ public abstract class Behaviour {
      * Set a backreference for the character model which this behaviour effects.
      *
      * @param model the model effected by this behaviour
+     * @throws NullPointerException if the given parameter is null
      */
     public void setModel(Model model) {
+        Objects.requireNonNull(model, Error.getNullMsg("model"));
+
         this.model = model;
         setVelocity();
     }
@@ -24,6 +31,6 @@ public abstract class Behaviour {
      *
      * @param model the model of a human in the population
      */
-    abstract void adjustToOthers(Model model);
+    abstract void adjustToOther(Model model);
 
 }

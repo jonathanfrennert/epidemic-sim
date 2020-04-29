@@ -10,6 +10,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.Objects;
 
+/** Simple model of a immune system.
+ * A human's natural defense against pathogens.*/
 public class ImmuneSystem {
 
     /** Default value for the antigen code.*/
@@ -24,7 +26,7 @@ public class ImmuneSystem {
     /** The duration for which the antigen is remembered by the immune system in seconds.*/
     private final DoubleProperty immunityDuration;
 
-    //---------------------------- Constructor & associated helpers ----------------------------
+    //---------------------------- Constructor ----------------------------
 
     /**
      * Create an immune system for a human.
@@ -38,6 +40,28 @@ public class ImmuneSystem {
         this.host = host;
         this.antigen = new SimpleIntegerProperty(DEF_ANTIGEN);
         this.immunityDuration = new SimpleDoubleProperty(0);
+    }
+
+    //---------------------------- Helper methods ----------------------------
+
+    /**
+     * Check if the host has a pathogen.
+     *
+     * @throws IllegalStateException if the given host has no pathogen
+     */
+    private void pathogenCheck() {
+        if (host.getPathogen() == null) {
+            throw new IllegalStateException(Error.ERROR_TAG + " Immune defense called without a pathogen in the host.");
+        }
+    }
+
+    /**
+     * Check if the host is immune to the pathogen in this simulation.
+     *
+     * @return true if the immune system is immune to the pathogen in the simulation, otherwise false
+     */
+    public boolean isImmune() {
+        return antigen.get() != DEF_ANTIGEN;
     }
 
     //---------------------------- Simulator actions ----------------------------
@@ -76,7 +100,7 @@ public class ImmuneSystem {
 
         if (pathogenIsKnown) {
             immunityDuration.set(host.getPathogen().getImmunityDuration());
-            host.setPathogen(null);
+            host.getPathogen().die();
         }
 
     }
@@ -93,27 +117,6 @@ public class ImmuneSystem {
             antigen.set(pathogen.hashCode());
             immunityDuration.set(pathogen.getImmunityDuration());
         }
-
-    }
-
-    /**
-     * Check if the host has a pathogen.
-     *
-     * @throws IllegalStateException if the given host has no pathogen
-     */
-    private void pathogenCheck() {
-        if (host.getPathogen() == null) {
-            throw new IllegalStateException(Error.ERROR_TAG + " Immune defense called without a pathogen in the host.");
-        }
-    }
-
-    /**
-     * Check if the host is immune to the pathogen in this simulation.
-     *
-     * @return true if the immune system is immune to the pathogen in the simulation, otherwise false
-     */
-    public boolean isImmune() {
-        return antigen.get() != DEF_ANTIGEN;
     }
 
 }
