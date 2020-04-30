@@ -1,5 +1,6 @@
 package org.epi.model2;
 
+import javafx.geometry.Point2D;
 import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
@@ -72,7 +73,6 @@ public class Location {
      * Initialise all event listeners.
      */
     private void initEvents() {
-
         //Listener throws an IllegalStateException if the current population count is above the maximum population count.
         population.addListener((ListChangeListener<Human>) change -> {
             while(change.next()) {
@@ -89,7 +89,6 @@ public class Location {
                 }
             }
         });
-
     }
 
     /**
@@ -125,6 +124,34 @@ public class Location {
             throw new IllegalStateException(
                     String.format(Error.ERROR_TAG + " This location's population count is above maximum capacity (%d): %d",
                             MAX_POPULATION, population.size()));
+        }
+    }
+
+    //---------------------------- Simulator actions ----------------------------
+
+    /**
+     * Adjust the velocity of the population such that they do not move past the walls.
+     */
+    public void wallCollisions() {
+        for (Human human :population) {
+            Model model = human.getModel();
+            Point2D velocity = model.getVelocity();
+
+            boolean onLeftWall = model.getCenterX() - model.getRadius() <= 0 && velocity.getX() < 0;
+
+            boolean onRightWall = model.getCenterX() + model.getRadius() >= width.get() && velocity.getX() > 0;
+
+            boolean onBottomWall = model.getCenterY() - model.getRadius() <= 0 && velocity.getY() < 0;
+
+            boolean onTopWall = model.getCenterY() + model.getRadius() >= height.get() && velocity.getY() > 0;
+
+            if (onLeftWall || onRightWall) {
+                model.setVelocity(- velocity.getX(), velocity.getY());
+            }
+
+            if (onBottomWall || onTopWall) {
+                model.setVelocity(velocity.getX(), - velocity.getY());
+            }
         }
     }
 

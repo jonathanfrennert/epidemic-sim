@@ -40,14 +40,14 @@ public class Human {
         Objects.requireNonNull(behaviour, Error.getNullMsg("behaviour"));
         Objects.requireNonNull(location, Error.getNullMsg("location"));
 
-        this.model = new Model(this, behaviour);
+        this.immuneSystem = new ImmuneSystem(this);
 
         this.status = StatusType.HEALTHY;
 
+        this.model = new Model(this, behaviour);
+
         this.location = new SimpleObjectProperty<>(location);
         location.getPopulation().add(this);
-
-        this.immuneSystem = new ImmuneSystem(this);
 
         initEvents();
     }
@@ -90,11 +90,14 @@ public class Human {
     //---------------------------- Simulator actions ----------------------------
 
     /**
-     * All regulatory behaviour for the pathogen which happens in each timer update.
+     * If this human is infected, spread the pathogen and let the pathogen live.
      *
      * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
+     * @throws IllegalArgumentException if the given parameter is negative
      */
-    public void pathogen(double elapsedSeconds) {
+    private void pathogen(double elapsedSeconds) {
+        Error.nonNegativeCheck(elapsedSeconds);
+
         if (isInfected()) {
             pathogen.infect();
 
@@ -103,11 +106,14 @@ public class Human {
     }
 
     /**
-     * All regulatory behaviour for the immune system which happens in each timer update.
+     * Let the immune system live and defend this human.
      *
      * @param elapsedSeconds the number of seconds elapsed since the immune system was last updated
+     * @throws IllegalArgumentException if the given parameter is negative
      */
-    public void immuneSystem(double elapsedSeconds) {
+    private void immuneSystem(double elapsedSeconds) {
+        Error.nonNegativeCheck(elapsedSeconds);
+
         immuneSystem.live(elapsedSeconds);
 
         if (isInfected()) {
@@ -116,14 +122,18 @@ public class Human {
     }
 
     /**
-     * All regulatory behaviour for the model which happens in each timer update.
+     * Set the correct fill for the model and move the model.
      *
-     * @param elapsedSeconds the number of seconds elapsed since the model was last updated
+     * @param elapsedSeconds the number of seconds elapsed since this human's model was last updated
+     * @throws IllegalArgumentException if the given parameter is negative
      */
-    public void model(double elapsedSeconds) {
+    private void model(double elapsedSeconds) {
+        Error.nonNegativeCheck(elapsedSeconds);
+
         status();
+        model.fill();
 
-
+        model.move(elapsedSeconds);
     }
 
     //---------------------------- Getters & Setters ----------------------------
@@ -138,12 +148,15 @@ public class Human {
     }
 
     /**
-     * Getter for {@link #location} property.
+     * Setter for {@link #location}.
      *
-     * @return {@link #location} property
+     * @param location {@link #location}
+     * @throws NullPointerException if the given location is null
      */
-    public Property<Location> locationProperty() {
-        return location;
+    public void setLocation(Location location) {
+        Objects.requireNonNull(location, Error.getNullMsg("location"));
+
+        this.location.setValue(location);
     }
 
     /**
@@ -165,17 +178,6 @@ public class Human {
     }
 
     /**
-     * Setter for {@link #status}
-     *
-     * @param status the status of this human
-     * @throws NullPointerException if the given parameter is null
-     */
-    public void setStatus(StatusType status) {
-        Objects.requireNonNull(status,Error.getNullMsg("status"));
-        this.status = status;
-    }
-
-    /**
      * Getter for {@link #immuneSystem}.
      *
      * @return {@link #immuneSystem}
@@ -185,19 +187,21 @@ public class Human {
     }
 
     /**
-     * Setter for {@link #pathogen}.
-     */
-    public void setPathogen(Pathogen pathogen) {
-        this.pathogen = pathogen;
-    }
-
-    /**
      * Getter for {@link #pathogen}.
      *
      * @return {@link #pathogen}
      */
     public Pathogen getPathogen() {
         return pathogen;
+    }
+
+    /**
+     * Setter for {@link #pathogen}.
+     *
+     * @param pathogen {@link #pathogen}
+     */
+    public void setPathogen(Pathogen pathogen) {
+        this.pathogen = pathogen;
     }
 
 }

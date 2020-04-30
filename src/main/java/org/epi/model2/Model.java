@@ -1,8 +1,9 @@
 package org.epi.model2;
 
+import org.epi.util.Error;
+
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
-import org.epi.util.Error;
 
 import java.util.Objects;
 
@@ -20,7 +21,7 @@ public class Model extends Circle {
     /** The behaviour of the host.*/
     private final Behaviour behaviour;
 
-    /** The velocity of the host.*/
+    /** The velocity of the host in pixels per second.*/
     private Point2D velocity;
 
     //---------------------------- Constructor ----------------------------
@@ -42,23 +43,14 @@ public class Model extends Circle {
 
         this.host = host;
 
+        fill();
+
         this.behaviour = behaviour;
         behaviour.setModel(this);
-
-        // Indicate the status of the human.
-        fill();
+        behaviour.initVelocity();
     }
 
-    //---------------------------- Simulator actions ----------------------------
-
-    /**
-     * Set the model fill to indicate the status type of the human.
-     */
-    private void fill() {
-        setFill(host.getStatus().color);
-    }
-
-    //---------------------------- Helper methods ----------------------------
+    //---------------------------- Helper method ----------------------------
 
     /**
      * Check if a model is colliding with this model.
@@ -80,6 +72,47 @@ public class Model extends Circle {
         }
 
         return false;
+    }
+
+    //---------------------------- Simulator actions ----------------------------
+
+    /**
+     * Move the model by its velocity for a given number of seconds.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the model was last updated
+     */
+    public void move(double elapsedSeconds) {
+        setCenterX(getCenterX() + velocity.getX() * elapsedSeconds);
+        setCenterY(getCenterY() + velocity.getY() * elapsedSeconds);
+    }
+
+    /**
+     * Set the model fill to indicate the status type of the human.
+     */
+    public void fill() {
+        setFill(host.getStatus().color);
+    }
+
+    //---------------------------- Getters and setters ----------------------------
+
+
+    /**
+     * Setter for {@link #velocity}.
+     *
+     * @return {@link #velocity}
+     */
+    public Point2D getVelocity() {
+        return velocity;
+    }
+
+    /**
+     * Setter for {@link #velocity}.
+     *
+     * @param velocityX the horizontal velocity of the model in pixels per second
+     * @param velocityY the vertical velocity of the model in pixels per second
+     */
+    public void setVelocity(double velocityX, double velocityY) {
+        this.velocity = new Point2D(velocityX, velocityY);
     }
 
 }

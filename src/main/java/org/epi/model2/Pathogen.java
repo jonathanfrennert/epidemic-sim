@@ -96,10 +96,10 @@ public class Pathogen {
             Human target = populationItr.next();
 
             boolean isHealthy = target.getPathogen() == null;
-            boolean inContact = target.getModel().collidingWith(host.getModel());
+            boolean areInContact = target.getModel().collidingWith(host.getModel());
             boolean effectiveTransmission = Probability.chance(transmissionRisk.get());
 
-            if (isHealthy && inContact && effectiveTransmission) {
+            if (isHealthy && areInContact && effectiveTransmission) {
                 Pathogen offspring = reproduce();
                 populationItr.previous().setPathogen(offspring);
             }
@@ -109,7 +109,7 @@ public class Pathogen {
     /**
      * Create a new copy of this pathogen to infect another human.
      *
-     * @return create a new copy of this pathogen to infect a human.
+     * @return create a new copy of this pathogen
      */
     private Pathogen reproduce()  {
         return new Pathogen(this.lifespan.get(),

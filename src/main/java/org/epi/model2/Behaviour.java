@@ -10,6 +10,29 @@ public abstract class Behaviour {
     /** Backreference to this behaviour's character model.*/
     private Model model;
 
+    //---------------------------- Constructors & associated helpers ----------------------------
+
+    /**
+     * Create a behaviour.
+     */
+    public Behaviour() {
+        this.model = null;
+    }
+
+    /** Set the initial velocity for this model.*/
+    abstract void initVelocity();
+
+    //---------------------------- Simulator action ----------------------------
+
+    /**
+     * Return this model's velocity in taking account of another human's model in the population.
+     *
+     * @param that a model of a human in the population
+     */
+    abstract void adjustToOther(Model that);
+
+    //---------------------------- Setter ----------------------------
+
     /**
      * Set a backreference for the character model which this behaviour effects.
      *
@@ -20,17 +43,6 @@ public abstract class Behaviour {
         Objects.requireNonNull(model, Error.getNullMsg("model"));
 
         this.model = model;
-        setVelocity();
     }
-
-    /** Set the initial velocity for this model.*/
-    abstract void setVelocity();
-
-    /**
-     * Return this model's velocity in taking account of another human's model in the population.
-     *
-     * @param model the model of a human in the population
-     */
-    abstract void adjustToOther(Model model);
 
 }
