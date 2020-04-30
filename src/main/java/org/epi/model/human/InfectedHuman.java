@@ -2,7 +2,7 @@ package org.epi.model.human;
 
 import org.epi.model.Disease;
 import org.epi.model.Human;
-import org.epi.model.StatusType;
+import org.epi.model2.Status;
 import org.epi.util.Probability;
 import org.epi.util.Error;
 
@@ -30,12 +30,12 @@ public class InfectedHuman extends Human {
      * @throws NullPointerException if the given parameter is null
      */
     public InfectedHuman(Disease disease) {
-        super(StatusType.INFECTED);
+        super(Status.INFECTED);
         Objects.requireNonNull(disease, Error.getNullMsg("disease"));
 
         this.disease = disease;
         this.currentDuration = new SimpleDoubleProperty(INITIAL_DURATION);
-        setFill(StatusType.INFECTED.color);
+        setFill(Status.INFECTED.color);
     }
 
     /**

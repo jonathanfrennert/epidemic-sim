@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import org.epi.model.human.HealthyHuman;
 import org.epi.model.human.InfectedHuman;
 import org.epi.model.human.RecoveredHuman;
+import org.epi.model2.Status;
 import org.epi.util.Error;
 
 import java.util.Objects;
@@ -38,7 +39,7 @@ public final class HumanFactory {
      * @return if the human of the given status was initialised in the population, otherwise false
      * @throws NullPointerException if any of the given parameters are null
      */
-    public static boolean createHuman(ObservableList<Human> population, World world, Disease disease, StatusType status) {
+    public static boolean createHuman(ObservableList<Human> population, World world, Disease disease, Status status) {
         Objects.requireNonNull(population, Error.getNullMsg("population"));
         Objects.requireNonNull(world, Error.getNullMsg("world"));
         Objects.requireNonNull(disease, Error.getNullMsg("disease"));
@@ -47,7 +48,7 @@ public final class HumanFactory {
         Human human;
 
         try {
-            if (status == StatusType.INFECTED) {
+            if (status == Status.INFECTED) {
                 human = new InfectedHuman(disease);
             } else {
                 throw new IllegalArgumentException(Error.ERROR_TAG + " Status type is not disease dependent: " + status);
@@ -75,7 +76,7 @@ public final class HumanFactory {
      * @return true if the human of the given status was initialised in the population, otherwise false
      * @throws NullPointerException If any of the given parameters are null
      */
-    public static boolean createHuman(ObservableList<Human> population, World world, StatusType status) {
+    public static boolean createHuman(ObservableList<Human> population, World world, Status status) {
         Objects.requireNonNull(population, Error.getNullMsg("population"));
         Objects.requireNonNull(world, Error.getNullMsg("world"));
         Objects.requireNonNull(status, Error.getNullMsg("status type"));

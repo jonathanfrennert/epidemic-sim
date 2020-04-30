@@ -2,6 +2,7 @@ package org.epi.model;
 
 import org.epi.model.human.HealthyHuman;
 import org.epi.model.human.InfectedHuman;
+import org.epi.model2.Status;
 import org.epi.util.Error;
 
 import javafx.animation.AnimationTimer;
@@ -116,9 +117,9 @@ public class Simulator {
         });
 
         // Add population.
-        HumanFactory.createHuman(population, world, disease, StatusType.INFECTED);
+        HumanFactory.createHuman(population, world, disease, Status.INFECTED);
         for (int i = 0; i < world.getPopulationCount() - 1; i++) {
-            HumanFactory.createHuman(population, world, StatusType.HEALTHY);
+            HumanFactory.createHuman(population, world, Status.HEALTHY);
         }
 
        this.worldStats = new Statistics(population);
@@ -193,7 +194,7 @@ public class Simulator {
      * @return true if the first given human is infected and the other is healthy, otherwise false
      */
     private boolean isEffectiveContact(Human human1, Human human2) {
-        return human1.isType(StatusType.INFECTED) && human2.isType(StatusType.HEALTHY);
+        return human1.isType(Status.INFECTED) && human2.isType(Status.HEALTHY);
     }
 
     /**
@@ -204,7 +205,7 @@ public class Simulator {
     private void statusEffects(double elapsedSeconds) {
         for (ListIterator<Human> populationItr = population.listIterator(); populationItr.hasNext();) {
             Human human = populationItr.next();
-            StatusType status = human.getStatus();
+            Status status = human.getStatus();
 
             switch(status) {
                 case HEALTHY:

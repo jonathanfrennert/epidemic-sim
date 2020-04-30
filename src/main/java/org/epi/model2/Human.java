@@ -1,9 +1,7 @@
 package org.epi.model2;
 
-import org.epi.model.StatusType;
 import org.epi.util.Error;
 
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.Objects;
@@ -13,13 +11,13 @@ import java.util.Objects;
 public class Human {
 
     /** The location of this human.*/
-    private final Property<Location> location;
+    private Location location;
 
     /** The graphical view of this human.*/
     private final Model model;
 
     /** The health status of this human.*/
-    private StatusType status;
+    private Status status;
 
     /** The immune system protecting this human.*/
     private final ImmuneSystem immuneSystem;
@@ -42,25 +40,12 @@ public class Human {
 
         this.immuneSystem = new ImmuneSystem(this);
 
-        this.status = StatusType.HEALTHY;
+        this.status = Status.HEALTHY;
 
         this.model = new Model(this, behaviour);
 
-        this.location = new SimpleObjectProperty<>(location);
+        this.location = location;
         location.getPopulation().add(this);
-
-        initEvents();
-    }
-
-    /**
-     * Initialise all event listeners.
-     */
-    private void initEvents() {
-        // If the location of the human is changed, they switch population.
-        location.addListener((observable, oldValue, newValue) -> {
-            oldValue.getPopulation().remove(Human.this);
-            newValue.getPopulation().add(Human.this);
-        });
     }
 
     //---------------------------- Helper methods ----------------------------
@@ -70,7 +55,7 @@ public class Human {
      *
      * @return true if this human is infected, otherwise false
      */
-    private boolean isInfected() {
+    public boolean isInfected() {
         return pathogen != null;
     }
 
@@ -79,11 +64,11 @@ public class Human {
      */
     private void status() {
         if (immuneSystem.isImmune()) {
-            status = StatusType.RECOVERED;
+            status = Status.RECOVERED;
         } else if (isInfected()) {
-            status = StatusType.INFECTED;
+            status = Status.INFECTED;
         } else {
-            status = StatusType.HEALTHY;
+            status = Status.HEALTHY;
         }
     }
 
@@ -100,7 +85,6 @@ public class Human {
 
         if (isInfected()) {
             pathogen.infect();
-
             pathogen.live(elapsedSeconds);
         }
     }
@@ -144,19 +128,26 @@ public class Human {
      * @return {@link #immuneSystem}
      */
     public Location getLocation() {
-        return location.getValue();
+        return location;
     }
 
     /**
      * Setter for {@link #location}.
+     * Removes the human from their previous location's population and
+     * adds the human to the given location's population, given that neither are null.
      *
      * @param location {@link #location}
-     * @throws NullPointerException if the given location is null
      */
     public void setLocation(Location location) {
-        Objects.requireNonNull(location, Error.getNullMsg("location"));
+        if (this.location != null) {
+            this.location.getPopulation().remove(this);
+        }
 
-        this.location.setValue(location);
+        this.location = location;
+
+        if (location != null) {
+            location.getPopulation().add(this);
+        }
     }
 
     /**
@@ -173,7 +164,7 @@ public class Human {
      *
      * @return {@link #status}
      */
-    public StatusType getStatus() {
+    public Status getStatus() {
         return status;
     }
 

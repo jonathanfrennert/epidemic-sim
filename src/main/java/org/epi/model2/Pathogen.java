@@ -137,13 +137,13 @@ public class Pathogen {
     }
 
     /**
-     * Attempt to kill the host by removing them from the population.
+     * Attempt to kill the host by removing them from their location.
      */
     private boolean killHost() {
         boolean isFatal = Probability.chance(fatalityRate.get());
 
         if (isFatal) {
-            host.getLocation().getPopulation().remove(host);
+            host.setLocation(null);
         }
 
         return isFatal;

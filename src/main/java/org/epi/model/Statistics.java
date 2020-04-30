@@ -1,6 +1,7 @@
 package org.epi.model;
 
 import javafx.beans.property.*;
+import org.epi.model2.Status;
 import org.epi.util.Error;
 
 import javafx.collections.ObservableList;
@@ -42,9 +43,9 @@ public class Statistics {
     public Statistics(ObservableList<Human> population) {
         Objects.requireNonNull(population, Error.getNullMsg("population"));
 
-        healthyCount = new SimpleIntegerProperty(getPopulationCountOf(population, StatusType.HEALTHY));
-        infectedCount = new SimpleIntegerProperty(getPopulationCountOf(population, StatusType.INFECTED));
-        recoveredCount = new SimpleIntegerProperty(getPopulationCountOf(population, StatusType.RECOVERED));
+        healthyCount = new SimpleIntegerProperty(getPopulationCountOf(population, Status.HEALTHY));
+        infectedCount = new SimpleIntegerProperty(getPopulationCountOf(population, Status.INFECTED));
+        recoveredCount = new SimpleIntegerProperty(getPopulationCountOf(population, Status.RECOVERED));
         deceasedCount = new SimpleIntegerProperty(INIT_DECEASED);
 
         initPopulationCount = new SimpleIntegerProperty(healthyCount.get() + infectedCount.get() + recoveredCount.get());
@@ -59,9 +60,9 @@ public class Statistics {
     public void updateCount(ObservableList<Human> population) {
         Objects.requireNonNull(population, Error.getNullMsg("world view"));
 
-        healthyCount.set(getPopulationCountOf(population, StatusType.HEALTHY));
-        infectedCount.set(getPopulationCountOf(population, StatusType.INFECTED));
-        recoveredCount.set(getPopulationCountOf(population, StatusType.RECOVERED));
+        healthyCount.set(getPopulationCountOf(population, Status.HEALTHY));
+        infectedCount.set(getPopulationCountOf(population, Status.INFECTED));
+        recoveredCount.set(getPopulationCountOf(population, Status.RECOVERED));
 
         deceasedCount.set(initPopulationCount.get() - healthyCount.get() - infectedCount.get() - recoveredCount.get());
 
@@ -100,7 +101,7 @@ public class Statistics {
      * @param status a status
      * @return the number of humans in the population of that status
      */
-    private static int getPopulationCountOf(ObservableList<Human> population, StatusType status) {
+    private static int getPopulationCountOf(ObservableList<Human> population, Status status) {
         return population.filtered(human -> human.getStatus() == status).size();
     }
 

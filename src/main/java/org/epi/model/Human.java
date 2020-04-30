@@ -1,5 +1,6 @@
 package org.epi.model;
 
+import org.epi.model2.Status;
 import org.epi.util.Error;
 
 import javafx.beans.property.DoubleProperty;
@@ -29,7 +30,7 @@ public abstract class Human extends Circle {
     private final DoubleProperty velocityY;
 
     /** The status of this human.*/
-    private final StatusType status;
+    private final Status status;
 
     /**
      * Constructor for a human.
@@ -37,7 +38,7 @@ public abstract class Human extends Circle {
      * @param status the status of this human
      * @throws NullPointerException if the given parameter is null
      */
-    public Human(StatusType status) {
+    public Human(Status status) {
         super(RADIUS);
         Objects.requireNonNull(status, Error.getNullMsg("status"));
 
@@ -120,11 +121,11 @@ public abstract class Human extends Circle {
     /**
      * Check if this human is of a given type.
      *
-     * @param statusType a status type
+     * @param status a status type
      * @return true if this human's status type is equal to the given status type, otherwise false.
      */
-    public boolean isType(StatusType statusType) {
-        return statusType == status;
+    public boolean isType(Status status) {
+        return status == this.status;
     }
 
     //---------------------------- Getters & Setters ----------------------------
@@ -188,7 +189,7 @@ public abstract class Human extends Circle {
      *
      * @return {@link Human#status}
      */
-    public StatusType getStatus() {
+    public Status getStatus() {
         return status;
     }
 

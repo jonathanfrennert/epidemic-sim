@@ -6,6 +6,9 @@ import org.epi.util.Error;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** A simple model of a world.
  * The class is used as a graphical representation of the world in the simulator.*/
 public class World {
@@ -53,10 +56,56 @@ public class World {
         this.totalElapsedSeconds = new SimpleDoubleProperty(0);
         this.detectionRate = new SimpleDoubleProperty(detectionRate);
         this.testingFrequency = new SimpleDoubleProperty(testingFrequency);
+
     }
 
     //---------------------------- Simulator actions ----------------------------
 
+    /**
+     * Let time pass in the world and perform tests routinely.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since this world was last updated
+     * @throws IllegalArgumentException if the given parameter is negative
+     */
+    public void live(double elapsedSeconds) {
+        Error.nonNegativeCheck(elapsedSeconds);
+
+        double oldValue = totalElapsedSeconds.get();
+        double newValue = oldValue + elapsedSeconds;
+
+        boolean isTesting = Math.ceil(oldValue / testingFrequency.get()) == Math.floor(newValue/ testingFrequency.get());
+
+        if (isTesting) {
+            test();
+        }
+
+        totalElapsedSeconds.set(newValue);
+    }
+
+    /**
+     * Test the city population for the pathogen, and for those who test positive, send them to the quarantine.
+     */
+    private void test() {
+        List<Human> quarantined = new ArrayList<>();
+
+        for (Human testSubject : city.getPopulation()) {
+            boolean isDetected = Probability.chance(detectionRate.get());
+
+            if (testSubject.isInfected() && isDetected) {
+                quarantined.add(testSubject);
+            }
+        }
+
+        quarantined.forEach(infected -> infected.setLocation(quarantine));
+    }
+
+    /**
+     * Call collision methods for the city and quarantine.
+     */
+    public void collisions() {
+        city.wallCollisions();
+        quarantine.wallCollisions();
+    }
 
     //---------------------------- Getters & Setters ----------------------------
 
@@ -117,8 +166,8 @@ public class World {
     /**
      * Setter for {@link #detectionRate}.
      *
-     * @throws IllegalArgumentException if the given parameter isless than {@value Probability#MIN_PROB} or more than
-     *                                  {@value Probability#MAX_PROB}
+     * @throws IllegalArgumentException if the given parameter is less than {@value Probability#MIN_PROB}
+     *                                  or more than {@value Probability#MAX_PROB}
      */
     public void setDetectionRate(double detectionRate) {
         Probability.probabilityCheck(detectionRate);
