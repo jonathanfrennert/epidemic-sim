@@ -89,6 +89,7 @@ public class Location {
                 }
             }
         });
+
     }
 
     /**
@@ -125,6 +126,15 @@ public class Location {
                     String.format(Error.ERROR_TAG + " This location's population count is above maximum capacity (%d): %d",
                             MAX_POPULATION, population.size()));
         }
+    }
+
+    /**
+     * Getter for {@link #MAX_POPULATION}.
+     *
+     * @return {@link #MAX_POPULATION}
+     */
+    public int getMaxPop() {
+        return MAX_POPULATION;
     }
 
     //---------------------------- Simulator actions ----------------------------

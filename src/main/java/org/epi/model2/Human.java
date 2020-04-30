@@ -193,6 +193,10 @@ public class Human {
      */
     public void setPathogen(Pathogen pathogen) {
         this.pathogen = pathogen;
+
+        if (pathogen != null) {
+            pathogen.setHost(this);
+        }
     }
 
 }

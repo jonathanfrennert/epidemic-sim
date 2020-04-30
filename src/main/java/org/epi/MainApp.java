@@ -1,7 +1,7 @@
 package org.epi;
 
 import org.epi.model.Disease;
-import org.epi.model.Simulator;
+import org.epi.model2.Simulator;
 import org.epi.model.World;
 
 import javafx.animation.AnimationTimer;
@@ -27,17 +27,17 @@ public class MainApp extends Application {
 
         // Simulator initialisation.
         Simulator simulator = new Simulator(world, disease);
-        AnimationTimer worldTime = simulator.getWorldTime();
+        AnimationTimer worldTime = simulator.getTimer();
 
         // Set the main pane.
         BorderPane root = new BorderPane();
 
         // Set the world view.
-        root.setCenter(simulator.getWorldView());
+        root.setCenter(simulator.getWorld());
 
         // Set the world statistics.
         Label stats = new Label();
-        stats.textProperty().bind(simulator.getWorldStats().getTextProperty());
+        stats.textProperty().bind(simulator.getStatistics().getTextProperty());
         root.setBottom(stats);
 
         // Set the stage.

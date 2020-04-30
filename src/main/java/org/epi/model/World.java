@@ -1,5 +1,6 @@
 package org.epi.model;
 
+import org.epi.model2.Simulator;
 import org.epi.util.Probability;
 import org.epi.util.Error;
 

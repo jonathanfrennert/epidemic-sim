@@ -180,7 +180,7 @@ public class Statistics {
      *
      * @return {@link #initPop}
      */
-    public int getInitPopulationCount() {
+    public int getInitPop() {
         return initPop.get();
     }
 

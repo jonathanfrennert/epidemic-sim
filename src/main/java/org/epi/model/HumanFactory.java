@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import org.epi.model.human.HealthyHuman;
 import org.epi.model.human.InfectedHuman;
 import org.epi.model.human.RecoveredHuman;
+import org.epi.model2.Simulator;
 import org.epi.model2.Status;
 import org.epi.util.Error;
 
@@ -12,9 +13,9 @@ import java.util.Objects;
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
-import static org.epi.model.Simulator.MAX_POPULATION;
-import static org.epi.model.Simulator.WORLD_HEIGHT;
-import static org.epi.model.Simulator.WORLD_WIDTH;
+import static org.epi.model2.Simulator.MAX_POPULATION;
+import static org.epi.model2.Simulator.WORLD_HEIGHT;
+import static org.epi.model2.Simulator.WORLD_WIDTH;
 
 /** Static factory for creating humans.*/
 public final class HumanFactory {
