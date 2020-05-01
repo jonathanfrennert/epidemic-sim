@@ -1,12 +1,13 @@
-package org.epi.model2;
+package org.epi.model;
 
-import org.epi.util.BehaviourDistribution;
 import org.epi.util.Error;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /** The simulator class.
@@ -41,12 +42,13 @@ public class Simulator {
                 immuneSystem(elapsedSeconds);
                 model(elapsedSeconds);
             }
-            lastUpdateTime.set(timestamp);
             statistics.update();
 
             if (endingIsReached()) {
                 timer.stop();
             }
+
+            lastUpdateTime.set(timestamp);
         }
 
     };
@@ -71,19 +73,20 @@ public class Simulator {
      *                                  or larger than the maximum capacity for the city
      */
     public Simulator(double popTotal, World world, BehaviourDistribution behaveDist, Pathogen pathogen) {
-        Error.intervalCheck("population", MIN_POPULATION, world.getCity().getMaxPop(), popTotal);
         Objects.requireNonNull(world, Error.getNullMsg("world"));
         Objects.requireNonNull(behaveDist, Error.getNullMsg("behaviour distribution"));
         Objects.requireNonNull(pathogen, Error.getNullMsg("pathogen"));
+        Error.intervalCheck("population", MIN_POPULATION, world.getCity().getMaxPop(), popTotal);
 
         this.world = world;
 
         Human patientZero = new Human(world.getCity(), behaveDist.sample());
         patientZero.setPathogen(pathogen);
+        patientZero.status();
 
         // Healthy individuals.
         for (int i = 0; i < popTotal - 1; i++) {
-            new Human(world.getCity(),behaveDist.sample());
+            new Human(world.getCity(), behaveDist.sample());
         }
 
         this.statistics = new Statistics(world);

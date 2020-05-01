@@ -1,4 +1,4 @@
-package org.epi.model2;
+package org.epi.model;
 
 import org.epi.util.Probability;
 import org.epi.util.Error;

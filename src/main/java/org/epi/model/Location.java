@@ -1,16 +1,16 @@
-package org.epi.model2;
+package org.epi.model;
 
-import javafx.geometry.Point2D;
+import javafx.collections.FXCollections;
 import org.epi.util.Error;
 
+import javafx.geometry.Point2D;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
-import static org.epi.model2.Model.HUMAN_RADIUS;
+import static org.epi.model.Model.HUMAN_RADIUS;
 
 /** A simple model of a location.
  * The class is used as a graphical representation of a location in the simulator.*/
@@ -55,7 +55,7 @@ public class Location {
         this.area = new Pane();
         setConstantSize();
 
-        population = new SimpleListProperty<>();
+        population = FXCollections.observableArrayList();
 
         initEvents();
     }
@@ -185,4 +185,7 @@ public class Location {
         return population;
     }
 
+    public void humanCollisions() {
+
+    }
 }

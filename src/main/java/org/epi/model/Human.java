@@ -1,196 +1,200 @@
 package org.epi.model;
 
-import org.epi.model2.Status;
 import org.epi.util.Error;
-
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.shape.Circle;
 
 import java.util.Objects;
 
-import static java.lang.Math.sqrt;
+/** A simple model of a human.
+ * The main actors in the simulator.*/
+public class Human {
 
-/** The superclass for all humans in the simulation.*/
-public abstract class Human extends Circle {
+    /** The location of this human.*/
+    private Location location;
 
-    /** The default radius of a human in pixels.*/
-    public static final double RADIUS = 5;
+    /** The graphical view of this human.*/
+    private final Model model;
 
-    /** The default horizontal velocity for a human in pixels per second.*/
-    private static final double VELOCITY_X = 0;
+    /** The health status of this human.*/
+    private Status status;
 
-    /** The default vertical velocity for a human in pixels per second.*/
-    private static final double VELOCITY_Y = 0;
+    /** The immune system protecting this human.*/
+    private final ImmuneSystem immuneSystem;
 
-    /** The horizontal velocity of this human in pixels per second.*/
-    private final DoubleProperty velocityX;
+    /** The pathogen infecting this human.*/
+    private Pathogen pathogen;
 
-    /** The vertical velocity of this human in pixels per second.*/
-    private final DoubleProperty velocityY;
-
-    /** The status of this human.*/
-    private final Status status;
+    //---------------------------- Constructor ----------------------------
 
     /**
-     * Constructor for a human.
+     * Create a human at a given location
      *
-     * @param status the status of this human
+     * @param behaviour the behaviour of this human
+     * @param location the location of this human
      * @throws NullPointerException if the given parameter is null
      */
-    public Human(Status status) {
-        super(RADIUS);
-        Objects.requireNonNull(status, Error.getNullMsg("status"));
+    public Human(Location location, Behaviour behaviour) {
+        Objects.requireNonNull(behaviour, Error.getNullMsg("behaviour"));
+        Objects.requireNonNull(location, Error.getNullMsg("location"));
 
-        this.status = status;
-        this.velocityX = new SimpleDoubleProperty(VELOCITY_X);
-        this.velocityY = new SimpleDoubleProperty(VELOCITY_Y);
+        this.immuneSystem = new ImmuneSystem(this);
+
+        this.status = Status.HEALTHY;
+
+        this.model = new Model(this, behaviour);
+
+        this.location = location;
+        location.getPopulation().add(this);
+    }
+
+    //---------------------------- Helper methods ----------------------------
+
+    /**
+     * Check if this human is infected with a pathogen.
+     *
+     * @return true if this human is infected, otherwise false
+     */
+    public boolean isInfected() {
+        return pathogen != null;
     }
 
     /**
-     * Adjust the velocities of this human and the given human if they are in contact, such that they are
-     * leaving each other in their next move. If they are not in contact, does not adjust velocities.
-     *
-     * @param that a human
-     * @throws NullPointerException if the given parameter is null
+     * Update the health status of this human.
      */
-    public void leave(Human that) {
-        Objects.requireNonNull(that, Error.getNullMsg("human"));
-
-        double deltaX = that.getCenterX() - this.getCenterX();
-        double deltaY = that.getCenterY() - this.getCenterY();
-
-        double distance = sqrt(deltaX * deltaX + deltaY * deltaY);
-
-        double unitContactX = deltaX / distance;
-        double unitContactY = deltaY / distance;
-
-        // velocity of this human in parallel to contact vector, same for that human.
-        double u1 = this.getVelocityX() * unitContactX + this.getVelocityY() * unitContactY;
-        double u2 = that.getVelocityX() * unitContactX + that.getVelocityY() * unitContactY;
-
-        /* Components of this human velocity in direction perpendicular
-        to contact vector. This doesn't change with collision.*/
-        double u1PerpX = this.getVelocityX() - u1 * unitContactX;
-        double u1PerpY = this.getVelocityY() - u1 * unitContactY;
-
-        double u2PerpX = that.getVelocityX() - u2 * unitContactX;
-        double u2PerpY = that.getVelocityY() - u2 * unitContactY;
-
-        this.setVelocityX(u2 * unitContactX + u1PerpX);
-        this.setVelocityY(u2 * unitContactY + u1PerpY);
-
-        that.setVelocityX(u1 * unitContactX + u2PerpX);
-        that.setVelocityY(u1 * unitContactY + u2PerpY);
-    }
-
-    /**
-     * Check if this human is in contact with another human.
-     *
-     * @param that a human
-     * @return true if the given human is in contact with this human, otherwise false
-     */
-    public boolean met(Human that) {
-        Objects.requireNonNull(that, Error.getNullMsg("human"));
-
-        double deltaX = that.getCenterX() - this.getCenterX();
-        double deltaY = that.getCenterY() - this.getCenterY();
-         double radiusSum = 2 * RADIUS;
-
-        if (deltaX * deltaX + deltaY * deltaY <= radiusSum * radiusSum) {
-            return deltaX * (that.getVelocityX() - this.getVelocityX())
-                    + deltaY * (that.getVelocityY() - this.getVelocityY()) <= 0;
+    public void status() {
+        if (immuneSystem.isImmune()) {
+            status = Status.RECOVERED;
+        } else if (isInfected()) {
+            status = Status.INFECTED;
+        } else {
+            status = Status.HEALTHY;
         }
-
-        return false;
     }
 
+    //---------------------------- Simulator actions ----------------------------
+
     /**
-     * Move a human with their velocity.
+     * If this human is infected, spread the pathogen and let the pathogen live.
      *
-     * @param elapsedSeconds the number of seconds elapsed
+     * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
      * @throws IllegalArgumentException if the given parameter is negative
      */
-    public void move(double elapsedSeconds) {
+    public void pathogen(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
 
-        setCenterX(getCenterX() + elapsedSeconds * getVelocityX());
-        setCenterY(getCenterY() + elapsedSeconds * getVelocityY());
+        if (isInfected()) {
+            pathogen.infect();
+            pathogen.live(elapsedSeconds);
+        }
     }
 
     /**
-     * Check if this human is of a given type.
+     * Let the immune system live and defend this human.
      *
-     * @param status a status type
-     * @return true if this human's status type is equal to the given status type, otherwise false.
+     * @param elapsedSeconds the number of seconds elapsed since the immune system was last updated
+     * @throws IllegalArgumentException if the given parameter is negative
      */
-    public boolean isType(Status status) {
-        return status == this.status;
+    public void immuneSystem(double elapsedSeconds) {
+        Error.nonNegativeCheck(elapsedSeconds);
+
+        immuneSystem.live(elapsedSeconds);
+
+        if (isInfected()) {
+            immuneSystem.defend();
+        }
+    }
+
+    /**
+     * Set the correct fill for the model and move the model.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since this human's model was last updated
+     * @throws IllegalArgumentException if the given parameter is negative
+     */
+    public void model(double elapsedSeconds) {
+        Error.nonNegativeCheck(elapsedSeconds);
+
+        status();
+        model.fill();
+
+        model.move(elapsedSeconds);
     }
 
     //---------------------------- Getters & Setters ----------------------------
 
     /**
-     * Getter for {@link Human#velocityX}
+     * Getter for {@link #immuneSystem}.
      *
-     * @return {@link Human#velocityX}
+     * @return {@link #immuneSystem}
      */
-    public double getVelocityX() {
-        return velocityX.get();
+    public Location getLocation() {
+        return location;
     }
 
     /**
-     * Getter for {@link Human#velocityX} {@link DoubleProperty}
+     * Setter for {@link #location}.
+     * Removes the human from their previous location's population and
+     * adds the human to the given location's population, given that neither are null.
      *
-     * @return {@link Human#velocityX}
+     * @param location {@link #location}
      */
-    public DoubleProperty velocityXProperty() {
-        return velocityX;
+    public void setLocation(Location location) {
+        if (this.location != null) {
+            this.location.getPopulation().remove(this);
+        }
+
+        this.location = location;
+
+        if (location != null) {
+            location.getPopulation().add(this);
+        }
     }
 
     /**
-     * Setter for {@link Human#velocityX}
+     * Getter for {@link #model}.
      *
-     * @param velocityX the horizontal velocity of the human in pixels per second
+     * @return {@link #model}
      */
-    public void setVelocityX(double velocityX) {
-        this.velocityX.set(velocityX);
+    public Model getModel() {
+        return model;
     }
 
     /**
-     * Getter for {@link Human#velocityY}
+     * Getter for {@link #status}
      *
-     * @return {@link Human#velocityY}
-     */
-    public double getVelocityY() {
-        return velocityY.get();
-    }
-
-    /**
-     * Getter for {@link Human#velocityY} {@link DoubleProperty}
-     *
-     * @return {@link Human#velocityY}
-     */
-    public DoubleProperty velocityYProperty() {
-        return velocityY;
-    }
-
-    /**
-     * Setter for {@link Human#velocityY}
-     *
-     * @param velocityY the vertical velocity of the human in pixels per second
-     */
-    public void setVelocityY(double velocityY) {
-        this.velocityY.set(velocityY);
-    }
-
-    /**
-     * Getter for {@link Human#status}.
-     *
-     * @return {@link Human#status}
+     * @return {@link #status}
      */
     public Status getStatus() {
         return status;
+    }
+
+    /**
+     * Getter for {@link #immuneSystem}.
+     *
+     * @return {@link #immuneSystem}
+     */
+    public ImmuneSystem getImmuneSystem() {
+        return immuneSystem;
+    }
+
+    /**
+     * Getter for {@link #pathogen}.
+     *
+     * @return {@link #pathogen}
+     */
+    public Pathogen getPathogen() {
+        return pathogen;
+    }
+
+    /**
+     * Setter for {@link #pathogen}.
+     *
+     * @param pathogen {@link #pathogen}
+     */
+    public void setPathogen(Pathogen pathogen) {
+        this.pathogen = pathogen;
+
+        if (pathogen != null) {
+            pathogen.setHost(this);
+        }
     }
 
 }

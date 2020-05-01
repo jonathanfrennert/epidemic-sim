@@ -1,72 +1,73 @@
 package org.epi.model;
 
-import javafx.beans.property.*;
-import org.epi.model2.Status;
 import org.epi.util.Error;
 
-import javafx.collections.ObservableList;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
 
 import java.util.Objects;
 
-/** Utility class for getting real-time statistics from a simulator.*/
+/** Get real-time statistics for a simulator.*/
 public class Statistics {
 
-    /** Initial number of deceased humans.*/
-    private static final int INIT_DECEASED = 0;
+    /** The backreference to the world for these statistics.*/
+    private final World world;
 
     /** Initial population count.*/
-    private final IntegerProperty initPopulationCount;
+    private final IntegerProperty initPop;
 
     /** The number of healthy people in the given simulation.*/
-    private final IntegerProperty healthyCount;
+    private final IntegerProperty healthy;
 
     /** The number of infected humans in the given simulation.*/
-    private final IntegerProperty infectedCount;
+    private final IntegerProperty infected;
 
     /** The number of recovered humans in the given simulation.*/
-    private final IntegerProperty recoveredCount;
+    private final IntegerProperty recovered;
 
     /** The number difference between the current population count and the initial population count.*/
-    private final IntegerProperty deceasedCount;
+    private final IntegerProperty deceased;
 
-    /** Show the statistics. Only for diagnostics.*/
-    private final ReadOnlyStringWrapper text = new ReadOnlyStringWrapper(this,
-                                                                    "text",
-                                                                "healthy = 99, infected = 1, recovered = 0, deceased = 0");
+    /** Show the statistics in a label.*/
+    private final ReadOnlyStringWrapper text = new ReadOnlyStringWrapper(this, "text",
+            "healthy = 0, infected = 0, recovered = 0, deceased = 0.");
+
+    //---------------------------- Constructor ----------------------------
 
     /**
-     * Constructor for simulator statistics; a real-time count for status populations.
+     * Create statistics for a world
      *
-     * @param population a simulator's population
+     * @param world a world
      * @throws NullPointerException if the given parameter is null
      */
-    public Statistics(ObservableList<Human> population) {
-        Objects.requireNonNull(population, Error.getNullMsg("population"));
+    public Statistics(World world) {
+        Objects.requireNonNull(world, Error.getNullMsg("world"));
 
-        healthyCount = new SimpleIntegerProperty(getPopulationCountOf(population, Status.HEALTHY));
-        infectedCount = new SimpleIntegerProperty(getPopulationCountOf(population, Status.INFECTED));
-        recoveredCount = new SimpleIntegerProperty(getPopulationCountOf(population, Status.RECOVERED));
-        deceasedCount = new SimpleIntegerProperty(INIT_DECEASED);
+        this.world = world;
 
-        initPopulationCount = new SimpleIntegerProperty(healthyCount.get() + infectedCount.get() + recoveredCount.get());
+        this.healthy = new SimpleIntegerProperty(getStatusCount(Status.HEALTHY));
+        this.infected = new SimpleIntegerProperty(getStatusCount(Status.INFECTED));
+        this.recovered = new SimpleIntegerProperty(getStatusCount(Status.RECOVERED));
+        this.deceased = new SimpleIntegerProperty(0);
+
+        this.initPop = new SimpleIntegerProperty(healthy.get() + infected.get() + recovered.get());
     }
 
+    //---------------------------- Helper methods ----------------------------
+
     /**
-     * Update the population counts. Meant to be called in the handle method of simulator's world time.
+     * Get the number of humans of a given status in the world.
      *
-     * @param population a simulator's population
-     * @throws NullPointerException if the given parameters is null
+     * @param status a status
+     * @return the number of humans in the world with the given status
      */
-    public void updateCount(ObservableList<Human> population) {
-        Objects.requireNonNull(population, Error.getNullMsg("world view"));
+    private int getStatusCount(Status status) {
+        int cityCount = world.getCity().getPopulation().filtered(human -> human.getStatus() == status).size();
+        int quarantineCount = world.getQuarantine().getPopulation().filtered(human -> human.getStatus() == status).size();
 
-        healthyCount.set(getPopulationCountOf(population, Status.HEALTHY));
-        infectedCount.set(getPopulationCountOf(population, Status.INFECTED));
-        recoveredCount.set(getPopulationCountOf(population, Status.RECOVERED));
-
-        deceasedCount.set(initPopulationCount.get() - healthyCount.get() - infectedCount.get() - recoveredCount.get());
-
-        text.set(toString());
+        return cityCount + quarantineCount;
     }
 
     /**
@@ -76,14 +77,121 @@ public class Statistics {
      */
     @Override
     public String toString() {
-        return "healthy = " + healthyCount.get() +
-               ", infected = " + infectedCount.get() +
-               ", recovered = " + recoveredCount.get() +
-               ", deceased = " + deceasedCount.get() +
+        return "healthy = " + healthy.get() +
+                ", infected = " + infected.get() +
+                ", recovered = " + recovered.get() +
+                ", deceased = " + deceased.get() +
                 ".";
     }
 
-    //---------------------------- Getters ----------------------------
+    //---------------------------- Simulator actions ----------------------------
+
+    /**
+     * Update the population counts for the given world.
+     *
+     * @throws NullPointerException if the given parameters is null
+     */
+    public void update() {
+        healthy.set(getStatusCount(Status.HEALTHY));
+        infected.set(getStatusCount(Status.INFECTED));
+        recovered.set(getStatusCount(Status.RECOVERED));
+
+        deceased.set(initPop.get() - healthy.get() - infected.get() - recovered.get());
+
+        text.set(toString());
+    }
+
+    //---------------------------- Getters and Setters ----------------------------
+
+    /**
+     * Getter for {@link #healthy}
+     *
+     * @return {@link #healthy}
+     */
+    public int getHealthy() {
+        return healthy.get();
+    }
+
+    /**
+     * Getter for {@link #healthy} {@link IntegerProperty}
+     *
+     * @return {@link #healthy}
+     */
+    public IntegerProperty healthyProperty() {
+        return healthy;
+    }
+
+    /**
+     * Getter for {@link #infected}
+     *
+     * @return {@link #infected}
+     */
+    public int getInfected() {
+        return infected.get();
+    }
+
+    /**
+     * Getter for {@link #infected} {@link IntegerProperty}
+     *
+     * @return {@link #infected}
+     */
+    public IntegerProperty infectedProperty() {
+        return infected;
+    }
+
+    /**
+     * Getter for {@link #recovered}
+     *
+     * @return {@link #recovered}
+     */
+    public int getRecovered() {
+        return recovered.get();
+    }
+
+    /**
+     * Getter for {@link #recovered} {@link IntegerProperty}
+     *
+     * @return {@link #recovered}
+     */
+    public IntegerProperty recoveredProperty() {
+        return recovered;
+    }
+
+    /**
+     * Getter for {@link #recovered}
+     *
+     * @return {@link #recovered}
+     */
+    public int getDeceased() {
+        return deceased.get();
+    }
+
+    /**
+     * Getter for {@link #deceased} {@link IntegerProperty}
+     *
+     * @return {@link #deceased}
+     */
+    public IntegerProperty deceasedProperty() {
+        return deceased;
+    }
+
+    /**
+     * Getter for {@link #initPop}
+     *
+     * @return {@link #initPop}
+     */
+    public int getInitPop() {
+        return initPop.get();
+    }
+
+    /**
+     * Getter for {@link #initPop} {@link IntegerProperty}
+     *
+     * @return {@link #initPop}
+     */
+    public IntegerProperty initPopProperty() {
+        return initPop;
+    }
 
     /**
      * Getter for {@link #text} {@link ReadOnlyStringProperty}
@@ -92,107 +200,6 @@ public class Statistics {
      */
     public ReadOnlyStringProperty getTextProperty() {
         return text.getReadOnlyProperty();
-    }
-
-    /**
-     * Get the number of humans of a given status in the population.
-     *
-     * @param population a simulator's population
-     * @param status a status
-     * @return the number of humans in the population of that status
-     */
-    private static int getPopulationCountOf(ObservableList<Human> population, Status status) {
-        return population.filtered(human -> human.getStatus() == status).size();
-    }
-
-    /**
-     * Getter for {@link #healthyCount}
-     *
-     * @return {@link #healthyCount}
-     */
-    public int getHealthyCount() {
-        return healthyCount.get();
-    }
-
-    /**
-     * Getter for {@link #healthyCount} {@link IntegerProperty}
-     *
-     * @return {@link #healthyCount}
-     */
-    public IntegerProperty healthyCountProperty() {
-        return healthyCount;
-    }
-
-    /**
-     * Getter for {@link #infectedCount}
-     *
-     * @return {@link #infectedCount}
-     */
-    public int getInfectedCount() {
-        return infectedCount.get();
-    }
-
-    /**
-     * Getter for {@link #infectedCount} {@link IntegerProperty}
-     *
-     * @return {@link #infectedCount}
-     */
-    public IntegerProperty infectedCountProperty() {
-        return infectedCount;
-    }
-
-    /**
-     * Getter for {@link #recoveredCount}
-     *
-     * @return {@link #recoveredCount}
-     */
-    public int getRecoveredCount() {
-        return recoveredCount.get();
-    }
-
-    /**
-     * Getter for {@link #recoveredCount} {@link IntegerProperty}
-     *
-     * @return {@link #recoveredCount}
-     */
-    public IntegerProperty recoveredCountProperty() {
-        return recoveredCount;
-    }
-
-    /**
-     * Getter for {@link #recoveredCount}
-     *
-     * @return {@link #recoveredCount}
-     */
-    public int getDeceasedCount() {
-        return deceasedCount.get();
-    }
-
-    /**
-     * Getter for {@link #deceasedCount} {@link IntegerProperty}
-     *
-     * @return {@link #deceasedCount}
-     */
-    public IntegerProperty deceasedCountProperty() {
-        return deceasedCount;
-    }
-
-    /**
-     * Getter for {@link #initPopulationCount}
-     *
-     * @return {@link #initPopulationCount}
-     */
-    public int getInitPopulationCount() {
-        return initPopulationCount.get();
-    }
-
-    /**
-     * Getter for {@link #initPopulationCount} {@link IntegerProperty}
-     *
-     * @return {@link #initPopulationCount}
-     */
-    public IntegerProperty initPopulationCountProperty() {
-        return initPopulationCount;
     }
 
 }

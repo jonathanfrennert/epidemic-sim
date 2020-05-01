@@ -1,4 +1,4 @@
-package org.epi.model2;
+package org.epi.model;
 
 import org.epi.util.Error;
 
@@ -29,6 +29,7 @@ public class Model extends Circle {
     /**
      * Create a human model given the behaviour that the human will exhibit.
      *
+     * @param host a backreference to the host of this model
      * @param behaviour a behaviour
      * @throws NullPointerException if any of the two given parameters are null
      */
@@ -46,8 +47,7 @@ public class Model extends Circle {
         fill();
 
         this.behaviour = behaviour;
-        behaviour.setModel(this);
-        behaviour.initVelocity();
+        behaviour.initVelocity(this);
     }
 
     //---------------------------- Helper method ----------------------------

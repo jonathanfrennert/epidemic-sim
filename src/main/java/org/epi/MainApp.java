@@ -1,7 +1,8 @@
 package org.epi;
 
-import org.epi.model.Disease;
-import org.epi.model2.Simulator;
+import org.epi.model.BehaviourDistribution;
+import org.epi.model.Pathogen;
+import org.epi.model.Simulator;
 import org.epi.model.World;
 
 import javafx.animation.AnimationTimer;
@@ -22,18 +23,20 @@ public class MainApp extends Application {
         stage.getIcons().add(new Image(getClass().getResource("/images/Epi.png").toExternalForm()));
 
         // Simulator parameters.
-        World world = new World(150,0.2);
-        Disease disease = new Disease(0.2,0.1,10);
+        World world = new World(0.8,10);
+        Pathogen pathogen = new Pathogen(5,0.2,0.9,0.4,20);
+        BehaviourDistribution behaveDist = new BehaviourDistribution(1,0,0);
 
         // Simulator initialisation.
-        Simulator simulator = new Simulator(world, disease);
+        Simulator simulator = new Simulator(150, world, behaveDist, pathogen);
         AnimationTimer worldTime = simulator.getTimer();
 
         // Set the main pane.
         BorderPane root = new BorderPane();
 
         // Set the world view.
-        root.setCenter(simulator.getWorld());
+        root.setLeft(simulator.getWorld().getCity().getArea());
+        root.setRight(simulator.getWorld().getQuarantine().getArea());
 
         // Set the world statistics.
         Label stats = new Label();
