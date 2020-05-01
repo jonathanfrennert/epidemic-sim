@@ -62,11 +62,15 @@ public class MainApp extends Application {
             Simulator simulator = new Simulator(world, disease);
             AnimationTimer worldTime = simulator.getWorldTime();
 
+            //TODO initRootLayout - uses RootLayoutController
+
             // Load the root layout from the fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
+            //TODO showSimulation - uses SimulationController
+            
             // Set the world view.
             rootLayout.setCenter(simulator.getWorldView());
 
