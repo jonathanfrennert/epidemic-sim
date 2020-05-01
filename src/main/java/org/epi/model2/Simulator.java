@@ -1,5 +1,6 @@
 package org.epi.model2;
 
+import org.epi.util.BehaviourDistribution;
 import org.epi.util.Error;
 
 import javafx.animation.AnimationTimer;
@@ -35,14 +36,17 @@ public class Simulator {
             if (lastUpdateTime.get() > 0) {
                 double elapsedSeconds = (timestamp - lastUpdateTime.get()) * NANO;
 
-                world.live(elapsedSeconds);
+                world(elapsedSeconds);
+                pathogen(elapsedSeconds);
+                immuneSystem(elapsedSeconds);
+                model(elapsedSeconds);
             }
+            lastUpdateTime.set(timestamp);
+            statistics.update();
 
             if (endingIsReached()) {
                 timer.stop();
             }
-
-            lastUpdateTime.set(timestamp);
         }
 
     };
@@ -50,7 +54,7 @@ public class Simulator {
     /** The world.*/
     private final World world;
 
-    /** The world statistics.*/
+    /** The world's statistics.*/
     private final Statistics statistics;
 
     //---------------------------- Constructor ----------------------------
@@ -60,10 +64,11 @@ public class Simulator {
      *
      * @param popTotal the population total
      * @param world the simulated world
-     * @param behaveDist distribution of behaviour in the population
+     * @param behaveDist distribution of behaviours in the population
      * @param pathogen the simulated pathogen
      * @throws NullPointerException if the world, behaviour distribution, or pathogen is null
-     * @throws IllegalArgumentException if the population total is less than {@value MIN_POPULATION} or larger than the maximum capacity for the city
+     * @throws IllegalArgumentException if the population total is less than {@value MIN_POPULATION}
+     *                                  or larger than the maximum capacity for the city
      */
     public Simulator(double popTotal, World world, BehaviourDistribution behaveDist, Pathogen pathogen) {
         Error.intervalCheck("population", MIN_POPULATION, world.getCity().getMaxPop(), popTotal);
@@ -73,7 +78,57 @@ public class Simulator {
 
         this.world = world;
 
+        Human patientZero = new Human(world.getCity(), behaveDist.sample());
+        patientZero.setPathogen(pathogen);
+
+        // Healthy individuals.
+        for (int i = 0; i < popTotal - 1; i++) {
+            new Human(world.getCity(),behaveDist.sample());
+        }
+
         this.statistics = new Statistics(world);
+    }
+
+    //---------------------------- Simulator actions ----------------------------
+
+    /**
+     * Perform all world changes in the elapsed seconds.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the world was last updated
+     */
+    private void world(double elapsedSeconds) {
+        world.live(elapsedSeconds);
+        world.collisions();
+    }
+
+    /**
+     * Perform all pathogen changes in the elapsed seconds.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
+     */
+    private void pathogen(double elapsedSeconds) {
+        world.getCity().getPopulation().forEach(human -> human.pathogen(elapsedSeconds));
+        world.getQuarantine().getPopulation().forEach(human -> human.pathogen(elapsedSeconds));
+    }
+
+    /**
+     * Perform all immune system changes in the elapsed seconds.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the human immune systems were last updated
+     */
+    private void immuneSystem(double elapsedSeconds) {
+        world.getCity().getPopulation().forEach(human -> human.immuneSystem(elapsedSeconds));
+        world.getQuarantine().getPopulation().forEach(human -> human.immuneSystem(elapsedSeconds));
+    }
+
+    /**
+     * Perform all model changes in the elapsed seconds.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the human models were last updated
+     */
+    private void model(double elapsedSeconds) {
+        world.getCity().getPopulation().forEach(human -> human.model(elapsedSeconds));
+        world.getQuarantine().getPopulation().forEach(human -> human.model(elapsedSeconds));
     }
 
     /**

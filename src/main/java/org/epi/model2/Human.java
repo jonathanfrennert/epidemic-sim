@@ -2,8 +2,6 @@ package org.epi.model2;
 
 import org.epi.util.Error;
 
-import javafx.beans.property.SimpleObjectProperty;
-
 import java.util.Objects;
 
 /** A simple model of a human.
@@ -80,7 +78,7 @@ public class Human {
      * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
      * @throws IllegalArgumentException if the given parameter is negative
      */
-    private void pathogen(double elapsedSeconds) {
+    public void pathogen(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
 
         if (isInfected()) {
@@ -95,7 +93,7 @@ public class Human {
      * @param elapsedSeconds the number of seconds elapsed since the immune system was last updated
      * @throws IllegalArgumentException if the given parameter is negative
      */
-    private void immuneSystem(double elapsedSeconds) {
+    public void immuneSystem(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
 
         immuneSystem.live(elapsedSeconds);
@@ -111,7 +109,7 @@ public class Human {
      * @param elapsedSeconds the number of seconds elapsed since this human's model was last updated
      * @throws IllegalArgumentException if the given parameter is negative
      */
-    private void model(double elapsedSeconds) {
+    public void model(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
 
         status();

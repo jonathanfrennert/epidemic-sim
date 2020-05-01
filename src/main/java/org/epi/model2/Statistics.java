@@ -91,7 +91,7 @@ public class Statistics {
      *
      * @throws NullPointerException if the given parameters is null
      */
-    public void updateStats() {
+    public void update() {
         healthy.set(getStatusCount(Status.HEALTHY));
         infected.set(getStatusCount(Status.INFECTED));
         recovered.set(getStatusCount(Status.RECOVERED));
