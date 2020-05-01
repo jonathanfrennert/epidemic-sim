@@ -3,6 +3,6 @@ module Epi {
     requires javafx.fxml;
     requires commons.math3;
 
-    opens org.epi to javafx.fxml;
+    opens org.epi.view to javafx.fxml;
     exports org.epi;
 }
