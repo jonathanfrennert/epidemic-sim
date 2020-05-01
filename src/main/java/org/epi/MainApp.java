@@ -70,7 +70,7 @@ public class MainApp extends Application {
             rootLayout = (BorderPane) loader.load();
 
             //TODO showSimulation - uses SimulationController
-            
+
             // Set the world view.
             rootLayout.setCenter(simulator.getWorldView());
 
