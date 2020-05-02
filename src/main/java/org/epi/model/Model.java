@@ -1,5 +1,6 @@
 package org.epi.model;
 
+import javafx.scene.paint.Color;
 import org.epi.util.Error;
 
 import javafx.geometry.Point2D;
@@ -45,6 +46,8 @@ public class Model extends Circle {
         this.host = host;
 
         fill();
+        this.setStrokeWidth(0.4);
+        this.setStroke(Color.BLACK);
 
         this.behaviour = behaviour;
         behaviour.initVelocity(this);

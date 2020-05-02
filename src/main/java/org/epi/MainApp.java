@@ -24,11 +24,11 @@ public class MainApp extends Application {
 
         // Simulator parameters.
         World world = new World(0.8,10);
-        Pathogen pathogen = new Pathogen(5,0.2,0.9,0.4,20);
-        BehaviourDistribution behaveDist = new BehaviourDistribution(1,0,0);
+        Pathogen pathogen = new Pathogen(5,0.09,0.4,0.4,20);
+        BehaviourDistribution behaveDist = new BehaviourDistribution(0.8,0.2,0);
 
         // Simulator initialisation.
-        Simulator simulator = new Simulator(150, world, behaveDist, pathogen);
+        Simulator simulator = new Simulator(200, world, behaveDist, pathogen);
         AnimationTimer worldTime = simulator.getTimer();
 
         // Set the main pane.
@@ -44,9 +44,8 @@ public class MainApp extends Application {
         root.setBottom(stats);
 
         // Set the stage.
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 800,600);
         stage.setScene(scene);
-        stage.setResizable(false);
 
         // Launch.
         stage.show();

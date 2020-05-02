@@ -110,8 +110,8 @@ public class Simulator {
      * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
      */
     private void pathogen(double elapsedSeconds) {
-        world.getCity().getPopulation().forEach(human -> human.pathogen(elapsedSeconds));
-        world.getQuarantine().getPopulation().forEach(human -> human.pathogen(elapsedSeconds));
+        new ArrayList<>(world.getCity().getPopulation()).forEach(human -> human.pathogen(elapsedSeconds));
+        new ArrayList<>(world.getQuarantine().getPopulation()).forEach(human -> human.pathogen(elapsedSeconds));
     }
 
     /**

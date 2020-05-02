@@ -107,10 +107,7 @@ public class World {
      */
     public void collisions() {
         city.wallCollisions();
-        city.humanCollisions();
-
         quarantine.wallCollisions();
-        quarantine.humanCollisions();
     }
 
     //---------------------------- Getters & Setters ----------------------------

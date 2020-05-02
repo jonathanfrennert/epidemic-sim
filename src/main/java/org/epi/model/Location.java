@@ -184,8 +184,4 @@ public class Location {
     public ObservableList<Human> getPopulation() {
         return population;
     }
-
-    public void humanCollisions() {
-
-    }
 }
