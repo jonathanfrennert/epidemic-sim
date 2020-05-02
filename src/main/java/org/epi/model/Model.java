@@ -16,6 +16,9 @@ public class Model extends Circle {
     /** Radius of a host's graphical representation in pixels.*/
     public static final double HUMAN_RADIUS = 5;
 
+    /** The diameter of a human.*/
+    public static final double HUMAN_DIAMETER = 2 * HUMAN_RADIUS;
+
     /** The backreference to the host of this model.*/
     private final Human host;
 
@@ -56,13 +59,13 @@ public class Model extends Circle {
     //---------------------------- Helper method ----------------------------
 
     /**
-     * Check if a model is colliding with this model.
+     * Check if a model is in contact with this model.
      *
      * @param model a model
-     * @return true if this model is colliding with the given model, otherwise false
+     * @return true if this model is in contact with the given model, otherwise false
      * @throws NullPointerException if the given model is null
      */
-    public boolean collidingWith(Model model) {
+    public boolean inContactWith(Model model) {
         Objects.requireNonNull(model, Error.getNullMsg("model"));
 
         double deltaX = model.getCenterX() - this.getCenterX();
@@ -77,6 +80,24 @@ public class Model extends Circle {
         return false;
     }
 
+    /**
+     * Find the distance between two models.
+     *
+     * @param m1 a model
+     * @param m2 a model
+     * @return the distance between the two models in pixels
+     * @throws NullPointerException if any of the given parameters are null
+     */
+    public static double distance (Model m1, Model m2) {
+        Objects.requireNonNull(m1, Error.getNullMsg("model"));
+        Objects.requireNonNull(m2, Error.getNullMsg("model"));
+
+        Point2D p1 = new Point2D(m1.getCenterX(), m1.getCenterY());
+        Point2D p2 = new Point2D(m2.getCenterX(), m2.getCenterY());
+
+        return p1.distance(p2);
+    }
+
     //---------------------------- Simulator actions ----------------------------
 
     /**
@@ -85,6 +106,8 @@ public class Model extends Circle {
      * @param elapsedSeconds the number of seconds elapsed since the model was last updated
      */
     public void move(double elapsedSeconds) {
+        behaviour.adjustToOthers(this);
+
         setCenterX(getCenterX() + velocity.getX() * elapsedSeconds);
         setCenterY(getCenterY() + velocity.getY() * elapsedSeconds);
     }
@@ -98,6 +121,14 @@ public class Model extends Circle {
 
     //---------------------------- Getters and setters ----------------------------
 
+    /**
+     * Getter for {@link #host}
+     *
+     * @return {@link #host}
+     */
+    public Human getHost() {
+        return host;
+    }
 
     /**
      * Setter for {@link #velocity}.
@@ -116,6 +147,18 @@ public class Model extends Circle {
      */
     public void setVelocity(double velocityX, double velocityY) {
         this.velocity = new Point2D(velocityX, velocityY);
+    }
+
+    /**
+     * Setter for {@link #velocity}
+     *
+     * @param velocity {@link #velocity}
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void setVelocity(Point2D velocity) {
+        Objects.requireNonNull(velocity, Error.getNullMsg("velocity"));
+
+        this.velocity = velocity;
     }
 
 }

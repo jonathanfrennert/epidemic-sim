@@ -10,6 +10,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
+import static org.epi.model.Model.HUMAN_DIAMETER;
 import static org.epi.model.Model.HUMAN_RADIUS;
 
 /** A simple model of a location.
@@ -18,9 +19,6 @@ public class Location {
 
     /** Maximum number of humans that can fit in the area without them overlapping.*/
     private final int MAX_POPULATION;
-
-    /** The diameter of a human.*/
-    private static final double HUMAN_DIAMETER = 2 * HUMAN_RADIUS;
 
     /** The width of this area in pixels.*/
     private final DoubleProperty width;
@@ -106,7 +104,7 @@ public class Location {
      * Check that the length of a layout bound is large enough to allow for a human to fit in the area.
      *
      * @param length the length of a layout bound
-     * @throws NullPointerException if the given length is less than {@value HUMAN_DIAMETER}.
+     * @throws NullPointerException if the given length is less than {@value ModelHUMAN_DIAMETER}.
      */
     private void layoutCheck(double length) {
         if (length < HUMAN_DIAMETER) {

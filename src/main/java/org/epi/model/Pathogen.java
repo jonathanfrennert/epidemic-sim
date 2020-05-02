@@ -96,7 +96,7 @@ public class Pathogen {
             Human target = populationItr.next();
 
             boolean isHealthy = target.getPathogen() == null;
-            boolean areInContact = target.getModel().collidingWith(host.getModel());
+            boolean areInContact = target.getModel().inContactWith(host.getModel());
             boolean effectiveTransmission = Probability.chance(transmissionRisk.get());
 
             if (isHealthy && areInContact && effectiveTransmission) {

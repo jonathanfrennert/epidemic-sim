@@ -1,59 +1,97 @@
 package org.epi.model;
 
+import javafx.geometry.Point2D;
 import org.epi.util.Error;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Spliterator;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import static org.epi.model.Model.HUMAN_DIAMETER;
+import static org.epi.model.Model.HUMAN_RADIUS;
 
 /** State class for the behaviour of humans.*/
 public enum Behaviour{
     NORMAL {
 
-        /**
-         * {@inheritDoc}
-         *
-         * Normal behaviour is to move around like normal.
-         */
+        /** {@inheritDoc} */
         @Override
         public void initVelocity(Model model) {
             Objects.requireNonNull(model, Error.getNullMsg("model"));
 
             final double angle = 2 * PI * Math.random();
+            model.setVelocity(new Point2D(cos(angle), sin(angle)).multiply(SPEED));
+        }
 
-            model.setVelocity(SPEED * cos(angle),SPEED * sin(angle));
+        /**
+         * {@inheritDoc}
+         * Normal behaviour is to move around like normal (constant).
+         */
+        @Override
+        public void adjustToOthers(Model model) {
         }
 
     },
     DISTANCING {
 
-        /**
-         * {@inheritDoc}
-         *
-         * Social distancing behaviour is to stay at home.
-         */
+        /** {@inheritDoc} */
         @Override
         public void initVelocity(Model model) {
             Objects.requireNonNull(model, Error.getNullMsg("model"));
             model.setVelocity(0,0);
         }
 
-    },
-    AVOIDANT {
         /**
          * {@inheritDoc}
-         *
-         * Avoidant behaviour is to actively avoid others.
+         * Social distancing behaviour is to stay at home (constant).
          */
+        @Override
+        public void adjustToOthers(Model model) {
+        }
+
+    },
+    AVOIDANT {
+
+        /** {@inheritDoc} */
         @Override
         public void initVelocity(Model model) {
             Objects.requireNonNull(model, Error.getNullMsg("model"));
+            model.setVelocity(0,0);
+        }
 
-            final double angle = 2 * PI * Math.random();
+        /**
+         * {@inheritDoc}
+         * Avoidant behaviour is to actively avoid others.
+         * @throws NullPointerException if the given parameter is null
+         */
+        @Override
+        public void adjustToOthers(Model model) {
+            Objects.requireNonNull(model, Error.getNullMsg("model"));
 
-            model.setVelocity(SPEED * cos(angle),SPEED * sin(angle));
+            List<Human> population = new ArrayList<>(model.getHost().getLocation().getPopulation());
+            population.remove(model.getHost());
+
+            Point2D velocity = new Point2D(0,0);
+
+            for (Human other : population) {
+                double distance = Model.distance(model, other.getModel());
+
+                if (distance <= HUMAN_DIAMETER) {
+                    double deltaX = model.getCenterX() - other.getModel().getCenterX();
+                    double deltaY = model.getCenterY() - other.getModel().getCenterY();
+                    Point2D direction = new Point2D(deltaX, deltaY).normalize();
+
+                    velocity = velocity.add(direction.multiply(1 / distance));
+                }
+            }
+
+            if (velocity.magnitude() > 0) {
+                model.setVelocity(velocity.normalize().multiply(SPEED));
+            }
         }
 
     };
@@ -68,5 +106,12 @@ public enum Behaviour{
      * @throws NullPointerException if the given parameter is null
      */
     public abstract void initVelocity(Model model);
+
+    /**
+     * Adjust the velocity of the model given its behaviour.
+     *
+     * @param model the model with this behaviour
+     */
+    public abstract void adjustToOthers(Model model);
 
 }

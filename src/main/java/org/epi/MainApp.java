@@ -24,8 +24,8 @@ public class MainApp extends Application {
 
         // Simulator parameters.
         World world = new World(0.8,10);
-        Pathogen pathogen = new Pathogen(5,0.09,0.4,0.4,20);
-        BehaviourDistribution behaveDist = new BehaviourDistribution(0.8,0.2,0);
+        Pathogen pathogen = new Pathogen(5,0.1,0.4,0.4,20);
+        BehaviourDistribution behaveDist = new BehaviourDistribution(0.33,0.33,0.33);
 
         // Simulator initialisation.
         Simulator simulator = new Simulator(200, world, behaveDist, pathogen);
