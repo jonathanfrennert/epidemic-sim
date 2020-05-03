@@ -1,58 +1,72 @@
 package org.epi;
 
-import org.epi.model.BehaviourDistribution;
-import org.epi.model.Pathogen;
-import org.epi.model.Simulator;
-import org.epi.model.World;
+import org.epi.view.RootLayoutController;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
+/** Main class for the application.
+ *
+ * Everything is initialised and run from this class.*/
 public class MainApp extends Application {
 
-    @Override
-    public void start(Stage stage) {
+    /** The main container for the application.*/
+    private Stage primaryStage;
 
-        // Setting application title and icon.
-        stage.setTitle("Epidemic Simulator");
-        stage.getIcons().add(new Image(getClass().getResource("/images/Epi.png").toExternalForm()));
+    /** The root layout for the application.*/
+    private BorderPane rootLayout;
 
-        // Simulator parameters.
-        World world = new World(0.8,10);
-        Pathogen pathogen = new Pathogen(5,0.1,0.4,0.4,20);
-        BehaviourDistribution behaveDist = new BehaviourDistribution(0.33,0.33,0.33);
-
-        // Simulator initialisation.
-        Simulator simulator = new Simulator(200, world, behaveDist, pathogen);
-        AnimationTimer worldTime = simulator.getTimer();
-
-        // Set the main pane.
-        BorderPane root = new BorderPane();
-
-        // Set the world view.
-        root.setLeft(simulator.getWorld().getCity().getArea());
-        root.setRight(simulator.getWorld().getQuarantine().getArea());
-
-        // Set the world statistics.
-        Label stats = new Label();
-        stats.textProperty().bind(simulator.getStatistics().getTextProperty());
-        root.setBottom(stats);
-
-        // Set the stage.
-        Scene scene = new Scene(root, 800,600);
-        stage.setScene(scene);
-
-        // Launch.
-        stage.show();
-        worldTime.start();
-    }
-
+    /**
+     * Standard Java main method; used to launch the application.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         Application.launch(args);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        primaryStage.setTitle("Epi");
+
+        // Set the application icon.
+        primaryStage.getIcons().add(new Image(getClass().getResource("/images/Epi.png").toExternalForm()));
+
+        initRootLayout();
+    }
+
+    /**
+     * Initializes the root layout.
+     */
+    public void initRootLayout() {
+        try {
+            // Load the root layout from the fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/RootLayout.fxml"));
+            rootLayout = (BorderPane) loader.load();
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+
+            // Give the controller access to the main app.
+            RootLayoutController rootLayoutController = loader.getController();
+            rootLayoutController.setMainApp(this);
+
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
