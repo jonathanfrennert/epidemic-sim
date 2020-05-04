@@ -74,7 +74,6 @@ public class Location {
         //Listener throws an IllegalStateException if the current population count is above the maximum population count.
         population.addListener((ListChangeListener<Human>) change -> {
             while(change.next()) {
-                populationCheck();
 
                 for (Human human : change.getAddedSubList()) {
 
@@ -104,35 +103,13 @@ public class Location {
      * Check that the length of a layout bound is large enough to allow for a human to fit in the area.
      *
      * @param length the length of a layout bound
-     * @throws NullPointerException if the given length is less than {@value ModelHUMAN_DIAMETER}.
+     * @throws NullPointerException if the given length is less than {@value Model#HUMAN_DIAMETER}.
      */
     private void layoutCheck(double length) {
         if (length < HUMAN_DIAMETER) {
             throw new IllegalArgumentException(
                     Error.ERROR_TAG + " Given length will not allow for this area to hold any humans: " + length);
         }
-    }
-
-    /**
-     * Check that the current population in the location is not over maximum capacity.
-     *
-     * @throws IllegalStateException if the current population count is above the maximum population count.
-     */
-    private void populationCheck() {
-        if (population.size() > MAX_POPULATION) {
-            throw new IllegalStateException(
-                    String.format(Error.ERROR_TAG + " This location's population count is above maximum capacity (%d): %d",
-                            MAX_POPULATION, population.size()));
-        }
-    }
-
-    /**
-     * Getter for {@link #MAX_POPULATION}.
-     *
-     * @return {@link #MAX_POPULATION}
-     */
-    public int getMaxPop() {
-        return MAX_POPULATION;
     }
 
     //---------------------------- Simulator actions ----------------------------
@@ -164,6 +141,15 @@ public class Location {
     }
 
     //---------------------------- Getters ----------------------------
+
+    /**
+     * Getter for {@link #MAX_POPULATION}.
+     *
+     * @return {@link #MAX_POPULATION}
+     */
+    public int getMaxPop() {
+        return MAX_POPULATION;
+    }
 
     /**
      * Getter for {@link #area}

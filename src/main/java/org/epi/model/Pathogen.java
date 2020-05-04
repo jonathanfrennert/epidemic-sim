@@ -27,7 +27,7 @@ public class Pathogen {
     /** The probability of an infected person dying from the disease.*/
     private final DoubleProperty fatalityRate;
 
-    /** This pathogen's immunity rate.*/
+    /** The probability of becoming immune.*/
     private final DoubleProperty immunityRate;
 
     /** The duration of this pathogen's immunity in seconds.*/
