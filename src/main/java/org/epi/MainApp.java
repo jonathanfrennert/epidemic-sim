@@ -26,18 +26,18 @@ public class MainApp extends Application {
     private BorderPane rootLayout;
 
     /** Simulator currently showing its simulation.*/
-    public Simulator simulator;
+    private Simulator simulator;
 
     /**
      * Constructor for the main application.
      */
     public MainApp() {
         // Added a sample simulation
-        World world = new World(0.5,10);
-        BehaviourDistribution dist = new BehaviourDistribution(1,1,0);
-        Pathogen pathogen = new Pathogen(5,1,0.5,0.8,30);
+        World world = new World(0.5,15);
+        BehaviourDistribution dist = new BehaviourDistribution(1,0, 0);
+        Pathogen pathogen = new Pathogen(5,0.2,0.3,0.8,20);
 
-        simulator = new Simulator(100, world, dist, pathogen);
+        simulator = new Simulator(150, world, dist, pathogen);
     }
 
     /**
@@ -109,6 +109,15 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Getter for {@link #simulator}
+     *
+     * @return {@link #simulator}
+     */
+    public Simulator getSimulator() {
+        return simulator;
     }
 
 }

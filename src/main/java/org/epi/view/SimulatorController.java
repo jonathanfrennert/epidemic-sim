@@ -54,7 +54,7 @@ public class SimulatorController extends Controller {
      * as assigns statistics labels.
      */
     private void showSimulation() {
-        Simulator simulator = getMainApp().simulator;
+        Simulator simulator = getMainApp().getSimulator();
         Statistics statistics = simulator.getStatistics();
 
         this.cityPane.getChildren().add(simulator.getWorld().getCity().getArea());

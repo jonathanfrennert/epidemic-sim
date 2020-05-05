@@ -10,7 +10,7 @@ import java.util.Objects;
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
-import static org.epi.model.Model.HUMAN_DIAMETER;
+import static org.epi.model.Model.HUMAN_RADIUS;
 
 /** State class for the behaviour of humans.*/
 public enum Behaviour{
@@ -80,7 +80,7 @@ public enum Behaviour{
             for (Human other : population) {
                 double distance = Model.distance(model, other.getModel());
 
-                if (distance <= 2 * HUMAN_DIAMETER) {
+                if (distance <= 3 * HUMAN_RADIUS) {
                     double deltaX = model.getCenterX() - other.getModel().getCenterX();
                     double deltaY = model.getCenterY() - other.getModel().getCenterY();
                     Point2D direction = new Point2D(deltaX, deltaY).normalize();
@@ -97,7 +97,7 @@ public enum Behaviour{
     };
 
     /** The initial speed of a human in pixels per second.*/
-    public static final double SPEED = 50;
+    public static final double SPEED = 70;
 
     /**
      * Initialise the velocity of the given model with this behaviour.
