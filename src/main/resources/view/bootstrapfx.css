@@ -670,7 +670,6 @@ a.bg-danger:focused {
   -fx-border-width: 1px;
   -fx-border-style: solid;
   -fx-border-color: transparent;
-  -fx-border-radius: 4px;
   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.05), 1, 0, 0, 1);
 }
 
