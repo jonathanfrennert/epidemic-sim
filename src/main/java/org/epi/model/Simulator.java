@@ -44,6 +44,7 @@ public class Simulator {
             statistics.update();
 
             if (endingIsReached()) {
+                world(0);
                 timer.stop();
             }
 

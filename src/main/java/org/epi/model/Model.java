@@ -1,6 +1,5 @@
 package org.epi.model;
 
-import javafx.scene.paint.Color;
 import org.epi.util.Error;
 
 import javafx.geometry.Point2D;
@@ -14,7 +13,7 @@ public class Model extends Circle {
     /** Default coordinate position of the model.*/
     private static final double DEF_POS = 0;
     /** Radius of a host's graphical representation in pixels.*/
-    public static final double HUMAN_RADIUS = 5;
+    public static final double HUMAN_RADIUS = 3;
 
     /** The diameter of a human.*/
     public static final double HUMAN_DIAMETER = 2 * HUMAN_RADIUS;
@@ -49,8 +48,6 @@ public class Model extends Circle {
         this.host = host;
 
         fill();
-        this.setStrokeWidth(0.4);
-        this.setStroke(Color.BLACK);
 
         this.behaviour = behaviour;
         behaviour.initVelocity(this);

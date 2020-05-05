@@ -48,8 +48,8 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
                <styleClass>
-                  <String fx:value="panel-default" />
                   <String fx:value="panel" />
+                  <String fx:value="panel-default" />
                </styleClass>
             </Pane>
             <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="401.0" text="Quarantine">
@@ -63,7 +63,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Pane fx:id="quarantinePane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0">
+            <Pane fx:id="quarantinePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="274.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

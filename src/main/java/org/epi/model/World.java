@@ -18,7 +18,7 @@ public class World {
     /** The height of the city in pixels.*/
     private static final double CITY_HEIGHT = 200;
     /** The width of the quarantine in pixels.*/
-    private static final double QUARANTINE_WIDTH = 548;
+    private static final double QUARANTINE_WIDTH = 274;
     /** The height of the quarantine in pixels.*/
     private static final double QUARANTINE_HEIGHT = 100;
 

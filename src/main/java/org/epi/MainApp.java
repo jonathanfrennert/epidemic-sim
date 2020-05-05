@@ -34,10 +34,10 @@ public class MainApp extends Application {
     public MainApp() {
         // Added a sample simulation
         World world = new World(0.5,15);
-        BehaviourDistribution dist = new BehaviourDistribution(1,0, 0);
-        Pathogen pathogen = new Pathogen(5,0.2,0.3,0.8,20);
+        BehaviourDistribution dist = new BehaviourDistribution(0,0, 1);
+        Pathogen pathogen = new Pathogen(5,0.3,0.3,0.8,20);
 
-        simulator = new Simulator(150, world, dist, pathogen);
+        simulator = new Simulator(200, world, dist, pathogen);
     }
 
     /**

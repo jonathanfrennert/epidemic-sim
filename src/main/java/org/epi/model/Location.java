@@ -130,13 +130,22 @@ public class Location {
 
             boolean onTopWall = model.getCenterY() + model.getRadius() >= height.get() && velocity.getY() > 0;
 
-            if (onLeftWall || onRightWall) {
+            if(onLeftWall) {
+                model.setCenterX(HUMAN_RADIUS);
+                model.setVelocity(- velocity.getX(), velocity.getY());
+            } else if (onRightWall) {
+                model.setCenterX(width.get() - HUMAN_RADIUS);
                 model.setVelocity(- velocity.getX(), velocity.getY());
             }
 
-            if (onBottomWall || onTopWall) {
+            if (onBottomWall) {
+                model.setCenterY(HUMAN_RADIUS);
+                model.setVelocity(velocity.getX(), - velocity.getY());
+            } else if (onTopWall) {
+                model.setCenterY(height.get() - HUMAN_RADIUS);
                 model.setVelocity(velocity.getX(), - velocity.getY());
             }
+
         }
     }
 
