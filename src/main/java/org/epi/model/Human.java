@@ -33,7 +33,7 @@ public class Human {
      * @throws NullPointerException if the given parameter is null
      */
     public Human(Location location, Behaviour behaviour) {
-        Objects.requireNonNull(behaviour, Error.getNullMsg("behaviour"));
+        Behaviour.requireNonNull(behaviour);
         Objects.requireNonNull(location, Error.getNullMsg("location"));
 
         this.immuneSystem = new ImmuneSystem(this);

@@ -39,7 +39,7 @@ public class Model extends Circle {
      */
     public Model(Human host, Behaviour behaviour) {
         Objects.requireNonNull(host, Error.getNullMsg("host"));
-        Objects.requireNonNull(behaviour, Error.getNullMsg("behaviour"));
+        Behaviour.requireNonNull(behaviour);
 
         // Set default values.
         setCenterY(DEF_POS);
@@ -66,7 +66,7 @@ public class Model extends Circle {
      * @throws NullPointerException if the given model is null
      */
     public boolean inContactWith(Model model) {
-        Objects.requireNonNull(model, Error.getNullMsg("model"));
+        requireNonNull(model);
 
         double deltaX = model.getCenterX() - this.getCenterX();
         double deltaY = model.getCenterY() - this.getCenterY();
@@ -89,13 +89,23 @@ public class Model extends Circle {
      * @throws NullPointerException if any of the given parameters are null
      */
     public static double distance (Model m1, Model m2) {
-        Objects.requireNonNull(m1, Error.getNullMsg("model"));
-        Objects.requireNonNull(m2, Error.getNullMsg("model"));
+        requireNonNull(m1);
+        requireNonNull(m2);
 
         Point2D p1 = new Point2D(m1.getCenterX(), m1.getCenterY());
         Point2D p2 = new Point2D(m2.getCenterX(), m2.getCenterY());
 
         return p1.distance(p2);
+    }
+
+    /**
+     * Check if the given model is null
+     *
+     * @param model a model
+     * @throws NullPointerException if the given model is null
+     */
+    public static void requireNonNull(Model model) {
+        Objects.requireNonNull(model, Error.getNullMsg("model"));
     }
 
     //---------------------------- Simulator actions ----------------------------

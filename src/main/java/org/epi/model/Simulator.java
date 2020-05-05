@@ -7,7 +7,6 @@ import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /** The simulator class.

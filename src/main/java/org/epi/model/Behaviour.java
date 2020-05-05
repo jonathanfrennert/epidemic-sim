@@ -6,13 +6,11 @@ import org.epi.util.Error;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Spliterator;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static org.epi.model.Model.HUMAN_DIAMETER;
-import static org.epi.model.Model.HUMAN_RADIUS;
 
 /** State class for the behaviour of humans.*/
 public enum Behaviour{
@@ -21,7 +19,7 @@ public enum Behaviour{
         /** {@inheritDoc} */
         @Override
         public void initVelocity(Model model) {
-            Objects.requireNonNull(model, Error.getNullMsg("model"));
+            Model.requireNonNull(model);
 
             final double angle = 2 * PI * Math.random();
             model.setVelocity(new Point2D(cos(angle), sin(angle)).multiply(SPEED));
@@ -41,7 +39,7 @@ public enum Behaviour{
         /** {@inheritDoc} */
         @Override
         public void initVelocity(Model model) {
-            Objects.requireNonNull(model, Error.getNullMsg("model"));
+            Model.requireNonNull(model);
             model.setVelocity(0,0);
         }
 
@@ -59,7 +57,7 @@ public enum Behaviour{
         /** {@inheritDoc} */
         @Override
         public void initVelocity(Model model) {
-            Objects.requireNonNull(model, Error.getNullMsg("model"));
+            Model.requireNonNull(model);
             model.setVelocity(0,0);
         }
 
@@ -70,7 +68,7 @@ public enum Behaviour{
          */
         @Override
         public void adjustToOthers(Model model) {
-            Objects.requireNonNull(model, Error.getNullMsg("model"));
+            Model.requireNonNull(model);
 
             List<Human> population = new ArrayList<>(model.getHost().getLocation().getPopulation());
             population.remove(model.getHost());
@@ -113,5 +111,15 @@ public enum Behaviour{
      * @param model the model with this behaviour
      */
     public abstract void adjustToOthers(Model model);
+
+    /**
+     * Check if the given behaviour is null
+     *
+     * @param behaviour a behaviour
+     * @throws NullPointerException if the given behaviour is null
+     */
+    public static void requireNonNull(Behaviour behaviour) {
+        Objects.requireNonNull(behaviour, Error.getNullMsg("behaviour"));
+    }
 
 }
