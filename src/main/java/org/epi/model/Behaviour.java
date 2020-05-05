@@ -58,7 +58,9 @@ public enum Behaviour{
         @Override
         public void initVelocity(Model model) {
             Model.requireNonNull(model);
-            model.setVelocity(0,0);
+
+            final double angle = 2 * PI * Math.random();
+            model.setVelocity(new Point2D(cos(angle), sin(angle)).multiply(SPEED));
         }
 
         /**
@@ -78,7 +80,7 @@ public enum Behaviour{
             for (Human other : population) {
                 double distance = Model.distance(model, other.getModel());
 
-                if (distance <= HUMAN_DIAMETER) {
+                if (distance <= 2 * HUMAN_DIAMETER) {
                     double deltaX = model.getCenterX() - other.getModel().getCenterX();
                     double deltaY = model.getCenterY() - other.getModel().getCenterY();
                     Point2D direction = new Point2D(deltaX, deltaY).normalize();
@@ -95,7 +97,7 @@ public enum Behaviour{
     };
 
     /** The initial speed of a human in pixels per second.*/
-    public static final double SPEED = 70;
+    public static final double SPEED = 50;
 
     /**
      * Initialise the velocity of the given model with this behaviour.

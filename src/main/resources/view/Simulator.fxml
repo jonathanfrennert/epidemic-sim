@@ -40,7 +40,7 @@
                   <Insets bottom="4.0" />
                </VBox.margin>
             </Label>
-            <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0">
+            <Pane fx:id="cityPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -63,7 +63,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0">
+            <Pane fx:id="quarantinePane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -71,8 +71,8 @@
                   <Insets top="5.0" />
                </VBox.margin>
                <styleClass>
-                  <String fx:value="panel-default" />
                   <String fx:value="panel" />
+                  <String fx:value="panel-default" />
                </styleClass>
             </Pane>
          </children>
@@ -451,22 +451,22 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Label" textFill="DIMGRAY" GridPane.columnIndex="1">
+                  <Label fx:id="deceasedLabel" text="Label" textFill="DIMGRAY" GridPane.columnIndex="1">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Label" textFill="DARKORCHID" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="recoveredLabel" text="Label" textFill="DARKORCHID" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Label" textFill="DODGERBLUE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Label fx:id="healthyLabel" text="Label" textFill="DODGERBLUE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Label" textFill="CRIMSON" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <Label fx:id="infectedLabel" text="Label" textFill="CRIMSON" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <font>
                         <Font size="11.0" />
                      </font>

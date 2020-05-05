@@ -32,7 +32,7 @@ public class BehaviourDistribution {
     //---------------------------- Constructor ----------------------------
 
     /**
-     * Create a behaviour distribution. Distribution is relative to the given probabilities.
+     * Create a behaviour distribution. Distribution normalises proportions to probabilities.
      *
      * @param normalProp the probability of normal behaviour
      * @param distancingProp the probability of social distancing behaviour

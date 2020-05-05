@@ -1,6 +1,7 @@
 package org.epi;
 
 import javafx.scene.layout.AnchorPane;
+import org.epi.model.*;
 import org.epi.view.RootLayoutController;
 
 import javafx.application.Application;
@@ -23,6 +24,21 @@ public class MainApp extends Application {
 
     /** The root layout for the application.*/
     private BorderPane rootLayout;
+
+    /** Simulator currently showing its simulation.*/
+    public Simulator simulator;
+
+    /**
+     * Constructor for the main application.
+     */
+    public MainApp() {
+        // Added a sample simulation
+        World world = new World(0.5,10);
+        BehaviourDistribution dist = new BehaviourDistribution(1,1,0);
+        Pathogen pathogen = new Pathogen(5,1,0.5,0.8,30);
+
+        simulator = new Simulator(100, world, dist, pathogen);
+    }
 
     /**
      * Standard Java main method; used to launch the application.
@@ -56,7 +72,7 @@ public class MainApp extends Application {
             // Load the root layout from the fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -89,6 +105,7 @@ public class MainApp extends Application {
             SimulatorController controller = loader.getController();
             controller.setMainApp(this);
 
+            this.simulator.getTimer().start();
         } catch (IOException e) {
             e.printStackTrace();
         }

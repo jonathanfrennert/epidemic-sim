@@ -14,13 +14,13 @@ import java.util.List;
 public class World {
 
     /** The width of the city in pixels.*/
-    private static final double CITY_WIDTH = 500;
+    private static final double CITY_WIDTH = 548;
     /** The height of the city in pixels.*/
-    private static final double CITY_HEIGHT = 500;
+    private static final double CITY_HEIGHT = 200;
     /** The width of the quarantine in pixels.*/
-    private static final double QUARANTINE_WIDTH = 200;
+    private static final double QUARANTINE_WIDTH = 548;
     /** The height of the quarantine in pixels.*/
-    private static final double QUARANTINE_HEIGHT = 200;
+    private static final double QUARANTINE_HEIGHT = 100;
 
     /** The initial time offset for the total elapsed seconds, such that testing does not occur at 0 seconds.*/
     private static final double OFFSET = 1 / 1000_000_000.00;

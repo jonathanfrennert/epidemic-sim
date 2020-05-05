@@ -23,4 +23,13 @@ public abstract class Controller {
         this.mainApp = mainApp;
     }
 
+    /**
+     * Getter for {@link MainApp}
+     *
+     * @return {@link MainApp}
+     */
+    public MainApp getMainApp() {
+        return mainApp;
+    }
+
 }
