@@ -1,11 +1,18 @@
 package org.epi.view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedAreaChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import org.epi.MainApp;
 import org.epi.model.Simulator;
 import org.epi.model.Statistics;
+
+import java.util.Stack;
 
 public class SimulatorController extends Controller {
 
@@ -22,6 +29,9 @@ public class SimulatorController extends Controller {
     private Label healthyLabel;
     @FXML
     private Label infectedLabel;
+
+    @FXML
+    private StackedAreaChart statsChart;
 
     /**
      * The constructor.
@@ -54,8 +64,11 @@ public class SimulatorController extends Controller {
      * as assigns statistics labels.
      */
     private void showSimulation() {
+
         Simulator simulator = getMainApp().getSimulator();
         Statistics statistics = simulator.getStatistics();
+
+        showStackedChart(simulator);
 
         this.cityPane.getChildren().add(simulator.getWorld().getCity().getArea());
         this.quarantinePane.getChildren().add(simulator.getWorld().getQuarantine().getArea());
@@ -64,6 +77,44 @@ public class SimulatorController extends Controller {
         this.recoveredLabel.textProperty().bind(statistics.recoveredProperty().asString());
         this.healthyLabel.textProperty().bind(statistics.healthyProperty().asString());
         this.infectedLabel.textProperty().bind(statistics.infectedProperty().asString());
+
+    }
+
+    private void showStackedChart(Simulator simulator){
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setLabel("Time progression");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Population");
+
+        //StackedAreaChart statsChart = new StackedAreaChart(xAxis,yAxis);
+
+        XYChart.Series dataSeriesDeceased = new XYChart.Series();
+        dataSeriesDeceased.setName("Deceased");
+
+        dataSeriesDeceased.getData().add(new XYChart.Data(0,0));
+
+        /*
+        if(!simulator.endingIsReached()){
+            while(simulator.getStatistics().getInfected() > 0){
+                dataSeriesDeceased.getData().add(new XYChart.Data(simulator.getTimer(),simulator.getStatistics().getDeceased()));
+                //statsChart.getData().add(dataSeriesDeceased);
+            }
+        }
+
+         */
+
+        dataSeriesDeceased.getData().add(new XYChart.Data(2,4));
+
+        XYChart.Series dataSeriesInfected = new XYChart.Series();
+        dataSeriesInfected.setName("Infected");
+
+        dataSeriesInfected.getData().add(new XYChart.Data(0,1));
+        dataSeriesInfected.getData().add(new XYChart.Data(2,10));
+
+        statsChart.getData().addAll(dataSeriesDeceased,dataSeriesInfected);
+        
+
     }
 
 }

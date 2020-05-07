@@ -1,18 +1,17 @@
 package org.epi.model;
 
-import org.epi.util.Error;
-
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import org.epi.util.Error;
 
 import java.util.Objects;
 
 /** Get real-time statistics for a simulator.*/
 public class Statistics {
 
-    /** The backreference to the world for these statistics.*/
+    /** The back reference to the world for these statistics.*/
     private final World world;
 
     /** Initial population count.*/

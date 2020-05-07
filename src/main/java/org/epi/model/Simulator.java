@@ -137,7 +137,7 @@ public class Simulator {
     /**
      * Check whether the world view has reached any end conditions
      */
-    private boolean endingIsReached() {
+    public boolean endingIsReached() {
         boolean isDiseaseGone = statistics.getInfected() == 0;
         boolean isHumanityGone = statistics.getDeceased() == statistics.getInitPop();
 
