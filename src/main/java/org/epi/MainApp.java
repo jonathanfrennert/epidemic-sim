@@ -33,6 +33,7 @@ public class MainApp extends Application {
     /** Maximum width of the application window in pixels.*/
     private static final double PREF_WIDTH = 963;
     /** Maximum height of the application window in pixels.*/
+    private static final double PREF_HEIGHT = 678;
 
     /** The main container for the application.*/
     private Stage primaryStage;
@@ -81,6 +82,7 @@ public class MainApp extends Application {
         this.primaryStage.setMaxWidth(MAX_WIDTH);
         this.primaryStage.setMaxHeight(MAX_HEIGHT);
         this.primaryStage.setWidth(PREF_WIDTH);
+        this.primaryStage.setHeight(PREF_HEIGHT);
 
         initRootLayout();
         showSimulator();
