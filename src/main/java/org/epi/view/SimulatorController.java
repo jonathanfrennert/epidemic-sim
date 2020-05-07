@@ -107,6 +107,7 @@ public class SimulatorController extends Controller {
         dataSeriesHealthy.getData().add(new XYChart.Data(0,100));
         dataSeriesHealthy.getData().add(new XYChart.Data(2,80));
 
+        //TODO try to set 4th label in line with the others
         XYChart.Series dataSeriesRecovered = new XYChart.Series();
         dataSeriesRecovered.setName("Recovered");
 
