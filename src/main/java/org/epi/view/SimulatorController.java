@@ -93,17 +93,6 @@ public class SimulatorController extends Controller {
         dataSeriesDeceased.setName("Deceased");
 
         dataSeriesDeceased.getData().add(new XYChart.Data(0,0));
-
-        /*
-        if(!simulator.endingIsReached()){
-            while(simulator.getStatistics().getInfected() > 0){
-                dataSeriesDeceased.getData().add(new XYChart.Data(simulator.getTimer(),simulator.getStatistics().getDeceased()));
-                //statsChart.getData().add(dataSeriesDeceased);
-            }
-        }
-
-         */
-
         dataSeriesDeceased.getData().add(new XYChart.Data(2,4));
 
         XYChart.Series dataSeriesInfected = new XYChart.Series();
@@ -112,7 +101,19 @@ public class SimulatorController extends Controller {
         dataSeriesInfected.getData().add(new XYChart.Data(0,1));
         dataSeriesInfected.getData().add(new XYChart.Data(2,10));
 
-        statsChart.getData().addAll(dataSeriesDeceased,dataSeriesInfected);
+        XYChart.Series dataSeriesHealthy = new XYChart.Series();
+        dataSeriesHealthy.setName("Healthy");
+
+        dataSeriesHealthy.getData().add(new XYChart.Data(0,100));
+        dataSeriesHealthy.getData().add(new XYChart.Data(2,80));
+
+        XYChart.Series dataSeriesRecovered = new XYChart.Series();
+        dataSeriesRecovered.setName("Recovered");
+
+        dataSeriesRecovered.getData().add(new XYChart.Data(0,0));
+        dataSeriesRecovered.getData().add(new XYChart.Data(2,3));
+
+        statsChart.getData().addAll(dataSeriesDeceased,dataSeriesHealthy,dataSeriesInfected, dataSeriesRecovered);
         
 
     }
