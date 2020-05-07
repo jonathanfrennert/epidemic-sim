@@ -27,7 +27,7 @@ public class MainApp extends Application {
     /** Maximum width of the application window in pixels.*/
     private static final double PREF_WIDTH = 960;
     /** Maximum height of the application window in pixels.*/
-    private static final double PREF_HEIGHT = 740;
+    private static final double PREF_HEIGHT = 700;
 
     /** The main container for the application.*/
     private Stage primaryStage;
