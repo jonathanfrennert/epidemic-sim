@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
-import org.epi.util.SpatialHash;
 
 import static org.epi.model.Model.HUMAN_DIAMETER;
 import static org.epi.model.Model.HUMAN_RADIUS;

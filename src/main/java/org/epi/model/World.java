@@ -16,7 +16,7 @@ public class World {
     /** The width of the city in pixels.*/
     private static final int CITY_WIDTH = 500;
     /** The height of the city in pixels.*/
-    private static final int CITY_HEIGHT = 250;
+    private static final int CITY_HEIGHT = 200;
     /** The width of the quarantine in pixels.*/
     private static final int QUARANTINE_WIDTH = 300;
     /** The height of the quarantine in pixels.*/

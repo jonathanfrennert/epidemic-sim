@@ -23,11 +23,15 @@ public class MainApp extends Application {
     /** Minimum width of the application window in pixels.*/
     private static final double MIN_WIDTH = 555;
     /** Minimum height of the application window in pixels.*/
-    private static final double MIN_HEIGHT = 520;
-    /** Maximum width of the application window in pixels.*/
-    private static final double PREF_WIDTH = 960;
+    private static final double MIN_HEIGHT = 610;
+    /** Minimum width of the application window in pixels.*/
+    private static final double MAX_WIDTH = 1100;
     /** Maximum height of the application window in pixels.*/
-    private static final double PREF_HEIGHT = 740;
+    private static final double MAX_HEIGHT = 740;
+    /** Maximum width of the application window in pixels.*/
+    private static final double PREF_WIDTH = 963;
+    /** Maximum height of the application window in pixels.*/
+    private static final double PREF_HEIGHT = 678;
 
     /** The main container for the application.*/
     private Stage primaryStage;
@@ -44,8 +48,8 @@ public class MainApp extends Application {
     public MainApp() {
         // Added a sample simulation
         World world = new World(0.5,15);
-        BehaviourDistribution dist = new BehaviourDistribution(0,0, 1);
-        Pathogen pathogen = new Pathogen(5,1,0.3,0.8,10);
+        BehaviourDistribution dist = new BehaviourDistribution(1,0, 0);
+        Pathogen pathogen = new Pathogen(5,0.1,0.3,0.8,10);
 
         simulator = new Simulator(300, world, dist, pathogen);
     }
@@ -70,10 +74,11 @@ public class MainApp extends Application {
         // Set the application icon.
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/Icon.png").toExternalForm()));
 
-        //Set stage size.
+        //Set size specs.
         this.primaryStage.setMinWidth(MIN_WIDTH);
         this.primaryStage.setMinHeight(MIN_HEIGHT);
-
+        this.primaryStage.setMaxWidth(MAX_WIDTH);
+        this.primaryStage.setMaxHeight(MAX_HEIGHT);
         this.primaryStage.setWidth(PREF_WIDTH);
         this.primaryStage.setHeight(PREF_HEIGHT);
 

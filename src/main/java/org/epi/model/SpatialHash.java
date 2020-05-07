@@ -1,8 +1,9 @@
-package org.epi.util;
+package org.epi.model;
 
 import org.epi.model.Human;
 import org.epi.model.Location;
 import org.epi.model.Model;
+import org.epi.util.Error;
 
 import java.util.HashMap;
 import java.util.HashSet;

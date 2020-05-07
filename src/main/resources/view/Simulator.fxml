@@ -20,9 +20,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="background" stylesheets="@bootstrapfx.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.epi.view.SimulatorController">
+<AnchorPane prefHeight="0.0" prefWidth="0.0" styleClass="background" stylesheets="@bootstrapfx.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.epi.view.SimulatorController">
    <children>
-      <Label layoutX="10.0" layoutY="12.0" text="Simulation" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Label layoutX="10.0" layoutY="10.0" text="Simulation" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -40,7 +40,7 @@
                   <Insets bottom="4.0" />
                </VBox.margin>
             </Label>
-            <StackPane fx:id="cityPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0">
+            <StackPane fx:id="cityPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
                <styleClass>
                   <String fx:value="panel-default" />
                   <String fx:value="panel" />
@@ -57,7 +57,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <StackPane fx:id="quarantinePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="500.0">
+            <StackPane fx:id="quarantinePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
                <styleClass>
                   <String fx:value="panel" />
                   <String fx:value="panel-default" />
@@ -65,12 +65,12 @@
             </StackPane>
          </children>
       </VBox>
-      <Label layoutX="100.0" layoutY="10.0" prefHeight="16.0" prefWidth="466.0" text="Parameters" AnchorPane.leftAnchor="545.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Label layoutX="100.0" layoutY="10.0" prefHeight="16.0" prefWidth="466.0" text="Parameters" AnchorPane.leftAnchor="540.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <GridPane fx:id="parameterBox" alignment="CENTER" layoutX="418.0" layoutY="263.0" prefHeight="556.0" prefWidth="394.0" styleClass="box" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="541.2" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+      <GridPane fx:id="parameterBox" alignment="CENTER" layoutX="542.0" layoutY="263.0" styleClass="box" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="540.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="160.0" />
@@ -394,17 +394,17 @@
             </JFXButton>
          </children>
       </GridPane>
-      <Label layoutX="10.0" layoutY="460.0" text="Statistics" AnchorPane.leftAnchor="10.0">
+      <Label layoutX="10.0" layoutY="410.0" text="Statistics" AnchorPane.leftAnchor="10.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="468.0" layoutY="460.0" text="Change over Time" AnchorPane.leftAnchor="405.0" AnchorPane.rightAnchor="415.0">
+      <Label layoutX="410.0" layoutY="410.0" text="Change over Time">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <HBox fx:id="statisticsBox" layoutY="486.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="121.0" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="480.0">
+      <HBox fx:id="statisticsBox" layoutY="432.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="430.0">
          <children>
             <GridPane minHeight="100.0" styleClass="box">
               <columnConstraints>
@@ -488,7 +488,7 @@
             </StackedAreaChart>
          </children>
       </HBox>
-      <HBox fx:id="playerBox" layoutX="405.0" layoutY="556.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <HBox fx:id="playerBox" layoutX="405.0" layoutY="556.0" prefHeight="54.0" prefWidth="925.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
             <JFXToggleNode contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="SOMETIMES">
                <styleClass>
