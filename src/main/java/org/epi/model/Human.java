@@ -3,6 +3,7 @@ package org.epi.model;
 import org.epi.util.Error;
 
 import java.util.Objects;
+import java.util.Set;
 
 /** A simple model of a human.
  * The main actors in the simulator.*/
@@ -68,6 +69,13 @@ public class Human {
         } else {
             status = Status.HEALTHY;
         }
+    }
+
+    /**
+     * Get all humans which in this human's vicinity
+     */
+    public Set<Human> getNearby() {
+        return location.getSpatialHash().getNearby(this);
     }
 
     //---------------------------- Simulator actions ----------------------------

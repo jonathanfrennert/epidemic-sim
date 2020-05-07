@@ -15,21 +15,21 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="background" stylesheets="@bootstrapfx.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.epi.view.SimulatorController">
+<AnchorPane styleClass="background" stylesheets="@bootstrapfx.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.epi.view.SimulatorController">
    <children>
-      <Label layoutX="10.0" layoutY="12.0" prefHeight="1.0" prefWidth="74.0" text="Simulation">
+      <Label layoutX="10.0" layoutY="12.0" text="Simulation" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="570.0" styleClass="box">
+      <VBox fx:id="simulationBox" alignment="CENTER" layoutX="14.0" layoutY="40.0" styleClass="box" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="401.0" text="City">
+            <Label alignment="CENTER" contentDisplay="CENTER" text="City">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -40,19 +40,13 @@
                   <Insets bottom="4.0" />
                </VBox.margin>
             </Label>
-            <Pane fx:id="cityPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
+            <StackPane fx:id="cityPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0">
                <styleClass>
-                  <String fx:value="panel" />
                   <String fx:value="panel-default" />
+                  <String fx:value="panel" />
                </styleClass>
-            </Pane>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="401.0" text="Quarantine">
+            </StackPane>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Quarantine">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -63,40 +57,34 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Pane fx:id="quarantinePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="274.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
+            <StackPane fx:id="quarantinePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="500.0">
                <styleClass>
                   <String fx:value="panel" />
                   <String fx:value="panel-default" />
                </styleClass>
-            </Pane>
+            </StackPane>
          </children>
       </VBox>
-      <Label layoutX="599.0" layoutY="12.0" prefHeight="16.0" prefWidth="90.0" text="Parameters">
+      <Label layoutX="100.0" layoutY="10.0" prefHeight="16.0" prefWidth="466.0" text="Parameters" AnchorPane.leftAnchor="545.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <GridPane layoutX="598.0" layoutY="37.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="394.0" styleClass="box">
+      <GridPane fx:id="parameterBox" alignment="CENTER" layoutX="418.0" layoutY="263.0" prefHeight="556.0" prefWidth="394.0" styleClass="box" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="541.2" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="220.0" />
-          <ColumnConstraints hgrow="ALWAYS" minWidth="-Infinity" prefWidth="150.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="160.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label alignment="CENTER" prefHeight="18.0" prefWidth="18.0" text="sec" textFill="LIGHTSLATEGRAY" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
@@ -155,6 +143,20 @@
                   <Insets right="3.0" />
                </GridPane.margin>
             </Label>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Behaviour Distribution">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Ratio distribution of human behaviours" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                <children>
                   <Label contentDisplay="CENTER" prefHeight="16.0" prefWidth="42.0" text="Lifespan">
@@ -253,82 +255,6 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Behaviour Distribution">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Ratio distribution of human behaviours" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <JFXTextField alignment="CENTER_RIGHT" minWidth="-Infinity" prefWidth="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="5.0" right="25.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </JFXTextField>
-            <JFXTextField alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="5.0" right="25.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="11.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXTextField>
-            <JFXTextField alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets left="5.0" right="25.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="11.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXTextField>
-            <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <GridPane.margin>
-                  <Insets left="5.0" right="25.0" />
-               </GridPane.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXSlider>
-            <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets left="5.0" right="25.0" />
-               </GridPane.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXSlider>
-            <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="6">
-               <GridPane.margin>
-                  <Insets left="5.0" right="25.0" />
-               </GridPane.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXSlider>
-            <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="7">
-               <GridPane.margin>
-                  <Insets left="5.0" right="25.0" />
-               </GridPane.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXSlider>
             <GridPane prefWidth="146.0" GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="35.0" />
@@ -395,40 +321,105 @@
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
+               <padding>
+                  <Insets right="25.0" />
+               </padding>
             </GridPane>
-            <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="400.0" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+            <JFXTextField alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" right="25.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="5.0" right="25.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXTextField>
+            <JFXTextField alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="5.0" right="25.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXTextField>
+            <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="5.0" right="25.0" />
+               </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXSlider>
+            <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="5.0" right="25.0" />
+               </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXSlider>
+            <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="5.0" right="25.0" />
+               </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXSlider>
+            <JFXSlider GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets left="5.0" right="25.0" />
+               </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXSlider>
+            <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </JFXButton>
          </children>
       </GridPane>
-      <Label layoutX="9.0" layoutY="414.0" prefHeight="22.0" prefWidth="192.0" styleClass="label-header" text="Statistics">
+      <Label layoutX="10.0" layoutY="460.0" text="Statistics" AnchorPane.leftAnchor="10.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutX="442.0" layoutY="414.0" prefHeight="22.0" prefWidth="137.0" styleClass="label-header" text="Change Over Time">
+      <Label layoutX="468.0" layoutY="460.0" text="Change over Time" AnchorPane.leftAnchor="405.0" AnchorPane.rightAnchor="415.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <HBox layoutX="10.0" layoutY="441.0" minHeight="-Infinity" minWidth="500.0" prefHeight="184.0" prefWidth="570.0" styleClass="box">
+      <HBox fx:id="statisticsBox" layoutY="486.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="121.0" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="480.0">
          <children>
-            <GridPane prefHeight="104.0" prefWidth="192.0">
+            <GridPane minHeight="100.0" styleClass="box">
               <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="-Infinity" minWidth="60.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="-Infinity" minWidth="60.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Recovered" GridPane.rowIndex="2">
@@ -477,13 +468,14 @@
                   <Separator prefHeight="37.0" prefWidth="192.0" GridPane.columnSpan="2" GridPane.rowIndex="7">
                      <GridPane.margin>
                         <Insets top="4.0" />
-                     </GridPane.margin></Separator>
+                     </GridPane.margin>
+                  </Separator>
                </children>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </HBox.margin>
             </GridPane>
-            <StackedAreaChart legendSide="LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="360.0" verticalGridLinesVisible="false" HBox.hgrow="SOMETIMES">
+            <StackedAreaChart legendSide="LEFT" minHeight="120.0" verticalGridLinesVisible="false" HBox.hgrow="SOMETIMES">
               <xAxis>
                 <NumberAxis minorTickVisible="false" side="BOTTOM" tickLabelsVisible="false" tickMarkVisible="false" />
               </xAxis>
@@ -496,7 +488,7 @@
             </StackedAreaChart>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="638.0" maxHeight="1.7976931348623157E308" prefHeight="52.0" prefWidth="984.0" styleClass="box">
+      <HBox fx:id="playerBox" layoutX="405.0" layoutY="556.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
             <JFXToggleNode contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="SOMETIMES">
                <styleClass>

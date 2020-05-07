@@ -790,7 +790,6 @@ a.bg-danger:focused {
   -fx-border-style: solid;
   -fx-border-color: #ddd;
   -fx-border-radius: 0, 0, 3px, 0;
-  -fx-overflow: hidden;
 }
 
 .btn-icon-play {
@@ -815,6 +814,7 @@ a.bg-danger:focused {
 }
 
 .chart {
+  -fx-padding: 0;
   -fx-border-width: 0;
   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.05), 1, 0, 0, 1);
 }

@@ -6,8 +6,6 @@ import org.epi.util.Error;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
-import java.util.ListIterator;
-
 /** A simple model of a pathogen.
  * The pathogen spreads between humans in the simulations.*/
 public class Pathogen {
@@ -90,18 +88,14 @@ public class Pathogen {
      * Attempt to infect all humans which are in contact with the host.
      */
     public void infect() {
-        ListIterator<Human> populationItr = host.getLocation().getPopulation().listIterator();
-
-        while (populationItr.hasNext()) {
-            Human target = populationItr.next();
-
+        for (Human target : host.getNearby()) {
             boolean isHealthy = target.getPathogen() == null;
             boolean areInContact = target.getModel().inContactWith(host.getModel());
             boolean effectiveTransmission = Probability.chance(transmissionRisk.get());
 
             if (isHealthy && areInContact && effectiveTransmission) {
                 Pathogen offspring = reproduce();
-                populationItr.previous().setPathogen(offspring);
+                target.setPathogen(offspring);
             }
         }
     }

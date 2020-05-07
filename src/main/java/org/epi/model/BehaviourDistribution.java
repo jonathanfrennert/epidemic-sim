@@ -5,6 +5,7 @@ import org.apache.commons.math3.distribution.EnumeratedDistribution;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import org.epi.model.Behaviour;
 
 import java.util.List;
 

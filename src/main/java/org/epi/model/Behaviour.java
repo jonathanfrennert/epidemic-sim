@@ -3,9 +3,8 @@ package org.epi.model;
 import javafx.geometry.Point2D;
 import org.epi.util.Error;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
@@ -72,12 +71,11 @@ public enum Behaviour{
         public void adjustToOthers(Model model) {
             Model.requireNonNull(model);
 
-            List<Human> population = new ArrayList<>(model.getHost().getLocation().getPopulation());
-            population.remove(model.getHost());
+            Set<Human> nearby = model.getHost().getNearby();
 
             Point2D velocity = new Point2D(0,0);
 
-            for (Human other : population) {
+            for (Human other : nearby) {
                 double distance = Model.distance(model, other.getModel());
 
                 if (distance <= 3 * HUMAN_RADIUS) {

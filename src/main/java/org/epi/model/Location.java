@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
+import org.epi.util.SpatialHash;
 
 import static org.epi.model.Model.HUMAN_DIAMETER;
 import static org.epi.model.Model.HUMAN_RADIUS;
@@ -16,9 +17,6 @@ import static org.epi.model.Model.HUMAN_RADIUS;
 /** A simple model of a location.
  * The class is used as a graphical representation of a location in the simulator.*/
 public class Location {
-
-    /** Maximum number of humans that can fit in the area without them overlapping.*/
-    private final int MAX_POPULATION;
 
     /** The width of this area in pixels.*/
     private final DoubleProperty width;
@@ -28,6 +26,9 @@ public class Location {
 
     /** The graphical representation of this location.*/
     private final Pane area;
+
+    /** A spatial hash of humans in the area.*/
+    private final SpatialHash spatialHash;
 
     /** The population of this location.*/
     private final ObservableList<Human> population;
@@ -45,16 +46,17 @@ public class Location {
         layoutCheck(width);
         layoutCheck(height);
 
-        this.MAX_POPULATION = (int) Math.ceil(width * height / (HUMAN_DIAMETER * HUMAN_DIAMETER));
-
         this.width = new SimpleDoubleProperty(width);
         this.height = new SimpleDoubleProperty(height);
 
         this.area = new Pane();
         setConstantSize();
 
-        population = FXCollections.observableArrayList();
+        this.population = FXCollections.observableArrayList();
 
+        this.spatialHash = new SpatialHash(this);
+
+        updateHash();
         initEvents();
     }
 
@@ -115,6 +117,13 @@ public class Location {
     //---------------------------- Simulator actions ----------------------------
 
     /**
+     * Update the spatial hash.
+     */
+    public void updateHash() {
+        spatialHash.update();
+    }
+
+    /**
      * Adjust the velocity of the population such that they do not move past the walls.
      */
     public void wallCollisions() {
@@ -152,21 +161,39 @@ public class Location {
     //---------------------------- Getters ----------------------------
 
     /**
-     * Getter for {@link #MAX_POPULATION}.
-     *
-     * @return {@link #MAX_POPULATION}
-     */
-    public int getMaxPop() {
-        return MAX_POPULATION;
-    }
-
-    /**
      * Getter for {@link #area}
      *
      * @return {@link #area}
      */
     public Pane getArea() {
         return area;
+    }
+
+    /**
+     * Getter for {@link #width} as an int.
+     *
+     * @return {@link #width}
+     */
+    public int getWidth() {
+        return (int) width.get();
+    }
+
+    /**
+     * Getter for {@link #height} as an int.
+     *
+     * @return {@link #height}
+     */
+    public int getHeight() {
+        return (int) height.get();
+    }
+
+    /**
+     * Getter for {@link #spatialHash}.
+     *
+     * @return {@link #spatialHash}
+     */
+    public SpatialHash getSpatialHash() {
+        return spatialHash;
     }
 
     /**

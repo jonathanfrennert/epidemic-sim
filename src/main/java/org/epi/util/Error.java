@@ -10,7 +10,7 @@ public class Error {
     private static final String NULL_MSG = ERROR_TAG + " Given %s must not be null.";
 
     /** Outside interval message format.*/
-    private static final String INTERVAL_MSG = ERROR_TAG + " Given %s must be between %d and %d but is: %f";
+    private static final String INTERVAL_MSG = ERROR_TAG + " Given %s must be between %d and %d but is: %.2f";
 
     //---------------------------- Null checks ----------------------------
 
@@ -50,7 +50,7 @@ public class Error {
      */
     public static void intervalCheck(String numberCategory, Number lowest, Number highest, Number value) {
         if (value.doubleValue() < lowest.doubleValue() || value.doubleValue() > highest.doubleValue()) {
-            throw new IllegalArgumentException(getIntervalMsg(numberCategory, Probability.MIN_PROB, Probability.MAX_PROB, value));
+            throw new IllegalArgumentException(getIntervalMsg(numberCategory, lowest, highest, value));
         }
     }
 

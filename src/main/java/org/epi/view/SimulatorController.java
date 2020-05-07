@@ -1,13 +1,28 @@
 package org.epi.view;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import org.epi.MainApp;
 import org.epi.model.Simulator;
 import org.epi.model.Statistics;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
+import static org.epi.util.Clip.clip;
+
 public class SimulatorController extends Controller {
+
+    @FXML
+    private VBox simulationBox;
+    @FXML
+    private HBox statisticsBox;
+    @FXML
+    private GridPane parameterBox;
+    @FXML
+    private HBox playerBox;
 
     @FXML
     private Pane cityPane;
@@ -36,6 +51,17 @@ public class SimulatorController extends Controller {
      */
     @FXML
     private void initialize() {
+        clipBoxes();
+    }
+
+    /**
+     * Clip the boxes in the UI.
+     */
+    private void clipBoxes() {
+        clip(simulationBox);
+        clip(parameterBox);
+        clip(statisticsBox);
+        clip(playerBox);
     }
 
     /**
@@ -45,7 +71,6 @@ public class SimulatorController extends Controller {
     @Override
     public void setMainApp(MainApp mainApp) {
         super.setMainApp(mainApp);
-
         showSimulation();
     }
 
@@ -57,8 +82,14 @@ public class SimulatorController extends Controller {
         Simulator simulator = getMainApp().getSimulator();
         Statistics statistics = simulator.getStatistics();
 
-        this.cityPane.getChildren().add(simulator.getWorld().getCity().getArea());
-        this.quarantinePane.getChildren().add(simulator.getWorld().getQuarantine().getArea());
+        Pane city = simulator.getWorld().getCity().getArea();
+        Pane quarantine = simulator.getWorld().getQuarantine().getArea();
+
+        clip(city);
+        clip(quarantine);
+
+        this.cityPane.getChildren().add(city);
+        this.quarantinePane.getChildren().add(quarantine);
 
         this.deceasedLabel.textProperty().bind(statistics.deceasedProperty().asString());
         this.recoveredLabel.textProperty().bind(statistics.recoveredProperty().asString());
