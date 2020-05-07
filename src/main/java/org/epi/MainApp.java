@@ -81,7 +81,6 @@ public class MainApp extends Application {
         this.primaryStage.setMaxWidth(MAX_WIDTH);
         this.primaryStage.setMaxHeight(MAX_HEIGHT);
         this.primaryStage.setWidth(PREF_WIDTH);
-        this.primaryStage.setHeight(PREF_HEIGHT);
 
         initRootLayout();
         showSimulator();
