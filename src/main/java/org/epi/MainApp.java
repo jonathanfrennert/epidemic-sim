@@ -1,17 +1,19 @@
 package org.epi;
 
-import javafx.scene.layout.AnchorPane;
-import org.epi.model.*;
 import org.epi.model.BehaviourDistribution;
+import org.epi.model.Pathogen;
+import org.epi.model.Simulator;
+import org.epi.model.World;
 import org.epi.view.RootLayoutController;
+import org.epi.view.SimulatorController;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.epi.view.SimulatorController;
 
 import java.io.IOException;
 
