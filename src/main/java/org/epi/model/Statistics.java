@@ -68,6 +68,7 @@ public class Statistics {
         this.dataSeriesInfected = new XYChart.Series<>();
         this.dataSeriesRecovered = new XYChart.Series<>();
 
+        //TODO move these values elsewhere
         dataSeriesRecovered.getData().add(new XYChart.Data<>(0.0,0));
         dataSeriesInfected.getData().add(new XYChart.Data<>(0.0,1));
         dataSeriesDeceased.getData().add(new XYChart.Data<>(0.0,0));

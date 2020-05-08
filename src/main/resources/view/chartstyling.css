@@ -1,3 +1,7 @@
+/*
+TODO change colors to fit EpiSim color scheme
+*/
+
 .default-color0.chart-area-symbol { -fx-background-color: #e9967a, #ffa07a; }
 .default-color1.chart-area-symbol { -fx-background-color: #f0e68c, #fffacd; }
 .default-color2.chart-area-symbol { -fx-background-color: #dda0dd, #d8bfd855; }

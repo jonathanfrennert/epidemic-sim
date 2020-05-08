@@ -69,6 +69,8 @@ public class SimulatorController extends Controller {
         Simulator simulator = getMainApp().getSimulator();
         Statistics statistics = simulator.getStatistics();
 
+        //TODO add axes and names to the chart
+
         statistics.getDataSeriesRecovered().setName("Recovered");
         statistics.getDataSeriesInfected().setName("Infected");
         statistics.getDataSeriesDeceased().setName("Deceased");
