@@ -4,8 +4,6 @@ import org.epi.util.Error;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
 
 import java.util.Objects;
 
@@ -29,10 +27,6 @@ public class Statistics {
 
     /** The number difference between the current population count and the initial population count.*/
     private final IntegerProperty deceased;
-
-    /** Show the statistics in a label.*/
-    private final ReadOnlyStringWrapper text = new ReadOnlyStringWrapper(this, "text",
-            "healthy = 0, infected = 0, recovered = 0, deceased = 0.");
 
     //---------------------------- Constructor ----------------------------
 
@@ -70,20 +64,6 @@ public class Statistics {
         return cityCount + quarantineCount;
     }
 
-    /**
-     * Lists of the statistics. Currently intended for diagnostics of simulator.
-     *
-     * @return Populations count's for the simulator
-     */
-    @Override
-    public String toString() {
-        return "healthy = " + healthy.get() +
-                ", infected = " + infected.get() +
-                ", recovered = " + recovered.get() +
-                ", deceased = " + deceased.get() +
-                ".";
-    }
-
     //---------------------------- Simulator actions ----------------------------
 
     /**
@@ -95,16 +75,13 @@ public class Statistics {
         healthy.set(getStatusCount(Status.HEALTHY));
         infected.set(getStatusCount(Status.INFECTED));
         recovered.set(getStatusCount(Status.RECOVERED));
-
         deceased.set(initPop.get() - healthy.get() - infected.get() - recovered.get());
-
-        text.set(toString());
     }
 
     //---------------------------- Getters and Setters ----------------------------
 
     /**
-     * Getter for {@link #healthy}
+     * Getter for {@link #healthy}.
      *
      * @return {@link #healthy}
      */
@@ -113,7 +90,7 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #healthy} {@link IntegerProperty}
+     * Getter for {@link #healthy} {@link IntegerProperty}.
      *
      * @return {@link #healthy}
      */
@@ -122,7 +99,7 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #infected}
+     * Getter for {@link #infected}.
      *
      * @return {@link #infected}
      */
@@ -131,7 +108,7 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #infected} {@link IntegerProperty}
+     * Getter for {@link #infected} {@link IntegerProperty}.
      *
      * @return {@link #infected}
      */
@@ -140,7 +117,7 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #recovered}
+     * Getter for {@link #recovered}.
      *
      * @return {@link #recovered}
      */
@@ -149,7 +126,7 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #recovered} {@link IntegerProperty}
+     * Getter for {@link #recovered} {@link IntegerProperty}.
      *
      * @return {@link #recovered}
      */
@@ -158,7 +135,7 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #recovered}
+     * Getter for {@link #recovered}.
      *
      * @return {@link #recovered}
      */
@@ -167,7 +144,7 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #deceased} {@link IntegerProperty}
+     * Getter for {@link #deceased} {@link IntegerProperty}.
      *
      * @return {@link #deceased}
      */
@@ -176,7 +153,7 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #initPop}
+     * Getter for {@link #initPop}.
      *
      * @return {@link #initPop}
      */
@@ -185,21 +162,12 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #initPop} {@link IntegerProperty}
+     * Getter for {@link #initPop} {@link IntegerProperty}.
      *
      * @return {@link #initPop}
      */
     public IntegerProperty initPopProperty() {
         return initPop;
-    }
-
-    /**
-     * Getter for {@link #text} {@link ReadOnlyStringProperty}
-     *
-     * @return {@link #text}
-     */
-    public ReadOnlyStringProperty getTextProperty() {
-        return text.getReadOnlyProperty();
     }
 
 }

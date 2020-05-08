@@ -1,8 +1,5 @@
 package org.epi.model;
 
-import org.epi.model.Human;
-import org.epi.model.Location;
-import org.epi.model.Model;
 import org.epi.util.Error;
 
 import java.util.HashMap;
@@ -95,7 +92,7 @@ public class SpatialHash {
      * Adds the given human to the spatial hash.
      *
      * @param human a human
-     * @param key a hashcode key
+     * @param key the human's spatial hashcode
      */
     private void addToSpatialHash(int key, Human human) {
         if(spatialHash.containsKey(key)) {

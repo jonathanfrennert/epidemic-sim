@@ -10,7 +10,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
-import static org.epi.model.Model.HUMAN_DIAMETER;
 import static org.epi.model.Model.HUMAN_RADIUS;
 
 /** A simple model of a location.
@@ -26,7 +25,7 @@ public class Location {
     /** The graphical representation of this location.*/
     private final Pane area;
 
-    /** A spatial hash of humans in the area.*/
+    /** The spatial hash of humans in the area.*/
     private final SpatialHash spatialHash;
 
     /** The population of this location.*/
@@ -77,7 +76,6 @@ public class Location {
             while(change.next()) {
 
                 for (Human human : change.getAddedSubList()) {
-
                     setPosition(human.getModel());
                     area.getChildren().add(human.getModel());
                 }
@@ -87,7 +85,6 @@ public class Location {
                 }
             }
         });
-
     }
 
     /**
@@ -96,8 +93,8 @@ public class Location {
      * @param model a human's graphical representation
      */
     private void setPosition(Model model) {
-        model.setCenterX(HUMAN_RADIUS +  Math.random() * (width.get() - HUMAN_DIAMETER));
-        model.setCenterY(HUMAN_RADIUS +  Math.random() * (height.get() - HUMAN_DIAMETER));
+        model.setCenterX(HUMAN_RADIUS +  Math.random() * (width.get() - Model.HUMAN_DIAMETER));
+        model.setCenterY(HUMAN_RADIUS +  Math.random() * (height.get() - Model.HUMAN_DIAMETER));
     }
 
     /**
@@ -107,7 +104,7 @@ public class Location {
      * @throws NullPointerException if the given length is less than {@value Model#HUMAN_DIAMETER}.
      */
     private void layoutCheck(double length) {
-        if (length < HUMAN_DIAMETER) {
+        if (length < Model.HUMAN_DIAMETER) {
             throw new IllegalArgumentException(
                     Error.ERROR_TAG + " Given length will not allow for this area to hold any humans: " + length);
         }
@@ -160,7 +157,7 @@ public class Location {
     //---------------------------- Getters ----------------------------
 
     /**
-     * Getter for {@link #area}
+     * Getter for {@link #area}.
      *
      * @return {@link #area}
      */
@@ -196,11 +193,12 @@ public class Location {
     }
 
     /**
-     * Getter for {@link #population}
+     * Getter for {@link #population}.
      *
      * @return {@link #population}
      */
     public ObservableList<Human> getPopulation() {
         return population;
     }
+
 }

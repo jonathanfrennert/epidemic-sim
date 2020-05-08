@@ -1,28 +1,16 @@
 package org.epi.view;
 
-import javafx.scene.layout.GridPane;
 import org.epi.MainApp;
 import org.epi.model.Simulator;
 import org.epi.model.Statistics;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import static org.epi.util.Clip.clip;
 
 public class SimulatorController extends Controller {
-
-    @FXML
-    private VBox simulationBox;
-    @FXML
-    private HBox statisticsBox;
-    @FXML
-    private GridPane parameterBox;
-    @FXML
-    private HBox playerBox;
 
     @FXML
     private Pane cityPane;
@@ -51,17 +39,6 @@ public class SimulatorController extends Controller {
      */
     @FXML
     private void initialize() {
-        clipBoxes();
-    }
-
-    /**
-     * Clip the boxes in the UI.
-     */
-    private void clipBoxes() {
-        clip(simulationBox);
-        clip(parameterBox);
-        clip(statisticsBox);
-        clip(playerBox);
     }
 
     /**

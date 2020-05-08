@@ -15,8 +15,8 @@ public class Simulator {
 
     /** The minimum population required for the simulation to run.*/
     private static final int MIN_POPULATION = 1;
-    /** Maximum number of humans that can be handled
-     * without frame performance issues and humans going over location edges.*/
+    /** Maximum number of humans that can be handled without frame performance
+     * issues and humans going over location edges.*/
     private static final int MAX_POPULATION = 300;
 
     /** The simulator timer.*/
@@ -141,10 +141,10 @@ public class Simulator {
      * Check whether the world view has reached any end conditions
      */
     private boolean endingIsReached() {
-        boolean isDiseaseGone = statistics.getInfected() == 0;
+        boolean isPathogenGone = statistics.getInfected() == 0;
         boolean isHumanityGone = statistics.getDeceased() == statistics.getInitPop();
 
-        return isDiseaseGone || isHumanityGone;
+        return isPathogenGone || isHumanityGone;
     }
 
     //---------------------------- Getters ----------------------------

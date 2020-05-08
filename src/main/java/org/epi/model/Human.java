@@ -27,7 +27,7 @@ public class Human {
     //---------------------------- Constructor ----------------------------
 
     /**
-     * Create a human at a given location
+     * Create a human at a given location.
      *
      * @param behaviour the behaviour of this human
      * @param location the location of this human
@@ -72,7 +72,7 @@ public class Human {
     }
 
     /**
-     * Get all humans which in this human's vicinity
+     * Get all humans which in this human's vicinity.
      */
     public Set<Human> getNearby() {
         return location.getSpatialHash().getNearby(this);
@@ -122,7 +122,6 @@ public class Human {
 
         status();
         model.fill();
-
         model.move(elapsedSeconds);
     }
 
@@ -166,7 +165,7 @@ public class Human {
     }
 
     /**
-     * Getter for {@link #status}
+     * Getter for {@link #status}.
      *
      * @return {@link #status}
      */

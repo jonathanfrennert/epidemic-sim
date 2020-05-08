@@ -41,7 +41,7 @@ public class MainApp extends Application {
     /** The root layout for the application.*/
     private BorderPane rootLayout;
 
-    /** Simulator currently showing its simulation.*/
+    /** Simulator currently being showed.*/
     private Simulator simulator;
 
     /**
@@ -134,6 +134,8 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+
+    //---------------------------- Helper methods ----------------------------
 
     /**
      * Getter for {@link #simulator}

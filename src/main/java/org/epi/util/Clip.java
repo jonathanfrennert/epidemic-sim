@@ -13,6 +13,8 @@ public class Clip {
      * This requires attaching a change listener to the region’s layout bounds,
      * as JavaFX does not currently provide any built-in way to clip children.
      *
+     * @author Christoph Nahr
+     *
      * @param region the {@link Region} whose children to clip
      * @throws NullPointerException if the given parameter is null
      */

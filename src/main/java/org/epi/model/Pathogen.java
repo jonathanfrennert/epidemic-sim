@@ -22,7 +22,7 @@ public class Pathogen {
     /** The probability of a transmission occurring in effective contact.*/
     private final DoubleProperty transmissionRisk;
 
-    /** The probability of an infected person dying from the disease.*/
+    /** The probability of an infected person dying from the pathogen.*/
     private final DoubleProperty fatalityRate;
 
     /** The probability of becoming immune.*/
@@ -34,11 +34,11 @@ public class Pathogen {
     //---------------------------- Constructor ----------------------------
 
     /**
-     * Create a disease.
+     * Create a pathogen.
      *
      * @param lifespan the lifespan of this pathogen in a host in seconds
      * @param transmissionRisk the probability of a transmission occurring in effective contact
-     * @param fatalityRate the probability of an infected person dying from the disease
+     * @param fatalityRate the probability of an infected person dying from the pathogen
      * @param immunityRate this pathogen's immunity rate
      * @param immunityDuration the duration of this pathogen's immunity in seconds
      * @throws IllegalArgumentException if any given durations are negative or if any probabilities given are
@@ -67,8 +67,7 @@ public class Pathogen {
     //---------------------------- Helper methods ----------------------------
 
     /**
-     * Returns the hash code for this pathogen
-     * dependent on the values of the non-changing instance fields.
+     * Returns the hash code for this pathogen dependent on the values of the non-changing instance fields.
      *
      * @return the hash code for this pathogen
      */
@@ -123,7 +122,7 @@ public class Pathogen {
         lifetime.set(lifetime.get() + elapsedSeconds);
 
         if (lifespan.get() <= lifetime.get()) {
-            if (!killHost()) {
+            if (!fatal()) {
                 host.getImmuneSystem().learn(this);
             }
             die();
@@ -133,7 +132,7 @@ public class Pathogen {
     /**
      * Attempt to kill the host by removing them from their location.
      */
-    private boolean killHost() {
+    private boolean fatal() {
         boolean isFatal = Probability.chance(fatalityRate.get());
 
         if (isFatal) {

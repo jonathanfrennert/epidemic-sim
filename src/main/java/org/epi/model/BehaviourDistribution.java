@@ -5,7 +5,6 @@ import org.apache.commons.math3.distribution.EnumeratedDistribution;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import org.epi.model.Behaviour;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import static org.epi.model.Behaviour.DISTANCING;
 import static org.epi.model.Behaviour.NORMAL;
 
 /**
- * A utility class for distributing behaviour when creating a human population.
+ * Utilise a behaviour distribution when creating a human population.
  */
 public class BehaviourDistribution {
 
@@ -22,35 +21,35 @@ public class BehaviourDistribution {
     private EnumeratedDistribution<Behaviour> behaveDist;
 
     /** The probability of normal behaviour.*/
-    private final DoubleProperty normalProb;
+    private final DoubleProperty normalProp;
 
     /** The probability of social distancing behaviour.*/
-    private final DoubleProperty distancingProb;
+    private final DoubleProperty distancingProp;
 
     /** The probability of avoidant behaviour.*/
-    private final DoubleProperty avoidantProb;
+    private final DoubleProperty avoidantProp;
 
     //---------------------------- Constructor ----------------------------
 
     /**
-     * Create a behaviour distribution. Distribution normalises proportions to probabilities.
+     * Create a behaviour distribution. Inputs normalises proportions to probabilities.
      *
-     * @param normalProp the probability of normal behaviour
-     * @param distancingProp the probability of social distancing behaviour
-     * @param avoidantProp The probability of avoidant behaviour
-     * @throws org.apache.commons.math3.exception.NotPositiveException if any of the probabilities are negative.
-     * @throws org.apache.commons.math3.exception.NotFiniteNumberException if any of the probabilities are infinite.
-     * @throws org.apache.commons.math3.exception.NotANumberException if any of the probabilities are NaN.
-     * @throws org.apache.commons.math3.exception.MathArithmeticException all of the probabilities are 0.
+     * @param normalProp the proportion of normal behaviour
+     * @param distancingProp the proportion of social distancing behaviour
+     * @param avoidantProp The proportion of avoidant behaviour
+     * @throws org.apache.commons.math3.exception.NotPositiveException if any of the proportions are negative.
+     * @throws org.apache.commons.math3.exception.NotFiniteNumberException if any of the proportions are infinite.
+     * @throws org.apache.commons.math3.exception.NotANumberException if any of the proportions are NaN.
+     * @throws org.apache.commons.math3.exception.MathArithmeticException all of the proportions are 0.
      */
     public BehaviourDistribution(double normalProp, double distancingProp, double avoidantProp) {
-        this.normalProb = new SimpleDoubleProperty(normalProp);
-        this.distancingProb = new SimpleDoubleProperty(distancingProp);
-        this.avoidantProb = new SimpleDoubleProperty(avoidantProp);
+        this.normalProp = new SimpleDoubleProperty(normalProp);
+        this.distancingProp = new SimpleDoubleProperty(distancingProp);
+        this.avoidantProp = new SimpleDoubleProperty(avoidantProp);
 
-        Pair<Behaviour, Double> normal = new Pair<>(NORMAL, normalProb.get());
-        Pair<Behaviour, Double> distancing = new Pair<>(DISTANCING, distancingProb.get());
-        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, avoidantProb.get());
+        Pair<Behaviour, Double> normal = new Pair<>(NORMAL, this.normalProp.get());
+        Pair<Behaviour, Double> distancing = new Pair<>(DISTANCING, this.distancingProp.get());
+        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, this.avoidantProp.get());
 
         this.behaveDist = new EnumeratedDistribution<>(List.of(normal, distancing, avoidant));
     }
@@ -69,112 +68,113 @@ public class BehaviourDistribution {
     //---------------------------- Getters & Setters ----------------------------
 
     /**
-     * Getter for {@link #normalProb}.
+     * Getter for {@link #normalProp}.
      *
-     * @return {@link #normalProb}
+     * @return {@link #normalProp}
      */
-    public double getNormalProb() {
-        return normalProb.get();
+    public double getNormalProp() {
+        return normalProp.get();
     }
 
     /**
-     * Getter for {@link #normalProb} property.
+     * Getter for {@link #normalProp} property.
      *
-     * @return {@link #normalProb} property
+     * @return {@link #normalProp} property
      */
-    public DoubleProperty normalProbProperty() {
-        return normalProb;
+    public DoubleProperty normalPropProperty() {
+        return normalProp;
     }
 
     /**
-     * Setter for {@link #normalProb}.
+     * Setter for {@link #normalProp}.
      *
-     * @param normalProb {@link #normalProb}
+     * @param normalProp {@link #normalProp}
+     * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
+     * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
+     * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
+     * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the proportions are 0.
+     */
+    public void setNormalProp(double normalProp) {
+        this.normalProp.set(normalProp);
+        setBehaveDist();
+    }
+
+    /**
+     * Getter for {@link #distancingProp}.
+     *
+     * @return {@link #distancingProp}
+     */
+    public double getDistancingProp() {
+        return distancingProp.get();
+    }
+
+    /**
+     * Getter for {@link #distancingProp} property.
+     *
+     * @return {@link #distancingProp} property
+     */
+    public DoubleProperty distancingPropProperty() {
+        return distancingProp;
+    }
+
+    /**
+     * Setter for {@link #distancingProp}.
+     *
+     * @param distancingProp {@link #distancingProp}
      * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the probabilities are 0.
      */
-    public void setNormalProb(double normalProb) {
-        this.normalProb.set(normalProb);
+    public void setDistancingProp(double distancingProp) {
+        this.distancingProp.set(distancingProp);
         setBehaveDist();
     }
 
     /**
-     * Getter for {@link #distancingProb}.
+     * Getter for {@link #avoidantProp}.
      *
-     * @return {@link #distancingProb}
+     * @return {@link #avoidantProp}
      */
-    public double getDistancingProb() {
-        return distancingProb.get();
+    public double getAvoidantProp() {
+        return avoidantProp.get();
     }
 
     /**
-     * Getter for {@link #distancingProb} property.
+     * Getter for {@link #avoidantProp} property.
      *
-     * @return {@link #distancingProb} property
+     * @return {@link #avoidantProp} property
      */
-    public DoubleProperty distancingProbProperty() {
-        return distancingProb;
+    public DoubleProperty avoidantPropProperty() {
+        return avoidantProp;
     }
 
     /**
-     * Setter for {@link #distancingProb}.
+     * Setter for {@link #avoidantProp}.
      *
-     * @param distancingProb {@link #distancingProb}
+     * @param avoidantProp {@link #avoidantProp}
      * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the probabilities are 0.
      */
-    public void setDistancingProb(double distancingProb) {
-        this.distancingProb.set(distancingProb);
+    public void setAvoidantProp(double avoidantProp) {
+        this.avoidantProp.set(avoidantProp);
         setBehaveDist();
     }
 
     /**
-     * Getter for {@link #avoidantProb}.
+     * Set the behaviour distribution to reflect new values for the proportions.
      *
-     * @return {@link #avoidantProb}
-     */
-    public double getAvoidantProb() {
-        return avoidantProb.get();
-    }
-
-    /**
-     * Getter for {@link #avoidantProb} property.
-     *
-     * @return {@link #avoidantProb} property
-     */
-    public DoubleProperty avoidantProbProperty() {
-        return avoidantProb;
-    }
-
-    /**
-     * Setter for {@link #avoidantProb}.
-     *
-     * @param avoidantProb {@link #avoidantProb}
-     * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
-     * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
-     * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
-     * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the probabilities are 0.
-     */
-    public void setAvoidantProb(double avoidantProb) {
-        this.avoidantProb.set(avoidantProb);
-        setBehaveDist();
-    }
-
-    /**
-     * Set the behaviour distribution to reflect new values for the probabilities.
      * @throws org.apache.commons.math3.exception.NotPositiveException if any of the probabilities are negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if any of the probabilities are infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if any of the probabilities are NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException all of the probabilities are 0.
      */
     public void setBehaveDist() {
-        Pair<Behaviour, Double> normal = new Pair<>(NORMAL, normalProb.get());
-        Pair<Behaviour, Double> distancing = new Pair<>(DISTANCING, distancingProb.get());
-        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, avoidantProb.get());
+        Pair<Behaviour, Double> normal = new Pair<>(NORMAL, normalProp.get());
+        Pair<Behaviour, Double> distancing = new Pair<>(DISTANCING, distancingProp.get());
+        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, avoidantProp.get());
 
         this.behaveDist = new EnumeratedDistribution<>(List.of(normal, distancing, avoidant));
     }

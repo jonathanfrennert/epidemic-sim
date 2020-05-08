@@ -14,7 +14,6 @@ public class Model extends Circle {
     private static final double DEF_POS = 0;
     /** Radius of a host's graphical representation in pixels.*/
     public static final double HUMAN_RADIUS = 3;
-
     /** The diameter of a human.*/
     public static final double HUMAN_DIAMETER = 2 * HUMAN_RADIUS;
 
@@ -40,7 +39,6 @@ public class Model extends Circle {
         Objects.requireNonNull(host, Error.getNullMsg("host"));
         Behaviour.requireNonNull(behaviour);
 
-        // Set default values.
         setCenterY(DEF_POS);
         setCenterY(DEF_POS);
         setRadius(HUMAN_RADIUS);
@@ -67,9 +65,8 @@ public class Model extends Circle {
 
         double deltaX = model.getCenterX() - this.getCenterX();
         double deltaY = model.getCenterY() - this.getCenterY();
-        double radiusSum = 2 * HUMAN_RADIUS;
 
-        if (deltaX * deltaX + deltaY * deltaY <= radiusSum * radiusSum) {
+        if (deltaX * deltaX + deltaY * deltaY <= HUMAN_DIAMETER * HUMAN_DIAMETER) {
             return deltaX * (velocity.getX() - this.velocity.getX())
                     + deltaY * (model.velocity.getY() - this.velocity.getY()) <= 0;
         }
@@ -129,7 +126,7 @@ public class Model extends Circle {
     //---------------------------- Getters and setters ----------------------------
 
     /**
-     * Getter for {@link #host}
+     * Getter for {@link #host}.
      *
      * @return {@link #host}
      */
@@ -157,7 +154,7 @@ public class Model extends Circle {
     }
 
     /**
-     * Setter for {@link #velocity}
+     * Setter for {@link #velocity}.
      *
      * @param velocity {@link #velocity}
      * @throws NullPointerException if the given parameter is null
