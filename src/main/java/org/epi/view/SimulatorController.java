@@ -1,5 +1,6 @@
 package org.epi.view;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -68,7 +69,16 @@ public class SimulatorController extends Controller {
         Simulator simulator = getMainApp().getSimulator();
         Statistics statistics = simulator.getStatistics();
 
-        showStackedChart(simulator);
+        statistics.getDataSeriesRecovered().setName("Recovered");
+        statistics.getDataSeriesInfected().setName("Infected");
+        statistics.getDataSeriesDeceased().setName("Deceased");
+        statistics.getDataSeriesHealthy().setName("Healthy");
+
+
+        statsChart.getData().addAll(statistics.getDataSeriesHealthy(),
+                statistics.getDataSeriesRecovered(),
+                statistics.getDataSeriesInfected(),
+                statistics.getDataSeriesDeceased());
 
         this.cityPane.getChildren().add(simulator.getWorld().getCity().getArea());
         this.quarantinePane.getChildren().add(simulator.getWorld().getQuarantine().getArea());
@@ -77,45 +87,6 @@ public class SimulatorController extends Controller {
         this.recoveredLabel.textProperty().bind(statistics.recoveredProperty().asString());
         this.healthyLabel.textProperty().bind(statistics.healthyProperty().asString());
         this.infectedLabel.textProperty().bind(statistics.infectedProperty().asString());
-
-    }
-
-    private void showStackedChart(Simulator simulator){
-        NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Time progression");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Population");
-
-        //StackedAreaChart statsChart = new StackedAreaChart(xAxis,yAxis);
-
-        XYChart.Series dataSeriesDeceased = new XYChart.Series();
-        dataSeriesDeceased.setName("Deceased");
-
-        dataSeriesDeceased.getData().add(new XYChart.Data(0,0));
-        dataSeriesDeceased.getData().add(new XYChart.Data(2,4));
-
-        XYChart.Series dataSeriesInfected = new XYChart.Series();
-        dataSeriesInfected.setName("Infected");
-
-        dataSeriesInfected.getData().add(new XYChart.Data(0,1));
-        dataSeriesInfected.getData().add(new XYChart.Data(2,10));
-
-        XYChart.Series dataSeriesHealthy = new XYChart.Series();
-        dataSeriesHealthy.setName("Healthy");
-
-        dataSeriesHealthy.getData().add(new XYChart.Data(0,100));
-        dataSeriesHealthy.getData().add(new XYChart.Data(2,80));
-
-        //TODO try to set 4th label in line with the others
-        XYChart.Series dataSeriesRecovered = new XYChart.Series();
-        dataSeriesRecovered.setName("Recovered");
-
-        dataSeriesRecovered.getData().add(new XYChart.Data(0,0));
-        dataSeriesRecovered.getData().add(new XYChart.Data(2,3));
-
-        statsChart.getData().addAll(dataSeriesDeceased,dataSeriesHealthy,dataSeriesInfected, dataSeriesRecovered);
-        
 
     }
 

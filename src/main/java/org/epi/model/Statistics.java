@@ -4,6 +4,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.XYChart;
 import org.epi.util.Error;
 
 import java.util.Objects;
@@ -33,6 +35,14 @@ public class Statistics {
     private final ReadOnlyStringWrapper text = new ReadOnlyStringWrapper(this, "text",
             "healthy = 0, infected = 0, recovered = 0, deceased = 0.");
 
+    private XYChart.Series<Double, Integer> dataSeriesDeceased;
+
+    private XYChart.Series<Double, Integer> dataSeriesInfected;
+
+    private XYChart.Series<Double, Integer> dataSeriesHealthy;
+
+    private XYChart.Series<Double, Integer> dataSeriesRecovered;
+
     //---------------------------- Constructor ----------------------------
 
     /**
@@ -52,6 +62,18 @@ public class Statistics {
         this.deceased = new SimpleIntegerProperty(0);
 
         this.initPop = new SimpleIntegerProperty(healthy.get() + infected.get() + recovered.get());
+
+        this.dataSeriesHealthy = new XYChart.Series<>();
+        this.dataSeriesDeceased = new XYChart.Series<>();
+        this.dataSeriesInfected = new XYChart.Series<>();
+        this.dataSeriesRecovered = new XYChart.Series<>();
+
+        dataSeriesRecovered.getData().add(new XYChart.Data<>(0.0,0));
+        dataSeriesInfected.getData().add(new XYChart.Data<>(0.0,1));
+        dataSeriesDeceased.getData().add(new XYChart.Data<>(0.0,0));
+        dataSeriesHealthy.getData().add(new XYChart.Data<>(0.0,getInitPop()));
+
+
     }
 
     //---------------------------- Helper methods ----------------------------
@@ -98,6 +120,13 @@ public class Statistics {
         deceased.set(initPop.get() - healthy.get() - infected.get() - recovered.get());
 
         text.set(toString());
+
+        double time = world.getTotalElapsedSeconds();
+
+        dataSeriesRecovered.getData().add(new XYChart.Data<>(time, getRecovered()));
+        dataSeriesInfected.getData().add(new XYChart.Data<>(time, getInfected()));
+        dataSeriesHealthy.getData().add(new XYChart.Data<>(time, getHealthy()));
+        dataSeriesDeceased.getData().add(new XYChart.Data<>(time, getDeceased()));
     }
 
     //---------------------------- Getters and Setters ----------------------------
@@ -128,6 +157,7 @@ public class Statistics {
     public int getInfected() {
         return infected.get();
     }
+
 
     /**
      * Getter for {@link #infected} {@link IntegerProperty}
@@ -199,6 +229,38 @@ public class Statistics {
      */
     public ReadOnlyStringProperty getTextProperty() {
         return text.getReadOnlyProperty();
+    }
+
+    public void setDataSeriesRecovered(XYChart.Series<Double, Integer> dataSeriesRecovered) {
+        this.dataSeriesRecovered = dataSeriesRecovered;
+    }
+
+    public void setDataSeriesHealthy(XYChart.Series<Double, Integer> dataSeriesHealthy) {
+        this.dataSeriesHealthy = dataSeriesHealthy;
+    }
+
+    public void setDataSeriesInfected(XYChart.Series<Double, Integer> dataSeriesInfected) {
+        this.dataSeriesInfected = dataSeriesInfected;
+    }
+
+    public void setDataSeriesDeceased(XYChart.Series<Double, Integer> dataSeriesDeceased) {
+        this.dataSeriesDeceased = dataSeriesDeceased;
+    }
+
+    public XYChart.Series<Double,Integer> getDataSeriesRecovered(){
+        return dataSeriesRecovered;
+    }
+
+    public XYChart.Series<Double,Integer> getDataSeriesInfected(){
+        return dataSeriesInfected;
+    }
+
+    public XYChart.Series<Double,Integer> getDataSeriesHealthy(){
+        return dataSeriesHealthy;
+    }
+
+    public XYChart.Series<Double,Integer> getDataSeriesDeceased(){
+        return dataSeriesDeceased;
     }
 
 }
