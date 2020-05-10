@@ -4,23 +4,16 @@ import javafx.collections.FXCollections;
 import org.epi.util.Error;
 
 import javafx.geometry.Point2D;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
 import static org.epi.model.Model.HUMAN_RADIUS;
+import static org.epi.util.Clip.clip;
 
 /** A simple model of a location.
  * The class is used as a graphical representation of a location in the simulator.*/
 public class Location {
-
-    /** The width of this area in pixels.*/
-    private final DoubleProperty width;
-
-    /** The height of this area in pixels.*/
-    private final DoubleProperty height;
 
     /** The graphical representation of this location.*/
     private final Pane area;
@@ -44,27 +37,18 @@ public class Location {
         layoutCheck(width);
         layoutCheck(height);
 
-        this.width = new SimpleDoubleProperty(width);
-        this.height = new SimpleDoubleProperty(height);
-
         this.area = new Pane();
-        setConstantSize();
+        this.area.setPrefSize(width, height);
+        this.area.setMinSize(width, height);
+        this.area.setMaxSize(width, height);
+        clip(this.area);
 
         this.population = FXCollections.observableArrayList();
 
         this.spatialHash = new SpatialHash(this);
-
         updateHash();
-        initEvents();
-    }
 
-    /**
-     * Set the area size to be constant.
-     */
-    private void setConstantSize() {
-        area.setPrefSize(width.get(), height.get());
-        area.setMinSize(width.get(), height.get());
-        area.setMaxSize(width.get(), height.get());
+        initEvents();
     }
 
     /**
@@ -93,8 +77,8 @@ public class Location {
      * @param model a human's graphical representation
      */
     private void setPosition(Model model) {
-        model.setCenterX(HUMAN_RADIUS +  Math.random() * (width.get() - Model.HUMAN_DIAMETER));
-        model.setCenterY(HUMAN_RADIUS +  Math.random() * (height.get() - Model.HUMAN_DIAMETER));
+        model.setCenterX(HUMAN_RADIUS +  Math.random() * (area.getPrefWidth() - Model.HUMAN_DIAMETER));
+        model.setCenterY(HUMAN_RADIUS +  Math.random() * (area.getPrefHeight() - Model.HUMAN_DIAMETER));
     }
 
     /**
@@ -129,17 +113,17 @@ public class Location {
 
             boolean onLeftWall = model.getCenterX() - model.getRadius() <= 0 && velocity.getX() < 0;
 
-            boolean onRightWall = model.getCenterX() + model.getRadius() >= width.get() && velocity.getX() > 0;
+            boolean onRightWall = model.getCenterX() + model.getRadius() >= area.getPrefWidth() && velocity.getX() > 0;
 
             boolean onBottomWall = model.getCenterY() - model.getRadius() <= 0 && velocity.getY() < 0;
 
-            boolean onTopWall = model.getCenterY() + model.getRadius() >= height.get() && velocity.getY() > 0;
+            boolean onTopWall = model.getCenterY() + model.getRadius() >= area.getPrefHeight() && velocity.getY() > 0;
 
             if(onLeftWall) {
                 model.setCenterX(HUMAN_RADIUS);
                 model.setVelocity(- velocity.getX(), velocity.getY());
             } else if (onRightWall) {
-                model.setCenterX(width.get() - HUMAN_RADIUS);
+                model.setCenterX(area.getPrefWidth() - HUMAN_RADIUS);
                 model.setVelocity(- velocity.getX(), velocity.getY());
             }
 
@@ -147,7 +131,7 @@ public class Location {
                 model.setCenterY(HUMAN_RADIUS);
                 model.setVelocity(velocity.getX(), - velocity.getY());
             } else if (onTopWall) {
-                model.setCenterY(height.get() - HUMAN_RADIUS);
+                model.setCenterY(area.getPrefHeight() - HUMAN_RADIUS);
                 model.setVelocity(velocity.getX(), - velocity.getY());
             }
 
@@ -163,24 +147,6 @@ public class Location {
      */
     public Pane getArea() {
         return area;
-    }
-
-    /**
-     * Getter for {@link #width} as an int.
-     *
-     * @return {@link #width}
-     */
-    public int getWidth() {
-        return (int) width.get();
-    }
-
-    /**
-     * Getter for {@link #height} as an int.
-     *
-     * @return {@link #height}
-     */
-    public int getHeight() {
-        return (int) height.get();
     }
 
     /**

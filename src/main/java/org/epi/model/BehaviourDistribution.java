@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import java.util.List;
 
 import static org.epi.model.Behaviour.AVOIDANT;
-import static org.epi.model.Behaviour.DISTANCING;
+import static org.epi.model.Behaviour.INERT;
 import static org.epi.model.Behaviour.NORMAL;
 
 /**
@@ -18,16 +18,16 @@ import static org.epi.model.Behaviour.NORMAL;
 public class BehaviourDistribution {
 
     /** The behaviour distribution.*/
-    private EnumeratedDistribution<Behaviour> behaveDist;
+    private EnumeratedDistribution<Behaviour> behaviourDistribution;
 
-    /** The probability of normal behaviour.*/
-    private final DoubleProperty normalProp;
+    /** The proportion of normal behaviour.*/
+    private final DoubleProperty normalProportion;
 
-    /** The probability of social distancing behaviour.*/
-    private final DoubleProperty distancingProp;
+    /** The proportion of social distancing behaviour.*/
+    private final DoubleProperty inertProportion;
 
-    /** The probability of avoidant behaviour.*/
-    private final DoubleProperty avoidantProp;
+    /** The proportion of avoidant behaviour.*/
+    private final DoubleProperty avoidantProportion;
 
     //---------------------------- Constructor ----------------------------
 
@@ -35,23 +35,23 @@ public class BehaviourDistribution {
      * Create a behaviour distribution. Inputs normalises proportions to probabilities.
      *
      * @param normalProp the proportion of normal behaviour
-     * @param distancingProp the proportion of social distancing behaviour
+     * @param inertProp the proportion of social distancing behaviour
      * @param avoidantProp The proportion of avoidant behaviour
      * @throws org.apache.commons.math3.exception.NotPositiveException if any of the proportions are negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if any of the proportions are infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if any of the proportions are NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException all of the proportions are 0.
      */
-    public BehaviourDistribution(double normalProp, double distancingProp, double avoidantProp) {
-        this.normalProp = new SimpleDoubleProperty(normalProp);
-        this.distancingProp = new SimpleDoubleProperty(distancingProp);
-        this.avoidantProp = new SimpleDoubleProperty(avoidantProp);
+    public BehaviourDistribution(double normalProp, double inertProp, double avoidantProp) {
+        this.normalProportion = new SimpleDoubleProperty(normalProp);
+        this.inertProportion = new SimpleDoubleProperty(inertProp);
+        this.avoidantProportion = new SimpleDoubleProperty(avoidantProp);
 
-        Pair<Behaviour, Double> normal = new Pair<>(NORMAL, this.normalProp.get());
-        Pair<Behaviour, Double> distancing = new Pair<>(DISTANCING, this.distancingProp.get());
-        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, this.avoidantProp.get());
+        Pair<Behaviour, Double> normal = new Pair<>(NORMAL, this.normalProportion.get());
+        Pair<Behaviour, Double> distancing = new Pair<>(INERT, this.inertProportion.get());
+        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, this.avoidantProportion.get());
 
-        this.behaveDist = new EnumeratedDistribution<>(List.of(normal, distancing, avoidant));
+        this.behaviourDistribution = new EnumeratedDistribution<>(List.of(normal, distancing, avoidant));
     }
 
     //---------------------------- Simulator action ----------------------------
@@ -62,105 +62,105 @@ public class BehaviourDistribution {
      * @return a behaviour
      */
     public Behaviour sample() {
-        return behaveDist.sample();
+        return behaviourDistribution.sample();
     }
 
     //---------------------------- Getters & Setters ----------------------------
 
     /**
-     * Getter for {@link #normalProp}.
+     * Getter for {@link #normalProportion}.
      *
-     * @return {@link #normalProp}
+     * @return {@link #normalProportion}
      */
-    public double getNormalProp() {
-        return normalProp.get();
+    public double getNormalProportion() {
+        return normalProportion.get();
     }
 
     /**
-     * Getter for {@link #normalProp} property.
+     * Getter for {@link #normalProportion} property.
      *
-     * @return {@link #normalProp} property
+     * @return {@link #normalProportion} property
      */
-    public DoubleProperty normalPropProperty() {
-        return normalProp;
+    public DoubleProperty normalProportionProperty() {
+        return normalProportion;
     }
 
     /**
-     * Setter for {@link #normalProp}.
+     * Setter for {@link #normalProportion}.
      *
-     * @param normalProp {@link #normalProp}
+     * @param normalProportion {@link #normalProportion}
      * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the proportions are 0.
      */
-    public void setNormalProp(double normalProp) {
-        this.normalProp.set(normalProp);
-        setBehaveDist();
+    public void setNormalProportion(double normalProportion) {
+        this.normalProportion.set(normalProportion);
+        setBehaviourDistribution();
     }
 
     /**
-     * Getter for {@link #distancingProp}.
+     * Getter for {@link #inertProportion}.
      *
-     * @return {@link #distancingProp}
+     * @return {@link #inertProportion}
      */
-    public double getDistancingProp() {
-        return distancingProp.get();
+    public double getInertProportion() {
+        return inertProportion.get();
     }
 
     /**
-     * Getter for {@link #distancingProp} property.
+     * Getter for {@link #inertProportion} property.
      *
-     * @return {@link #distancingProp} property
+     * @return {@link #inertProportion} property
      */
-    public DoubleProperty distancingPropProperty() {
-        return distancingProp;
+    public DoubleProperty inertProportionProperty() {
+        return inertProportion;
     }
 
     /**
-     * Setter for {@link #distancingProp}.
+     * Setter for {@link #inertProportion}.
      *
-     * @param distancingProp {@link #distancingProp}
+     * @param inertProportion {@link #inertProportion}
      * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the probabilities are 0.
      */
-    public void setDistancingProp(double distancingProp) {
-        this.distancingProp.set(distancingProp);
-        setBehaveDist();
+    public void setInertProportion(double inertProportion) {
+        this.inertProportion.set(inertProportion);
+        setBehaviourDistribution();
     }
 
     /**
-     * Getter for {@link #avoidantProp}.
+     * Getter for {@link #avoidantProportion}.
      *
-     * @return {@link #avoidantProp}
+     * @return {@link #avoidantProportion}
      */
-    public double getAvoidantProp() {
-        return avoidantProp.get();
+    public double getAvoidantProportion() {
+        return avoidantProportion.get();
     }
 
     /**
-     * Getter for {@link #avoidantProp} property.
+     * Getter for {@link #avoidantProportion} property.
      *
-     * @return {@link #avoidantProp} property
+     * @return {@link #avoidantProportion} property
      */
-    public DoubleProperty avoidantPropProperty() {
-        return avoidantProp;
+    public DoubleProperty avoidantProportionProperty() {
+        return avoidantProportion;
     }
 
     /**
-     * Setter for {@link #avoidantProp}.
+     * Setter for {@link #avoidantProportion}.
      *
-     * @param avoidantProp {@link #avoidantProp}
+     * @param avoidantProportion {@link #avoidantProportion}
      * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the probabilities are 0.
      */
-    public void setAvoidantProp(double avoidantProp) {
-        this.avoidantProp.set(avoidantProp);
-        setBehaveDist();
+    public void setAvoidantProportion(double avoidantProportion) {
+        this.avoidantProportion.set(avoidantProportion);
+        setBehaviourDistribution();
     }
 
     /**
@@ -171,12 +171,12 @@ public class BehaviourDistribution {
      * @throws org.apache.commons.math3.exception.NotANumberException if any of the probabilities are NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException all of the probabilities are 0.
      */
-    public void setBehaveDist() {
-        Pair<Behaviour, Double> normal = new Pair<>(NORMAL, normalProp.get());
-        Pair<Behaviour, Double> distancing = new Pair<>(DISTANCING, distancingProp.get());
-        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, avoidantProp.get());
+    public void setBehaviourDistribution() {
+        Pair<Behaviour, Double> normal = new Pair<>(NORMAL, normalProportion.get());
+        Pair<Behaviour, Double> distancing = new Pair<>(INERT, inertProportion.get());
+        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, avoidantProportion.get());
 
-        this.behaveDist = new EnumeratedDistribution<>(List.of(normal, distancing, avoidant));
+        this.behaviourDistribution = new EnumeratedDistribution<>(List.of(normal, distancing, avoidant));
     }
 
 }

@@ -10,8 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import org.epi.util.Error;
 
-import static org.epi.model.SimulationState.*;
-import static org.epi.util.Clip.clip;
+import static org.epi.model.SimulationState.ENDED;
+import static org.epi.model.SimulationState.PAUSE;
+import static org.epi.model.SimulationState.RUN;
 
 public class SimulatorController extends Controller {
 
@@ -40,14 +41,8 @@ public class SimulatorController extends Controller {
         Simulator simulator = getMainApp().getSimulator();
         Statistics statistics = simulator.getStatistics();
 
-        Pane city = simulator.getWorld().getCity().getArea();
-        Pane quarantine = simulator.getWorld().getQuarantine().getArea();
-
-        clip(city);
-        clip(quarantine);
-
-        this.cityPane.getChildren().add(city);
-        this.quarantinePane.getChildren().add(quarantine);
+        this.cityPane.getChildren().add(simulator.getWorld().getCity().getArea());
+        this.quarantinePane.getChildren().add(simulator.getWorld().getQuarantine().getArea());
 
         this.deceasedLabel.textProperty().bind(statistics.deceasedProperty().asString());
         this.recoveredLabel.textProperty().bind(statistics.recoveredProperty().asString());
@@ -96,7 +91,7 @@ public class SimulatorController extends Controller {
     @FXML
     private void handlePlay() {
         Simulator simulator = getMainApp().getSimulator();
-        SimulationState result = null;
+        SimulationState result;
 
         switch (simulator.getSimulationState()) {
             case RUN:

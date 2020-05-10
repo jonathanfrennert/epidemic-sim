@@ -33,7 +33,7 @@ public enum Behaviour{
         }
 
     },
-    DISTANCING {
+    INERT {
 
         /** {@inheritDoc} */
         @Override
@@ -44,7 +44,7 @@ public enum Behaviour{
 
         /**
          * {@inheritDoc}
-         * Social distancing behaviour is to stay at home (constant).
+         * Inert behaviour is to stay at home (constant).
          */
         @Override
         public void adjustToOthers(Model model) {
