@@ -1,13 +1,16 @@
 package org.epi.view;
 
-import org.epi.MainApp;
+import com.jfoenix.controls.JFXButton;
+import org.epi.model.SimulationState;
 import org.epi.model.Simulator;
 import org.epi.model.Statistics;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import org.epi.util.Error;
 
+import static org.epi.model.SimulationState.*;
 import static org.epi.util.Clip.clip;
 
 public class SimulatorController extends Controller {
@@ -26,36 +29,14 @@ public class SimulatorController extends Controller {
     @FXML
     private Label infectedLabel;
 
-    /**
-     * The constructor.
-     * The constructor is called before the initialize() method.
-     */
-    public SimulatorController() {
-    }
-
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
     @FXML
-    private void initialize() {
-    }
-
-    /**
-     * {@inheritDoc}
-     * Assign the simulator to the corresponding holders.
-     */
-    @Override
-    public void setMainApp(MainApp mainApp) {
-        super.setMainApp(mainApp);
-        showSimulation();
-    }
+    private JFXButton playButton;
 
     /**
      * Fills the panes with the city and quarantine from the main application's simulator as well
      * as assigns statistics labels.
      */
-    private void showSimulation() {
+    public void showSimulation() {
         Simulator simulator = getMainApp().getSimulator();
         Statistics statistics = simulator.getStatistics();
 
@@ -72,6 +53,82 @@ public class SimulatorController extends Controller {
         this.recoveredLabel.textProperty().bind(statistics.recoveredProperty().asString());
         this.healthyLabel.textProperty().bind(statistics.healthyProperty().asString());
         this.infectedLabel.textProperty().bind(statistics.infectedProperty().asString());
+
+        this.playButton.getStyleClass().add(simulator.getSimulationState().styleClass);
+        initEvents();
+    }
+
+    /**
+     * Initialise event listeners
+     */
+    private void initEvents() {
+        // Switch the style class of the play button.
+        getMainApp().getSimulator().getSimulationStateProperty().addListener((observable, oldValue, newValue) -> {
+            styleSwitch(newValue);
+
+            if (newValue == ENDED) {
+                playButton.setDisable(true);
+            }
+        });
+
+    }
+
+    /**
+     * Switch the style class of the play button to reflect the simulation state.
+     *
+     * @param simulationState the simulation state being switched to
+     */
+    private void styleSwitch(SimulationState simulationState) {
+        for (SimulationState simState : SimulationState.values()) {
+            playButton.getStyleClass().remove(simState.styleClass);
+        }
+
+        playButton.getStyleClass().add(simulationState.styleClass);
+    }
+
+    //---------------------------- User actions ----------------------------
+
+    /**
+     * Switch the simulation state.
+     *
+     * @throws IllegalStateException if the current simulator's state is invalid
+     */
+    @FXML
+    private void handlePlay() {
+        Simulator simulator = getMainApp().getSimulator();
+        SimulationState result = null;
+
+        switch (simulator.getSimulationState()) {
+            case RUN:
+                result = PAUSE;
+                break;
+            case PAUSE:
+                result = RUN;
+                break;
+            default:
+                throw new IllegalStateException(Error.ERROR_TAG + " Simulator state is invalid: " + simulator.getSimulationState());
+        }
+
+        simulator.setSimulationState(result);
+    }
+
+    /**
+     * Reset the simulator.
+     */
+    @FXML
+    private void handleReset() {
+        Simulator simulator = getMainApp().getSimulator();
+
+        Pane city = simulator.getWorld().getCity().getArea();
+        Pane quarantine = simulator.getWorld().getQuarantine().getArea();
+
+        this.cityPane.getChildren().remove(city);
+        this.quarantinePane.getChildren().remove(quarantine);
+
+        getMainApp().setSimulator(simulator.reset());
+
+        playButton.setDisable(false);
+        showSimulation();
     }
 
 }

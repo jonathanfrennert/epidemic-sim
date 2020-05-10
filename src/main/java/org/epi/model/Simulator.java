@@ -1,13 +1,13 @@
 package org.epi.model;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import org.epi.util.Error;
-
-import javafx.animation.AnimationTimer;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import static org.epi.model.SimulationState.*;
 
 /** The simulator class.
  *  Used to interface with all the simulator components.*/
@@ -19,83 +19,90 @@ public class Simulator {
      * issues and humans going over location edges.*/
     private static final int MAX_POPULATION = 300;
 
-    /** The simulator timer.*/
-    private final AnimationTimer timer = new AnimationTimer() {
+    /** The state of the simulator.*/
+    private final Property<SimulationState> simulationState;
 
-        /** The order magnitude of nano units.*/
-        private static final double NANO = 1 / 1000_000_000.00;
+    /** The simulator player.*/
+    private final Player player;
 
-        /** Last time world view was updated.*/
-        final LongProperty lastUpdateTime = new SimpleLongProperty(0);
-
-        /**
-         * Handles all actions that happen in each frame.
-         *
-         * @param timestamp The timestamp of the current frame given in nanoseconds. This value will be the same for all
-         *                  AnimationTimers called during one frame.
-         */
-        @Override
-        public void handle(long timestamp) {
-            if (lastUpdateTime.get() > 0) {
-                double elapsedSeconds = (timestamp - lastUpdateTime.get()) * NANO;
-
-                world(elapsedSeconds);
-                pathogen(elapsedSeconds);
-                immuneSystem(elapsedSeconds);
-                model(elapsedSeconds);
-            }
-            statistics.update();
-
-            if (endingIsReached()) {
-                world(0);
-                timer.stop();
-            }
-
-            lastUpdateTime.set(timestamp);
-        }
-
-    };
+    /** The world's statistics.*/
+    private final Statistics statistics;
 
     /** The world.*/
     private final World world;
 
-    /** The world's statistics.*/
-    private final Statistics statistics;
+    /** The behaviour distribution for this simulator.*/
+    private final BehaviourDistribution behaviourDistribution;
+
+    /** The pathogen for this simulator.*/
+    private final Pathogen pathogen;
+
+    /** The population total for this simulator.*/
+    private final int populationTotal;
+
+    /** The infected total for this simulator.*/
+    private final int infectedTotal;
 
     //---------------------------- Constructor ----------------------------
 
     /**
      * Initialise a simulator.
      *
-     * @param popTotal the population total
      * @param world the simulated world
-     * @param behaveDist distribution of behaviours in the population
+     * @param behaviourDistribution distribution of behaviours in the population
      * @param pathogen the simulated pathogen
+     * @param populationTotal the population total
+     * @param infectedTotal the number of infected in the population
      * @throws NullPointerException if the world, behaviour distribution, or pathogen is null
      * @throws IllegalArgumentException if the population total is less than {@value MIN_POPULATION}
-     *                                  or larger than the maximum capacity for the city
+     *                                  or larger than the {@value MAX_POPULATION} or if the infected total is less than
+     *                                  {@value MIN_POPULATION} or more than the population total
      */
-    public Simulator(int popTotal, World world, BehaviourDistribution behaveDist, Pathogen pathogen) {
+    public Simulator(World world, BehaviourDistribution behaviourDistribution, Pathogen pathogen,
+                     int populationTotal, int infectedTotal) {
         Objects.requireNonNull(world, Error.getNullMsg("world"));
-        Objects.requireNonNull(behaveDist, Error.getNullMsg("behaviour distribution"));
+        Objects.requireNonNull(behaviourDistribution, Error.getNullMsg("behaviour distribution"));
         Objects.requireNonNull(pathogen, Error.getNullMsg("pathogen"));
-        Error.intervalCheck("population", MIN_POPULATION, MAX_POPULATION, popTotal);
+        Error.intervalCheck("population", MIN_POPULATION, MAX_POPULATION, populationTotal);
+        Error.intervalCheck("infected population", MIN_POPULATION, populationTotal, infectedTotal);
 
         this.world = world;
+        this.behaviourDistribution = behaviourDistribution;
+        this.pathogen = pathogen;
+        this.populationTotal = populationTotal;
+        this.infectedTotal = infectedTotal;
 
-        Human patientZero = new Human(world.getCity(), behaveDist.sample());
-        patientZero.setPathogen(pathogen);
-        patientZero.status();
+        for (int i = 0; i < infectedTotal; i++) {
+            Human infected = new Human(world.getCity(), behaviourDistribution.sample());
+            infected.setPathogen(pathogen.reproduce());
+            infected.status();
+        }
 
-        // Healthy individuals.
-        for (int i = 0; i < popTotal - 1; i++) {
-            new Human(world.getCity(), behaveDist.sample());
+        for (int i = 0; i < populationTotal - infectedTotal; i++) {
+            new Human(world.getCity(), behaviourDistribution.sample());
         }
 
         this.statistics = new Statistics(world);
+        this.simulationState = new SimpleObjectProperty<>(PAUSE);
+        this.player = new Player(this);
     }
 
     //---------------------------- Simulator actions ----------------------------
+
+    /**
+     * Perform all updates for the simulator given the elapsed seconds.
+     *
+     * @param elapsedSeconds the number of seconds elapsed since the world was last updated.
+     */
+    public void update(double elapsedSeconds) {
+        world(elapsedSeconds);
+        pathogen(elapsedSeconds);
+        immuneSystem(elapsedSeconds);
+        model(elapsedSeconds);
+        statistics.update();
+    }
+
+    //---------------------------- Helper methods ----------------------------
 
     /**
      * Perform all world changes in the elapsed seconds.
@@ -138,24 +145,68 @@ public class Simulator {
     }
 
     /**
-     * Check whether the world view has reached any end conditions
+     * Check whether the world view has reached any end conditions.
      */
-    private boolean endingIsReached() {
+    public boolean ended() {
         boolean isPathogenGone = statistics.getInfected() == 0;
         boolean isHumanityGone = statistics.getDeceased() == statistics.getInitPop();
 
         return isPathogenGone || isHumanityGone;
     }
 
-    //---------------------------- Getters ----------------------------
+    /**
+     * Reset the simulator to its initial state, with new positions for all the humans.
+     *
+     * @return a reset version of this simulator
+     */
+    public Simulator reset() {
+        World world = new World(this.world.getDetectionRate(), this.world.getTestingFrequency());
+        return new Simulator(world, behaviourDistribution, pathogen, populationTotal, infectedTotal);
+    }
+
+    //---------------------------- Getters & Setters ----------------------------
 
     /**
-     * Getter for {@link #timer}.
+     * Getter for {@link #simulationState}
      *
-     * @return {@link #timer}
+     * @return {@link #simulationState}
      */
-    public AnimationTimer getTimer() {
-        return timer;
+    public SimulationState getSimulationState() {
+        return simulationState.getValue();
+    }
+
+    /**
+     * Getter for {@link #simulationState} property
+     *
+     * @return {@link #simulationState} property
+     */
+    public Property<SimulationState> getSimulationStateProperty() {
+        return simulationState;
+    }
+
+    /**
+     * Setter for {@link #simulationState}
+     *
+     * @param state a state
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void setSimulationState(SimulationState state) {
+        Objects.requireNonNull(state, Error.getNullMsg("state"));
+
+        if (simulationState.getValue() == ENDED) {
+            return;
+        }
+
+        this.simulationState.setValue(state);
+    }
+
+    /**
+     * Getter for {@link #player}.
+     *
+     * @return {@link #player}
+     */
+    public Player getPlayer() {
+        return player;
     }
 
     /**

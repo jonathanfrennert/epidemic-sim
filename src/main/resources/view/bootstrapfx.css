@@ -792,8 +792,8 @@ a.bg-danger:focused {
   -fx-border-radius: 0, 0, 3px, 0;
 }
 
-.btn-icon-play {
-  -fx-background-image: url("../images/Play.png");
+.btn-icon-run {
+  -fx-background-image: url("../images/Run.png");
   -fx-background-size: 15px;
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;

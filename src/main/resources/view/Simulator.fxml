@@ -3,14 +3,12 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXToggleNode?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.StackedAreaChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -490,22 +488,8 @@
       </HBox>
       <HBox fx:id="playerBox" layoutX="405.0" layoutY="556.0" prefHeight="54.0" prefWidth="925.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <JFXToggleNode contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="SOMETIMES">
-               <styleClass>
-                  <String fx:value="btn-icon-play" />
-                  <String fx:value="btn-primary" />
-               </styleClass>
-               <toggleGroup>
-                  <ToggleGroup fx:id="timerGroup" />
-               </toggleGroup>
-            </JFXToggleNode>
-            <JFXToggleNode contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" toggleGroup="$timerGroup" HBox.hgrow="SOMETIMES">
-               <styleClass>
-                  <String fx:value="btn-icon-pause" />
-                  <String fx:value="btn-primary" />
-               </styleClass>
-            </JFXToggleNode>
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="30.0" text=" " HBox.hgrow="SOMETIMES">
+            <JFXButton fx:id="playButton" onAction="#handlePlay" prefHeight="30.0" prefWidth="30.0" styleClass="btn-primary" text=" " />
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="30.0" prefWidth="30.0" text=" " HBox.hgrow="SOMETIMES">
                <styleClass>
                   <String fx:value="btn-icon-reset" />
                   <String fx:value="btn-primary" />

@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /** Main class for the application.
  *
@@ -50,10 +51,10 @@ public class MainApp extends Application {
     public MainApp() {
         // Added a sample simulation
         World world = new World(0.5,15);
-        BehaviourDistribution dist = new BehaviourDistribution(1,0, 0);
-        Pathogen pathogen = new Pathogen(5,0.1,0.3,0.8,10);
+        BehaviourDistribution dist = new BehaviourDistribution(1,1, 0);
+        Pathogen pathogen = new Pathogen(5,0.05,0.3,0.8,10);
 
-        simulator = new Simulator(300, world, dist, pathogen);
+        simulator = new Simulator(world, dist, pathogen, 300, 5);
     }
 
     /**
@@ -128,22 +129,32 @@ public class MainApp extends Application {
             // Give the controller access to the main app.
             SimulatorController controller = loader.getController();
             controller.setMainApp(this);
-
-            this.simulator.getTimer().start();
+            controller.showSimulation();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    //---------------------------- Helper methods ----------------------------
+    //---------------------------- Getters & Setters ----------------------------
 
     /**
-     * Getter for {@link #simulator}
+     * Getter for {@link #simulator}.
      *
      * @return {@link #simulator}
      */
     public Simulator getSimulator() {
         return simulator;
+    }
+
+    /**
+     * Setter for {@link #simulator}.
+     *
+     * @param simulator {@link #simulator}
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void setSimulator(Simulator simulator) {
+        Objects.requireNonNull(simulator);
+        this.simulator = simulator;
     }
 
 }

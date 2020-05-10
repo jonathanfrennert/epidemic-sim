@@ -104,7 +104,7 @@ public class Pathogen {
      *
      * @return create a new copy of this pathogen
      */
-    private Pathogen reproduce()  {
+    public Pathogen reproduce()  {
         return new Pathogen(this.lifespan.get(),
                 this.transmissionRisk.get(),
                 this.fatalityRate.get(),
