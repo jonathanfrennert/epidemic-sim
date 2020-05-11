@@ -1,6 +1,7 @@
 package org.epi.view;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import org.epi.model.SimulationState;
 import org.epi.model.Simulator;
 import org.epi.model.Statistics;
@@ -36,6 +37,17 @@ public class SimulatorController extends Controller {
 
     @FXML
     private JFXButton playButton;
+
+    @FXML
+    private JFXTextField NormalPropTextField;
+    @FXML
+    private JFXTextField InertPropTextField;
+    @FXML
+    private JFXTextField AvoidantProportionTextField;
+    @FXML
+    private JFXTextField LifespanTextField;
+    @FXML
+    private JFXTextField ImmunityDurationTextField;
 
     /**
      * Fills the panes with the city and quarantine from the main application's simulator as well
