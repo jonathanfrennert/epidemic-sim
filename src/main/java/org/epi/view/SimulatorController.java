@@ -10,6 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import org.epi.util.Error;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.epi.model.SimulationState.ENDED;
 import static org.epi.model.SimulationState.PAUSE;
 import static org.epi.model.SimulationState.RUN;
@@ -122,7 +126,10 @@ public class SimulatorController extends Controller {
 
         getMainApp().setSimulator(simulator.reset());
 
+        List<String> buttonStyles = Arrays.stream(SimulationState.values()).map(x -> x.styleClass).collect(Collectors.toList());
+        playButton.getStyleClass().removeIf(buttonStyles::contains);
         playButton.setDisable(false);
+
         showSimulation();
     }
 

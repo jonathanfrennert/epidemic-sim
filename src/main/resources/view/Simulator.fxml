@@ -385,7 +385,7 @@
                   <Insets />
                </opaqueInsets>
             </JFXSlider>
-            <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+            <JFXButton alignment="BOTTOM_CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
@@ -488,8 +488,8 @@
       </HBox>
       <HBox fx:id="playerBox" layoutX="405.0" layoutY="556.0" prefHeight="54.0" prefWidth="925.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <JFXButton fx:id="playButton" onAction="#handlePlay" prefHeight="30.0" prefWidth="30.0" styleClass="btn-primary" text=" " />
-            <JFXButton alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="30.0" prefWidth="30.0" text=" " HBox.hgrow="SOMETIMES">
+            <JFXButton fx:id="playButton" buttonType="RAISED" onAction="#handlePlay" prefHeight="30.0" prefWidth="30.0" styleClass="btn-primary" text=" " />
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="30.0" prefWidth="30.0" text=" " HBox.hgrow="SOMETIMES">
                <styleClass>
                   <String fx:value="btn-icon-reset" />
                   <String fx:value="btn-primary" />
