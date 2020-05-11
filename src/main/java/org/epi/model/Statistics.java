@@ -4,29 +4,43 @@ import org.epi.util.Error;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.chart.XYChart;
 
 import java.util.Objects;
 
 /** Get real-time statistics for a simulator.*/
 public class Statistics {
 
-    /** The backreference to the world for these statistics.*/
+    /** The back reference to the world for these statistics.*/
     private final World world;
 
     /** Initial population count.*/
-    private final IntegerProperty initPop;
+    private final IntegerProperty initialPopulation;
 
     /** The number of healthy people in the given simulation.*/
     private final IntegerProperty healthy;
 
+    /** {@link #healthy} data series.*/
+    private final XYChart.Series<Double, Integer> dataSeriesHealthy;
+
     /** The number of infected humans in the given simulation.*/
     private final IntegerProperty infected;
+
+    /** {@link #infected} data series.*/
+    private final XYChart.Series<Double, Integer> dataSeriesInfected;
 
     /** The number of recovered humans in the given simulation.*/
     private final IntegerProperty recovered;
 
+    /** {@link #recovered} data series.*/
+    private final XYChart.Series<Double, Integer> dataSeriesRecovered;
+
     /** The number difference between the current population count and the initial population count.*/
     private final IntegerProperty deceased;
+
+    /** {@link #deceased} data series.*/
+    private final XYChart.Series<Double, Integer> dataSeriesDeceased;
+
 
     //---------------------------- Constructor ----------------------------
 
@@ -46,7 +60,12 @@ public class Statistics {
         this.recovered = new SimpleIntegerProperty(getStatusCount(Status.RECOVERED));
         this.deceased = new SimpleIntegerProperty(0);
 
-        this.initPop = new SimpleIntegerProperty(healthy.get() + infected.get() + recovered.get());
+        this.initialPopulation = new SimpleIntegerProperty(healthy.get() + infected.get() + recovered.get());
+
+        this.dataSeriesHealthy = new XYChart.Series<>();
+        this.dataSeriesDeceased = new XYChart.Series<>();
+        this.dataSeriesInfected = new XYChart.Series<>();
+        this.dataSeriesRecovered = new XYChart.Series<>();
     }
 
     //---------------------------- Helper methods ----------------------------
@@ -75,10 +94,17 @@ public class Statistics {
         healthy.set(getStatusCount(Status.HEALTHY));
         infected.set(getStatusCount(Status.INFECTED));
         recovered.set(getStatusCount(Status.RECOVERED));
-        deceased.set(initPop.get() - healthy.get() - infected.get() - recovered.get());
+        deceased.set(initialPopulation.get() - healthy.get() - infected.get() - recovered.get());
+
+        double time = world.getTotalElapsedSeconds();
+
+        dataSeriesHealthy.getData().add(new XYChart.Data<>(time, healthy.get()));
+        dataSeriesInfected.getData().add(new XYChart.Data<>(time, infected.get()));
+        dataSeriesRecovered.getData().add(new XYChart.Data<>(time, recovered.get()));
+        dataSeriesDeceased.getData().add(new XYChart.Data<>(time, recovered.get()));
     }
 
-    //---------------------------- Getters and Setters ----------------------------
+    //---------------------------- Getters & Setters ----------------------------
 
     /**
      * Getter for {@link #healthy}.
@@ -106,6 +132,7 @@ public class Statistics {
     public int getInfected() {
         return infected.get();
     }
+
 
     /**
      * Getter for {@link #infected} {@link IntegerProperty}.
@@ -153,21 +180,37 @@ public class Statistics {
     }
 
     /**
-     * Getter for {@link #initPop}.
+     * Getter for {@link #initialPopulation}.
      *
-     * @return {@link #initPop}
+     * @return {@link #initialPopulation}
      */
-    public int getInitPop() {
-        return initPop.get();
+    public int getInitialPopulation() {
+        return initialPopulation.get();
     }
 
     /**
-     * Getter for {@link #initPop} {@link IntegerProperty}.
+     * Getter for {@link #initialPopulation} {@link IntegerProperty}.
      *
-     * @return {@link #initPop}
+     * @return {@link #initialPopulation}
      */
-    public IntegerProperty initPopProperty() {
-        return initPop;
+    public IntegerProperty initialPopulationProperty() {
+        return initialPopulation;
+    }
+
+    public XYChart.Series<Double,Integer> getDataSeriesRecovered(){
+        return dataSeriesRecovered;
+    }
+
+    public XYChart.Series<Double,Integer> getDataSeriesInfected(){
+        return dataSeriesInfected;
+    }
+
+    public XYChart.Series<Double,Integer> getDataSeriesHealthy(){
+        return dataSeriesHealthy;
+    }
+
+    public XYChart.Series<Double,Integer> getDataSeriesDeceased(){
+        return dataSeriesDeceased;
     }
 
 }

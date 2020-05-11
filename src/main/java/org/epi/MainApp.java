@@ -77,7 +77,7 @@ public class MainApp extends Application {
         // Set the application icon.
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/Icon.png").toExternalForm()));
 
-        //Set size specs.
+        //Set size specifications.
         this.primaryStage.setMinWidth(MIN_WIDTH);
         this.primaryStage.setMinHeight(MIN_HEIGHT);
         this.primaryStage.setMaxWidth(MAX_WIDTH);

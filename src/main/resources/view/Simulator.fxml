@@ -448,9 +448,9 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <HBox fx:id="statisticsBox" layoutY="432.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="430.0">
+      <HBox fx:id="statisticsBox" layoutY="432.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="430.0">
          <children>
-            <GridPane minHeight="100.0" styleClass="box">
+            <GridPane styleClass="box">
               <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" />
                 <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" />
@@ -519,7 +519,7 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </HBox.margin>
             </GridPane>
-            <StackedAreaChart legendSide="LEFT" minHeight="120.0" verticalGridLinesVisible="false" HBox.hgrow="SOMETIMES">
+            <StackedAreaChart fx:id="statsChart" legendSide="LEFT" stylesheets="@chartstyling.css" verticalGridLinesVisible="false" HBox.hgrow="SOMETIMES">
               <xAxis>
                 <NumberAxis minorTickVisible="false" side="BOTTOM" tickLabelsVisible="false" tickMarkVisible="false" />
               </xAxis>

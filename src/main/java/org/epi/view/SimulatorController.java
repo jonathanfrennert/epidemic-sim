@@ -1,23 +1,22 @@
 package org.epi.view;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import org.epi.model.SimulationState;
 import org.epi.model.Simulator;
 import org.epi.model.Statistics;
+import org.epi.util.Error;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.chart.StackedAreaChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import org.epi.util.Error;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.epi.model.SimulationState.ENDED;
-import static org.epi.model.SimulationState.PAUSE;
-import static org.epi.model.SimulationState.RUN;
+import static org.epi.model.SimulationState.*;
 
 public class SimulatorController extends Controller {
 
@@ -49,6 +48,9 @@ public class SimulatorController extends Controller {
     @FXML
     private JFXTextField ImmunityDurationTextField;
 
+    @FXML
+    private StackedAreaChart statsChart;
+
     /**
      * Fills the panes with the city and quarantine from the main application's simulator as well
      * as assigns statistics labels.
@@ -65,7 +67,19 @@ public class SimulatorController extends Controller {
         this.healthyLabel.textProperty().bind(statistics.healthyProperty().asString());
         this.infectedLabel.textProperty().bind(statistics.infectedProperty().asString());
 
+        //TODO fix unsafe operations
+
+        statsChart.createSymbolsProperty().setValue(false);
+        statsChart.setLegendVisible(false);
+        statsChart.setAnimated(true);
+
+        statsChart.getData().addAll(statistics.getDataSeriesDeceased(),
+                statistics.getDataSeriesRecovered(),
+                statistics.getDataSeriesHealthy(),
+                statistics.getDataSeriesInfected());
+
         this.playButton.getStyleClass().add(simulator.getSimulationState().styleClass);
+
         initEvents();
     }
 

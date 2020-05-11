@@ -149,7 +149,7 @@ public class Simulator {
      */
     public boolean ended() {
         boolean isPathogenGone = statistics.getInfected() == 0;
-        boolean isHumanityGone = statistics.getDeceased() == statistics.getInitPop();
+        boolean isHumanityGone = statistics.getDeceased() == statistics.getInitialPopulation();
 
         return isPathogenGone || isHumanityGone;
     }
