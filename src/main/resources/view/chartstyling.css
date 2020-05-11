@@ -1,15 +1,14 @@
-/*
-TODO change colors to fit EpiSim color scheme
-*/
+.default-color0.chart-area-symbol { -fx-background-color: #1e90ff, #ffffff; }
+.default-color1.chart-area-symbol { -fx-background-color: #9932cc, #ffffff; }
+.default-color2.chart-area-symbol { -fx-background-color: #dc143c, #ffffff; }
+.default-color3.chart-area-symbol { -fx-background-color: #696969, #ffffff; }
 
-.default-color0.chart-area-symbol { -fx-background-color: #e9967a, #ffa07a; }
-.default-color1.chart-area-symbol { -fx-background-color: #f0e68c, #fffacd; }
-.default-color2.chart-area-symbol { -fx-background-color: #dda0dd, #d8bfd855; }
+.default-color0.chart-series-area-line { -fx-stroke: #1e90ff; }
+.default-color1.chart-series-area-line { -fx-stroke: #9932cc; }
+.default-color2.chart-series-area-line { -fx-stroke: #dc143c; }
+.default-color3.chart-series-area-line { -fx-stroke: #696969; }
 
-.default-color0.chart-series-area-line { -fx-stroke: #e9967a; }
-.default-color1.chart-series-area-line { -fx-stroke: #f0e68c; }
-.default-color2.chart-series-area-line { -fx-stroke: #dda0dd; }
-
-.default-color0.chart-series-area-fill { -fx-fill: #ffa07a55; }
-.default-color1.chart-series-area-fill { -fx-fill: #fffacd55; }
-.default-color2.chart-series-area-fill { -fx-fill: #d8bfd855; }
+.default-color0.chart-series-area-fill { -fx-fill: #1e90ff55; }
+.default-color1.chart-series-area-fill { -fx-fill: #9932cc55; }
+.default-color2.chart-series-area-fill { -fx-fill: #dc143c55; }
+.default-color3.chart-series-area-fill { -fx-fill: #69696955; }
