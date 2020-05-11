@@ -2,9 +2,9 @@ package org.epi.model;
 
 /** Indicates the state of the simulation for the given simulator.*/
 public enum SimulationState {
-    RUN ("btn-icon-run"),
-    PAUSE ("btn-icon-pause"),
-    ENDED ("btn-icon-pause");
+    RUN ("btn-icon-pause"),
+    PAUSE ("btn-icon-run"),
+    ENDED ("btn-icon-run");
 
     /** The style class of the play button for this state.*/
     public String styleClass;
