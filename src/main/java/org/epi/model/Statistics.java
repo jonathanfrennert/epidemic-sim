@@ -6,6 +6,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
+import javafx.scene.shape.Rectangle;
 import org.epi.util.Error;
 
 import java.util.Objects;
@@ -73,8 +74,6 @@ public class Statistics {
         dataSeriesInfected.getData().add(new XYChart.Data<>(0.0,1));
         dataSeriesDeceased.getData().add(new XYChart.Data<>(0.0,0));
         dataSeriesHealthy.getData().add(new XYChart.Data<>(0.0,getInitPop()));
-
-
     }
 
     //---------------------------- Helper methods ----------------------------

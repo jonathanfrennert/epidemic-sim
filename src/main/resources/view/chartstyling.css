@@ -1,14 +1,14 @@
-.default-color0.chart-area-symbol { -fx-background-color: #1e90ff, #ffffff; }
+.default-color0.chart-area-symbol { -fx-background-color: #696969, #ffffff; }
 .default-color1.chart-area-symbol { -fx-background-color: #9932cc, #ffffff; }
-.default-color2.chart-area-symbol { -fx-background-color: #dc143c, #ffffff; }
-.default-color3.chart-area-symbol { -fx-background-color: #696969, #ffffff; }
+.default-color2.chart-area-symbol { -fx-background-color: #1e90ff, #ffffff; }
+.default-color3.chart-area-symbol { -fx-background-color: #dc143c, #ffffff; }
 
-.default-color0.chart-series-area-line { -fx-stroke: #1e90ff; }
+.default-color0.chart-series-area-line { -fx-stroke: #696969; }
 .default-color1.chart-series-area-line { -fx-stroke: #9932cc; }
-.default-color2.chart-series-area-line { -fx-stroke: #dc143c; }
-.default-color3.chart-series-area-line { -fx-stroke: #696969; }
+.default-color2.chart-series-area-line { -fx-stroke: #1e90ff; }
+.default-color3.chart-series-area-line { -fx-stroke: #dc143c; }
 
-.default-color0.chart-series-area-fill { -fx-fill: #1e90ff55; }
+.default-color0.chart-series-area-fill { -fx-fill: #69696955; }
 .default-color1.chart-series-area-fill { -fx-fill: #9932cc55; }
-.default-color2.chart-series-area-fill { -fx-fill: #dc143c55; }
-.default-color3.chart-series-area-fill { -fx-fill: #69696955; }
+.default-color2.chart-series-area-fill { -fx-fill: #1e90ff55; }
+.default-color3.chart-series-area-fill { -fx-fill: #dc143c55; }

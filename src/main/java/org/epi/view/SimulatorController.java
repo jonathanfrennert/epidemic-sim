@@ -69,21 +69,16 @@ public class SimulatorController extends Controller {
         Simulator simulator = getMainApp().getSimulator();
         Statistics statistics = simulator.getStatistics();
 
+        //TODO fix unsafe operations
         //TODO add axes and names to the chart (?)
 
-        //TODO remove titles
+        statsChart.createSymbolsProperty().setValue(false);
+        statsChart.setLegendVisible(false);
 
-        statistics.getDataSeriesRecovered().setName("Recovered");
-        statistics.getDataSeriesInfected().setName("Infected");
-        statistics.getDataSeriesDeceased().setName("Deceased");
-        statistics.getDataSeriesHealthy().setName("Healthy");
-
-        //TODO change order of series
-
-        statsChart.getData().addAll(statistics.getDataSeriesHealthy(),
+        statsChart.getData().addAll(statistics.getDataSeriesDeceased(),
                 statistics.getDataSeriesRecovered(),
-                statistics.getDataSeriesInfected(),
-                statistics.getDataSeriesDeceased());
+                statistics.getDataSeriesHealthy(),
+                statistics.getDataSeriesInfected());
 
         this.cityPane.getChildren().add(simulator.getWorld().getCity().getArea());
         this.quarantinePane.getChildren().add(simulator.getWorld().getQuarantine().getArea());
