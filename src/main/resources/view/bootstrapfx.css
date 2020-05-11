@@ -780,9 +780,12 @@ a.bg-danger:focused {
 }
 
 /*!
-* Added by Jonathan Gustafsson Frennert for Epi (https://github.com/J0HNN7G/EpiSim).
+* Added by Jonathan Gustafsson Frennert and Alexandra Purcarea for Epi (https://github.com/J0HNN7G/EpiSim).
 * Licensed under MIT (https://github.com/J0HNN7G/EpiSim/blob/master/LICENSE)
 */
+
+
+/** Main box padding */
 
 .box {
   -fx-padding: 10px;
@@ -791,6 +794,30 @@ a.bg-danger:focused {
   -fx-border-color: #ddd;
   -fx-border-radius: 0, 0, 3px, 0;
 }
+
+/** Stacked Area Chart */
+
+.chart {
+  -fx-padding: 0;
+  -fx-border-width: 0;
+  -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.05), 1, 0, 0, 1);
+}
+
+.chart-plot-background {
+  -fx-background-color: white;
+}
+
+.default-color0.chart-series-area-line { -fx-stroke: crimson; }
+.default-color1.chart-series-area-line { -fx-stroke: dodgerblue; }
+.default-color2.chart-series-area-line { -fx-stroke: darkorchid; }
+.default-color3.chart-series-area-line { -fx-stroke: dimgrey; }
+
+.default-color0.chart-series-area-fill { -fx-fill: #dc143c55; }
+.default-color1.chart-series-area-fill { -fx-fill: #1e90ff55; }
+.default-color2.chart-series-area-fill { -fx-fill: #9932cc55; }
+.default-color3.chart-series-area-fill { -fx-fill: #69696955; }
+
+/** Player buttons*/
 
 .btn-icon-run {
   -fx-background-image: url("../images/Run.png");
@@ -813,15 +840,7 @@ a.bg-danger:focused {
   -fx-background-position: center;
 }
 
-.chart {
-  -fx-padding: 0;
-  -fx-border-width: 0;
-  -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.05), 1, 0, 0, 1);
-}
-
-.chart-plot-background {
-  -fx-background-color: white;
-}
+/** Sliders */
 
 /* Styling the slider thumb */
 .jfx-slider > .thumb {

@@ -519,12 +519,12 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </HBox.margin>
             </GridPane>
-            <StackedAreaChart fx:id="statsChart" legendSide="LEFT" stylesheets="@chartstyling.css" verticalGridLinesVisible="false" HBox.hgrow="SOMETIMES">
+            <StackedAreaChart fx:id="areaChart" alternativeRowFillVisible="false" createSymbols="false" horizontalGridLinesVisible="false" legendSide="LEFT" legendVisible="false" minHeight="120.0" verticalGridLinesVisible="false" HBox.hgrow="SOMETIMES">
               <xAxis>
-                <NumberAxis minorTickVisible="false" side="BOTTOM" tickLabelsVisible="false" tickMarkVisible="false" />
+                <NumberAxis minorTickCount="1" minorTickLength="1.0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" fx:id="xAxis" />
               </xAxis>
               <yAxis>
-                <NumberAxis minorTickVisible="false" side="LEFT" tickLabelsVisible="false" tickMarkVisible="false" />
+                <NumberAxis fx:id="yAxis" autoRanging="false" minorTickCount="1" minorTickLength="0.5" minorTickVisible="false" side="LEFT" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" />
               </yAxis>
                <HBox.margin>
                   <Insets />

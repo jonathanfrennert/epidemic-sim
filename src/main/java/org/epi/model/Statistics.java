@@ -60,12 +60,20 @@ public class Statistics {
         this.recovered = new SimpleIntegerProperty(getStatusCount(Status.RECOVERED));
         this.deceased = new SimpleIntegerProperty(0);
 
-        this.initialPopulation = new SimpleIntegerProperty(healthy.get() + infected.get() + recovered.get());
+        // There are only healthy and infected in the beginning.
+        this.initialPopulation = new SimpleIntegerProperty(healthy.get() + infected.get());
 
         this.dataSeriesHealthy = new XYChart.Series<>();
-        this.dataSeriesDeceased = new XYChart.Series<>();
+        this.dataSeriesHealthy.getData().add(new XYChart.Data<>(0.0, healthy.get()));
+
         this.dataSeriesInfected = new XYChart.Series<>();
+        this.dataSeriesInfected.getData().add(new XYChart.Data<>(0.0, infected.get()));
+
         this.dataSeriesRecovered = new XYChart.Series<>();
+        this.dataSeriesRecovered.getData().add(new XYChart.Data<>(0.0, recovered.get()));
+
+        this.dataSeriesDeceased = new XYChart.Series<>();
+        this.dataSeriesDeceased.getData().add(new XYChart.Data<>(0.0, deceased.get()));
     }
 
     //---------------------------- Helper methods ----------------------------
@@ -101,7 +109,7 @@ public class Statistics {
         dataSeriesHealthy.getData().add(new XYChart.Data<>(time, healthy.get()));
         dataSeriesInfected.getData().add(new XYChart.Data<>(time, infected.get()));
         dataSeriesRecovered.getData().add(new XYChart.Data<>(time, recovered.get()));
-        dataSeriesDeceased.getData().add(new XYChart.Data<>(time, recovered.get()));
+        dataSeriesDeceased.getData().add(new XYChart.Data<>(time, deceased.get()));
     }
 
     //---------------------------- Getters & Setters ----------------------------
@@ -197,18 +205,38 @@ public class Statistics {
         return initialPopulation;
     }
 
-    public XYChart.Series<Double,Integer> getDataSeriesRecovered(){
-        return dataSeriesRecovered;
-    }
-
-    public XYChart.Series<Double,Integer> getDataSeriesInfected(){
-        return dataSeriesInfected;
-    }
-
+    /**
+     * Getter for {@link #dataSeriesHealthy}.
+     *
+     * @return {@link #dataSeriesHealthy}
+     */
     public XYChart.Series<Double,Integer> getDataSeriesHealthy(){
         return dataSeriesHealthy;
     }
 
+    /**
+     * Getter for {@link #dataSeriesInfected}.
+     *
+     * @return {@link #dataSeriesInfected}
+     */
+    public XYChart.Series<Double,Integer> getDataSeriesInfected(){
+        return dataSeriesInfected;
+    }
+
+    /**
+     * Getter for {@link #dataSeriesRecovered}.
+     *
+     * @return {@link #dataSeriesRecovered}
+     */
+    public XYChart.Series<Double,Integer> getDataSeriesRecovered(){
+        return dataSeriesRecovered;
+    }
+
+    /**
+     * Getter for {@link #dataSeriesDeceased}.
+     *
+     * @return {@link #dataSeriesDeceased}
+     */
     public XYChart.Series<Double,Integer> getDataSeriesDeceased(){
         return dataSeriesDeceased;
     }
