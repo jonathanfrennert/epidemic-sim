@@ -74,6 +74,7 @@ public class SimulatorController extends Controller {
 
         statsChart.createSymbolsProperty().setValue(false);
         statsChart.setLegendVisible(false);
+        statsChart.setAnimated(true);
 
         statsChart.getData().addAll(statistics.getDataSeriesDeceased(),
                 statistics.getDataSeriesRecovered(),
