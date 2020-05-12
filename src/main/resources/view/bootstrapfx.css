@@ -845,7 +845,6 @@ a.bg-danger:focused {
 /* Styling the slider thumb */
 .jfx-slider > .thumb {
   -fx-background-color: #1e90ff;
-
 }
 
 /* Styling the filled track */
@@ -855,6 +854,7 @@ a.bg-danger:focused {
 
 /* Styling the animated thumb */
 .jfx-slider > .animated-thumb {
+  visibility: hidden;
   -fx-background-color: #1e90ff;
 }
 

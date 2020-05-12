@@ -26,7 +26,7 @@ public class MainApp extends Application {
     /** Minimum width of the application window in pixels.*/
     private static final double MIN_WIDTH = 555;
     /** Minimum height of the application window in pixels.*/
-    private static final double MIN_HEIGHT = 610;
+    private static final double MIN_HEIGHT = 678;
     /** Minimum width of the application window in pixels.*/
     private static final double MAX_WIDTH = 1100;
     /** Maximum height of the application window in pixels.*/
@@ -34,7 +34,7 @@ public class MainApp extends Application {
     /** Maximum width of the application window in pixels.*/
     private static final double PREF_WIDTH = 963;
     /** Maximum height of the application window in pixels.*/
-    private static final double PREF_HEIGHT = 678;
+    private static final double PREF_HEIGHT = MIN_HEIGHT;
 
     /** The main container for the application.*/
     private Stage primaryStage;
@@ -50,11 +50,11 @@ public class MainApp extends Application {
      */
     public MainApp() {
         // Added a sample simulation
-        World world = new World(0.5,15);
-        BehaviourDistribution dist = new BehaviourDistribution(1,1, 0);
-        Pathogen pathogen = new Pathogen(5,0.05,0.3,0.8,10);
+        World world = new World(0.8,15);
+        BehaviourDistribution dist = new BehaviourDistribution(1,1, 1);
+        Pathogen pathogen = new Pathogen(7.5,0.05,0.5,0.8,40);
 
-        simulator = new Simulator(world, dist, pathogen, 300, 5);
+        simulator = new Simulator(world, dist, pathogen, 200, 5);
     }
 
     /**

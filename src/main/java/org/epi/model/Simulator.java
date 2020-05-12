@@ -14,10 +14,10 @@ import static org.epi.model.SimulationState.*;
 public class Simulator {
 
     /** The minimum population required for the simulation to run.*/
-    private static final int MIN_POPULATION = 1;
+    public static final int MIN_POPULATION = 1;
     /** Maximum number of humans that can be handled without frame performance
      * issues and humans going over location edges.*/
-    private static final int MAX_POPULATION = 300;
+    public static final int MAX_POPULATION = 300;
 
     /** The state of the simulator.*/
     private final Property<SimulationState> simulationState;
@@ -58,8 +58,11 @@ public class Simulator {
      *                                  or larger than the {@value MAX_POPULATION} or if the infected total is less than
      *                                  {@value MIN_POPULATION} or more than the population total
      */
-    public Simulator(World world, BehaviourDistribution behaviourDistribution, Pathogen pathogen,
-                     int populationTotal, int infectedTotal) {
+    public Simulator(World world,
+                     BehaviourDistribution behaviourDistribution,
+                     Pathogen pathogen,
+                     int populationTotal,
+                     int infectedTotal) {
         Objects.requireNonNull(world, Error.getNullMsg("world"));
         Objects.requireNonNull(behaviourDistribution, Error.getNullMsg("behaviour distribution"));
         Objects.requireNonNull(pathogen, Error.getNullMsg("pathogen"));
@@ -210,6 +213,15 @@ public class Simulator {
     }
 
     /**
+     * Getter for {@link #statistics}.
+     *
+     * @return {@link #statistics}
+     */
+    public Statistics getStatistics() {
+        return statistics;
+    }
+
+    /**
      * Getter for {@link #world}.
      *
      * @return {@link #world}
@@ -219,12 +231,39 @@ public class Simulator {
     }
 
     /**
-     * Getter for {@link #statistics}.
+     * Getter for {@link #behaviourDistribution}.
      *
-     * @return {@link #statistics}
+     * @return {@link #behaviourDistribution}
      */
-    public Statistics getStatistics() {
-        return statistics;
+    public BehaviourDistribution getBehaviourDistribution() {
+        return behaviourDistribution;
+    }
+
+    /**
+     * Getter for {@link #pathogen}.
+     *
+     * @return {@link #pathogen}
+     */
+    public Pathogen getPathogen() {
+        return pathogen;
+    }
+
+    /**
+     * Getter for {@link #populationTotal}.
+     *
+     * @return {@link #populationTotal}
+     */
+    public int getPopulationTotal() {
+        return populationTotal;
+    }
+
+    /**
+     * Getter for {@link #infectedTotal}.
+     *
+     * @return {@link #infectedTotal}
+     */
+    public int getInfectedTotal() {
+        return infectedTotal;
     }
 
 }
