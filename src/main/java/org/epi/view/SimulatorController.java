@@ -1,27 +1,23 @@
 package org.epi.view;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSlider;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedAreaChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import org.apache.commons.math3.util.Precision;
 import org.epi.model.SimulationState;
 import org.epi.model.Simulator;
 import org.epi.model.Statistics;
 import org.epi.util.Error;
-
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXSlider;
-
-import org.apache.commons.math3.util.Precision;
-
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.chart.XYChart;
-import javafx.fxml.FXML;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.StackedAreaChart;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +39,11 @@ public class SimulatorController extends Controller {
     /** Naturally, the maximum FPS in JavaFX is 60, from which the minimum time interval in seconds can be deduced.*/
     private static final double MIN_TIME_INTERVAL = 1 / ((double) 60);
     /** The maximum time interval in seconds; generally simulations tend to be 1-2 minutes.*/
-    private static final double MAX_TIME_INTERVAL = 5 * 60;
+    private static final double MAX_TIME_INTERVAL = 2 * 60;
+    /** Minimum percentage.*/
+    private static final double MIN_PERCENT = 0;
+    /** Maximum percentage.*/
+    private static final double MAX_PERCENT = 100;
 
     @FXML
     private Pane cityPane;
@@ -219,14 +219,10 @@ public class SimulatorController extends Controller {
 
         // Initialise dependency to total population for certain sliders.
         totalPopulationSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            double result = newValue.doubleValue();
+            double value = newValue.doubleValue();
+            sickPopulationSlider.setMax(value);
 
-            sickPopulationSlider.setMax(result);
-            normalProportionSlider.setMax(result);
-            inertProportionSlider.setMax(result);
-            avoidantProportionSlider.setMax(result);
-
-            if (result == MIN_POPULATION) {
+            if (value == MIN_POPULATION) {
                 sickPopulationSlider.setDisable(true);
             } else if (sickPopulationSlider.isDisabled()) {
                 sickPopulationSlider.setDisable(false);
@@ -239,15 +235,15 @@ public class SimulatorController extends Controller {
         initSlider(testingFrequencyLabel, testingFrequencySlider,
                 2, SEC_EXT, MIN_TIME_INTERVAL, MAX_TIME_INTERVAL);
 
-        BindLabelToSlider(detectionRateLabel, 1, PERCENT_EXT, detectionRateSlider);
-        setPrecision(detectionRateSlider, 1);
+        initSlider(detectionRateLabel, detectionRateSlider,
+                1, PERCENT_EXT, MIN_PERCENT, MAX_PERCENT);
     }
 
     /**
-     * Initialise world sliders.
+     * Initialise behaviour sliders.
      */
     private void initBehaviourSliders() {
-        ChangeListener<Number> distDependListener = (observable, oldValue, newValue) -> {
+        ChangeListener<Number> distributionListener = (observable, oldValue, newValue) -> {
             boolean normalIsEmpty = normalProportionSlider.getValue() == 0;
             boolean inertIsEmpty = inertProportionSlider.getValue() == 0;
             boolean avoidantIsEmpty = avoidantProportionSlider.getValue() == 0;
@@ -271,30 +267,16 @@ public class SimulatorController extends Controller {
                 inertProportionSlider.valueProperty(),
                 avoidantProportionSlider.valueProperty()
                 );
-
         DoubleBinding normalPercent = Bindings.createDoubleBinding(
-                () -> normalProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
-
+                () -> 100 * normalProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
         DoubleBinding inertPercent = Bindings.createDoubleBinding(
-                () -> inertProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
-
+                () -> 100 * inertProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
         DoubleBinding avoidantPercent = Bindings.createDoubleBinding(
-                () -> avoidantProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
+                () -> 100 * avoidantProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
 
-        initSlider(normalProportionLabel, normalProportionSlider,
-                0, "", 0, totalPopulationSlider.getValue());
-        normalProportionLabel.textProperty().bind(normalPercent.asString());
-        normalProportionSlider.valueProperty().addListener(distDependListener);
-
-        initSlider(inertProportionLabel, inertProportionSlider,
-                0, "", 0, totalPopulationSlider.getValue());
-        inertProportionLabel.textProperty().bind(inertPercent.asString());
-        inertProportionSlider.valueProperty().addListener(distDependListener);
-
-        initSlider(avoidantProportionLabel, avoidantProportionSlider,
-                0, "", 0, totalPopulationSlider.getValue());
-        avoidantProportionLabel.textProperty().bind(avoidantPercent.asString());
-        avoidantProportionSlider.valueProperty().addListener(distDependListener);
+        initPropSlider(normalProportionLabel, normalProportionSlider, distributionListener, normalPercent);
+        initPropSlider(inertProportionLabel, inertProportionSlider, distributionListener, inertPercent);
+        initPropSlider(avoidantProportionLabel, avoidantProportionSlider, distributionListener, avoidantPercent);
     }
 
     /**
@@ -349,34 +331,6 @@ public class SimulatorController extends Controller {
     }
 
     /**
-     * Switch the style class of the play button to reflect the simulation state.
-     *
-     * @param simulationState the simulation state being switched to
-     */
-    private void styleSwitch(SimulationState simulationState) {
-        for (SimulationState simState : SimulationState.values()) {
-            playButton.getStyleClass().remove(simState.styleClass);
-        }
-
-        playButton.getStyleClass().add(simulationState.styleClass);
-    }
-
-    /**
-     * Adapt the X-axis of the area chart to a paused state.
-     */
-    private void pauseXAxis() {
-        xAxis.setAutoRanging(false);
-        xAxis.setUpperBound(getMainApp().getSimulator().getWorld().getTotalElapsedSeconds());
-    }
-
-    /**
-     * Adapt the X-axis of the area chart to a running state.
-     */
-    private void runXAxis() {
-        xAxis.setAutoRanging(true);
-    }
-
-    /**
      * Reset the city and quarantine panes.
      */
     private void resetPanes() {
@@ -414,6 +368,34 @@ public class SimulatorController extends Controller {
         getMainApp().setSimulator(getMainApp().getSimulator().reset());
     }
 
+    /**
+     * Switch the style class of the play button to reflect the simulation state.
+     *
+     * @param simulationState the simulation state being switched to
+     */
+    private void styleSwitch(SimulationState simulationState) {
+        for (SimulationState simState : SimulationState.values()) {
+            playButton.getStyleClass().remove(simState.styleClass);
+        }
+
+        playButton.getStyleClass().add(simulationState.styleClass);
+    }
+
+    /**
+     * Adapt the X-axis of the area chart to a paused state.
+     */
+    private void pauseXAxis() {
+        xAxis.setAutoRanging(false);
+        xAxis.setUpperBound(getMainApp().getSimulator().getWorld().getTotalElapsedSeconds());
+    }
+
+    /**
+     * Adapt the X-axis of the area chart to a running state.
+     */
+    private void runXAxis() {
+        xAxis.setAutoRanging(true);
+    }
+
     //---------------------------- Static helper methods ----------------------------
 
     /**
@@ -431,6 +413,22 @@ public class SimulatorController extends Controller {
         setPrecision(slider, precision);
         slider.setMin(Precision.round(min, precision));
         slider.setMax(Precision.round(max, precision));
+    }
+
+    /**
+     * Initialise a behaviour proportion slider.
+     *
+     * @param label a label
+     * @param slider a proportion slider
+     * @param distributionListener the distribution listener
+     * @param proportionPercentage the proportion percentage for the given slider.
+     */
+    private void initPropSlider( Label label, JFXSlider slider, ChangeListener<Number> distributionListener, DoubleBinding proportionPercentage) {
+        label.textProperty().bind(Bindings.format(extFormat(1, PERCENT_EXT), proportionPercentage));
+        setPrecision(slider, 1);
+        slider.setMin(Precision.round(MIN_PERCENT, 1));
+        slider.setMax(Precision.round(MAX_PERCENT, 1));
+        slider.valueProperty().addListener(distributionListener);
     }
 
     /**
@@ -465,7 +463,7 @@ public class SimulatorController extends Controller {
      * @return a string pattern for double values with the given extension
      */
     private static String extFormat(int precision,  String extension) {
-        return "%." + String.valueOf(precision) + "f" + extension;
+        return "%." + precision + "f" + extension;
     }
 
     /**
@@ -485,7 +483,7 @@ public class SimulatorController extends Controller {
      * @param slider a slider
      */
     private static void disable(JFXSlider slider) {
-        slider.setValue(1);
+        slider.setValue(slider.getMax());
         slider.setDisable(true);
     }
 

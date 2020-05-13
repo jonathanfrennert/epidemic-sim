@@ -250,7 +250,7 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="normalProportionSlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                  <JFXSlider fx:id="normalProportionSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -278,7 +278,7 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="inertProportionSlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                  <JFXSlider fx:id="inertProportionSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -306,7 +306,7 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="avoidantProportionSlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                  <JFXSlider fx:id="avoidantProportionSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
