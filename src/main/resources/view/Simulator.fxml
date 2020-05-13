@@ -24,7 +24,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" layoutX="14.0" layoutY="40.0" styleClass="box" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0">
+      <VBox alignment="CENTER" layoutX="14.0" layoutY="40.0" styleClass="box" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" text="City">
                <opaqueInsets>
@@ -67,7 +67,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <GridPane alignment="CENTER" layoutX="542.0" layoutY="263.0" maxHeight="1.7976931348623157E308" prefHeight="562.0" prefWidth="393.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="540.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+      <GridPane alignment="CENTER" layoutX="542.0" layoutY="263.0" maxHeight="1.7976931348623157E308" prefHeight="562.0" prefWidth="393.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="540.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="160.0" />
@@ -182,7 +182,7 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="testingFrequencySlider" blockIncrement="0.01" majorTickUnit="0.01" minorTickCount="0" snapToTicks="true">
+                  <JFXSlider fx:id="testingFrequencySlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -338,12 +338,12 @@
             </VBox>
             <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="12">
                <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
+                  <Label fx:id="lifespanLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                  <JFXSlider fx:id="lifespanSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -369,12 +369,12 @@
             </VBox>
             <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13">
                <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
+                  <Label fx:id="immunityDurationLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                  <JFXSlider fx:id="immunityDurationSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -400,12 +400,12 @@
             </VBox>
             <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14">
                <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
+                  <Label fx:id="immunityRateLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                  <JFXSlider fx:id="immunityRateSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -431,12 +431,12 @@
             </VBox>
             <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="15">
                <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
+                  <Label fx:id="transmissionRiskLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                  <JFXSlider fx:id="transmissionRiskSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -462,12 +462,12 @@
             </VBox>
             <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="16">
                <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
+                  <Label fx:id="fatalityRateLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                  <JFXSlider fx:id="fatalityRateSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -480,22 +480,22 @@
             <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="17" />
             <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="18" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets bottom="5.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </GridPane.margin>
             </JFXButton>
          </children>
       </GridPane>
-      <Label layoutX="10.0" layoutY="410.0" text="Statistics" AnchorPane.leftAnchor="10.0">
+      <Label layoutX="10.0" layoutY="398.0" text="Statistics" AnchorPane.leftAnchor="10.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="410.0" layoutY="410.0" text="Change over Time">
+      <Label layoutX="410.0" layoutY="398.0" text="Change over Time">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <HBox layoutY="432.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="430.0">
+      <HBox layoutY="410.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="410.0">
          <children>
             <GridPane styleClass="box">
               <columnConstraints>

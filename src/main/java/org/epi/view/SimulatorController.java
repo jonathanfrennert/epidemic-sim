@@ -37,9 +37,9 @@ public class SimulatorController extends Controller {
     private static final String PERCENT_EXT = "%%";
 
     /** Naturally, the maximum FPS in JavaFX is 60, from which the minimum time interval in seconds can be deduced.*/
-    private static final double MIN_TIME_INTERVAL = 1 / ((double) 60);
+    private static final double MIN_TIME_INTERVAL = 0.1;
     /** The maximum time interval in seconds; generally simulations tend to be 1-2 minutes.*/
-    private static final double MAX_TIME_INTERVAL = 2 * 60;
+    private static final double MAX_TIME_INTERVAL = 60;
     /** Minimum percentage.*/
     private static final double MIN_PERCENT = 0;
     /** Maximum percentage.*/
@@ -215,7 +215,7 @@ public class SimulatorController extends Controller {
      */
     private void initWorldSliders() {
         initSlider(totalPopulationLabel, totalPopulationSlider,
-                0, "", MIN_POPULATION, MAX_POPULATION);
+                0, " total", MIN_POPULATION, MAX_POPULATION);
 
         // Initialise dependency to total population for certain sliders.
         totalPopulationSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -230,10 +230,10 @@ public class SimulatorController extends Controller {
         });
 
         initSlider(sickPopulationLabel, sickPopulationSlider,
-                0, "", MIN_POPULATION, totalPopulationSlider.valueProperty().intValue());
+                0, " sick", MIN_POPULATION, totalPopulationSlider.valueProperty().intValue());
 
         initSlider(testingFrequencyLabel, testingFrequencySlider,
-                2, SEC_EXT, MIN_TIME_INTERVAL, MAX_TIME_INTERVAL);
+                1, SEC_EXT, MIN_TIME_INTERVAL, MAX_TIME_INTERVAL);
 
         initSlider(detectionRateLabel, detectionRateSlider,
                 1, PERCENT_EXT, MIN_PERCENT, MAX_PERCENT);
@@ -283,7 +283,16 @@ public class SimulatorController extends Controller {
      * Initialise pathogen sliders.
      */
     private void initPathogenSliders() {
-
+        initSlider(lifespanLabel, lifespanSlider,
+                1, SEC_EXT, MIN_TIME_INTERVAL, MAX_TIME_INTERVAL);
+        initSlider(immunityDurationLabel, immunityDurationSlider,
+                1, SEC_EXT, MIN_TIME_INTERVAL, MAX_TIME_INTERVAL);
+        initSlider(immunityRateLabel, immunityRateSlider,
+                1, PERCENT_EXT, MIN_PERCENT, MAX_PERCENT);
+        initSlider(transmissionRiskLabel, transmissionRiskSlider,
+                1, PERCENT_EXT, MIN_PERCENT, MAX_PERCENT);
+        initSlider(fatalityRateLabel, fatalityRateSlider,
+                1, PERCENT_EXT, MIN_PERCENT, MAX_PERCENT);
     }
 
     /**
