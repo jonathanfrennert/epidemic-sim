@@ -76,7 +76,7 @@ public class World {
         double oldValue = totalElapsedSeconds.get();
         double newValue = oldValue + elapsedSeconds;
 
-        boolean isTesting = Math.ceil(oldValue / testingFrequency.get()) == Math.floor(newValue/ testingFrequency.get());
+        boolean isTesting = Math.ceil(oldValue / testingFrequency.get()) <= Math.floor(newValue/ testingFrequency.get());
 
         if (isTesting) {
             test();

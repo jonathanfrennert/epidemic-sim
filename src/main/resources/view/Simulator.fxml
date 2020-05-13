@@ -94,20 +94,11 @@
             <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="7">
-               <children>
-                  <Label text="Normal Proportion">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Ratio distribution of human behaviours" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
+            <Label text="World">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                <children>
                   <Label contentDisplay="CENTER" text="Total Population">
@@ -121,6 +112,23 @@
                      </font>
                   </Label>
                </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="totalPopulationLabel" alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider fx:id="totalPopulationSlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
+               </children>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                <children>
@@ -136,33 +144,22 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="12">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Label contentDisplay="CENTER" text="Lifespan">
+                  <Label fx:id="sickPopulationLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Lifespan of the pathogen" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
+                  <JFXSlider fx:id="sickPopulationSlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
                </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="13">
-               <children>
-                  <Label text="Immunity Duration">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Duration of pathogen immunity" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-               </children>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                <children>
@@ -178,47 +175,22 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="14">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Label text="Immunity Rate ">
+                  <Label fx:id="testingFrequencyLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Probability of pathogen immunity" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
+                  <JFXSlider fx:id="testingFrequencySlider" blockIncrement="0.01" majorTickUnit="0.01" minorTickCount="0" snapToTicks="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
                </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="15">
-               <children>
-                  <Label text="Transmission Risk ">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Probability of transmission per frame in contact" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="16">
-               <children>
-                  <Label text="Fatality Rate ">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Probability of sick dying from the pathogen" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-               </children>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                <children>
@@ -241,7 +213,7 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="detectionRateSlider" blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                  <JFXSlider fx:id="detectionRateSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -251,19 +223,90 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="18" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets bottom="5.0" />
-               </GridPane.margin>
-            </JFXButton>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14">
+            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            <Label text="Human" GridPane.rowIndex="6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="7">
                <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
+                  <Label text="Normal Proportion">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                  <Label text="Proportion of humans with normal behaviour" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <children>
+                  <Label fx:id="normalProportionLabel" alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider fx:id="normalProportionSlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="8">
+               <children>
+                  <Label text="Inert Proportion">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Proportion of humans with inert behaviour" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <children>
+                  <Label fx:id="inertProportionLabel" alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider fx:id="inertProportionSlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="9">
+               <children>
+                  <Label text="Avoidant Proportion">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Proportion of humans with avoidant behaviour" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <children>
+                  <Label fx:id="avoidantProportionLabel" alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider fx:id="avoidantProportionSlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -273,107 +316,25 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="15">
+            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+            <Label text="Pathogen" GridPane.rowIndex="11">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="12">
                <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
+                  <Label contentDisplay="CENTER" text="Lifespan">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
-               </children>
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
-            </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="16">
-               <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
+                  <Label text="Lifespan of the pathogen" textFill="LIGHTSLATEGRAY">
                      <font>
-                        <Font size="11.0" />
+                        <Font size="10.0" />
                      </font>
                   </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
                </children>
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
-            </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Label fx:id="totalPopulationLabel" alignment="CENTER_RIGHT" text="value">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <JFXSlider fx:id="totalPopulationSlider" blockIncrement="1.0" majorTickUnit="100.0" minorTickCount="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
-               </children>
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
-            </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <Label fx:id="sickPopulationLabel" alignment="CENTER_RIGHT" text="value">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <JFXSlider fx:id="sickPopulationSlider" blockIncrement="1.0" majorTickUnit="100.0" minorTickCount="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
-               </children>
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
-            </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <Label fx:id="testingFrequencyLabel" alignment="CENTER_RIGHT" text="value">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <JFXSlider fx:id="testingFrequencySlider" blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
-               </children>
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
-            </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13">
-               <children>
-                  <Label alignment="CENTER_RIGHT" text="value">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
-               </children>
-               <GridPane.margin>
-                  <Insets left="5.0" />
-               </GridPane.margin>
             </VBox>
             <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="12">
                <children>
@@ -392,14 +353,28 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="13">
                <children>
-                  <Label fx:id="avoidantProportionLabel" alignment="CENTER_RIGHT" text="value">
+                  <Label text="Immunity Duration">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="avoidantProportionSlider" blockIncrement="1.0" majorTickUnit="100.0" minorTickCount="1">
+                  <Label text="Duration of pathogen immunity" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13">
+               <children>
+                  <Label alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -409,80 +384,105 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="9">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="14">
                <children>
-                  <Label text="Avoidant Proportion">
+                  <Label text="Immunity Rate ">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Ratio distribution of human behaviours" textFill="LIGHTSLATEGRAY">
+                  <Label text="Probability of pathogen immunity" textFill="LIGHTSLATEGRAY">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14">
                <children>
-                  <Label fx:id="inertProportionLabel" alignment="CENTER_RIGHT" text="value">
+                  <Label alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="inertProportionSlider" blockIncrement="1.0" majorTickUnit="100.0" minorTickCount="1">
+                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </JFXSlider>
                </children>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="15">
                <children>
-                  <Label fx:id="normalProportionLabel" alignment="CENTER_RIGHT" text="value">
+                  <Label text="Transmission Risk ">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="normalProportionSlider" blockIncrement="1.0" majorTickUnit="100.0" minorTickCount="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="8">
-               <children>
-                  <Label text="Inert Proportion">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Ratio distribution of human behaviours" textFill="LIGHTSLATEGRAY">
+                  <Label text="Probability of transmission per frame in contact" textFill="LIGHTSLATEGRAY">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="10" />
-            <Label text="World">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label text="Behaviour" GridPane.rowIndex="6">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label text="Pathogen" GridPane.rowIndex="11">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="15">
+               <children>
+                  <Label alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
+               </children>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="16">
+               <children>
+                  <Label text="Fatality Rate ">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Probability of sick dying from the pathogen" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="16">
+               <children>
+                  <Label alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider blockIncrement="0.1" majorTickUnit="100.0" minorTickCount="1">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
+               </children>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </VBox>
             <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="17" />
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="18" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets bottom="5.0" />
+               </GridPane.margin>
+            </JFXButton>
          </children>
       </GridPane>
       <Label layoutX="10.0" layoutY="410.0" text="Statistics" AnchorPane.leftAnchor="10.0">
