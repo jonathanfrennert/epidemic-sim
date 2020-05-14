@@ -1,13 +1,12 @@
 package org.epi.model;
 
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleObjectProperty;
 import org.epi.util.Error;
 
-import java.lang.reflect.Array;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
+
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.function.Predicate;
 
 import static org.epi.model.SimulationState.*;
 
@@ -101,9 +100,13 @@ public class Simulator {
      * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
      */
     private void pathogen(double elapsedSeconds) {
-        new ArrayList<>(world.getCity().getPopulation()).stream().filter(Human::isSick).forEach(human -> human.pathogen(elapsedSeconds));
-        new ArrayList<>(world.getQuarantine().getPopulation()).stream().filter(Human::isSick).forEach(human -> human.pathogen(elapsedSeconds));
+        new ArrayList<>(world.getCity().getPopulation()).stream().filter(Human::isSick).
+                forEach(human -> human.pathogen(elapsedSeconds));
+        new ArrayList<>(world.getQuarantine().getPopulation()).stream().filter(Human::isSick).
+                forEach(human -> human.pathogen(elapsedSeconds));
     }
+
+
 
     /**
      * Perform all immune system changes in the elapsed seconds.
@@ -111,8 +114,8 @@ public class Simulator {
      * @param elapsedSeconds the number of seconds elapsed since the human immune systems were last updated
      */
     private void immuneSystem(double elapsedSeconds) {
-        world.getCity().getPopulation().forEach(human -> human.immuneSystem(elapsedSeconds));
-        world.getQuarantine().getPopulation().forEach(human -> human.immuneSystem(elapsedSeconds));
+        world.getCity().getPopulation().parallelStream().forEach(human -> human.immuneSystem(elapsedSeconds));
+        world.getQuarantine().getPopulation().parallelStream().forEach(human -> human.immuneSystem(elapsedSeconds));
     }
 
     /**

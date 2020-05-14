@@ -56,14 +56,14 @@ public class SpatialHash {
     public void update() {
         spatialHash.clear();
 
-        for (Human human : location.getPopulation()) {
+        location.getPopulation().parallelStream().forEach(human -> {
             for (double a : multipleArray) {
                 for (double b : multipleArray) {
                     int hash = hashcode(human.getModel().getCenterX() + a, human.getModel().getCenterY() + b);
                     addToSpatialHash(hash, human);
                 }
             }
-        }
+        });
     }
 
     /**

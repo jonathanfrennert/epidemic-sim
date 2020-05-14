@@ -107,7 +107,7 @@ public class Location {
      * Adjust the velocity of the population such that they do not move past the walls.
      */
     public void wallCollisions() {
-        for (Human human :population) {
+        for (Human human : population) {
             Model model = human.getModel();
             Point2D velocity = model.getVelocity();
 

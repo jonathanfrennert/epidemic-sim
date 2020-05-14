@@ -56,9 +56,9 @@ public class MainApp extends Application {
      */
     public MainApp() {
         // Added a sample simulation
-        World world = new World(200, 5,0.0,15);
-        BehaviourDistribution dist = new BehaviourDistribution(1,1, 0);
-        Pathogen pathogen = new Pathogen(7.5,0.05,0.5,0.8,40);
+        World world = new World(500, 20,0.5,10);
+        BehaviourDistribution dist = new BehaviourDistribution(1,0, 0);
+        Pathogen pathogen = new Pathogen(5,0.05,0.5,0.8,12);
 
         simulator = new Simulator(world, dist, pathogen);
     }

@@ -28,7 +28,7 @@ public class World {
     public static final int MIN_POPULATION = 1;
     /** Maximum number of humans that can be handled without frame performance
      * issues and humans going over location edges.*/
-    public static final int MAX_POPULATION = 300;
+    public static final int MAX_POPULATION = 500;
 
     /** The initial time offset for the total elapsed seconds, such that testing does not occur at 0 seconds.*/
     private static final double OFFSET = 1 / 1000_000_000.00;
