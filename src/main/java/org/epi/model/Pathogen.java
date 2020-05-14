@@ -22,7 +22,7 @@ public class Pathogen {
     /** The probability of a transmission occurring in effective contact.*/
     private final DoubleProperty transmissionRisk;
 
-    /** The probability of an infected person dying from the pathogen.*/
+    /** The probability of an sick human dying from the pathogen.*/
     private final DoubleProperty fatalityRate;
 
     /** The probability of becoming immune.*/
@@ -38,7 +38,7 @@ public class Pathogen {
      *
      * @param lifespan the lifespan of this pathogen in a host in seconds
      * @param transmissionRisk the probability of a transmission occurring in effective contact
-     * @param fatalityRate the probability of an infected person dying from the pathogen
+     * @param fatalityRate the probability of a sick human dying from the pathogen
      * @param immunityRate this pathogen's immunity rate
      * @param immunityDuration the duration of this pathogen's immunity in seconds
      * @throws IllegalArgumentException if any given durations are negative or if any probabilities given are

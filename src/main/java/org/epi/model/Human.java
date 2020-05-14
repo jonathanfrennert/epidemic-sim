@@ -21,7 +21,7 @@ public class Human {
     /** The immune system protecting this human.*/
     private final ImmuneSystem immuneSystem;
 
-    /** The pathogen infecting this human.*/
+    /** The pathogen this human is sick with.*/
     private Pathogen pathogen;
 
     //---------------------------- Constructor ----------------------------
@@ -50,11 +50,11 @@ public class Human {
     //---------------------------- Helper methods ----------------------------
 
     /**
-     * Check if this human is infected with a pathogen.
+     * Check if this human is sick with a pathogen.
      *
-     * @return true if this human is infected, otherwise false
+     * @return true if this human is sick, otherwise false
      */
-    public boolean isInfected() {
+    public boolean isSick() {
         return pathogen != null;
     }
 
@@ -64,8 +64,8 @@ public class Human {
     public void status() {
         if (immuneSystem.isImmune()) {
             status = Status.RECOVERED;
-        } else if (isInfected()) {
-            status = Status.INFECTED;
+        } else if (isSick()) {
+            status = Status.SICK;
         } else {
             status = Status.HEALTHY;
         }
@@ -81,7 +81,7 @@ public class Human {
     //---------------------------- Simulator actions ----------------------------
 
     /**
-     * If this human is infected, spread the pathogen and let the pathogen live.
+     * If this human is sick, spread the pathogen and let the pathogen live.
      *
      * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
      * @throws IllegalArgumentException if the given parameter is negative
@@ -89,10 +89,8 @@ public class Human {
     public void pathogen(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
 
-        if (isInfected()) {
-            pathogen.infect();
-            pathogen.live(elapsedSeconds);
-        }
+        pathogen.infect();
+        pathogen.live(elapsedSeconds);
     }
 
     /**
@@ -106,7 +104,7 @@ public class Human {
 
         immuneSystem.live(elapsedSeconds);
 
-        if (isInfected()) {
+        if (isSick()) {
             immuneSystem.defend();
         }
     }

@@ -548,7 +548,7 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label fx:id="infectedLabel" text="Label" textFill="CRIMSON" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <Label fx:id="sickLabel" text="Label" textFill="CRIMSON" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <font>
                         <Font size="11.0" />
                      </font>

@@ -45,16 +45,22 @@ public class MainApp extends Application {
     /** Simulator currently being showed.*/
     private Simulator simulator;
 
+    private World world;
+
+    private BehaviourDistribution behaviourDistribution;
+
+    private Pathogen pathogen;
+
     /**
      * Constructor for the main application.
      */
     public MainApp() {
         // Added a sample simulation
-        World world = new World(0.8,15);
-        BehaviourDistribution dist = new BehaviourDistribution(1,1, 1);
+        World world = new World(200, 5,0.0,15);
+        BehaviourDistribution dist = new BehaviourDistribution(1,1, 0);
         Pathogen pathogen = new Pathogen(7.5,0.05,0.5,0.8,40);
 
-        simulator = new Simulator(world, dist, pathogen, 200, 5);
+        simulator = new Simulator(world, dist, pathogen);
     }
 
     /**

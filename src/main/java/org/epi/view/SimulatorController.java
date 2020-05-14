@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 import static org.epi.model.SimulationState.ENDED;
 import static org.epi.model.SimulationState.PAUSE;
 import static org.epi.model.SimulationState.RUN;
-import static org.epi.model.Simulator.MAX_POPULATION;
-import static org.epi.model.Simulator.MIN_POPULATION;
+import static org.epi.model.World.MAX_POPULATION;
+import static org.epi.model.World.MIN_POPULATION;
 
 public class SimulatorController extends Controller {
 
@@ -57,7 +57,7 @@ public class SimulatorController extends Controller {
     @FXML
     private Label healthyLabel;
     @FXML
-    private Label infectedLabel;
+    private Label sickLabel;
 
     @FXML
     private StackedAreaChart<Double, Integer> areaChart;
@@ -314,7 +314,7 @@ public class SimulatorController extends Controller {
         deceasedLabel.textProperty().bind(statistics.deceasedProperty().asString());
         recoveredLabel.textProperty().bind(statistics.recoveredProperty().asString());
         healthyLabel.textProperty().bind(statistics.healthyProperty().asString());
-        infectedLabel.textProperty().bind(statistics.infectedProperty().asString());
+        sickLabel.textProperty().bind(statistics.sickProperty().asString());
     }
 
     /**
@@ -324,12 +324,12 @@ public class SimulatorController extends Controller {
         Statistics statistics = getMainApp().getSimulator().getStatistics();
 
         ObservableList<XYChart.Series<Double,Integer>> chartData = FXCollections.observableArrayList();
-        chartData.add(statistics.getDataSeriesInfected());
+        chartData.add(statistics.getDataSeriesSick());
         chartData.add(statistics.getDataSeriesHealthy());
         chartData.add(statistics.getDataSeriesRecovered());
         chartData.add(statistics.getDataSeriesDeceased());
         areaChart.setData(chartData);
-        yAxis.setUpperBound(statistics.getInitialPopulation());
+        yAxis.setUpperBound(getMainApp().getSimulator().getWorld().getPopulationTotal());
     }
 
     /**

@@ -4,20 +4,16 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import org.epi.util.Error;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import static org.epi.model.SimulationState.*;
 
 /** The simulator class.
  *  Used to interface with all the simulator components.*/
 public class Simulator {
-
-    /** The minimum population required for the simulation to run.*/
-    public static final int MIN_POPULATION = 1;
-    /** Maximum number of humans that can be handled without frame performance
-     * issues and humans going over location edges.*/
-    public static final int MAX_POPULATION = 300;
 
     /** The state of the simulator.*/
     private final Property<SimulationState> simulationState;
@@ -37,12 +33,6 @@ public class Simulator {
     /** The pathogen for this simulator.*/
     private final Pathogen pathogen;
 
-    /** The population total for this simulator.*/
-    private final int populationTotal;
-
-    /** The infected total for this simulator.*/
-    private final int infectedTotal;
-
     //---------------------------- Constructor ----------------------------
 
     /**
@@ -51,37 +41,25 @@ public class Simulator {
      * @param world the simulated world
      * @param behaviourDistribution distribution of behaviours in the population
      * @param pathogen the simulated pathogen
-     * @param populationTotal the population total
-     * @param infectedTotal the number of infected in the population
-     * @throws NullPointerException if the world, behaviour distribution, or pathogen is null
-     * @throws IllegalArgumentException if the population total is less than {@value MIN_POPULATION}
-     *                                  or larger than the {@value MAX_POPULATION} or if the infected total is less than
-     *                                  {@value MIN_POPULATION} or more than the population total
+     * @throws NullPointerException if the given parameters are null
      */
-    public Simulator(World world,
-                     BehaviourDistribution behaviourDistribution,
-                     Pathogen pathogen,
-                     int populationTotal,
-                     int infectedTotal) {
+    public Simulator(World world, BehaviourDistribution behaviourDistribution, Pathogen pathogen) {
         Objects.requireNonNull(world, Error.getNullMsg("world"));
         Objects.requireNonNull(behaviourDistribution, Error.getNullMsg("behaviour distribution"));
         Objects.requireNonNull(pathogen, Error.getNullMsg("pathogen"));
-        Error.intervalCheck("population", MIN_POPULATION, MAX_POPULATION, populationTotal);
-        Error.intervalCheck("infected population", MIN_POPULATION, populationTotal, infectedTotal);
 
         this.world = world;
         this.behaviourDistribution = behaviourDistribution;
         this.pathogen = pathogen;
-        this.populationTotal = populationTotal;
-        this.infectedTotal = infectedTotal;
 
-        for (int i = 0; i < infectedTotal; i++) {
-            Human infected = new Human(world.getCity(), behaviourDistribution.sample());
-            infected.setPathogen(pathogen.reproduce());
-            infected.status();
+        for (int i = 0; i < world.getSickTotal(); i++) {
+            Human sick = new Human(world.getCity(), behaviourDistribution.sample());
+            sick.setPathogen(pathogen.reproduce());
+            sick.status();
+            sick.getModel().fill();
         }
 
-        for (int i = 0; i < populationTotal - infectedTotal; i++) {
+        for (int i = 0; i < world.getPopulationTotal() - world.getSickTotal(); i++) {
             new Human(world.getCity(), behaviourDistribution.sample());
         }
 
@@ -123,8 +101,8 @@ public class Simulator {
      * @param elapsedSeconds the number of seconds elapsed since the pathogen was last updated
      */
     private void pathogen(double elapsedSeconds) {
-        new ArrayList<>(world.getCity().getPopulation()).forEach(human -> human.pathogen(elapsedSeconds));
-        new ArrayList<>(world.getQuarantine().getPopulation()).forEach(human -> human.pathogen(elapsedSeconds));
+        new ArrayList<>(world.getCity().getPopulation()).stream().filter(Human::isSick).forEach(human -> human.pathogen(elapsedSeconds));
+        new ArrayList<>(world.getQuarantine().getPopulation()).stream().filter(Human::isSick).forEach(human -> human.pathogen(elapsedSeconds));
     }
 
     /**
@@ -151,8 +129,8 @@ public class Simulator {
      * Check whether the world view has reached any end conditions.
      */
     public boolean ended() {
-        boolean isPathogenGone = statistics.getInfected() == 0;
-        boolean isHumanityGone = statistics.getDeceased() == statistics.getInitialPopulation();
+        boolean isPathogenGone = statistics.getSick() == 0;
+        boolean isHumanityGone = statistics.getDeceased() == world.getPopulationTotal();
 
         return isPathogenGone || isHumanityGone;
     }
@@ -163,8 +141,9 @@ public class Simulator {
      * @return a reset version of this simulator
      */
     public Simulator reset() {
-        World world = new World(this.world.getDetectionRate(), this.world.getTestingFrequency());
-        return new Simulator(world, behaviourDistribution, pathogen, populationTotal, infectedTotal);
+        World world = new World(this.world.getPopulationTotal(), this.world.getSickTotal(),
+                this.world.getDetectionRate(), this.world.getTestingFrequency());
+        return new Simulator(world, behaviourDistribution, pathogen);
     }
 
     //---------------------------- Getters & Setters ----------------------------
@@ -247,24 +226,5 @@ public class Simulator {
     public Pathogen getPathogen() {
         return pathogen;
     }
-
-    /**
-     * Getter for {@link #populationTotal}.
-     *
-     * @return {@link #populationTotal}
-     */
-    public int getPopulationTotal() {
-        return populationTotal;
-    }
-
-    /**
-     * Getter for {@link #infectedTotal}.
-     *
-     * @return {@link #infectedTotal}
-     */
-    public int getInfectedTotal() {
-        return infectedTotal;
-    }
-
 }
 
