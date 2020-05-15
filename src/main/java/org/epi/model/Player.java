@@ -50,6 +50,7 @@ public class Player extends AnimationTimer {
             simulator.update(elapsedSeconds);
 
             if (simulator.ended()) {
+                simulator.update(0);
                 simulator.setSimulationState(ENDED);
                 this.stop();
             }

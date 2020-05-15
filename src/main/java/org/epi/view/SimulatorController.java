@@ -12,7 +12,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedAreaChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import org.apache.commons.math3.util.Precision;
 import org.epi.model.SimulationState;
 import org.epi.model.Simulator;
@@ -23,9 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.epi.model.SimulationState.ENDED;
-import static org.epi.model.SimulationState.PAUSE;
-import static org.epi.model.SimulationState.RUN;
+import static org.epi.model.SimulationState.*;
 import static org.epi.model.World.MAX_POPULATION;
 import static org.epi.model.World.MIN_POPULATION;
 
@@ -68,6 +68,8 @@ public class SimulatorController extends Controller {
 
     @FXML
     private JFXButton playButton;
+    @FXML
+    private JFXButton resetButton;
 
     @FXML
     private Label totalPopulationLabel;
@@ -78,9 +80,17 @@ public class SimulatorController extends Controller {
     @FXML
     private JFXSlider sickPopulationSlider;
     @FXML
+    private Label quarantineCapacityLabel;
+    @FXML
+    private JFXSlider quarantineCapacitySlider;
+
+    @FXML
+    private Tooltip testingFrequencyTooltip;
+    @FXML
     private Label testingFrequencyLabel;
     @FXML
     private JFXSlider testingFrequencySlider;
+
     @FXML
     private Label detectionRateLabel;
     @FXML
@@ -91,13 +101,13 @@ public class SimulatorController extends Controller {
     @FXML
     private JFXSlider normalProportionSlider;
     @FXML
-    private Label inertProportionLabel;
+    private Label socialDistancingProportionLabel;
     @FXML
-    private JFXSlider inertProportionSlider;
+    private JFXSlider socialDistancingProportionSlider;
     @FXML
-    private Label avoidantProportionLabel;
+    private Label contactTracingProportionLabel;
     @FXML
-    private JFXSlider avoidantProportionSlider;
+    private JFXSlider contactTracingProportionSlider;
 
     @FXML
     private Label lifespanLabel;
@@ -128,6 +138,7 @@ public class SimulatorController extends Controller {
      */
     @FXML
     private void initialize() {
+        initTooltip(testingFrequencyTooltip);
         initSliders();
     }
 
@@ -150,6 +161,8 @@ public class SimulatorController extends Controller {
         // Switch the style class of the play button.
         getMainApp().getSimulator().getSimulationStateProperty().addListener((observable, oldValue, newValue) -> {
             styleSwitch(newValue);
+
+            resetButton.setDisable(newValue == RUN);
 
             if (newValue == ENDED) {
                 playButton.setDisable(true);
@@ -245,38 +258,38 @@ public class SimulatorController extends Controller {
     private void initBehaviourSliders() {
         ChangeListener<Number> distributionListener = (observable, oldValue, newValue) -> {
             boolean normalIsEmpty = normalProportionSlider.getValue() == 0;
-            boolean inertIsEmpty = inertProportionSlider.getValue() == 0;
-            boolean avoidantIsEmpty = avoidantProportionSlider.getValue() == 0;
+            boolean socialDistancingIsEmpty = socialDistancingProportionSlider.getValue() == 0;
+            boolean contactTracingIsEmpty = contactTracingProportionSlider.getValue() == 0;
 
             able(normalProportionSlider);
-            able(inertProportionSlider);
-            able(avoidantProportionSlider);
+            able(socialDistancingProportionSlider);
+            able(contactTracingProportionSlider);
 
-            if (normalIsEmpty && inertIsEmpty) {
-                disable(avoidantProportionSlider);
-            } else if (normalIsEmpty && avoidantIsEmpty) {
-                disable(inertProportionSlider);
-            } else if (inertIsEmpty && avoidantIsEmpty) {
+            if (normalIsEmpty && socialDistancingIsEmpty) {
+                disable(contactTracingProportionSlider);
+            } else if (normalIsEmpty && contactTracingIsEmpty) {
+                disable(socialDistancingProportionSlider);
+            } else if (socialDistancingIsEmpty && contactTracingIsEmpty) {
                 disable(normalProportionSlider);
             }
         };
 
         DoubleBinding proportionSum = Bindings.createDoubleBinding(
-                () -> normalProportionSlider.getValue() + inertProportionSlider.getValue() + avoidantProportionSlider.getValue(),
+                () -> normalProportionSlider.getValue() + socialDistancingProportionSlider.getValue() + contactTracingProportionSlider.getValue(),
                 normalProportionSlider.valueProperty(),
-                inertProportionSlider.valueProperty(),
-                avoidantProportionSlider.valueProperty()
+                socialDistancingProportionSlider.valueProperty(),
+                contactTracingProportionSlider.valueProperty()
                 );
         DoubleBinding normalPercent = Bindings.createDoubleBinding(
                 () -> 100 * normalProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
-        DoubleBinding inertPercent = Bindings.createDoubleBinding(
-                () -> 100 * inertProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
-        DoubleBinding avoidantPercent = Bindings.createDoubleBinding(
-                () -> 100 * avoidantProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
+        DoubleBinding socialDistancingPercent = Bindings.createDoubleBinding(
+                () -> 100 * socialDistancingProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
+        DoubleBinding contactTracingPercent = Bindings.createDoubleBinding(
+                () -> 100 * contactTracingProportionSlider.getValue() / proportionSum.getValue(), proportionSum);
 
         initPropSlider(normalProportionLabel, normalProportionSlider, distributionListener, normalPercent);
-        initPropSlider(inertProportionLabel, inertProportionSlider, distributionListener, inertPercent);
-        initPropSlider(avoidantProportionLabel, avoidantProportionSlider, distributionListener, avoidantPercent);
+        initPropSlider(socialDistancingProportionLabel, socialDistancingProportionSlider, distributionListener, socialDistancingPercent);
+        initPropSlider(contactTracingProportionLabel, contactTracingProportionSlider, distributionListener, contactTracingPercent);
     }
 
     /**
@@ -473,6 +486,17 @@ public class SimulatorController extends Controller {
      */
     private static String extFormat(int precision,  String extension) {
         return "%." + precision + "f" + extension;
+    }
+
+    /**
+     * Initialise a tooltip.
+     *
+     * @param tooltip a tooltip
+     */
+    private static void initTooltip(Tooltip tooltip) {
+        tooltip.setShowDelay(Duration.ZERO);
+        tooltip.setShowDuration(Duration.INDEFINITE);
+        tooltip.setHideDelay(Duration.ZERO);
     }
 
     /**

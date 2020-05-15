@@ -10,6 +10,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /** A simple model of a world.
  * The class is used as a graphical representation of the world in the simulator.*/
@@ -48,6 +50,9 @@ public class World {
     /** The sick total for this simulator.*/
     private final IntegerProperty sickTotal;
 
+    /** The maximum number of humans in quarantine.*/
+    private final IntegerProperty quarantineCapacity;
+
     /** The probability of an sick human being detected in testing.*/
     private final DoubleProperty detectionRate;
 
@@ -61,18 +66,20 @@ public class World {
      *
      * @param populationTotal the population total
      * @param sickTotal the number of sick in the population
+     * @param quarantineCapacity the maximum number of humans in the quarantine
      * @param detectionRate the probability of a sick person being detected in testing
      * @param testingFrequency how often testing occurs in this world by number of seconds between testings
-     * @throws IllegalArgumentException if the given detection rate is less than {@value Probability#MIN_PROB} or more than
-     *                                  {@value Probability#MAX_PROB}, if the testing frequency is negative,
-     *                                  if the population total is less than {@value MIN_POPULATION}
-     *                                  or larger than the {@value MAX_POPULATION}, if the sick total is less than
-     *                                  {@value MIN_POPULATION} or more than the population total
+     * @throws IllegalArgumentException if the population total is less than {@value MIN_POPULATION} or larger than the
+     *                                  {@value MAX_POPULATION}, if the sick total is less than {@value MIN_POPULATION}
+     *                                  or more than the population total, if the quarantine capacity is negative,
+     *                                  if the given detection rate is less than {@value Probability#MIN_PROB} or
+     *                                  more than {@value Probability#MAX_PROB} or if the testing frequency is negative
      */
-    public World(int populationTotal, int sickTotal, double detectionRate, double testingFrequency) {
+    public World(int populationTotal, int sickTotal, int quarantineCapacity,double detectionRate, double testingFrequency) {
         Probability.probabilityCheck(detectionRate);
         Error.nonNegativeCheck(testingFrequency);
-        Error.intervalCheck("population", MIN_POPULATION, MAX_POPULATION, populationTotal);
+        Error.nonNegativeCheck(quarantineCapacity);
+        Error.intervalCheck("total population", MIN_POPULATION, MAX_POPULATION, populationTotal);
         Error.intervalCheck("sick population", MIN_POPULATION, populationTotal, sickTotal);
 
         this.city = new Location(CITY_WIDTH, CITY_HEIGHT);
@@ -81,6 +88,7 @@ public class World {
 
         this.populationTotal = new SimpleIntegerProperty(populationTotal);
         this.sickTotal = new SimpleIntegerProperty(sickTotal);
+        this.quarantineCapacity = new SimpleIntegerProperty(quarantineCapacity);
         this.detectionRate = new SimpleDoubleProperty(detectionRate);
         this.testingFrequency = new SimpleDoubleProperty(testingFrequency);
     }
@@ -99,30 +107,13 @@ public class World {
         double oldValue = totalElapsedSeconds.get();
         double newValue = oldValue + elapsedSeconds;
 
-        boolean isTesting = Math.ceil(oldValue / testingFrequency.get()) <= Math.floor(newValue/ testingFrequency.get());
+        boolean isTesting = Math.ceil(oldValue / testingFrequency.get()) <= Math.floor(newValue / testingFrequency.get());
 
         if (isTesting) {
             test();
         }
 
         totalElapsedSeconds.set(newValue);
-    }
-
-    /**
-     * Test the city population for the pathogen, and for those who test positive, send them to the quarantine.
-     */
-    private void test() {
-        List<Human> quarantined = new ArrayList<>();
-
-        for (Human testSubject : city.getPopulation()) {
-            boolean isDetected = Probability.chance(detectionRate.get());
-
-            if (testSubject.isSick() && isDetected) {
-                quarantined.add(testSubject);
-            }
-        }
-
-        quarantined.forEach(sick -> sick.setLocation(quarantine));
     }
 
     /**
@@ -134,6 +125,56 @@ public class World {
 
         quarantine.updateHash();
         quarantine.wallCollisions();
+    }
+
+    /**
+     * Show contact tracing network in the city and quarantine.
+     */
+    public void contactNetwork() {
+        city.updateContactNetwork();
+        quarantine.updateContactNetwork();
+    }
+
+    //---------------------------- Helper methods ----------------------------
+
+    /**
+     * Test world's area for the pathogen and act accordingly.
+     */
+    private void test() {
+        testQuarantine();
+        testCity();
+    }
+
+    /**
+     * Test the city population for the pathogen, and for those who test positive, send them to the quarantine.
+     */
+    private void testCity() {
+        List<Human> toQuarantine = new ArrayList<>();
+
+        for (Human testSubject : city.getPopulation()) {
+            boolean isAboveCapacity = quarantine.getPopulation().size() + toQuarantine.size() >= quarantineCapacity.get();
+
+            if (isAboveCapacity) {
+                break;
+            }
+
+            boolean isDetected = Probability.chance(detectionRate.get());
+
+            if (testSubject.isSick() && isDetected) {
+                toQuarantine.add(testSubject);
+            }
+        }
+
+        toQuarantine.forEach(sick -> sick.setLocation(quarantine));
+    }
+
+    /**
+     * Test the quarantine population for those healthy or recovered, send them back to the city.
+     */
+    private void testQuarantine() {
+        quarantine.getPopulation().parallelStream()
+                .filter(Predicate.not(Human::isSick)).collect(Collectors.toList())
+                .forEach(survivor -> survivor.setLocation(city));
     }
 
     //---------------------------- Getters & Setters ----------------------------
@@ -236,6 +277,34 @@ public class World {
     public void setSickTotal(int sickTotal) {
         Error.intervalCheck("sick population", MIN_POPULATION, populationTotal.get(), sickTotal);
         this.sickTotal.set(sickTotal);
+    }
+
+    /**
+     * Getter for {@link #quarantineCapacity}.
+     *
+     * @return {@link #quarantineCapacity}
+     */
+    public int getQuarantineCapacity() {
+        return quarantineCapacity.get();
+    }
+
+    /**
+     * Getter for {@link #quarantineCapacity} property.
+     *
+     * @return {@link #quarantineCapacity} property
+     */
+    public IntegerProperty quarantineCapacityProperty() {
+        return quarantineCapacity;
+    }
+
+    /**
+     * Setter for {@link #quarantineCapacity}.
+     *
+     * @throws IllegalArgumentException if the given parameter is negative
+     */
+    public void setQuarantineCapacity(int quarantineCapacity) {
+        Error.nonNegativeCheck(quarantineCapacity);
+        this.quarantineCapacity.set(quarantineCapacity);
     }
 
     /**

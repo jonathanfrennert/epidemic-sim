@@ -5,6 +5,7 @@ import org.epi.util.Error;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
@@ -33,7 +34,7 @@ public enum Behaviour{
         }
 
     },
-    INERT {
+    SOCIAL_DISTANCING {
 
         /** {@inheritDoc} */
         @Override
@@ -44,14 +45,14 @@ public enum Behaviour{
 
         /**
          * {@inheritDoc}
-         * Inert behaviour is to stay at home (constant).
+         * Social distancing behaviour is to stay at home (constant).
          */
         @Override
         public void adjustToOthers(Model model) {
         }
 
     },
-    AVOIDANT {
+    CONTACT_TRACING {
 
         /** {@inheritDoc} */
         @Override
@@ -64,7 +65,7 @@ public enum Behaviour{
 
         /**
          * {@inheritDoc}
-         * Avoidant behaviour is to actively avoid others.
+         * Contact tracing behaviour is to actively avoid others.
          * @throws NullPointerException if the given parameter is null
          */
         @Override
@@ -72,6 +73,11 @@ public enum Behaviour{
             Model.requireNonNull(model);
 
             Set<Human> nearby = model.getHost().getNearby();
+
+            if (!model.getHost().isSick()) {
+                nearby.removeIf(human -> human.getModel().getBehaviour() != CONTACT_TRACING);
+                nearby.removeIf(Predicate.not(Human::isSick));
+            }
 
             Point2D velocity = new Point2D(0,0);
 
@@ -83,7 +89,7 @@ public enum Behaviour{
                     double deltaY = model.getCenterY() - other.getModel().getCenterY();
                     Point2D direction = new Point2D(deltaX, deltaY).normalize();
 
-                    velocity = velocity.add(direction.multiply(1 / distance));
+                    velocity = direction.multiply(1 / distance).add(velocity);
                 }
             }
 
@@ -95,7 +101,7 @@ public enum Behaviour{
     };
 
     /** The initial speed of a human in pixels per second.*/
-    public static final double SPEED = 70;
+    public static final double SPEED = 60;
 
     /**
      * Initialise the velocity of the given model with this behaviour.

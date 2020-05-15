@@ -1,6 +1,8 @@
 package org.epi.model;
 
 import javafx.collections.FXCollections;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import org.epi.util.Error;
 
 import javafx.geometry.Point2D;
@@ -8,7 +10,11 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
-import static org.epi.model.Model.HUMAN_RADIUS;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.epi.model.Behaviour.CONTACT_TRACING;
+import static org.epi.model.Model.*;
 import static org.epi.util.Clip.clip;
 
 /** A simple model of a location.
@@ -20,6 +26,9 @@ public class Location {
 
     /** The spatial hash of humans in the area.*/
     private final SpatialHash spatialHash;
+
+    /** The contact network.*/
+    private final ObservableList<Line> contactNetwork;
 
     /** The population of this location.*/
     private final ObservableList<Human> population;
@@ -48,6 +57,8 @@ public class Location {
         this.spatialHash = new SpatialHash(this);
         updateHash();
 
+        this.contactNetwork = FXCollections.observableArrayList();
+
         initEvents();
     }
 
@@ -67,6 +78,13 @@ public class Location {
                 for (Human human : change.getRemoved()) {
                     area.getChildren().remove(human.getModel());
                 }
+            }
+        });
+
+        contactNetwork.addListener((ListChangeListener<Line>) change -> {
+            while (change.next()) {
+                area.getChildren().addAll(change.getAddedSubList());
+                area.getChildren().removeAll(change.getRemoved());
             }
         });
     }
@@ -136,6 +154,43 @@ public class Location {
             }
 
         }
+    }
+
+    /**
+     * Update the contact tracing network.
+     */
+    public void updateContactNetwork() {
+        contactNetwork.clear();
+
+        List<Human> sickUsers = population.parallelStream()
+                .filter(human -> human.getModel().getBehaviour() == CONTACT_TRACING)
+                .filter(Human::isSick)
+                .collect(Collectors.toList());
+
+        for (Human sickUser : sickUsers) {
+            sickUser.getNearby().stream()
+                    .map(Human::getModel)
+                    .filter(user -> distance(user, sickUser.getModel()) <= 6 * HUMAN_RADIUS)
+                    .forEach(user -> drawContact(user, sickUser.getModel()));
+        }
+
+        contactNetwork.forEach(Line::toBack);
+    }
+
+    //---------------------------- Helper methods ----------------------------
+
+    /**
+     * Draw a line between two humans in this location.
+     *
+     * @param human1 a human
+     * @param human2 a human
+     */
+    private void drawContact(Model human1, Model human2) {
+        Line contact = new Line(human1.getCenterX(), human1.getCenterY(), human2.getCenterX(), human2.getCenterY());
+        contact.setOpacity(0.3);
+        contact.setFill(Color.DIMGRAY);
+
+        contactNetwork.add(contact);
     }
 
     //---------------------------- Getters ----------------------------

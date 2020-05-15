@@ -56,9 +56,9 @@ public class MainApp extends Application {
      */
     public MainApp() {
         // Added a sample simulation
-        World world = new World(500, 20,0.5,10);
-        BehaviourDistribution dist = new BehaviourDistribution(1,0, 0);
-        Pathogen pathogen = new Pathogen(5,0.05,0.5,0.8,12);
+        World world = new World(300, 250, 50, 0.5,10);
+        BehaviourDistribution dist = new BehaviourDistribution(0.2,0, 1);
+        Pathogen pathogen = new Pathogen(10,0.05,0.1,0.8,20);
 
         simulator = new Simulator(world, dist, pathogen);
     }
@@ -142,6 +142,16 @@ public class MainApp extends Application {
     }
 
     //---------------------------- Getters & Setters ----------------------------
+
+
+    /**
+     * Getter for {@link #primaryStage}.
+     *
+     * @return {@link #primaryStage}
+     */
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
 
     /**
      * Getter for {@link #simulator}.

@@ -8,8 +8,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 import java.util.List;
 
-import static org.epi.model.Behaviour.AVOIDANT;
-import static org.epi.model.Behaviour.INERT;
+import static org.epi.model.Behaviour.CONTACT_TRACING;
+import static org.epi.model.Behaviour.SOCIAL_DISTANCING;
 import static org.epi.model.Behaviour.NORMAL;
 
 /**
@@ -24,10 +24,10 @@ public class BehaviourDistribution {
     private final DoubleProperty normalProportion;
 
     /** The proportion of social distancing behaviour.*/
-    private final DoubleProperty inertProportion;
+    private final DoubleProperty socialDistancingProportion;
 
-    /** The proportion of avoidant behaviour.*/
-    private final DoubleProperty avoidantProportion;
+    /** The proportion of contact tracing behaviour.*/
+    private final DoubleProperty contactTracingProportion;
 
     //---------------------------- Constructor ----------------------------
 
@@ -35,23 +35,23 @@ public class BehaviourDistribution {
      * Create a behaviour distribution. Inputs normalises proportions to probabilities.
      *
      * @param normalProp the proportion of normal behaviour
-     * @param inertProp the proportion of social distancing behaviour
-     * @param avoidantProp The proportion of avoidant behaviour
+     * @param socialDistancingProp the proportion of social distancing behaviour
+     * @param contactTracingProp The proportion of contact tracing behaviour
      * @throws org.apache.commons.math3.exception.NotPositiveException if any of the proportions are negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if any of the proportions are infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if any of the proportions are NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException all of the proportions are 0.
      */
-    public BehaviourDistribution(double normalProp, double inertProp, double avoidantProp) {
+    public BehaviourDistribution(double normalProp, double socialDistancingProp, double contactTracingProp) {
         this.normalProportion = new SimpleDoubleProperty(normalProp);
-        this.inertProportion = new SimpleDoubleProperty(inertProp);
-        this.avoidantProportion = new SimpleDoubleProperty(avoidantProp);
+        this.socialDistancingProportion = new SimpleDoubleProperty(socialDistancingProp);
+        this.contactTracingProportion = new SimpleDoubleProperty(contactTracingProp);
 
         Pair<Behaviour, Double> normal = new Pair<>(NORMAL, this.normalProportion.get());
-        Pair<Behaviour, Double> distancing = new Pair<>(INERT, this.inertProportion.get());
-        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, this.avoidantProportion.get());
+        Pair<Behaviour, Double> socialDistancing = new Pair<>(SOCIAL_DISTANCING, this.socialDistancingProportion.get());
+        Pair<Behaviour, Double> contactTracing = new Pair<>(CONTACT_TRACING, this.contactTracingProportion.get());
 
-        this.behaviourDistribution = new EnumeratedDistribution<>(List.of(normal, distancing, avoidant));
+        this.behaviourDistribution = new EnumeratedDistribution<>(List.of(normal, socialDistancing, contactTracing));
     }
 
     //---------------------------- Simulator action ----------------------------
@@ -100,66 +100,66 @@ public class BehaviourDistribution {
     }
 
     /**
-     * Getter for {@link #inertProportion}.
+     * Getter for {@link #socialDistancingProportion}.
      *
-     * @return {@link #inertProportion}
+     * @return {@link #socialDistancingProportion}
      */
-    public double getInertProportion() {
-        return inertProportion.get();
+    public double getSocialDistancingProportion() {
+        return socialDistancingProportion.get();
     }
 
     /**
-     * Getter for {@link #inertProportion} property.
+     * Getter for {@link #socialDistancingProportion} property.
      *
-     * @return {@link #inertProportion} property
+     * @return {@link #socialDistancingProportion} property
      */
-    public DoubleProperty inertProportionProperty() {
-        return inertProportion;
+    public DoubleProperty socialDistancingProportionProperty() {
+        return socialDistancingProportion;
     }
 
     /**
-     * Setter for {@link #inertProportion}.
+     * Setter for {@link #socialDistancingProportion}.
      *
-     * @param inertProportion {@link #inertProportion}
+     * @param socialDistancingProportion {@link #socialDistancingProportion}
      * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the probabilities are 0.
      */
-    public void setInertProportion(double inertProportion) {
-        this.inertProportion.set(inertProportion);
+    public void setSocialDistancingProportion(double socialDistancingProportion) {
+        this.socialDistancingProportion.set(socialDistancingProportion);
         setBehaviourDistribution();
     }
 
     /**
-     * Getter for {@link #avoidantProportion}.
+     * Getter for {@link #contactTracingProportion}.
      *
-     * @return {@link #avoidantProportion}
+     * @return {@link #contactTracingProportion}
      */
-    public double getAvoidantProportion() {
-        return avoidantProportion.get();
+    public double getContactTracingProportion() {
+        return contactTracingProportion.get();
     }
 
     /**
-     * Getter for {@link #avoidantProportion} property.
+     * Getter for {@link #contactTracingProportion} property.
      *
-     * @return {@link #avoidantProportion} property
+     * @return {@link #contactTracingProportion} property
      */
-    public DoubleProperty avoidantProportionProperty() {
-        return avoidantProportion;
+    public DoubleProperty contactTracingProportionProperty() {
+        return contactTracingProportion;
     }
 
     /**
-     * Setter for {@link #avoidantProportion}.
+     * Setter for {@link #contactTracingProportion}.
      *
-     * @param avoidantProportion {@link #avoidantProportion}
+     * @param contactTracingProportion {@link #contactTracingProportion}
      * @throws org.apache.commons.math3.exception.NotPositiveException if the given parameter is negative.
      * @throws org.apache.commons.math3.exception.NotFiniteNumberException if the given parameter is infinite.
      * @throws org.apache.commons.math3.exception.NotANumberException if the given parameter is NaN.
      * @throws org.apache.commons.math3.exception.MathArithmeticException if all of the probabilities are 0.
      */
-    public void setAvoidantProportion(double avoidantProportion) {
-        this.avoidantProportion.set(avoidantProportion);
+    public void setContactTracingProportion(double contactTracingProportion) {
+        this.contactTracingProportion.set(contactTracingProportion);
         setBehaviourDistribution();
     }
 
@@ -173,10 +173,10 @@ public class BehaviourDistribution {
      */
     public void setBehaviourDistribution() {
         Pair<Behaviour, Double> normal = new Pair<>(NORMAL, normalProportion.get());
-        Pair<Behaviour, Double> distancing = new Pair<>(INERT, inertProportion.get());
-        Pair<Behaviour, Double> avoidant = new Pair<>(AVOIDANT, avoidantProportion.get());
+        Pair<Behaviour, Double> socialDistancing = new Pair<>(SOCIAL_DISTANCING, socialDistancingProportion.get());
+        Pair<Behaviour, Double> contactTracing = new Pair<>(CONTACT_TRACING, contactTracingProportion.get());
 
-        this.behaviourDistribution = new EnumeratedDistribution<>(List.of(normal, distancing, avoidant));
+        this.behaviourDistribution = new EnumeratedDistribution<>(List.of(normal, socialDistancing, contactTracing));
     }
 
 }

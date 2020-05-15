@@ -863,3 +863,9 @@ a.bg-danger:focused {
   -fx-fill: white;
   -fx-stroke: white;
 }
+
+/** Information tooltip */
+
+.infoTip {
+  -fx-image: url("../images/Info.png");
+}

@@ -56,7 +56,7 @@ public class SpatialHash {
     public void update() {
         spatialHash.clear();
 
-        location.getPopulation().parallelStream().forEach(human -> {
+        location.getPopulation().forEach(human -> {
             for (double a : multipleArray) {
                 for (double b : multipleArray) {
                     int hash = hashcode(human.getModel().getCenterX() + a, human.getModel().getCenterY() + b);

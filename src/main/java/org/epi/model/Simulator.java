@@ -8,7 +8,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static org.epi.model.SimulationState.*;
+import static org.epi.model.SimulationState.ENDED;
+import static org.epi.model.SimulationState.PAUSE;
 
 /** The simulator class.
  *  Used to interface with all the simulator components.*/
@@ -75,23 +76,32 @@ public class Simulator {
      * @param elapsedSeconds the number of seconds elapsed since the world was last updated.
      */
     public void update(double elapsedSeconds) {
-        world(elapsedSeconds);
+        worldBefore(elapsedSeconds);
         pathogen(elapsedSeconds);
         immuneSystem(elapsedSeconds);
         model(elapsedSeconds);
+        worldAfter();
+
         statistics.update();
     }
 
     //---------------------------- Helper methods ----------------------------
 
     /**
-     * Perform all world changes in the elapsed seconds.
+     * Perform all initial world changes in the elapsed seconds.
      *
      * @param elapsedSeconds the number of seconds elapsed since the world was last updated
      */
-    private void world(double elapsedSeconds) {
+    private void worldBefore(double elapsedSeconds) {
         world.live(elapsedSeconds);
         world.collisions();
+    }
+
+    /**
+     * Changes that happen after human and pathogen behaviour.
+     */
+    private void worldAfter() {
+        world.contactNetwork();
     }
 
     /**
@@ -144,8 +154,11 @@ public class Simulator {
      * @return a reset version of this simulator
      */
     public Simulator reset() {
-        World world = new World(this.world.getPopulationTotal(), this.world.getSickTotal(),
-                this.world.getDetectionRate(), this.world.getTestingFrequency());
+        World world = new World(this.world.getPopulationTotal(),
+                this.world.getSickTotal(),
+                this.world.getQuarantineCapacity(),
+                this.world.getDetectionRate(),
+                this.world.getTestingFrequency());
         return new Simulator(world, behaviourDistribution, pathogen);
     }
 
@@ -172,17 +185,17 @@ public class Simulator {
     /**
      * Setter for {@link #simulationState}
      *
-     * @param state a state
+     * @param simulationState a simulation state
      * @throws NullPointerException if the given parameter is null
      */
-    public void setSimulationState(SimulationState state) {
-        Objects.requireNonNull(state, Error.getNullMsg("state"));
+    public void setSimulationState(SimulationState simulationState) {
+        Objects.requireNonNull(simulationState, Error.getNullMsg("simulation state"));
 
-        if (simulationState.getValue() == ENDED) {
+        if (this.simulationState.getValue() == ENDED) {
             return;
         }
 
-        this.simulationState.setValue(state);
+        this.simulationState.setValue(simulationState);
     }
 
     /**

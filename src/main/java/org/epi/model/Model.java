@@ -135,6 +135,15 @@ public class Model extends Circle {
     }
 
     /**
+     * Getter for {@link #behaviour}.
+     *
+     * @return {@link #behaviour}
+     */
+    public Behaviour getBehaviour() {
+        return behaviour;
+    }
+
+    /**
      * Setter for {@link #velocity}.
      *
      * @return {@link #velocity}

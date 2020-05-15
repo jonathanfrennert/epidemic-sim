@@ -8,6 +8,8 @@
 <?import javafx.scene.chart.StackedAreaChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -73,6 +75,7 @@
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="160.0" />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
             <RowConstraints vgrow="SOMETIMES" />
@@ -161,21 +164,33 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                <children>
-                  <Label text="Testing Frequency">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Time interval between quarantine testing" textFill="LIGHTSLATEGRAY">
+                  <HBox alignment="CENTER_LEFT" spacing="2.0">
+                     <children>
+                        <Label text="Testing Frequency">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="12.0" prefWidth="12.0">
+                           <tooltip>
+                              <Tooltip fx:id="testingFrequencyTooltip" autoHide="true" text="Testing occurs at regular time intervals.&#10;&#10;In city testing, the sick detected are&#10;quarantined. If the quarantine is at &#10;capacity, detected stay in the city. &#10;&#10;In quarantine testing, all healthy and &#10;recovered are sent to the city. " />
+                           </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true" styleClass="infoTip" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label text="Time between testing" textFill="LIGHTSLATEGRAY">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
                   <Label fx:id="testingFrequencyLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
@@ -192,7 +207,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
                <children>
                   <Label text="Detection Rate">
                      <font>
@@ -206,7 +221,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
                   <Label fx:id="detectionRateLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
@@ -223,13 +238,13 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-            <Label text="Human" GridPane.rowIndex="6">
+            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+            <Label text="Human" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="7">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="8">
                <children>
                   <Label text="Normal Proportion">
                      <font>
@@ -243,7 +258,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <children>
                   <Label fx:id="normalProportionLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
@@ -257,42 +272,14 @@
                   </JFXSlider>
                </children>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="8">
-               <children>
-                  <Label text="Inert Proportion">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Proportion of humans with inert behaviour" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8">
-               <children>
-                  <Label fx:id="inertProportionLabel" alignment="CENTER_RIGHT" text="value">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <JFXSlider fx:id="inertProportionSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
-               </children>
-            </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="9">
                <children>
-                  <Label text="Avoidant Proportion">
+                  <Label text="Social Distancing Proportion">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Proportion of humans with avoidant behaviour" textFill="LIGHTSLATEGRAY">
+                  <Label text="Proportion of humans social distancing" textFill="LIGHTSLATEGRAY">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -301,12 +288,40 @@
             </VBox>
             <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <children>
-                  <Label fx:id="avoidantProportionLabel" alignment="CENTER_RIGHT" text="value">
+                  <Label fx:id="socialDistancingProportionLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Label>
-                  <JFXSlider fx:id="avoidantProportionSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
+                  <JFXSlider fx:id="socialDistancingProportionSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="10">
+               <children>
+                  <Label text="Contact Tracing Proportion">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Proportion of humans contact tracing" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <children>
+                  <Label fx:id="contactTracingProportionLabel" alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider fx:id="contactTracingProportionSlider" blockIncrement="0.1" majorTickUnit="0.1" minorTickCount="0" snapToTicks="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -316,13 +331,13 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="10" />
-            <Label text="Pathogen" GridPane.rowIndex="11">
+            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+            <Label text="Pathogen" GridPane.rowIndex="12">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="12">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="13">
                <children>
                   <Label contentDisplay="CENTER" text="Lifespan">
                      <font>
@@ -336,7 +351,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="12">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13">
                <children>
                   <Label fx:id="lifespanLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
@@ -353,7 +368,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="13">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="14">
                <children>
                   <Label text="Immunity Duration">
                      <font>
@@ -367,7 +382,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14">
                <children>
                   <Label fx:id="immunityDurationLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
@@ -384,7 +399,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="14">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="15">
                <children>
                   <Label text="Immunity Rate ">
                      <font>
@@ -398,7 +413,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="15">
                <children>
                   <Label fx:id="immunityRateLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
@@ -415,7 +430,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="15">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="16">
                <children>
                   <Label text="Transmission Risk ">
                      <font>
@@ -429,7 +444,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="15">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="16">
                <children>
                   <Label fx:id="transmissionRiskLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
@@ -446,7 +461,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="16">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="17">
                <children>
                   <Label text="Fatality Rate ">
                      <font>
@@ -460,7 +475,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="16">
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="17">
                <children>
                   <Label fx:id="fatalityRateLabel" alignment="CENTER_RIGHT" text="value">
                      <font>
@@ -477,12 +492,40 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
-            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="17" />
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="18" GridPane.valignment="CENTER">
+            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="18" />
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" ripplerFill="BLACK" styleClass="btn-primary" text="Generate" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="19" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets bottom="5.0" top="5.0" />
                </GridPane.margin>
             </JFXButton>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+               <children>
+                  <Label contentDisplay="CENTER" text="Quarantine Capacity">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Maximum number of humans in quarantine" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Label fx:id="quarantineCapacityLabel" alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider fx:id="quarantineCapacitySlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
+               </children>
+            </VBox>
          </children>
       </GridPane>
       <Label layoutX="10.0" layoutY="398.0" text="Statistics" AnchorPane.leftAnchor="10.0">
@@ -582,7 +625,7 @@
       <HBox layoutX="405.0" layoutY="556.0" prefHeight="54.0" prefWidth="522.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <children>
             <JFXButton fx:id="playButton" buttonType="RAISED" onAction="#handlePlay" prefHeight="30.0" prefWidth="30.0" styleClass="btn-primary" text=" " />
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="30.0" prefWidth="30.0" text=" " HBox.hgrow="SOMETIMES">
+            <JFXButton fx:id="resetButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="30.0" prefWidth="30.0" text=" " HBox.hgrow="SOMETIMES">
                <styleClass>
                   <String fx:value="btn-icon-reset" />
                   <String fx:value="btn-primary" />
