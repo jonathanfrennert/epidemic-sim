@@ -179,4 +179,16 @@ public class BehaviourDistribution {
         this.behaviourDistribution = new EnumeratedDistribution<>(List.of(normal, socialDistancing, contactTracing));
     }
 
+    /**
+     * Clone this behaviour distribution.
+     *
+     * @return a clone of this behaviour distribution
+     */
+    @Override
+    public BehaviourDistribution clone() {
+        return new BehaviourDistribution(normalProportion.get(),
+                socialDistancingProportion.get(),
+                contactTracingProportion.get());
+    }
+
 }

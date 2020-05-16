@@ -16,9 +16,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.apache.commons.math3.util.Precision;
-import org.epi.model.SimulationState;
-import org.epi.model.Simulator;
-import org.epi.model.Statistics;
+import org.epi.model.*;
 import org.epi.util.Error;
 
 import java.util.Arrays;
@@ -45,10 +43,14 @@ public class SimulatorController extends Controller {
     /** Maximum percentage.*/
     private static final double MAX_PERCENT = 100;
 
+    // Simulation panes ----------------------------
+
     @FXML
     private Pane cityPane;
     @FXML
     private Pane quarantinePane;
+
+    // Statistics table ----------------------------
 
     @FXML
     private Label deceasedLabel;
@@ -59,6 +61,8 @@ public class SimulatorController extends Controller {
     @FXML
     private Label sickLabel;
 
+    // Time chart ----------------------------
+
     @FXML
     private StackedAreaChart<Double, Integer> areaChart;
     @FXML
@@ -66,10 +70,14 @@ public class SimulatorController extends Controller {
     @FXML
     private NumberAxis xAxis;
 
+    // Player buttons ----------------------------
+
     @FXML
     private JFXButton playButton;
     @FXML
     private JFXButton resetButton;
+
+    // Parameter sliders ----------------------------
 
     @FXML
     private Label totalPopulationLabel;
@@ -144,6 +152,9 @@ public class SimulatorController extends Controller {
     @FXML
     private JFXSlider fatalityRateSlider;
 
+    @FXML
+    private JFXButton generateButton;
+
     //---------------------------- Construction methods ----------------------------
 
     /**
@@ -164,6 +175,7 @@ public class SimulatorController extends Controller {
         showTable();
         showChart();
         showPlayButton();
+        showParameters();
 
         initEvents();
     }
@@ -177,12 +189,15 @@ public class SimulatorController extends Controller {
             styleSwitch(newValue);
 
             resetButton.setDisable(newValue == RUN);
+            generateButton.setDisable(newValue == RUN);
 
             if (newValue == ENDED) {
                 playButton.setDisable(true);
                 pauseXAxis();
             }
         });
+
+        initParameters();
     }
 
     //---------------------------- User actions ----------------------------
@@ -226,7 +241,32 @@ public class SimulatorController extends Controller {
         showSimulation();
     }
 
+    /**
+     * Generate a simulator with the given parameter settings
+     */
+    @FXML
+    private void handleGenerate() {
+        resetPanes();
+        resetChart();
+        resetPlayButton();
+
+        getMainApp().setSimulator(new Simulator(getMainApp().getWorld().reset(),
+                getMainApp().getBehaviourDistribution().clone(),
+                getMainApp().getPathogen().reproduce()));
+
+        showSimulation();
+    }
+
     //---------------------------- Instance helper methods ----------------------------
+
+    /**
+     * Initialise parameters.
+     */
+    private void initParameters() {
+        initWorld();
+        initBehaviour();
+        initPathogen();
+    }
 
     /**
      * Initialise all tooltips
@@ -381,16 +421,99 @@ public class SimulatorController extends Controller {
     }
 
     /**
+     * Show parameters values.
+     */
+    private void showParameters() {
+        World world = getMainApp().getSimulator().getWorld();
+        BehaviourDistribution behaveDist = getMainApp().getSimulator().getBehaviourDistribution();
+        Pathogen pathogen = getMainApp().getSimulator().getPathogen();
+
+        totalPopulationSlider.setValue(world.getPopulationTotal());
+        sickPopulationSlider.setValue(world.getSickTotal());
+        quarantineCapacitySlider.setValue(world.getQuarantineCapacity());
+        testingFrequencySlider.setValue(world.getTestingFrequency());
+        detectionRateSlider.setValue(MAX_PERCENT * world.getDetectionRate());
+
+        normalProportionSlider.setValue(behaveDist.getNormalProportion());
+        socialDistancingProportionSlider.setValue(behaveDist.getSocialDistancingProportion());
+        contactTracingProportionSlider.setValue(behaveDist.getContactTracingProportion());
+
+        lifespanSlider.setValue(pathogen.getLifespan());
+        immunityDurationSlider.setValue(pathogen.getImmunityDuration());
+        immunityRateSlider.setValue(MAX_PERCENT * pathogen.getImmunityRate());
+        transmissionRiskSlider.setValue(MAX_PERCENT * pathogen.getTransmissionRisk());
+        fatalityRateSlider.setValue(MAX_PERCENT * pathogen.getFatalityRate());
+    }
+
+    /**
+     * Initialise world parameters.
+     */
+    private void initWorld() {
+        World world = getMainApp().getWorld();
+
+        totalPopulationSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                world.setPopulationTotal(newValue.intValue()));
+
+        sickPopulationSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                world.setSickTotal(newValue.intValue()));
+
+        quarantineCapacitySlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                world.setQuarantineCapacity(newValue.intValue()));
+
+        testingFrequencySlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                world.setTestingFrequency(newValue.doubleValue()));
+
+        detectionRateSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                world.setDetectionRate(newValue.doubleValue() / MAX_PERCENT));
+
+    }
+
+    /**
+     * Initialise behaviour parameters.
+     */
+    private void initBehaviour() {
+        BehaviourDistribution behaveDist = getMainApp().getBehaviourDistribution();
+
+        normalProportionSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                behaveDist.setNormalProportion(newValue.doubleValue()));
+
+        socialDistancingProportionSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                behaveDist.setSocialDistancingProportion(newValue.doubleValue()));
+
+        contactTracingProportionSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                behaveDist.setContactTracingProportion(newValue.doubleValue()));
+
+    }
+
+    /**
+     * Initialise pathogen parameters.
+     */
+    private void initPathogen() {
+        Pathogen pathogen = getMainApp().getPathogen();
+
+        lifespanSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                pathogen.setLifespan(newValue.doubleValue()));
+
+        immunityDurationSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                pathogen.setImmunityDuration(newValue.doubleValue()));
+
+        immunityRateSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                pathogen.setImmunityRate(newValue.doubleValue() / MAX_PERCENT));
+
+        transmissionRiskSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                pathogen.setTransmissionRisk(newValue.doubleValue() / MAX_PERCENT));
+
+        fatalityRateSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                pathogen.setFatalityRate(newValue.doubleValue() / MAX_PERCENT));
+
+    }
+
+    /**
      * Reset the city and quarantine panes.
      */
     private void resetPanes() {
-        Simulator simulator = getMainApp().getSimulator();
-
-        Pane city = simulator.getWorld().getCity().getArea();
-        Pane quarantine = simulator.getWorld().getQuarantine().getArea();
-
-        cityPane.getChildren().remove(city);
-        quarantinePane.getChildren().remove(quarantine);
+        cityPane.getChildren().clear();
+        quarantinePane.getChildren().clear();
     }
 
     /**

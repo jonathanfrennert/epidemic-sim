@@ -4,6 +4,7 @@ import org.epi.model.BehaviourDistribution;
 import org.epi.model.Pathogen;
 import org.epi.model.Simulator;
 import org.epi.model.World;
+import org.epi.util.Error;
 import org.epi.view.RootLayoutController;
 import org.epi.view.SimulatorController;
 
@@ -45,23 +46,14 @@ public class MainApp extends Application {
     /** Simulator currently being showed.*/
     private Simulator simulator;
 
+    /** World edited in parameters.*/
     private World world;
 
+    /** Behaviour distribution edited in parameters.*/
     private BehaviourDistribution behaviourDistribution;
 
+    /** Pathogen edited in parameters.*/
     private Pathogen pathogen;
-
-    /**
-     * Constructor for the main application.
-     */
-    public MainApp() {
-        // Added a sample simulation
-        World world = new World(300, 50, 50, 0.5,10);
-        BehaviourDistribution dist = new BehaviourDistribution(1,0, 0);
-        Pathogen pathogen = new Pathogen(10,0.05,0.1,0.8,20);
-
-        simulator = new Simulator(world, dist, pathogen);
-    }
 
     /**
      * Standard Java main method; used to launch the application.
@@ -91,8 +83,21 @@ public class MainApp extends Application {
         this.primaryStage.setWidth(PREF_WIDTH);
         this.primaryStage.setHeight(PREF_HEIGHT);
 
+        newSimulator();
+
         initRootLayout();
         showSimulator();
+    }
+
+    /**
+     * Generate a sample simulator.
+     */
+    private void newSimulator() {
+        this.world = new World(250, 5, 100, 0.4,10);
+        this.behaviourDistribution = new BehaviourDistribution(50,50, 50);
+        this.pathogen = new Pathogen(10,0.05,0.1,0.7,20);
+
+        this.simulator = new Simulator(this.world.reset(), this.behaviourDistribution.clone(), this.pathogen.reproduce());
     }
 
     /**
@@ -171,6 +176,58 @@ public class MainApp extends Application {
     public void setSimulator(Simulator simulator) {
         Objects.requireNonNull(simulator);
         this.simulator = simulator;
+    }
+
+    /**
+     * Getter for {@link #world}.
+     */
+    public World getWorld() {
+        return world;
+    }
+
+    /**
+     * Setter for {@link #world}.
+     *
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void setWorld(World world) {
+        Objects.requireNonNull(world, Error.getNullMsg("world"));
+        this.world = world;
+    }
+
+    /**
+     * Getter for {@link #behaviourDistribution}.
+     */
+    public BehaviourDistribution getBehaviourDistribution() {
+        return behaviourDistribution;
+    }
+
+    /**
+     * Setter for {@link #behaviourDistribution}.
+     *
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void setBehaviourDistribution(BehaviourDistribution behaviourDistribution) {
+        Objects.requireNonNull(behaviourDistribution, Error.getNullMsg("behaviour distribution"));
+        this.behaviourDistribution = behaviourDistribution;
+    }
+
+    /**
+     * Getter for {@link #pathogen}.
+     */
+    public Pathogen getPathogen() {
+        return pathogen;
+    }
+
+
+    /**
+     * Setter for {@link #pathogen}.
+     *
+     * @throws NullPointerException if the given parameter is null
+     */
+    public void setPathogen(Pathogen pathogen) {
+        Objects.requireNonNull(pathogen, Error.getNullMsg("pathogen"));
+        this.pathogen = pathogen;
     }
 
 }
