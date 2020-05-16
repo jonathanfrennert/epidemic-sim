@@ -166,7 +166,7 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                <children>
-                  <HBox alignment="CENTER_LEFT" spacing="2.0">
+                  <HBox spacing="2.0">
                      <children>
                         <Label text="Testing Frequency">
                            <font>
@@ -274,11 +274,23 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="9">
                <children>
-                  <Label text="Social Distancing Proportion">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
+                  <HBox spacing="2.0">
+                     <children>
+                        <Label text="Social Distancing Proportion">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="12.0" prefWidth="12.0">
+                           <tooltip>
+                              <Tooltip fx:id="socialDistancingTooltip" autoHide="true" text="Social distancing is simulated by having&#10;the corresponding humans be inert." />
+                           </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true" styleClass="infoTip" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </HBox>
                   <Label text="Proportion of humans social distancing" textFill="LIGHTSLATEGRAY">
                      <font>
                         <Font size="10.0" />
@@ -302,11 +314,23 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="10">
                <children>
-                  <Label text="Contact Tracing Proportion">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
+                  <HBox spacing="2.0">
+                     <children>
+                        <Label text="Contact Tracing Proportion">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="12.0" prefWidth="12.0">
+                           <tooltip>
+                              <Tooltip fx:id="contactTracingTooltip" autoHide="true" text="Contact tracing is simulated by having all &#10;corresponding humans linked to a contact &#10;network.  &#10;&#10;Healthy and recovered individuals &#10;in this network may interact. In contrast, &#10;sick individuals warn others via the network, &#10;such that nearby network-connected &#10;individuals will actively avoid the sick. &#10;&#10;Although sick individuals will avoid others&#10;unconditionally, healthy and recovered &#10;network-connected individuals are not aware &#10;of the health status of individuals exhibiting &#10;normal or social distancing behaviour and can &#10;therethrough get sick.&#10;&#10;The contact network is visualized around sick &#10;individuals by graph edges from them to all &#10;the other contact tracing individuals nearby. &#10;" />
+                           </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true" styleClass="infoTip" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </HBox>
                   <Label text="Proportion of humans contact tracing" textFill="LIGHTSLATEGRAY">
                      <font>
                         <Font size="10.0" />
@@ -370,11 +394,23 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="14">
                <children>
-                  <Label text="Immunity Duration">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
+                  <HBox spacing="2.0">
+                     <children>
+                        <Label text="Immunity Duration">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="12.0" prefWidth="12.0">
+                           <tooltip>
+                              <Tooltip fx:id="immunityDurationTooltip" autoHide="true" text="Humans who are immune to the &#10;pathogen are categorized as &#10;recovered, whilst other humans, &#10;without the pathogen, are categorized &#10;as healthy.&#10;&#10;Recovered individuals cannot get the &#10;pathogen as their immune system will &#10;defend them. Eventually, the immunity &#10;duration will pass for a recovered individual, &#10;at which point their immune system will have &#10;forgotten the pathogen. Hence, they become &#10;recategorized as healthy.  &#10;" />
+                           </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true" styleClass="infoTip" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </HBox>
                   <Label text="Duration of pathogen immunity" textFill="LIGHTSLATEGRAY">
                      <font>
                         <Font size="10.0" />
@@ -432,12 +468,24 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="16">
                <children>
-                  <Label text="Transmission Risk ">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Probability of transmission per frame in contact" textFill="LIGHTSLATEGRAY">
+                  <HBox spacing="2.0">
+                     <children>
+                        <Label text="Transmission Risk">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="12.0" prefWidth="12.0">
+                           <tooltip>
+                              <Tooltip fx:id="transmissionRiskTooltip" autoHide="true" text="Transmission can occur at anytime &#10;during effective contact. This is &#10;simulated by having the pathogen&#10;attempt to infect any healthy humans&#10;in contact with a sick human for the &#10;current video frame. The chance of &#10;a successful attempt is the transmission &#10;risk. " />
+                           </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true" styleClass="infoTip" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label text="Probability of transmission whilst in contact" textFill="LIGHTSLATEGRAY">
                      <font>
                         <Font size="10.0" />
                      </font>

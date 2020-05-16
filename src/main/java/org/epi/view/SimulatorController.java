@@ -100,10 +100,16 @@ public class SimulatorController extends Controller {
     private Label normalProportionLabel;
     @FXML
     private JFXSlider normalProportionSlider;
+
+    @FXML
+    private Tooltip socialDistancingTooltip;
     @FXML
     private Label socialDistancingProportionLabel;
     @FXML
     private JFXSlider socialDistancingProportionSlider;
+
+    @FXML
+    private Tooltip contactTracingTooltip;
     @FXML
     private Label contactTracingProportionLabel;
     @FXML
@@ -113,18 +119,26 @@ public class SimulatorController extends Controller {
     private Label lifespanLabel;
     @FXML
     private JFXSlider lifespanSlider;
+
+    @FXML
+    private Tooltip immunityDurationTooltip;
     @FXML
     private Label immunityDurationLabel;
     @FXML
     private JFXSlider immunityDurationSlider;
+
     @FXML
     private Label immunityRateLabel;
     @FXML
     private JFXSlider immunityRateSlider;
+
+    @FXML
+    private Tooltip transmissionRiskTooltip;
     @FXML
     private Label transmissionRiskLabel;
     @FXML
     private JFXSlider transmissionRiskSlider;
+
     @FXML
     private Label fatalityRateLabel;
     @FXML
@@ -138,7 +152,7 @@ public class SimulatorController extends Controller {
      */
     @FXML
     private void initialize() {
-        initTooltip(testingFrequencyTooltip);
+        initTooltips();
         initSliders();
     }
 
@@ -215,6 +229,17 @@ public class SimulatorController extends Controller {
     //---------------------------- Instance helper methods ----------------------------
 
     /**
+     * Initialise all tooltips
+     */
+    private void initTooltips() {
+        initTooltip(testingFrequencyTooltip);
+        initTooltip(socialDistancingTooltip);
+        initTooltip(contactTracingTooltip);
+        initTooltip(immunityDurationTooltip);
+        initTooltip(transmissionRiskTooltip);
+    }
+
+    /**
      * Initialise sliders for all parameters.
      */
     private void initSliders() {
@@ -228,7 +253,7 @@ public class SimulatorController extends Controller {
      */
     private void initWorldSliders() {
         initSlider(totalPopulationLabel, totalPopulationSlider,
-                0, " total", MIN_POPULATION, MAX_POPULATION);
+                0, "", MIN_POPULATION, MAX_POPULATION);
 
         // Initialise dependency to total population for certain sliders.
         totalPopulationSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -243,7 +268,10 @@ public class SimulatorController extends Controller {
         });
 
         initSlider(sickPopulationLabel, sickPopulationSlider,
-                0, " sick", MIN_POPULATION, totalPopulationSlider.valueProperty().intValue());
+                0, "", MIN_POPULATION, totalPopulationSlider.valueProperty().intValue());
+
+        initSlider(quarantineCapacityLabel, quarantineCapacitySlider,
+                0, "", MIN_POPULATION, MAX_POPULATION);
 
         initSlider(testingFrequencyLabel, testingFrequencySlider,
                 1, SEC_EXT, MIN_TIME_INTERVAL, MAX_TIME_INTERVAL);

@@ -170,7 +170,7 @@ public class Location {
         for (Human sickUser : sickUsers) {
             sickUser.getNearby().stream()
                     .map(Human::getModel)
-                    .filter(user -> distance(user, sickUser.getModel()) <= 6 * HUMAN_RADIUS)
+                    .filter(user -> distance(user, sickUser.getModel()) <= 5.5 * HUMAN_RADIUS)
                     .forEach(user -> drawContact(user, sickUser.getModel()));
         }
 
@@ -187,7 +187,7 @@ public class Location {
      */
     private void drawContact(Model human1, Model human2) {
         Line contact = new Line(human1.getCenterX(), human1.getCenterY(), human2.getCenterX(), human2.getCenterY());
-        contact.setOpacity(0.3);
+        contact.setOpacity(0.25);
         contact.setFill(Color.DIMGRAY);
 
         contactNetwork.add(contact);
