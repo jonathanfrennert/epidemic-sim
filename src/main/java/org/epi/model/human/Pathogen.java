@@ -1,4 +1,4 @@
-package org.epi.model;
+package org.epi.model.human;
 
 import org.epi.util.Probability;
 import org.epi.util.Error;
@@ -6,7 +6,6 @@ import org.epi.util.Error;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -58,7 +57,6 @@ public class Pathogen {
         Probability.probabilityCheck(transmissionRisk);
         Probability.probabilityCheck(fatalityRate);
         Probability.probabilityCheck(immunityRate);
-
         this.host = null;
         this.lifetime = new SimpleDoubleProperty(0);
         this.lifespan = new SimpleDoubleProperty(lifespan);
@@ -160,49 +158,12 @@ public class Pathogen {
     }
 
     /**
-     * Getter for {@link #lifetime}.
-     *
-     * @return {@link #lifetime}
-     */
-    public double getLifetime() {
-        return lifetime.get();
-    }
-
-    /**
-     * Getter for {@link #lifetime} property.
-     *
-     * @return {@link #lifetime} property
-     */
-    public DoubleProperty lifetimeProperty() {
-        return lifetime;
-    }
-
-    /**
-     * Setter for {@link #lifetime}.
-     *
-     * @throws IllegalArgumentException if the given parameter is negative
-     */
-    public void setLifetime(double lifetime) {
-        Error.nonNegativeCheck(lifetime);
-        this.lifetime.set(lifetime);
-    }
-
-    /**
      * Getter for {@link #lifespan}.
      *
      * @return {@link #lifespan}
      */
     public double getLifespan() {
         return lifespan.get();
-    }
-
-    /**
-     * Getter for {@link #lifespan} property.
-     *
-     * @return {@link #lifespan} property
-     */
-    public DoubleProperty lifespanProperty() {
-        return lifespan;
     }
 
     /**
@@ -222,15 +183,6 @@ public class Pathogen {
      */
     public double getTransmissionRisk() {
         return transmissionRisk.get();
-    }
-
-    /**
-     * Getter for {@link #transmissionRisk} property.
-     *
-     * @return {@link #transmissionRisk} property
-     */
-    public DoubleProperty transmissionRiskProperty() {
-        return transmissionRisk;
     }
 
     /**
@@ -254,15 +206,6 @@ public class Pathogen {
     }
 
     /**
-     * Getter for {@link #fatalityRate} property.
-     *
-     * @return {@link #fatalityRate} property
-     */
-    public DoubleProperty fatalityRateProperty() {
-        return fatalityRate;
-    }
-
-    /**
      * Setter for {@link #fatalityRate}.
      *
      * @throws IllegalArgumentException if the given parameter is less than {@value Probability#MIN_PROB} or
@@ -283,15 +226,6 @@ public class Pathogen {
     }
 
     /**
-     * Getter for {@link #immunityRate} property.
-     *
-     * @return {@link #immunityRate} property
-     */
-    public DoubleProperty immunityRateProperty() {
-        return immunityRate;
-    }
-
-    /**
      * Setter for {@link #immunityRate}.
      *
      * @throws IllegalArgumentException if the given parameter is less than {@value Probability#MIN_PROB} or
@@ -309,15 +243,6 @@ public class Pathogen {
      */
     public double getImmunityDuration() {
         return immunityDuration.get();
-    }
-
-    /**
-     * Getter for {@link #immunityDuration} property.
-     *
-     * @return {@link #immunityDuration} property
-     */
-    public DoubleProperty immunityDurationProperty() {
-        return immunityDuration;
     }
 
     /**

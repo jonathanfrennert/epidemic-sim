@@ -1,5 +1,6 @@
-package org.epi.model;
+package org.epi.model.world;
 
+import org.epi.model.human.Human;
 import org.epi.util.Probability;
 import org.epi.util.Error;
 
@@ -81,11 +82,9 @@ public class World {
         Error.nonNegativeCheck(quarantineCapacity);
         Error.intervalCheck("total population", MIN_POPULATION, MAX_POPULATION, populationTotal);
         Error.intervalCheck("sick population", MIN_POPULATION, populationTotal, sickTotal);
-
         this.city = new Location(CITY_WIDTH, CITY_HEIGHT);
         this.quarantine = new Location(QUARANTINE_WIDTH, QUARANTINE_HEIGHT);
         this.totalElapsedSeconds = new SimpleDoubleProperty(OFFSET);
-
         this.populationTotal = new SimpleIntegerProperty(populationTotal);
         this.sickTotal = new SimpleIntegerProperty(sickTotal);
         this.quarantineCapacity = new SimpleIntegerProperty(quarantineCapacity);
@@ -207,30 +206,12 @@ public class World {
     }
 
     /**
-     * Getter for {@link #totalElapsedSeconds} property.
-     *
-     * @return {@link #totalElapsedSeconds} property
-     */
-    public DoubleProperty totalElapsedSecondsProperty() {
-        return totalElapsedSeconds;
-    }
-
-    /**
      * Getter for {@link #populationTotal}.
      *
      * @return {@link #populationTotal}
      */
     public int getPopulationTotal() {
         return populationTotal.get();
-    }
-
-    /**
-     * Getter for {@link #populationTotal} property.
-     *
-     * @return {@link #populationTotal}
-     */
-    public IntegerProperty populationTotalProperty() {
-        return populationTotal;
     }
 
     /**
@@ -260,15 +241,6 @@ public class World {
     }
 
     /**
-     * Getter for {@link #sickTotal} property.
-     *
-     * @return {@link #sickTotal} property
-     */
-    public IntegerProperty sickTotalProperty() {
-        return sickTotal;
-    }
-
-    /**
      * Setter for {@link #sickTotal}.
      *
      * @throws IllegalArgumentException  if the sick total is less than
@@ -286,15 +258,6 @@ public class World {
      */
     public int getQuarantineCapacity() {
         return quarantineCapacity.get();
-    }
-
-    /**
-     * Getter for {@link #quarantineCapacity} property.
-     *
-     * @return {@link #quarantineCapacity} property
-     */
-    public IntegerProperty quarantineCapacityProperty() {
-        return quarantineCapacity;
     }
 
     /**
@@ -317,15 +280,6 @@ public class World {
     }
 
     /**
-     * Getter for {@link #detectionRate} property.
-     *
-     * @return {@link #detectionRate} property
-     */
-    public DoubleProperty detectionRateProperty() {
-        return detectionRate;
-    }
-
-    /**
      * Setter for {@link #detectionRate}.
      *
      * @throws IllegalArgumentException if the given parameter is less than {@value Probability#MIN_PROB}
@@ -343,15 +297,6 @@ public class World {
      */
     public double getTestingFrequency() {
         return testingFrequency.get();
-    }
-
-    /**
-     * Getter for {@link #testingFrequency} property.
-     *
-     * @return {@link #testingFrequency} property
-     */
-    public DoubleProperty testingFrequencyProperty() {
-        return testingFrequency;
     }
 
     /**

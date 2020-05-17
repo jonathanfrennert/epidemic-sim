@@ -1,5 +1,7 @@
 package org.epi.model;
 
+import org.epi.model.human.Behaviour;
+
 import org.apache.commons.math3.util.Pair;
 import org.apache.commons.math3.distribution.EnumeratedDistribution;
 
@@ -8,9 +10,9 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 import java.util.List;
 
-import static org.epi.model.Behaviour.CONTACT_TRACING;
-import static org.epi.model.Behaviour.SOCIAL_DISTANCING;
-import static org.epi.model.Behaviour.NORMAL;
+import static org.epi.model.human.Behaviour.CONTACT_TRACING;
+import static org.epi.model.human.Behaviour.SOCIAL_DISTANCING;
+import static org.epi.model.human.Behaviour.NORMAL;
 
 /**
  * Utilise a behaviour distribution when creating a human population.

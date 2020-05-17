@@ -14,7 +14,8 @@ public enum SimulationState {
      *
      * @param styleClass the style class for the play button of this state
      */
-    private SimulationState(String styleClass) {
+    SimulationState(String styleClass) {
         this.styleClass = styleClass;
     }
+
 }

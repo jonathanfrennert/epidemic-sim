@@ -1,4 +1,4 @@
-package org.epi.model;
+package org.epi.model.human;
 
 import org.epi.util.Error;
 
@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
-import static org.epi.model.Model.HUMAN_RADIUS;
+import static org.epi.model.human.Model.HUMAN_RADIUS;
 
 /** State class for the behaviour of humans.*/
 public enum Behaviour{

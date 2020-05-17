@@ -1,4 +1,4 @@
-package org.epi.model;
+package org.epi.model.human;
 
 import javafx.scene.paint.Color;
 
@@ -16,7 +16,7 @@ public enum Status {
      *
      * @param color the color indicating the status type in the simulation view
      */
-    private Status(Color color) {
+    Status(Color color) {
         this.color = color;
     }
 

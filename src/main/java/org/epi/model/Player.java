@@ -1,9 +1,10 @@
 package org.epi.model;
 
+import org.epi.util.Error;
+
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
-import org.epi.util.Error;
 
 import java.util.Objects;
 

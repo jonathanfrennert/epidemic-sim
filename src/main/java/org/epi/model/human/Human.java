@@ -1,5 +1,6 @@
-package org.epi.model;
+package org.epi.model.human;
 
+import org.epi.model.world.Location;
 import org.epi.util.Error;
 
 import java.util.Objects;
@@ -88,7 +89,6 @@ public class Human {
      */
     public void pathogen(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
-
         pathogen.infect();
         pathogen.live(elapsedSeconds);
     }
@@ -117,7 +117,6 @@ public class Human {
      */
     public void model(double elapsedSeconds) {
         Error.nonNegativeCheck(elapsedSeconds);
-
         status();
         model.fill();
         model.move(elapsedSeconds);

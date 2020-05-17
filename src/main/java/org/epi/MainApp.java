@@ -1,9 +1,9 @@
 package org.epi;
 
 import org.epi.model.BehaviourDistribution;
-import org.epi.model.Pathogen;
+import org.epi.model.human.Pathogen;
 import org.epi.model.Simulator;
-import org.epi.model.World;
+import org.epi.model.world.World;
 import org.epi.util.Error;
 import org.epi.view.RootLayoutController;
 import org.epi.view.SimulatorController;

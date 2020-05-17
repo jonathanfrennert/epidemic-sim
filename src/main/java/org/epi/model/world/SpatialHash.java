@@ -1,5 +1,7 @@
-package org.epi.model;
+package org.epi.model.world;
 
+import org.epi.model.human.Human;
+import org.epi.model.human.Model;
 import org.epi.util.Error;
 
 import java.util.HashMap;
@@ -39,11 +41,8 @@ public class SpatialHash {
      */
     public SpatialHash(Location location) {
         Objects.requireNonNull(location, Error.getNullMsg("location"));
-
         this.location = location;
-
-        this.convertFactor = 1 / ((double) CELL_SIZE);
-
+        this.convertFactor = 1 / CELL_SIZE;
         this.spatialHash = new HashMap<>();
         update();
     }
@@ -100,7 +99,6 @@ public class SpatialHash {
         } else {
             HashSet<Human> cellSet = new HashSet<>();
             cellSet.add(human);
-
             spatialHash.put(key, cellSet);
         }
     }

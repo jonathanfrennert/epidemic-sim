@@ -1,10 +1,12 @@
-package org.epi.model;
+package org.epi.model.world;
+
+import org.epi.model.human.Human;
+import org.epi.model.human.Model;
+import org.epi.util.Error;
 
 import javafx.collections.FXCollections;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import org.epi.util.Error;
-
 import javafx.geometry.Point2D;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -13,8 +15,9 @@ import javafx.scene.layout.Pane;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.epi.model.Behaviour.CONTACT_TRACING;
-import static org.epi.model.Model.*;
+import static org.epi.model.human.Behaviour.CONTACT_TRACING;
+import static org.epi.model.human.Model.HUMAN_RADIUS;
+import static org.epi.model.human.Model.distance;
 import static org.epi.util.Clip.clip;
 
 /** A simple model of a location.
@@ -170,7 +173,7 @@ public class Location {
         for (Human sickUser : sickUsers) {
             sickUser.getNearby().stream()
                     .map(Human::getModel)
-                    .filter(user -> distance(user, sickUser.getModel()) <= 5.5 * HUMAN_RADIUS)
+                    .filter(user -> distance(user, sickUser.getModel()) <= 5.5 * HUMAN_RADIUS) // Multiplier is a preference.
                     .forEach(user -> drawContact(user, sickUser.getModel()));
         }
 

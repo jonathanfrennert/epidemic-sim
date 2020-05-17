@@ -1,4 +1,4 @@
-package org.epi.model;
+package org.epi.model.human;
 
 import org.epi.util.Probability;
 import org.epi.util.Error;
@@ -36,7 +36,6 @@ public class ImmuneSystem {
      */
     public ImmuneSystem(Human host) {
         Objects.requireNonNull(host, Error.getNullMsg("host"));
-
         this.host = host;
         this.antigen = new SimpleIntegerProperty(DEF_ANTIGEN);
         this.immunityDuration = new SimpleDoubleProperty(0);

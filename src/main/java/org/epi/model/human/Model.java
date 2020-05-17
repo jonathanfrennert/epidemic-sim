@@ -1,4 +1,4 @@
-package org.epi.model;
+package org.epi.model.human;
 
 import org.epi.util.Error;
 
@@ -85,10 +85,8 @@ public class Model extends Circle {
     public static double distance (Model m1, Model m2) {
         requireNonNull(m1);
         requireNonNull(m2);
-
         Point2D p1 = new Point2D(m1.getCenterX(), m1.getCenterY());
         Point2D p2 = new Point2D(m2.getCenterX(), m2.getCenterY());
-
         return p1.distance(p2);
     }
 
@@ -111,7 +109,6 @@ public class Model extends Circle {
      */
     public void move(double elapsedSeconds) {
         behaviour.adjustToOthers(this);
-
         setCenterX(getCenterX() + velocity.getX() * elapsedSeconds);
         setCenterY(getCenterY() + velocity.getY() * elapsedSeconds);
     }
@@ -170,7 +167,6 @@ public class Model extends Circle {
      */
     public void setVelocity(Point2D velocity) {
         Objects.requireNonNull(velocity, Error.getNullMsg("velocity"));
-
         this.velocity = velocity;
     }
 

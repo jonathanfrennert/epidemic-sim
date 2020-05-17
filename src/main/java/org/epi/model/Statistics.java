@@ -1,5 +1,7 @@
 package org.epi.model;
 
+import org.epi.model.human.Status;
+import org.epi.model.world.World;
 import org.epi.util.Error;
 
 import javafx.beans.property.IntegerProperty;

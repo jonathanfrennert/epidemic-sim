@@ -1,5 +1,8 @@
 package org.epi.model;
 
+import org.epi.model.human.Human;
+import org.epi.model.human.Pathogen;
+import org.epi.model.world.World;
 import org.epi.util.Error;
 
 import javafx.beans.property.Property;
@@ -11,8 +14,7 @@ import java.util.Objects;
 import static org.epi.model.SimulationState.ENDED;
 import static org.epi.model.SimulationState.PAUSE;
 
-/** The simulator class.
- *  Used to interface with all the simulator components.*/
+/** The simulator class. Used to interface with all the simulator components.*/
 public class Simulator {
 
     /** The state of the simulator.*/

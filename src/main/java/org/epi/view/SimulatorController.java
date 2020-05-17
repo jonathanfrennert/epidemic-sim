@@ -1,15 +1,18 @@
 package org.epi.view;
 
 import org.epi.model.BehaviourDistribution;
-import org.epi.model.Pathogen;
+import org.epi.model.human.Pathogen;
 import org.epi.model.SimulationState;
 import org.epi.model.Simulator;
 import org.epi.model.Statistics;
-import org.epi.model.World;
+import org.epi.model.world.World;
 import org.epi.util.Error;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
+
+import org.apache.commons.math3.util.Precision;
+
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.value.ChangeListener;
@@ -23,7 +26,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import org.apache.commons.math3.util.Precision;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,8 +34,8 @@ import java.util.stream.Collectors;
 import static org.epi.model.SimulationState.ENDED;
 import static org.epi.model.SimulationState.PAUSE;
 import static org.epi.model.SimulationState.RUN;
-import static org.epi.model.World.MAX_POPULATION;
-import static org.epi.model.World.MIN_POPULATION;
+import static org.epi.model.world.World.MAX_POPULATION;
+import static org.epi.model.world.World.MIN_POPULATION;
 
 public class SimulatorController extends Controller {
 
