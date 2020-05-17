@@ -95,9 +95,9 @@ public class MainApp extends Application {
     private void newSimulator() {
         this.world = new World(250, 5, 100, 0.4,10);
         this.behaviourDistribution = new BehaviourDistribution(50,50, 50);
-        this.pathogen = new Pathogen(10,0.05,0.1,0.7,20);
+        this.pathogen = new Pathogen(10,0.1,0.1,0.7,20);
 
-        this.simulator = new Simulator(this.world.reset(), this.behaviourDistribution.clone(), this.pathogen.reproduce());
+        this.simulator = new Simulator(this.world.reset(), this.behaviourDistribution.copy(), this.pathogen.reproduce());
     }
 
     /**

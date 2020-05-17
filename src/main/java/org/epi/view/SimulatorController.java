@@ -1,5 +1,13 @@
 package org.epi.view;
 
+import org.epi.model.BehaviourDistribution;
+import org.epi.model.Pathogen;
+import org.epi.model.SimulationState;
+import org.epi.model.Simulator;
+import org.epi.model.Statistics;
+import org.epi.model.World;
+import org.epi.util.Error;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import javafx.beans.binding.Bindings;
@@ -16,14 +24,14 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.apache.commons.math3.util.Precision;
-import org.epi.model.*;
-import org.epi.util.Error;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.epi.model.SimulationState.*;
+import static org.epi.model.SimulationState.ENDED;
+import static org.epi.model.SimulationState.PAUSE;
+import static org.epi.model.SimulationState.RUN;
 import static org.epi.model.World.MAX_POPULATION;
 import static org.epi.model.World.MIN_POPULATION;
 
@@ -254,7 +262,7 @@ public class SimulatorController extends Controller {
         resetPlayButton();
 
         getMainApp().setSimulator(new Simulator(getMainApp().getWorld().reset(),
-                getMainApp().getBehaviourDistribution().clone(),
+                getMainApp().getBehaviourDistribution().copy(),
                 getMainApp().getPathogen().reproduce()));
 
         showSimulation();

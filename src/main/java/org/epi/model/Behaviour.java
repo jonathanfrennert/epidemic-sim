@@ -1,7 +1,8 @@
 package org.epi.model;
 
-import javafx.geometry.Point2D;
 import org.epi.util.Error;
+
+import javafx.geometry.Point2D;
 
 import java.util.Objects;
 import java.util.Set;

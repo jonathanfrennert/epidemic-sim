@@ -77,15 +77,6 @@ public class BehaviourDistribution {
     }
 
     /**
-     * Getter for {@link #normalProportion} property.
-     *
-     * @return {@link #normalProportion} property
-     */
-    public DoubleProperty normalProportionProperty() {
-        return normalProportion;
-    }
-
-    /**
      * Setter for {@link #normalProportion}.
      *
      * @param normalProportion {@link #normalProportion}
@@ -109,15 +100,6 @@ public class BehaviourDistribution {
     }
 
     /**
-     * Getter for {@link #socialDistancingProportion} property.
-     *
-     * @return {@link #socialDistancingProportion} property
-     */
-    public DoubleProperty socialDistancingProportionProperty() {
-        return socialDistancingProportion;
-    }
-
-    /**
      * Setter for {@link #socialDistancingProportion}.
      *
      * @param socialDistancingProportion {@link #socialDistancingProportion}
@@ -138,15 +120,6 @@ public class BehaviourDistribution {
      */
     public double getContactTracingProportion() {
         return contactTracingProportion.get();
-    }
-
-    /**
-     * Getter for {@link #contactTracingProportion} property.
-     *
-     * @return {@link #contactTracingProportion} property
-     */
-    public DoubleProperty contactTracingProportionProperty() {
-        return contactTracingProportion;
     }
 
     /**
@@ -184,8 +157,7 @@ public class BehaviourDistribution {
      *
      * @return a clone of this behaviour distribution
      */
-    @Override
-    public BehaviourDistribution clone() {
+    public BehaviourDistribution copy() {
         return new BehaviourDistribution(normalProportion.get(),
                 socialDistancingProportion.get(),
                 contactTracingProportion.get());
