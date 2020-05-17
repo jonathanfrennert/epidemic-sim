@@ -243,7 +243,7 @@ public class World {
     public void setPopulationTotal(int populationTotal) {
         Error.intervalCheck("population", MIN_POPULATION, MAX_POPULATION, populationTotal);
 
-        if(populationTotal > sickTotal.get()) {
+        if(populationTotal < sickTotal.get()) {
             sickTotal.set(populationTotal);
         }
 

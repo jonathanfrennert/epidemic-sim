@@ -164,6 +164,34 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+               <children>
+                  <Label contentDisplay="CENTER" text="Quarantine Capacity">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label text="Maximum number of humans in quarantine" textFill="LIGHTSLATEGRAY">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Label fx:id="quarantineCapacityLabel" alignment="CENTER_RIGHT" text="value">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <JFXSlider fx:id="quarantineCapacitySlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </JFXSlider>
+               </children>
+            </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                <children>
                   <HBox spacing="2.0">
@@ -239,11 +267,23 @@
                </GridPane.margin>
             </VBox>
             <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-            <Label text="Human" GridPane.rowIndex="7">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
+            <HBox spacing="2.0" GridPane.rowIndex="7">
+               <children>
+                  <Label text="Human">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="12.0" prefWidth="12.0">
+                     <tooltip>
+                        <Tooltip fx:id="humanTooltip" autoHide="true" text="A human's behaviour is decided by &#10;a probability distribution, where the&#10;inputs are ratio proportions." />
+                     </tooltip>
+                     <graphic>
+                        <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true" styleClass="infoTip" />
+                     </graphic>
+                  </Label>
+               </children>
+            </HBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="8">
                <children>
                   <Label text="Normal Proportion">
@@ -546,34 +586,6 @@
                   <Insets bottom="5.0" top="5.0" />
                </GridPane.margin>
             </JFXButton>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
-               <children>
-                  <Label contentDisplay="CENTER" text="Quarantine Capacity">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Maximum number of humans in quarantine" textFill="LIGHTSLATEGRAY">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <Label fx:id="quarantineCapacityLabel" alignment="CENTER_RIGHT" text="value">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <JFXSlider fx:id="quarantineCapacitySlider" blockIncrement="1.0" majorTickUnit="1.0" minorTickCount="0" snapToTicks="true">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </JFXSlider>
-               </children>
-            </VBox>
          </children>
       </GridPane>
       <Label layoutX="10.0" layoutY="398.0" text="Statistics" AnchorPane.leftAnchor="10.0">

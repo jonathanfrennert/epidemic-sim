@@ -105,6 +105,9 @@ public class SimulatorController extends Controller {
     private JFXSlider detectionRateSlider;
 
     @FXML
+    private Tooltip humanTooltip;
+
+    @FXML
     private Label normalProportionLabel;
     @FXML
     private JFXSlider normalProportionSlider;
@@ -273,6 +276,7 @@ public class SimulatorController extends Controller {
      */
     private void initTooltips() {
         initTooltip(testingFrequencyTooltip);
+        initTooltip(humanTooltip);
         initTooltip(socialDistancingTooltip);
         initTooltip(contactTracingTooltip);
         initTooltip(immunityDurationTooltip);
