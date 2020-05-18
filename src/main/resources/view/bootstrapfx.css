@@ -9,7 +9,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 * {
-  -fx-font-family: 'sans-serif';
+  -fx-font-family: 'Open Sans';
 }
 
 .text-left {
@@ -793,6 +793,7 @@ a.bg-danger:focused {
   -fx-border-style: solid;
   -fx-border-color: #ddd;
   -fx-border-radius: 0, 0, 3px, 0;
+  -fx-background-color: derive(#ececec,26.4%);
 }
 
 /** Stacked Area Chart */
@@ -868,4 +869,10 @@ a.bg-danger:focused {
 
 .infoTip {
   -fx-image: url("../images/Info.png");
+}
+
+/** Background */
+
+.linear-grad-to-right{
+  -fx-background-color: linear-gradient(to right, dodgerblue, crimson);
 }

@@ -19,11 +19,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="0.0" prefWidth="0.0" styleClass="background" stylesheets="@bootstrapfx.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.epi.view.SimulatorController">
+<AnchorPane minHeight="605.0" minWidth="948.0" prefHeight="0.0" prefWidth="0.0" stylesheets="@bootstrapfx.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.epi.view.SimulatorController">
    <children>
-      <Label layoutX="10.0" layoutY="10.0" text="Simulation" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="522.0" text="Simulation" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font size="14.0" />
          </font>
       </Label>
       <VBox alignment="CENTER" layoutX="14.0" layoutY="40.0" styleClass="box" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="30.0">
@@ -64,7 +64,7 @@
             </StackPane>
          </children>
       </VBox>
-      <Label layoutX="100.0" layoutY="10.0" prefHeight="16.0" prefWidth="466.0" text="Parameters" AnchorPane.leftAnchor="540.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Label alignment="CENTER" layoutX="100.0" layoutY="10.0" prefHeight="16.0" prefWidth="466.0" text="Parameters" textFill="WHITE" AnchorPane.leftAnchor="540.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -588,14 +588,14 @@
             </JFXButton>
          </children>
       </GridPane>
-      <Label layoutX="10.0" layoutY="398.0" text="Statistics" AnchorPane.leftAnchor="10.0">
+      <Label layoutX="10.0" layoutY="395.0" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="10.0">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="410.0" layoutY="398.0" text="Change over Time">
+      <Label layoutX="410.0" layoutY="395.0" text="Change over Time" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font size="14.0" />
          </font>
       </Label>
       <HBox layoutY="410.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="410.0">
@@ -694,4 +694,8 @@
          </children>
       </HBox>
    </children>
+   <styleClass>
+      <String fx:value="background" />
+      <String fx:value="linear-grad-to-right" />
+   </styleClass>
 </AnchorPane>
