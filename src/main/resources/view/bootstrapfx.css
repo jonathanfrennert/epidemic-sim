@@ -877,6 +877,18 @@ a.bg-danger:focused {
   -fx-background-color: linear-gradient(to right, dodgerblue, crimson);
 }
 
+/** Website Icon */
+
 .icon {
   -fx-image: url("../images/Icon.png");
+}
+
+/** Button style */
+
+.btn-constant:selected, .btn-constant:focused, .btn-constant:pressed, .btn-constant:hover {
+  -fx-font-size: 16;
+}
+
+.btn-menu:hover {
+  -fx-font-size: 14;
 }
