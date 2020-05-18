@@ -1,0 +1,28 @@
+2020-05-18 22:39:25,320 [INFO] in scala-execution-context-global-33 - [info] c.j.i.s.Initializer$ - redirected OUT / ERR
+2020-05-18 22:39:25,321 [INFO] in scala-execution-context-global-33 - [info] c.j.i.s.Initializer$ - installed SLF4JBridge
+2020-05-18 22:39:25,321 [INFO] in scala-execution-context-global-33 - [info] c.j.i.s.MonocleInitializer$ - screen: null
+2020-05-18 22:39:25,321 [INFO] in scala-execution-context-global-47 - Warning: Quantum will not submit render jobs, nothing should draw
+2020-05-18 22:39:25,322 [INFO] in scala-execution-context-global-47 - [info] c.j.i.s.Initializer$ - finished init!
+2020-05-18 22:39:25,322 [INFO] in scala-execution-context-global-47 - [info] c.j.i.s.Initializer$ - JavaFX version: 11.0.3.4-jpro+0-2019-12-20-085014
+2020-05-18 22:39:25,338 [INFO] in scala-execution-context-global-47 - [info] c.j.i.c.m.DynamicDataModel - Started Monitoring chart data...
+2020-05-18 22:39:25,360 [INFO] in scala-execution-context-global-47 - [info] c.j.i.c.m.ChartJSONImExporter - Nothing to import
+2020-05-18 22:39:25,612 [INFO] in scala-execution-context-global-47 - [info] play.api.Play - Application started (Prod)
+2020-05-18 22:39:26,007 [INFO] in scala-execution-context-global-47 - [info] p.c.s.AkkaHttpServer - Listening for HTTP on /0:0:0:0:0:0:0:0:8080
+2020-05-18 22:39:27,010 [INFO] in scala-execution-context-global-47 - [info] c.jpro - application requested: 0!episim
+2020-05-18 22:39:27,025 [INFO] in scala-execution-context-global-47 - [info] c.jpro - Creating Application: 0!episim
+2020-05-18 22:39:27,028 [INFO] in scala-execution-context-global-47 - [info] c.jpro - remoteAddress 0:0:0:0:0:0:0:1
+2020-05-18 22:39:27,029 [INFO] in scala-execution-context-global-47 - [warn] c.jpro - jpro.plainFile - Couldn't get resource for: 'jpro/html/favicon.ico'
+2020-05-18 22:39:27,031 [INFO] in scala-execution-context-global-47 - [info] c.jpro - host          localhost:8080
+2020-05-18 22:39:27,031 [INFO] in scala-execution-context-global-47 - [info] c.jpro - uri           /app/0!episim
+2020-05-18 22:39:28,122 [INFO] in scala-execution-context-global-47 - [info] c.j.i.s.ViewSerializerActor - appdef: AppByMain(episim,org.epi.MainApp,None,NamedClassLoader(system),false) clientinfo: ClientInfo(http://localhost:8080/,http://localhost:8080/app/episim,1536.0,722.0,false,en-GB,List(en-GB, en-US, en, sv),Map(Idea-861972b3 -> 1991cd2f-b421-45d4-87ad-1c726b6403e2, Idea-d1815c0 -> c6c668c2-146e-42f6-b039-7d0170e64cdc))out: Actor[akka://application/system/StreamSupervisor-0/$$g-actorRefSource#-1404646975]
+2020-05-18 22:39:29,381 [INFO] in scala-execution-context-global-48 - [info] com.jpro.JS - received msg: new MainID: 12229 userid: 898780082
+2020-05-18 22:42:56,408 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - 
+2020-05-18 22:42:56,409 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - Application closed:
+2020-05-18 22:42:56,415 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - startTime      : Mon May 18 22:42:56 CEST 2020      
+2020-05-18 22:42:56,415 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - averageLatency : 00:00:00.127 
+2020-05-18 22:42:56,415 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - averageJitter  : 00:00:00.017  
+2020-05-18 22:42:56,416 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - framerateServer: 00:00:00.000
+2020-05-18 22:42:56,416 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - framerateClient: 00:00:00.000
+2020-05-18 22:42:56,416 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - raw            : 221695724
+2020-05-18 22:42:56,416 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - zipped         : 41760084
+2020-05-18 22:42:56,416 [INFO] in scala-execution-context-global-48 - [info] c.j.i.s.ViewInfo$ - 

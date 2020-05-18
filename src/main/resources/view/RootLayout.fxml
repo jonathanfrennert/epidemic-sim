@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -16,14 +15,22 @@
    <bottom>
       <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" styleClass="linear-grad-to-right" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <Label alignment="CENTER" text="2020 Alexandra Purcarea &amp; Jonathan Gustafsson Frennert" textFill="WHITE">
-               <HBox.margin>
-                  <Insets bottom="5.0" />
-               </HBox.margin>
+            <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="21.6" text="View" textFill="WHITE">
                <font>
                   <Font size="10.0" />
                </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" />
+               </HBox.margin>
             </Label>
+            <Hyperlink alignment="CENTER" onAction="#handleLink" text="code" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" />
+               </HBox.margin>
+            </Hyperlink>
          </children>
       </HBox>
    </bottom>
@@ -47,33 +54,8 @@
                   </Label>
                </children>
                <GridPane.margin>
-                  <Insets left="60.0" />
+                  <Insets left="60.0" top="5.0" />
                </GridPane.margin>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets right="60.0" />
-               </GridPane.margin>
-               <children>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="90.0" text="Simulator" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="btn-constant" />
-                        <String fx:value="btn-menu" />
-                     </styleClass>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="90.0" text="About" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="btn-constant" />
-                        <String fx:value="btn-menu" />
-                     </styleClass>
-                  </JFXButton>
-               </children>
             </HBox>
          </children>
       </GridPane>

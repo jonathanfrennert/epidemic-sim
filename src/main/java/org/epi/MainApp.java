@@ -25,9 +25,9 @@ import java.util.Objects;
 public class MainApp extends Application {
 
     /** Minimum width of the application window in pixels.*/
-    private static final double MIN_WIDTH = 600;
+    private static final double MIN_WIDTH = 614;
     /** Minimum height of the application window in pixels.*/
-    private static final double MIN_HEIGHT = 710;
+    private static final double MIN_HEIGHT = 715;
     /** Minimum width of the application window in pixels.*/
     private static final double MAX_WIDTH = 1920;
     /** Maximum height of the application window in pixels.*/
@@ -73,7 +73,7 @@ public class MainApp extends Application {
         primaryStage.setTitle("Epi");
 
         // Set the application icon.
-        primaryStage.getIcons().add(new Image(getClass().getResource("/images/Icon.png").toExternalForm()));
+        primaryStage.getIcons().add(new Image(getClass().getResource("/img/Icon.png").toExternalForm()));
 
         //Set size specifications.
         this.primaryStage.setMinWidth(MIN_WIDTH);
@@ -218,7 +218,6 @@ public class MainApp extends Application {
     public Pathogen getPathogen() {
         return pathogen;
     }
-
 
     /**
      * Setter for {@link #pathogen}.
