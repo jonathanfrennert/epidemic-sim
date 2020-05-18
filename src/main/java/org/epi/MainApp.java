@@ -27,7 +27,7 @@ public class MainApp extends Application {
     /** Minimum width of the application window in pixels.*/
     private static final double MIN_WIDTH = 600;
     /** Minimum height of the application window in pixels.*/
-    private static final double MIN_HEIGHT = 700;
+    private static final double MIN_HEIGHT = 710;
     /** Minimum width of the application window in pixels.*/
     private static final double MAX_WIDTH = 1920;
     /** Maximum height of the application window in pixels.*/
