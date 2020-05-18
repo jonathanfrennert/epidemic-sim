@@ -25,15 +25,15 @@ import java.util.Objects;
 public class MainApp extends Application {
 
     /** Minimum width of the application window in pixels.*/
-    private static final double MIN_WIDTH = 555;
+    private static final double MIN_WIDTH = 613;
     /** Minimum height of the application window in pixels.*/
-    private static final double MIN_HEIGHT = 678;
+    private static final double MIN_HEIGHT = 710;
     /** Minimum width of the application window in pixels.*/
-    private static final double MAX_WIDTH = 1100;
+    private static final double MAX_WIDTH = 1920;
     /** Maximum height of the application window in pixels.*/
-    private static final double MAX_HEIGHT = 740;
+    private static final double MAX_HEIGHT = 1080;
     /** Maximum width of the application window in pixels.*/
-    private static final double PREF_WIDTH = 963;
+    private static final double PREF_WIDTH = 1044;
     /** Maximum height of the application window in pixels.*/
     private static final double PREF_HEIGHT = MIN_HEIGHT;
 

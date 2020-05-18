@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane stylesheets="@bootstrapfx.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.epi.view.RootLayoutController">
+   <bottom>
+      <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" styleClass="linear-grad-to-right" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+            <Label alignment="CENTER" text="2020 J&amp;A" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </bottom>
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="New">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Open..." />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Save">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Save As...">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-              <MenuItem mnemonicParsing="false" text="Revert To Saved" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Export As PNG...">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-              <MenuItem mnemonicParsing="false" text="Quit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About Epi" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      <GridPane styleClass="linear-grad-to-right" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" styleClass="icon" />
+                  <Label text="Simple Epidemic Simulator" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets left="60.0" />
+               </GridPane.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="30.0" />
+               </GridPane.margin>
+            </HBox>
+         </children>
+      </GridPane>
    </top>
 </BorderPane>

@@ -876,3 +876,7 @@ a.bg-danger:focused {
 .linear-grad-to-right{
   -fx-background-color: linear-gradient(to right, dodgerblue, crimson);
 }
+
+.icon {
+  -fx-image: url("../images/Icon.png");
+}
