@@ -781,7 +781,7 @@ a.bg-danger:focused {
 
 /*!
 * Added by Jonathan Gustafsson Frennert and Alexandra Purcarea for Epi (https://github.com/J0HNN7G/EpiSim).
-* Licensed under MIT (https://github.com/J0HNN7G/EpiSim/blob/master/LICENSE)
+* Licensed under MIT (https://github.com/J0HNN7G/EpiSim/blob/master/LICENSE).
 */
 
 
@@ -892,6 +892,8 @@ a.bg-danger:focused {
 .btn-menu:hover {
   -fx-font-size: 14;
 }
+
+/** Hyperlink */
 
 .hyperlink:pressed {
   -fx-font-size: 10;
