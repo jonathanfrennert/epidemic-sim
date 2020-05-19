@@ -1,8 +1,7 @@
 plugins {
-    id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.8'
-    id 'org.beryx.jlink' version '2.12.0'
+    id 'org.beryx.jlink' version '2.19.0'
 }
 
 group 'org.epi'
@@ -21,20 +20,74 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
     compile 'com.jfoenix:jfoenix:9.0.8'
     compile 'org.kordamp.bootstrapfx:bootstrapfx-core:0.2.4'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 javafx {
     version = '14'
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = [ 'javafx.controls', 'javafx.fxml']
 }
 
 jlink {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-    launcher {
+    launcher{
         name = 'Epi'
+        jvmArgs = ['-Djdk.gtk.version=2'] // required due to a bug in Java: https://github.com/javafxports/openjdk-jfx/issues/175
+    }
+
+    addExtraDependencies("javafx")
+
+    jpackage {
+        appVersion = '1.0'
+
+        installerOptions = [
+                '--description', "A simple epidemic simulator for modelling the effect of different spread-prevention policies.",
+                '--copyright', 'MIT 2020 Jonathan Gustafsson Frennert and Alexandra Purcarea',
+                '--vendor' , 'Alexandra Purcarea & Jonathan Gustafsson Frennert'
+        ]
+
+        installerType = project.findProperty('installerType') // we will pass this from the command line (example: -PinstallerType=msi)
+
+        if (installerType == 'msi') {
+            imageOptions += ['--icon', 'src/main/resources/img/WIN/icon.ico']
+            installerOptions += [
+                    '--win-per-user-install', '--win-dir-chooser',
+                    '--win-menu', '--win-shortcut'
+            ]
+        }
+
+        if (installerType == 'pkg') {
+            imageOptions += ['--icon', 'src/main/resources/img/MACOSX/icon.icns']
+        }
+
+        if (installerType in ['deb', 'rpm']) {
+            imageOptions += ['--icon', 'src/main/resources/img/LINUX/icon.png']
+            installerOptions += [
+                    '--linux-menu-group', 'Office',
+                    '--linux-shortcut'
+            ]
+        }
+
+        if (installerType == 'deb') {
+            installerOptions += [
+                    '--linux-deb-maintainer', 'jonathan.frennert@gmail.com'
+            ]
+        }
+
+        if (installerType == 'rpm') {
+            installerOptions += [
+                    '--linux-rpm-license-type', 'GPLv3'
+            ]
+        }
+
+    }
+}
+
+jpackage {
+    doFirst {
+        project.getProperty('installerType') // throws exception if its missing
     }
 }

@@ -821,21 +821,21 @@ a.bg-danger:focused {
 /** Player buttons*/
 
 .btn-icon-run {
-  -fx-background-image: url("../img/Run.png");
+  -fx-background-image: url("../img/run.png");
   -fx-background-size: 15px;
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
 
 .btn-icon-pause {
-  -fx-background-image: url("../img/Pause.png");
+  -fx-background-image: url("../img/pause.png");
   -fx-background-size: 15px;
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
 }
 
 .btn-icon-reset {
-  -fx-background-image: url("../img/Reset.png");
+  -fx-background-image: url("../img/reset.png");
   -fx-background-size: 20px;
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
@@ -868,7 +868,7 @@ a.bg-danger:focused {
 /** Information tooltip */
 
 .infoTip {
-  -fx-image: url("../img/Info.png");
+  -fx-image: url("../img/info.png");
 }
 
 /** Background */
@@ -880,7 +880,7 @@ a.bg-danger:focused {
 /** Website Icon */
 
 .icon {
-  -fx-image: url("../img/Icon.png");
+  -fx-image: url("../img/icon.png");
 }
 
 /** Button style */

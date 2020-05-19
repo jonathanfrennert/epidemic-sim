@@ -31,7 +31,7 @@ public class MainApp extends Application {
     /** Minimum width of the application window in pixels.*/
     private static final double MAX_WIDTH = 1920;
     /** Maximum height of the application window in pixels.*/
-    private static final double MAX_HEIGHT = 1000;
+    private static final double MAX_HEIGHT = 1080;
     /** Maximum width of the application window in pixels.*/
     private static final double PREF_WIDTH = 1044;
     /** Maximum height of the application window in pixels.*/
@@ -73,7 +73,7 @@ public class MainApp extends Application {
         primaryStage.setTitle("Epi");
 
         // Set the application icon.
-        primaryStage.getIcons().add(new Image(getClass().getResource("/img/Icon.png").toExternalForm()));
+        primaryStage.getIcons().add(new Image(getClass().getResource("/img/icon.png").toExternalForm()));
 
         //Set size specifications.
         this.primaryStage.setMinWidth(MIN_WIDTH);
