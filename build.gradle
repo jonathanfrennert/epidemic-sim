@@ -45,7 +45,8 @@ jlink {
 
         installerOptions = [
                 '--description', "A simple epidemic simulator for modelling the effect of different spread-prevention policies.",
-                '--copyright', 'MIT 2020 Jonathan Gustafsson Frennert and Alexandra Purcarea',
+                '--copyright', '2020 Jonathan Gustafsson Frennert and Alexandra Purcarea',
+                '--license-file', 'LICENSE',
                 '--vendor' , 'Alexandra Purcarea & Jonathan Gustafsson Frennert'
         ]
 
