@@ -13,6 +13,7 @@ Show the status counts for the humans. Further, the colour of the values indicat
 
 ### Simulation Player
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPlayer.png">
+to do Jonathan :kissing_heart:
 
 ### Parameters
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/Parameters.png">
