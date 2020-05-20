@@ -2,24 +2,25 @@
 A epidemic simulator made in JavaFX for experimenting on the effect of different spread-prevention policies.
 
 ### How-to
-
 #### Simulation Panes
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPanes.png" width="400" height="300"> 
-Shows the world of simulation currently loaded. The humans are represented by the circles. The colour of the circles indicates the       human's status corresponding to the statistics table.
+The simulation panes show the simulated world. The humans are represented by the circles. The colour of the circles indicates the       human's status which correspond to the colours in the statistics table.
 
 #### Statistics Table 
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/StatisticsTable.png"> 
-Show the status counts for the humans. Further, the colour of the values indicates
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/StatisticsTable.png" width="150"> 
+The statistics table shows the status counts for the humans in real time. The colour of the counts on each row indicate the corresponding status of any given human in the simulation panes and area in the stacked area chart.
 
-### Simulation Player
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPlayer.png">
-to do Jonathan :kissing_heart:
+#### Area Chart
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/AreaChart.png" width="300">
+The area chart shows how the status count for the simulation population changes over time, where the colour of the area corresponds to the status being counted.
 
-### Parameters
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/Parameters.png">
+#### Simulation Player
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPlayer.png" width="400">
+The simulation player is used to run, pause or reset the current simulation.
 
-### Area Chart
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/AreaChart.png">
+#### Parameters
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/Parameters.png" width="300" height="400">
+The parameters are for specifying the given conditions in a simulator. When you have changed the parameters to desired values, you press the generate button to load the new simulation.
 
 ### Development 
 Have interesting ideas for developing this project? Here is the class diagram.
@@ -28,7 +29,7 @@ Have interesting ideas for developing this project? Here is the class diagram.
 - [class diagram (visual paradigm)](https://www.dropbox.com/s/drcfb5krf6yli4q/Epi%20Class%20Diagram.vpp?dl=1). 
 
 ### Download
-If you want to utilize the software outside of a development context, we have installers for Windows (macOS coming soon).  
+If you want to utilize the software outside of a development context, we have installers for Windows.  
 
 - [Epi-1.0 for Windows (msi)](https://www.dropbox.com/s/l94zermzjs9mlfs/Epi-1.0.msi?dl=1)
 
@@ -47,7 +48,7 @@ The icon for our application was made by [Ddara](https://www.iconfinder.com/dDar
 
 - [JavaFX pane clipping](https://news.kynosarges.org/2016/11/03/javafx-pane-clipping/) - This tutorial helped us with overcoming the issue of JavaFX panes not having a straightforward clipping property, thanks [Christopher Nahr](https://news.kynosarges.org/author/cnahr/).
 
-- [Distributing JavaFX desktop](https://walczak.it/blog/distributing-javafx-desktop-applications-without-requiring-jvm-using-jlink-and-jpackage) - This article by Adam was super useful for creating JavaFX app installers. 
+- [Distributing JavaFX desktop](https://walczak.it/blog/distributing-javafx-desktop-applications-without-requiring-jvm-using-jlink-and-jpackage) - This article by Adam was super useful for creating a JavaFX app installer. 
 
 #### The following provided JavaFX UI assets 
 - [JFoenix](http://www.jfoenix.com/) - JFoenix controls provided an elegant and professional styling for our UI controls ([Apache 2.0](http://www.jfoenix.com/documentation.html#License)). 
