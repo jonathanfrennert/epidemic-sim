@@ -14,6 +14,12 @@ Show the status counts for the humans. Further, the colour of the values indicat
 ### Simulation Player
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPlayer.png">
 
+### Parameters
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/Parameters.png">
+
+### Area Chart
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/AreaChart.png">
+
 ### Development 
 Have interesting ideas for developing this project? Here is the class diagram.
 - [class diagram (jpg)](https://www.dropbox.com/s/y2o4s7x7vnb244h/Epi%20Class%20Diagram.jpg?dl=1) 
