@@ -118,8 +118,6 @@ public class Simulator {
                 forEach(human -> human.pathogen(elapsedSeconds));
     }
 
-
-
     /**
      * Perform all immune system changes in the elapsed seconds.
      *
@@ -244,5 +242,6 @@ public class Simulator {
     public Pathogen getPathogen() {
         return pathogen;
     }
+
 }
 

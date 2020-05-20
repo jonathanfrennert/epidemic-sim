@@ -176,6 +176,19 @@ public class World {
                 .forEach(survivor -> survivor.setLocation(city));
     }
 
+    /**
+     * Create a reset version of this world.
+     *
+     * @return a reset version of this world.
+     */
+    public World reset() {
+        return new World(populationTotal.get(),
+                sickTotal.get(),
+                quarantineCapacity.get(),
+                detectionRate.get(),
+                testingFrequency.get());
+    }
+
     //---------------------------- Getters & Setters ----------------------------
 
     /**
@@ -307,19 +320,6 @@ public class World {
     public void setTestingFrequency(double testingFrequency) {
         Error.nonNegativeCheck(testingFrequency);
         this.testingFrequency.set(testingFrequency);
-    }
-
-    /**
-     * Create a reset version of this world.
-     *
-     * @return a reset version of this world.
-     */
-    public World reset() {
-        return new World(populationTotal.get(),
-                sickTotal.get(),
-                quarantineCapacity.get(),
-                detectionRate.get(),
-                testingFrequency.get());
     }
 
 }
