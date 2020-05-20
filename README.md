@@ -11,6 +11,8 @@ Shows the world of simulation currently loaded. The humans are represented by th
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/StatisticsTable.png"> 
 Show the status counts for the humans. Further, the colour of the values indicates
 
+### Simulation Player
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPlayer.png">
 
 ### Development 
 Have interesting ideas for developing this project? Here is the class diagram.
