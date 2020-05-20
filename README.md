@@ -1,4 +1,5 @@
 <img src="https://img.shields.io/github/license/J0HNN7G/EpiSim">
+
 # Simple Epidemic Simulator (Epi)
 A epidemic simulator made in JavaFX for experimenting on the effect of different spread-prevention policies.
 
