@@ -26,7 +26,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" layoutX="14.0" layoutY="40.0" styleClass="box" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
+      <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="40.0" styleClass="box" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" text="City">
                <opaqueInsets>
@@ -36,7 +36,7 @@
                   <Font size="11.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="4.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
             <StackPane fx:id="cityPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
@@ -69,7 +69,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <GridPane alignment="CENTER" layoutX="542.0" layoutY="263.0" maxHeight="1.7976931348623157E308" prefHeight="562.0" prefWidth="393.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
+      <GridPane alignment="CENTER" layoutX="600.0" layoutY="30.0" maxHeight="1.7976931348623157E308" prefHeight="558.0" prefWidth="393.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="160.0" />
@@ -588,17 +588,17 @@
             </JFXButton>
          </children>
       </GridPane>
-      <Label layoutX="10.0" layoutY="395.0" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="40.0">
+      <Label layoutX="40.0" layoutY="390.0" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="40.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="449.0" layoutY="395.0" text="Change over Time" textFill="WHITE">
+      <Label layoutX="449.0" layoutY="390.0" text="Change over Time" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <HBox layoutY="410.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="540.0" spacing="10.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="410.0">
+      <HBox layoutX="30.0" layoutY="405.0" maxHeight="200.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="540.0" spacing="5.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="405.0">
          <children>
             <GridPane styleClass="box">
               <columnConstraints>
@@ -669,7 +669,7 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </HBox.margin>
             </GridPane>
-            <StackedAreaChart fx:id="areaChart" alternativeRowFillVisible="false" createSymbols="false" horizontalGridLinesVisible="false" legendSide="LEFT" legendVisible="false" minHeight="120.0" verticalGridLinesVisible="false" HBox.hgrow="SOMETIMES">
+            <StackedAreaChart fx:id="areaChart" alternativeRowFillVisible="false" createSymbols="false" horizontalGridLinesVisible="false" legendSide="LEFT" legendVisible="false" minHeight="120.0" prefWidth="353.0" verticalGridLinesVisible="false" HBox.hgrow="SOMETIMES">
               <xAxis>
                 <NumberAxis minorTickCount="1" minorTickLength="1.0" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickLabelsVisible="false" tickMarkVisible="false" tickUnit="1.0" fx:id="xAxis" />
               </xAxis>
@@ -682,7 +682,7 @@
             </StackedAreaChart>
          </children>
       </HBox>
-      <HBox layoutX="405.0" layoutY="556.0" prefHeight="54.0" prefWidth="522.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="40.0">
+      <HBox layoutX="40.0" layoutY="535.2" prefHeight="54.0" prefWidth="522.0" styleClass="box" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="40.0">
          <children>
             <JFXButton fx:id="playButton" buttonType="RAISED" onAction="#handlePlay" prefHeight="30.0" prefWidth="30.0" styleClass="btn-primary" text=" " />
             <JFXButton fx:id="resetButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="30.0" prefWidth="30.0" text=" " HBox.hgrow="SOMETIMES">
