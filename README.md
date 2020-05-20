@@ -12,11 +12,9 @@ Have interesting ideas for developing this project? Here is the class diagram.
 - [class diagram (visual paradigm)](https://www.dropbox.com/s/drcfb5krf6yli4q/Epi%20Class%20Diagram.vpp?dl=1). 
 
 ### Download
-If you want to utilize the software outside of a development context, we have installers for both Windows and macOS.  
+If you want to utilize the software outside of a development context, we have installers for Windows (macOS coming soon).  
 
 - [Epi-1.0 for Windows (msi)](https://www.dropbox.com/s/l94zermzjs9mlfs/Epi-1.0.msi?dl=1)
-
-- [Epi-1.0 for macOS (pkg)]()
 
 ### Acknowledgments
 The icon for our application was made by [Ddara](https://www.iconfinder.com/dDara) ([CC-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/legalcode)).
