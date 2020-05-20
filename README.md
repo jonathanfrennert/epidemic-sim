@@ -1,7 +1,5 @@
 # Simple Epidemic Simulator (Epi)
-A epidemic simulator made in JavaFX for experimenting on the effect of spread-prevention policies.
-
-**DISCLAIMER : THIS SOFTWARE IS NOT INTENDED FOR USE IN POLICY IMPLEMENTATION OR SCIENTIFIC STUDY**
+A epidemic simulator made in JavaFX for experimenting on the effect of different spread-prevention policies.
 
 ### Download
 If you want to utilize the software outside of a development context, we have installers for both Windows and macOS.  
