@@ -3,7 +3,14 @@ A epidemic simulator made in JavaFX for experimenting on the effect of different
 
 ### How-to
 
-Alexandra over here :kissing_heart:
+#### Simulation Panes
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPanes.png" width="400" height="300"> 
+Shows the world of simulation currently loaded. The human's are represented by the circles. The colour of the circles indicate the       human's status as correspond in the statistics table.
+
+#### Statistics Table 
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/StatisticsTable.png"> 
+Show the status counts for the humans. Further, the colour of the values indicates
+
 
 ### Development 
 Have interesting ideas for developing this project? Here is the class diagram.
