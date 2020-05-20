@@ -3,23 +3,23 @@ A epidemic simulator made in JavaFX for experimenting on the effect of different
 
 ### Documentation
 #### Simulation Panes
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/documentation/SimulationPanes.png" width="400" height="300"> 
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/doc/SimulationPanes.png" width="400" height="300"> 
 The simulation panes show the simulated world. The humans are represented by the circles. The colour of the circles indicates the       health status of the given human.
 
 #### Statistics Table 
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/documentation/StatisticsTable.png" width="150"> 
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/doc/StatisticsTable.png" width="150"> 
 The statistics table shows the status counts for the humans in real time. The colour of the counts on each row indicate the corresponding health status of any given human in the simulation panes and area in the stacked area chart.
 
 #### Area Chart
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/documentation/AreaChart.png" width="300">
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/doc/AreaChart.png" width="300">
 The area chart shows how the health status count for the simulation population changes over time, where the colour of the area corresponds to the status being counted.
 
 #### Simulation Player
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/documentation/SimulationPlayer.png" width="400">
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/doc/SimulationPlayer.png" width="400">
 The simulation player is used to run, pause or reset the current simulation.
 
 #### Parameters
-<img src="https://github.com/J0HNN7G/EpiSim/blob/master/documentation/Parameters.png" width="300" height="400">
+<img src="https://github.com/J0HNN7G/EpiSim/blob/master/doc/Parameters.png" width="300" height="400">
 The parameters are for specifying the given conditions in a simulator. When you have changed the parameters to desired values, you press the generate button to load the new simulation.
 
 ### Development 
