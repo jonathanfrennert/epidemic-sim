@@ -1,12 +1,22 @@
 # Simple Epidemic Simulator (Epi)
 A epidemic simulator made in JavaFX for experimenting on the effect of different spread-prevention policies.
 
+### How-to
+
+Alexandra over here :kissing_heart:
+
+### Development 
+Have interesting ideas for developing this project? Here is the class diagram.
+- [class diagram (jpg)](https://www.dropbox.com/s/y2o4s7x7vnb244h/Epi%20Class%20Diagram.jpg?dl=1) 
+
+- [class diagram (visual paradigm)](https://www.dropbox.com/s/drcfb5krf6yli4q/Epi%20Class%20Diagram.vpp?dl=1). 
+
 ### Download
 If you want to utilize the software outside of a development context, we have installers for both Windows and macOS.  
 
 - [Epi-1.0 for Windows (msi)](https://www.dropbox.com/s/l94zermzjs9mlfs/Epi-1.0.msi?dl=1)
 
-- [Epi-1.0 for macOS (pkg)](https://www.dropbox.com/s/l94zermzjs9mlfs/Epi-1.0.msi?dl=0)
+- [Epi-1.0 for macOS (pkg)]()
 
 ### Acknowledgments
 The icon for our application was made by [Ddara](https://www.iconfinder.com/dDara) ([CC-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/legalcode)).
@@ -23,7 +33,9 @@ The icon for our application was made by [Ddara](https://www.iconfinder.com/dDar
 
 - [JavaFX pane clipping](https://news.kynosarges.org/2016/11/03/javafx-pane-clipping/) - This tutorial helped us with overcoming that JavaFX pane's do not have a straight-forward clipping property, thanks [Christopher Nahr](https://news.kynosarges.org/author/cnahr/).
 
+- [Distributing JavaFX desktop](https://walczak.it/blog/distributing-javafx-desktop-applications-without-requiring-jvm-using-jlink-and-jpackage) - This article by Adam was super useful for creating JavaFX app installers. 
+
 #### The following provided JavaFX UI assets 
 - [JFoenix](http://www.jfoenix.com/) - JFoenix controls provided an elegant and professional styling for our UI controls ([Apache 2.0](http://www.jfoenix.com/documentation.html#License)). 
 
-- [BootstrapFX](https://github.com/kordamp/bootstrapfx) - BootstrapFX makes up most of the Epi's CSS styling. 
+- [BootstrapFX](https://github.com/kordamp/bootstrapfx) - BootstrapFX makes up most of the Epi's CSS styling.
