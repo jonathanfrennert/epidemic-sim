@@ -1,18 +1,18 @@
 # Simple Epidemic Simulator (Epi)
 A epidemic simulator made in JavaFX for experimenting on the effect of different spread-prevention policies.
 
-### How-to
+### Documentation
 #### Simulation Panes
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPanes.png" width="400" height="300"> 
-The simulation panes show the simulated world. The humans are represented by the circles. The colour of the circles indicates the       human's status which correspond to the colours in the statistics table.
+The simulation panes show the simulated world. The humans are represented by the circles. The colour of the circles indicates the       health status of the given human.
 
 #### Statistics Table 
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/StatisticsTable.png" width="150"> 
-The statistics table shows the status counts for the humans in real time. The colour of the counts on each row indicate the corresponding status of any given human in the simulation panes and area in the stacked area chart.
+The statistics table shows the status counts for the humans in real time. The colour of the counts on each row indicate the corresponding health status of any given human in the simulation panes and area in the stacked area chart.
 
 #### Area Chart
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/AreaChart.png" width="300">
-The area chart shows how the status count for the simulation population changes over time, where the colour of the area corresponds to the status being counted.
+The area chart shows how the health status count for the simulation population changes over time, where the colour of the area corresponds to the status being counted.
 
 #### Simulation Player
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/howto/SimulationPlayer.png" width="400">
@@ -23,13 +23,16 @@ The simulation player is used to run, pause or reset the current simulation.
 The parameters are for specifying the given conditions in a simulator. When you have changed the parameters to desired values, you press the generate button to load the new simulation.
 
 ### Development 
+
+The software was programmed in JDK 11 and JavaFX 14 (see [build.gradle](https://github.com/J0HNN7G/EpiSim/blob/master/build.gradle)).
+
 Have interesting ideas for developing this project? Here is the class diagram.
 - [class diagram (jpg)](https://www.dropbox.com/s/y2o4s7x7vnb244h/Epi%20Class%20Diagram.jpg?dl=1) 
 
 - [class diagram (visual paradigm)](https://www.dropbox.com/s/drcfb5krf6yli4q/Epi%20Class%20Diagram.vpp?dl=1). 
 
 ### Download
-If you want to utilize the software outside of a development context, we have installers for Windows.  
+If you want to utilize the software outside of a development context, we have an installer for Windows.  
 
 - [Epi-1.0 for Windows (msi)](https://www.dropbox.com/s/l94zermzjs9mlfs/Epi-1.0.msi?dl=1)
 
