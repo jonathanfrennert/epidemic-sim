@@ -36,7 +36,7 @@ The icon for our application was made by [Ddara](https://www.iconfinder.com/dDar
 
 - [JavaFX animation experiments](https://gist.github.com/james-d/8327842) - A bouncing ball simulation project done by [James D](https://gist.github.com/james-d). Provides a large backbone for the wall collision response and model class.
 
-- [JavaFX pane clipping](https://news.kynosarges.org/2016/11/03/javafx-pane-clipping/) - This tutorial helped us with overcoming that JavaFX pane's do not have a straight-forward clipping property, thanks [Christopher Nahr](https://news.kynosarges.org/author/cnahr/).
+- [JavaFX pane clipping](https://news.kynosarges.org/2016/11/03/javafx-pane-clipping/) - This tutorial helped us with overcoming the issue of JavaFX panes not having a straightforward clipping property, thanks [Christopher Nahr](https://news.kynosarges.org/author/cnahr/).
 
 - [Distributing JavaFX desktop](https://walczak.it/blog/distributing-javafx-desktop-applications-without-requiring-jvm-using-jlink-and-jpackage) - This article by Adam was super useful for creating JavaFX app installers. 
 
