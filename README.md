@@ -10,7 +10,7 @@ The simulation panes show the simulated world. The humans are represented by the
 
 #### Statistics Table 
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/doc/StatisticsTable.png" width="150"> 
-The statistics table shows the status counts for the humans in real time. The colour of the counts on each row indicate the corresponding health status of any given human in the simulation panes and area in the stacked area chart.
+The statistics table shows the status counts for the humans in real time. The colour of the counts on each row indicates the corresponding health status of any given human in the simulation panes and area in the stacked area chart.
 
 #### Area Chart
 <img src="https://github.com/J0HNN7G/EpiSim/blob/master/doc/AreaChart.png" width="300">
