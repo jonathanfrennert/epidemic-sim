@@ -26,7 +26,7 @@ The parameters are for specifying the given conditions in a simulator. When you 
 
 ### Development 
 
-The software was programmed in JDK 11 and JavaFX 14 (see [build.gradle](https://github.com/J0HNN7G/EpiSim/blob/master/build.gradle)).
+The software was written using the [Gradle](https://gradle.org/) template in [IntelliJ IDEA](https://www.jetbrains.com/idea/) with [JDK 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (For further specifications see [build.gradle](https://github.com/J0HNN7G/EpiSim/blob/master/build.gradle)).
 
 Have interesting ideas for developing this project? Here is the class diagram.
 - [class diagram (jpg)](https://www.dropbox.com/s/y2o4s7x7vnb244h/Epi%20Class%20Diagram.jpg?dl=1) 
