@@ -83,6 +83,19 @@ public class Pathogen {
         return result;
     }
 
+    /**
+     * Check if the given object is the same as this pathogen. Implemented for consistency with {@link #hashCode()}.
+     *
+     * @param obj an object
+     * @return true if the given object is a pathogen with all the same values in the non-changing fields
+     *         ({@link #lifespan}, {@link #transmissionRisk}, {@link #fatalityRate}, {@link #immunityRate} and
+     *         {@link #immunityDuration}), otherwise false
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
     //---------------------------- Simulator actions ----------------------------
 
     /**
