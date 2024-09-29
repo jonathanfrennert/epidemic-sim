@@ -1,4 +1,4 @@
-# Epi : The Simple Epidemic Simulator [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/J0HNN7G/EpiSim.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/J0HNN7G/EpiSim/context:java) <img src="https://img.shields.io/github/license/J0HNN7G/EpiSim">
+# Epi : The Simple Epidemic Simulator <img src="https://img.shields.io/github/license/J0HNN7G/EpiSim">
 
 A user-friendly epidemic simulator for experimenting on the effect of different spread-prevention policies.
 
